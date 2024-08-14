@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Python基础使用 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="Python 环境在Python官网下载的Python实际上是Python的解释器，而我们所熟知的PyCharm是一种Python的编辑器，Python安装教程已经非常丰富了，这里就不过多介绍 Python 语法与使用基础语法数据类型在Python中有6种自带的数据类型    类型 描述    数字(Number) 整数(int)、浮点数(float)、复数(complex)、布尔值(bool)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础使用">
+<meta property="og:url" content="http://example.com/2023/12/14/Python%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="Python 环境在Python官网下载的Python实际上是Python的解释器，而我们所熟知的PyCharm是一种Python的编辑器，Python安装教程已经非常丰富了，这里就不过多介绍 Python 语法与使用基础语法数据类型在Python中有6种自带的数据类型    类型 描述    数字(Number) 整数(int)、浮点数(float)、复数(complex)、布尔值(bool)">
+<meta property="og:locale" content="en_UK">
+<meta property="article:published_time" content="2023-12-14T14:04:31.000Z">
+<meta property="article:modified_time" content="2023-12-15T04:16:35.636Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://qm.qq.com/q/FDr6C2fVAY" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">29</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">20</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">7</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/AVL%E6%A0%91/" rel="tag">AVL树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" rel="tag">k近邻算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/priority-queue/" rel="tag">priority_queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyecharts/" rel="tag">pyecharts</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vector/" rel="tag">vector</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vi/" rel="tag">vi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BB%BF%E5%87%BD%E6%95%B0/" rel="tag">仿函数</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag">位图</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BA%94%E7%94%A8/" rel="tag">应用</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" rel="tag">循环结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8C%87%E9%92%88/" rel="tag">指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" rel="tag">斐波那契</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">最长上升子序列</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">神经网络</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%93%E8%AE%BA%E9%A2%98/" rel="tag">结论题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag">背包问题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E6%8E%A8/" rel="tag">递推</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——匿名管道" >
+            <div class="recent-link-text">
+              Linux进程间通信——匿名管道
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" title="Linux基础IO——文件系统与动静态库" >
+            <div class="recent-link-text">
+              Linux基础IO——文件系统与动静态库
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" title="Linux基础IO——重定向与文件缓冲区" >
+            <div class="recent-link-text">
+              Linux基础IO——重定向与文件缓冲区
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/" title="Linux基础IO——文件的系统调用与文件描述符的本质" >
+            <div class="recent-link-text">
+              Linux基础IO——文件的系统调用与文件描述符的本质
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/" title="Linux进程控制——进程程序替换、bash的模拟实现" >
+            <div class="recent-link-text">
+              Linux进程控制——进程程序替换、bash的模拟实现
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Python基础使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Python基础使用
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-14T14:04:31.000Z" itemprop="datePublished">2023-12-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/python/">python</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.2k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="Python-环境"><a href="#Python-环境" class="headerlink" title="Python 环境"></a>Python 环境</h1><p>在Python官网下载的Python实际上是Python的解释器，而我们所熟知的PyCharm是一种Python的编辑器，<a target="_blank" rel="noopener" href="http://t.csdnimg.cn/87wg2">Python安装教程</a>已经非常丰富了，这里就不过多介绍</p>
+<h1 id="Python-语法与使用"><a href="#Python-语法与使用" class="headerlink" title="Python 语法与使用"></a>Python 语法与使用</h1><h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>在Python中有6种自带的数据类型</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数字(Number)</td>
+<td>整数(int)、浮点数(float)、复数(complex)、布尔值(bool)</td>
+</tr>
+<tr>
+<td>字符串(String)</td>
+<td>由一串字符组成的一种描述文本的数据类型</td>
+</tr>
+<tr>
+<td>列表(List)</td>
+<td>有序的序列</td>
+</tr>
+<tr>
+<td>元组(Tuple)</td>
+<td>有序的不可更改的序列</td>
+</tr>
+<tr>
+<td>集合(Set)</td>
+<td>无序不重复集合</td>
+</tr>
+<tr>
+<td>字典(Dictionary)</td>
+<td>键值对的集合</td>
+</tr>
+</tbody></table>
+<p>在Python中的数据类型我们可以使用type()函数查看，在Python中声明变量是不需要声明数据类型的，但是在使用过程中仍然要注意类型的匹配，在后面的学习中，我们会介绍标注类型的方法</p>
+<p>Python是不受数据大小限制的，例如整数int是没有大小限制的</p>
+<p>Python中值相同的变量指向的是同一个地址的，可以用id()来查看</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>注释用法如下，举例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单行注释</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	多行注释1</span></span><br><span class="line"><span class="string">	多行注释2</span></span><br><span class="line"><span class="string">	多行注释3</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数据类型介绍"><a href="#数据类型介绍" class="headerlink" title="数据类型介绍"></a>数据类型介绍</h3><p>这里只做最最基础的介绍，之后讲到容器时会具体介绍</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>Python中有三种字符串定义方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&#x27;字符串&#x27;</span></span><br><span class="line">str2 = <span class="string">&quot;字符串&quot;</span></span><br><span class="line">str3 = <span class="string">&quot;&quot;&quot;字符串&quot;&quot;&quot;</span> <span class="comment"># 这里与多行注释不同的是有变量接收，同样也支持多行赋值</span></span><br><span class="line">str4 = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	字符串1</span></span><br><span class="line"><span class="string">	字符串2</span></span><br><span class="line"><span class="string">	字符串3</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>用方括号括起，内部元素可以是整数，字符串，其他容器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lt = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><p>用圆括号括起，内部元素不可改变，可以是其他容器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tp = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="comment"># 多个元素声明</span></span><br><span class="line">tp = (<span class="number">1</span>,)    <span class="comment"># 单个元素声明</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>用花括号括起，内部元素可以改变但不能重复</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">st = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125; </span><br></pre></td></tr></table></figure>
+
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><p>由花括号括起，内部元素可以改变且无序，类似于生活中的字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dic = &#123;<span class="string">&#x27;key1&#x27;</span> : <span class="string">&#x27;val1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span> : <span class="string">&#x27;val2&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>在不同的使用场景下需要不同的数据类型，因此就需要类型转换的功能，例如int()转换为整数，float()转换为浮点数，str()转换为字符串</p>
+<h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p>我们给变量、类、函数起名时的标识符有如下限制</p>
+<ol>
+<li>标识符中可以出现英文、中文、数字、下划线，注意其中数字不可以作为开头使用</li>
+<li>Python中的关键字不允许作为标识符使用</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">False</span> <span class="literal">True</span> <span class="literal">None</span> <span class="keyword">and</span> <span class="keyword">as</span> <span class="keyword">assert</span> <span class="keyword">break</span> <span class="keyword">class</span> <span class="title class_">continue</span> <span class="keyword">def</span> <span class="title function_">del</span> <span class="keyword">elif</span> <span class="keyword">else</span> <span class="keyword">except</span> <span class="keyword">finally</span> <span class="keyword">for</span> <span class="keyword">from</span> <span class="keyword">global</span> <span class="keyword">if</span> <span class="keyword">import</span> <span class="keyword">in</span> <span class="keyword">is</span> <span class="keyword">lambda</span> <span class="keyword">nonlocal</span> <span class="keyword">not</span> <span class="keyword">or</span> <span class="keyword">pass</span> <span class="keyword">raise</span> <span class="keyword">return</span> <span class="keyword">try</span> <span class="keyword">while</span> <span class="keyword">with</span> <span class="keyword">yield</span></span><br></pre></td></tr></table></figure>
+
+<p>注意其中的False、True、None的首字母需要大写</p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h4><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>加</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>除</td>
+</tr>
+<tr>
+<td>&#x2F;&#x2F;</td>
+<td>取整除</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取模</td>
+</tr>
+<tr>
+<td>**</td>
+<td>指数</td>
+</tr>
+</tbody></table>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>赋值</td>
+</tr>
+</tbody></table>
+<h4 id="复合运算符"><a href="#复合运算符" class="headerlink" title="复合运算符"></a>复合运算符</h4><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+&#x3D;</td>
+<td>加法赋值</td>
+</tr>
+<tr>
+<td>……</td>
+<td>诸如此类</td>
+</tr>
+</tbody></table>
+<p>注意Python不支持++，–操作</p>
+<h3 id="字符串-1"><a href="#字符串-1" class="headerlink" title="字符串"></a>字符串</h3><h4 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h4><p>直接用加号即可拼接</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;str1&quot;</span>+<span class="string">&quot;str2&quot;</span>)</span><br><span class="line"></span><br><span class="line">name = <span class="string">&#x27;your str&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;str1&quot;</span>+name+<span class="string">&quot;str2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h4><p>一旦变量过多，要输出需要拼接许多次，略显麻烦，可以采用字符串格式化来表示</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mas1 = <span class="string">&quot;str1&quot;</span></span><br><span class="line">mas2 = <span class="string">&quot;mas1 = %s&quot;</span> % mas1</span><br></pre></td></tr></table></figure>
+
+<p>这里就使用%s进行占位，来进行变量的输出</p>
+<p>需要注意的是，多个变量的时候需要在之后用圆括号括起，并按照顺序填写</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mas1 = <span class="string">&quot;str1&quot;</span></span><br><span class="line">mas2 = <span class="string">&quot;str2&quot;</span></span><br><span class="line">mas3 = <span class="string">&quot;mas1 = %s, mas2 = %s&quot;</span> % (mas1,mas2)</span><br></pre></td></tr></table></figure>
+
+<p>关于其他占位符</p>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%s</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点数</td>
+</tr>
+</tbody></table>
+<p>关于浮点数的精度控制可以用 m.n 来控制</p>
+<p>m控制宽度，要求是数字</p>
+<p>.n，控制小数点精度，要求是数字</p>
+<p>示例：</p>
+<ul>
+<li>%5d：表示将整数的宽度控制在5位，如数字11，被设置为5d，就会变成：[空格][空格][空格]11，用三个空格补足宽度。</li>
+<li>%5.2f：表示将宽度控制为5，将小数点精度设置为2。小数点和小数部分也算入宽度计算。<ul>
+<li>如，对11.345设置了%7.2f 后，结果是：[空格][空格]11.35。2个空格补足宽度，小数部分限制2位精度后，四舍五入为 .35</li>
+</ul>
+</li>
+<li>%.2f：表示不限制宽度，只设置小数点精度为2，如11.345设置%.2f后，结果是11.35</li>
+</ul>
+<p>使用占位符进行格式化的效率比较慢，有第二种格式化的方法，会比较常用，例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mas1 = <span class="string">&quot;str1&quot;</span></span><br><span class="line">mas2 = <span class="string">&quot;str2&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;mas1 = <span class="subst">&#123;mas1&#125;</span>, mas2 = <span class="subst">&#123;mas2&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，这种写法不用做精度控制，也不需要管类型是如何，适用于快速格式化，较为方便和易读，在花括号内填入变量名或者表达式都可以。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2023/12/15/Python%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"
+      title="Python流程控制语句"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Python流程控制语句
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/12/13/STL%E4%B8%ADlist%E7%9A%84%E4%BB%8B%E7%BB%8D/"
+      title="STL中list的介绍"
+     >
+
+    <p class="title-text">
+      
+        STL中list的介绍
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Python数据容器 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="数据容器数据容器是一种可以容纳多份数据的数据类型，容纳的每一份数据称之为一个元素，每一个元素，可以是任意类型的数据，如字符串、数字、布尔等 在Python中有不同的数据容器，他们有不同的特性，分为五类：列表(list)、元组(tuple)、字符串(str)、集合(set)、字典(dict) list 列表定义123list_name1 &#x3D; [name1,name2,name3,...]list_a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python数据容器">
+<meta property="og:url" content="http://example.com/2023/12/18/Python%E6%95%B0%E6%8D%AE%E5%AE%B9%E5%99%A8/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="数据容器数据容器是一种可以容纳多份数据的数据类型，容纳的每一份数据称之为一个元素，每一个元素，可以是任意类型的数据，如字符串、数字、布尔等 在Python中有不同的数据容器，他们有不同的特性，分为五类：列表(list)、元组(tuple)、字符串(str)、集合(set)、字典(dict) list 列表定义123list_name1 &#x3D; [name1,name2,name3,...]list_a">
+<meta property="og:locale" content="en_UK">
+<meta property="article:published_time" content="2023-12-18T09:46:15.000Z">
+<meta property="article:modified_time" content="2023-12-19T04:28:07.068Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://qm.qq.com/q/FDr6C2fVAY" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">29</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">20</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">7</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/AVL%E6%A0%91/" rel="tag">AVL树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" rel="tag">k近邻算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/priority-queue/" rel="tag">priority_queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyecharts/" rel="tag">pyecharts</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vector/" rel="tag">vector</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vi/" rel="tag">vi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BB%BF%E5%87%BD%E6%95%B0/" rel="tag">仿函数</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag">位图</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BA%94%E7%94%A8/" rel="tag">应用</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" rel="tag">循环结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8C%87%E9%92%88/" rel="tag">指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" rel="tag">斐波那契</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">最长上升子序列</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">神经网络</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%93%E8%AE%BA%E9%A2%98/" rel="tag">结论题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag">背包问题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E6%8E%A8/" rel="tag">递推</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——匿名管道" >
+            <div class="recent-link-text">
+              Linux进程间通信——匿名管道
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" title="Linux基础IO——文件系统与动静态库" >
+            <div class="recent-link-text">
+              Linux基础IO——文件系统与动静态库
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" title="Linux基础IO——重定向与文件缓冲区" >
+            <div class="recent-link-text">
+              Linux基础IO——重定向与文件缓冲区
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/" title="Linux基础IO——文件的系统调用与文件描述符的本质" >
+            <div class="recent-link-text">
+              Linux基础IO——文件的系统调用与文件描述符的本质
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/" title="Linux进程控制——进程程序替换、bash的模拟实现" >
+            <div class="recent-link-text">
+              Linux进程控制——进程程序替换、bash的模拟实现
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Python数据容器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Python数据容器
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-18T09:46:15.000Z" itemprop="datePublished">2023-12-18</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/python/">python</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.5k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="数据容器"><a href="#数据容器" class="headerlink" title="数据容器"></a>数据容器</h2><p>数据容器是一种可以容纳多份数据的数据类型，容纳的每一份数据称之为一个元素，每一个元素，可以是任意类型的数据，如字符串、数字、布尔等</p>
+<p>在Python中有不同的数据容器，他们有不同的特性，分为五类：列表(list)、元组(tuple)、字符串(str)、集合(set)、字典(dict)</p>
+<h3 id="list-列表"><a href="#list-列表" class="headerlink" title="list 列表"></a>list 列表</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list_name1 = [name1,name2,name3,...]</span><br><span class="line">list_a = []</span><br><span class="line">list_b = <span class="built_in">list</span>()</span><br></pre></td></tr></table></figure>
+
+<p>以方括号作为表示，用逗号隔开，元素之间可以是不同的数据类型，支持嵌套，后面两种都是定义空列表的方式</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_name2 = [[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>数组是利用下标索引进行访问的，有两种标号方式，一种是从左到右，依次标号为0，1，2，…；第二种是从右到左，一次标号为-1，-2，-3，…；</p>
+<p>当我们想要进行取出数据时，可以利用方括号+下标的方式取出，例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list_1 = list_name1[<span class="number">0</span>]</span><br><span class="line">list_2 = list_name2[<span class="number">0</span>][<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>这里的方法其实就类似于函数，但是需要配合数据容器进行使用</p>
+<h5 id="查找下标"><a href="#查找下标" class="headerlink" title="查找下标"></a>查找下标</h5><p>功能：查找指定元素在列表的下标，如果找不到，报错ValueError</p>
+<p>语法：列表.index(元素)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list_name3 = [<span class="string">&#x27;name1&#x27;</span>,<span class="string">&#x27;name2&#x27;</span>,<span class="string">&#x27;name3&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(list_name3.index(<span class="string">&#x27;name2&#x27;</span>))  <span class="comment"># 结果会输出 1</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="列表修改"><a href="#列表修改" class="headerlink" title="列表修改"></a>列表修改</h5><p>功能：修改列表中元素的值</p>
+<p>语法：列表[下标] &#x3D; 值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_name3[<span class="number">2</span>] = <span class="string">&#x27;name4&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h5><p>语法：列表.insert(下标, 元素)，在指定的下标位置，插入指定的元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list_name3.insert(<span class="number">2</span>,<span class="string">&#x27;name3&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(list_name3) <span class="comment"># 结果 [&#x27;name1&#x27;,&#x27;name2&#x27;,&#x27;name3&#x27;,&#x27;name4&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="追加"><a href="#追加" class="headerlink" title="追加"></a>追加</h5><p>语法：列表.append(元素)，将指定元素，追加到列表的尾部</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_name3.append(<span class="string">&#x27;name5&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>语法：列表.extend(其它数据容器)，将其它数据容器的内容取出，依次追加到列表尾部</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list_name4 = [<span class="string">&#x27;name6&#x27;</span>,<span class="string">&#x27;name7&#x27;</span>]</span><br><span class="line">list_name3.append(list_name4)</span><br><span class="line"><span class="built_in">print</span>(list_name3) <span class="comment"># 结果 [&#x27;name1&#x27;,&#x27;name2&#x27;,&#x27;name3&#x27;,&#x27;name4&#x27;&#x27;name5&#x27;,&#x27;name6&#x27;,&#x27;name7&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h5><ol>
+<li><p>del 列表[下标]</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> list_name3[<span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>列表.pop(下标)</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_name3.pop(<span class="number">5</span>)</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ol>
+<h5 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h5><ol>
+<li><p>删除第一个匹配的元素 列表.remove(元素)</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_name3.remove(<span class="string">&#x27;name5&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>清空列表 列表.clear()</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_name4.clear()</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>统计某元素在列表内的数量 列表.count(元素)</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_name3.count(<span class="string">&#x27;name2&#x27;</span>)</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ol>
+<h5 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h5><p>统计列表内，有多少元素</p>
+<p>语法：len(列表)</p>
+<p>可以得到一个int数字，表示列表内的元素数量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(list_name3)) <span class="comment"># 结果是 4</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，方法其实非常多，也不需要死记硬背，用的多的自然会记下来，我们只需要知道有这样一个方法即可，要用的时候，只需要查一下</p>
+<h5 id="循环遍历"><a href="#循环遍历" class="headerlink" title="循环遍历"></a>循环遍历</h5><ol>
+<li><p>while</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">index = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> index &lt; <span class="built_in">len</span>(列表):</span><br><span class="line">    元素 = 列表[index]</span><br><span class="line">    处理</span><br><span class="line">    idnex += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这是列表一个简单的遍历，如果没有理解可以看一下之前流程控制的章节</p>
+</blockquote>
+</li>
+<li><p>for</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 临时变量 <span class="keyword">in</span> 容器</span><br><span class="line">	处理</span><br></pre></td></tr></table></figure>
+
+<p>这里与上面不同的是，临时变量可以直接使用，类似于while循环中的元素，也相对便利，了解C++的朋友也可以认为这是简化版的范围for，这在我介绍C++的迭代器的部分也有提及，感兴趣的朋友可以选择性阅读</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="tuple-元组"><a href="#tuple-元组" class="headerlink" title="tuple 元组"></a>tuple 元组</h3><p>列表是可修改的，元组是不可修改的，同样的，也可以包含不同类型的元素</p>
+<h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>定义元组使用小括号，且使用逗号隔开各个数据，数据可以是不同的数据类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tuple1 = (e1,e2,e3,...)</span><br><span class="line">tuple2 = ()</span><br><span class="line">tuple3 = <span class="built_in">tuple</span>()</span><br><span class="line">tuple4 = (e1,)</span><br><span class="line">tuple5 = (e1)</span><br></pre></td></tr></table></figure>
+
+<p>tuple2和tuple3都是空元组，tuple4是只含一个元素的元组，需要注意的是当元组只有一个数据时，这个数据之后需要添加逗号，否则就不是元组类型，而是他本身的类型</p>
+<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><p>元组由于不可修改的特性，所以其操作方法非常少</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>index()</td>
+<td>查找元组内数据，存在则返回下标，不存在则报错</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>统计某个元素在元组内出现的次数</td>
+</tr>
+<tr>
+<td>len()</td>
+<td>统计元组内元素的个数</td>
+</tr>
+</tbody></table>
+<p>其余的特性除了修改元组内容基本上都和列表一样</p>
+<h3 id="str-字符串"><a href="#str-字符串" class="headerlink" title="str 字符串"></a>str 字符串</h3><p>对于字符串来说，他只是字符的容器，因此同样也支持下标的访问，他的内容也无法进行修改，我们只能对旧字符串操作之后得到新的字符串，原来的字符串是无法修改的</p>
+<h4 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h4><h5 id="查找下标-1"><a href="#查找下标-1" class="headerlink" title="查找下标"></a>查找下标</h5><p>语法：字符串.index(字符串)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&quot;rick and morty&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1.index(<span class="string">&quot;and&quot;</span>)) <span class="comment"># 结果是5</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h5><p>语法：字符串.replace(字符串1，字符串2）</p>
+<p>功能：将字符串内的全部：字符串1，替换为字符串2</p>
+<p>注意：不是修改字符串本身，而是得到了一个新字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str2 = str1.replace(<span class="string">&quot;and&quot;</span>,<span class="string">&quot;or&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(str2) <span class="comment"># 结果是 rick or morty</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h5><p>语法：字符串.split(分隔符字符串）</p>
+<p>功能：按照指定的分隔符字符串，将字符串划分为多个字符串，并存入列表对象中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list1 = str1.split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(list1) <span class="comment"># 结果是 [&#x27;rick&#x27;,&#x27;and&#x27;,&#x27;morty&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="去除前后空格"><a href="#去除前后空格" class="headerlink" title="去除前后空格"></a>去除前后空格</h5><p>语法：字符串.strip()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str3 = <span class="string">&quot;  rick and morty  &quot;</span></span><br><span class="line">str4 = str3.strip()</span><br></pre></td></tr></table></figure>
+
+<h5 id="去除前后指定字符"><a href="#去除前后指定字符" class="headerlink" title="去除前后指定字符"></a>去除前后指定字符</h5><p>语法：字符串.strip(字符串)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str5 = <span class="string">&quot;_~rick and morty~_&quot;</span></span><br><span class="line">str6 = str5.strip(<span class="string">&quot;_~&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是这里本质上是从传入的两个字符依次比较，删除相同的字符</p>
+<h5 id="统计字符串出现次数"><a href="#统计字符串出现次数" class="headerlink" title="统计字符串出现次数"></a>统计字符串出现次数</h5><p>语法：字符串.count(字符串)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count1 = str1.count(<span class="string">&#x27;and&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="统计字符串长度"><a href="#统计字符串长度" class="headerlink" title="统计字符串长度"></a>统计字符串长度</h5><p>语法：len(字符串)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len1 = <span class="built_in">len</span>(str1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="序列的切片"><a href="#序列的切片" class="headerlink" title="序列的切片"></a>序列的切片</h3><h4 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h4><p>序列是指内容连续、有序，可以使用下标引用的一类数据容器，而列表、元组、字符串都是序列</p>
+<h4 id="序列的切片-1"><a href="#序列的切片-1" class="headerlink" title="序列的切片"></a>序列的切片</h4><p>这里切片的含义是从一个序列中取出一个子序列</p>
+<p>语法：序列[起始下标:结束下标:步长]</p>
+<p>表示从序列中，从指定位置开始，依次取出元素，到指定位置结束，得到一个新序列：</p>
+<p>起始下标表示从何处开始，可以留空，留空视作从头开始</p>
+<p>结束下标（不含）表示何处结束，可以留空，留空视作截取到结尾</p>
+<p>步长表示，依次取元素的间隔</p>
+<p>步长1表示，一个个取元素</p>
+<p>步长2表示，每次跳过1个元素取</p>
+<p>步长N表示，每次跳过N-1个元素取</p>
+<p><strong>步长为负数表示，反向取（注意，起始下标和结束下标也要反向标记）</strong></p>
+<p>注意：此操作不会影响序列本身，而是会得到一个新的序列</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">list2 = list1[<span class="number">1</span>:<span class="number">4</span>] <span class="comment"># 从下标1开始取到4结束，前闭后开</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>这个操作对列表、元组、字符串是通用的</strong></p>
+<p><strong>同时非常灵活，根据需求，起始位置，结束位置，步长（正反序）都是可以自行控制的</strong></p>
+<h3 id="set-集合"><a href="#set-集合" class="headerlink" title="set 集合"></a>set 集合</h3><p>集合的概念类似于数学上集合的定义，具有不重复，无序的特点</p>
+<p>那我们其实可以利用这个特点做去重的工作</p>
+<h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set1 = &#123;e1,e2,...&#125;</span><br><span class="line">set2 = <span class="built_in">set</span>()</span><br></pre></td></tr></table></figure>
+
+<p>在定义集合时哪怕e1和e2相同，他也会自动帮你去重</p>
+<h4 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h4><p>因为集合是无序的，所以集合不支持下标索引访问</p>
+<h5 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h5><p>语法：集合.add(元素)。将指定元素，添加到集合内</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set1 = &#123;<span class="string">&#x27;e1&#x27;</span>,<span class="string">&#x27;e2&#x27;</span>&#125;</span><br><span class="line">set1.add(<span class="string">&#x27;e3&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h5><p>语法：集合.remove(元素)，将指定元素，从集合内移除</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set1.remove(<span class="string">&#x27;e2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="随机取出"><a href="#随机取出" class="headerlink" title="随机取出"></a>随机取出</h5><p>语法：集合.pop()，功能，从集合中随机取出一个元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elemment = set1.pop()</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是这个操作之后，集合本身也会被修改，元素被移除</p>
+<h5 id="清空"><a href="#清空" class="headerlink" title="清空"></a>清空</h5><p>语法：集合.clear()，功能，清空集合</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set1.clear()</span><br></pre></td></tr></table></figure>
+
+<h5 id="差集"><a href="#差集" class="headerlink" title="差集"></a>差集</h5><p>语法：集合1.difference(集合2)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set3 = set2.difference(set1)</span><br></pre></td></tr></table></figure>
+
+<p>结果是得到一个新集合，集合1和集合2不变</p>
+<h5 id="消除差集"><a href="#消除差集" class="headerlink" title="消除差集"></a>消除差集</h5><p>语法：集合1.difference_update(集合2)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set1.difference_update(set2)</span><br></pre></td></tr></table></figure>
+
+<p>简单说就是在set1中消除set2中也有的元素</p>
+<h5 id="并集"><a href="#并集" class="headerlink" title="并集"></a>并集</h5><p>语法：集合1.union(集合2)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set3 = set1.union(set2)</span><br></pre></td></tr></table></figure>
+
+<p>   结果会得到新集合，集合1和集合2不变</p>
+<p>其余的len()和遍历与其他容器相同</p>
+<h3 id="dict-字典"><a href="#dict-字典" class="headerlink" title="dict 字典"></a>dict 字典</h3><p>字典实际上就是类似于生活中的字典，是由键值对组成，键是指key，关键字的意思，值是值value</p>
+<h4 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h4><p>字典的定义，同样使用{}，不过存储的元素是一个个的：键值对</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dict1 = &#123;key:val,key:val,...&#125;</span><br><span class="line">dict2 = <span class="built_in">dict</span>()</span><br><span class="line">dict3 = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li><p>key和value可以是任意类型的数据（key不可为字典）</p>
+</li>
+<li><p>key不可重复，重复会对原有数据覆盖</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h4><p>字典同样是无序的，无法用下标访问，但是可以利用key来访问</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dict1 = &#123;<span class="string">&#x27;Summer&#x27;</span>:<span class="number">17</span>,<span class="string">&#x27;Morty&#x27;</span>:<span class="number">14</span>,<span class="string">&#x27;Rick&#x27;</span>:<span class="number">60</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(dict1[<span class="string">&#x27;Morty&#x27;</span>]) <span class="comment"># 结果是14</span></span><br></pre></td></tr></table></figure>
+
+<p>除此之外，字典是可以嵌套字典（列表等）的，放在value的地方，我们可以以此来理解之后的JSON数据，以后会讲到</p>
+<h5 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h5><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dict1[‘Jerry’] &#x3D; 36</td>
+<td>添加元素，字典被修改</td>
+</tr>
+<tr>
+<td>dict1[‘Rick’] &#x3D; 61</td>
+<td>更新元素，字典被修改</td>
+</tr>
+<tr>
+<td>dict1.pop(‘Jerry’)</td>
+<td>删除元素</td>
+</tr>
+<tr>
+<td>dict1.clear()</td>
+<td>清空字典</td>
+</tr>
+<tr>
+<td>dict1.keys()</td>
+<td>获取全部的key</td>
+</tr>
+<tr>
+<td>for key in dict1.keys()</td>
+<td>遍历字典</td>
+</tr>
+</tbody></table>
+<p>字典不支持下标索引，所以同样不可以用while循环遍历</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"><strong>列表</strong></th>
+<th align="center"><strong>元组</strong></th>
+<th align="center"><strong>字符串</strong></th>
+<th align="center"><strong>集合</strong></th>
+<th align="center"><strong>字典</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">元素数量</td>
+<td align="center">支持多个</td>
+<td align="center">支持多个</td>
+<td align="center">支持多个</td>
+<td align="center">支持多个</td>
+<td align="center">支持多个</td>
+</tr>
+<tr>
+<td align="center">元素类型</td>
+<td align="center">任意</td>
+<td align="center">任意</td>
+<td align="center">仅字符</td>
+<td align="center">任意</td>
+<td align="center">key : value key：除字典外任意类型  Value：任意类型</td>
+</tr>
+<tr>
+<td align="center">下标索引</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+</tr>
+<tr>
+<td align="center">重复元素</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+</tr>
+<tr>
+<td align="center">可修改性</td>
+<td align="center">支持</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">数据有序</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">使用场景</td>
+<td align="center">可修改、可重复的一批数据记录场景</td>
+<td align="center">不可修改、可重复的一批数据记录场景</td>
+<td align="center">一串字符的记录场景</td>
+<td align="center">不可重复的数据记录场景</td>
+<td align="center">以key检索value的数据记录场景</td>
+</tr>
+</tbody></table>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2023/12/19/Python%E7%89%B9%E6%80%A7%E4%B9%8B%E6%8E%A8%E5%AF%BC%E5%BC%8F/"
+      title="Python特性之推导式"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Python特性之推导式
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/12/18/Python%E5%87%BD%E6%95%B0/"
+      title="Python函数"
+     >
+
+    <p class="title-text">
+      
+        Python函数
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

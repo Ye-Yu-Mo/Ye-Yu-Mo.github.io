@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>类和对象 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="面向过程与面向对象C语言是面向过程的，关注的是做一件事情的需要的步骤有哪些，通过一系列函数之间的调用配合来实现解决问题 例如打游戏，需要 拿出电脑，开机，联网，登录，进入游戏这几个步骤 C++是基于面向对象的，关注的是解决这一个问题参与的对象，依靠对象之间的交互来完成问题的解决 例如打游戏，对象就是电脑和人，对于电脑这个对象，内部可能有一些机理，比如联网，登录，对于人也有一些机理，例如肌肉运动之类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类和对象">
+<meta property="og:url" content="http://example.com/2023/08/31/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="面向过程与面向对象C语言是面向过程的，关注的是做一件事情的需要的步骤有哪些，通过一系列函数之间的调用配合来实现解决问题 例如打游戏，需要 拿出电脑，开机，联网，登录，进入游戏这几个步骤 C++是基于面向对象的，关注的是解决这一个问题参与的对象，依靠对象之间的交互来完成问题的解决 例如打游戏，对象就是电脑和人，对于电脑这个对象，内部可能有一些机理，比如联网，登录，对于人也有一些机理，例如肌肉运动之类">
+<meta property="og:locale" content="en_UK">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d050183c34e04581ab70d1c8edbb6cca.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cb548214e0134b4ab9a85903577f9465.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9f438b1224aa4bc79cfa8906772df15a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/26ee933b5a074690bb3545c4fb4853ec.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f55d6ed347594e3cbdd3b54c4b2f64f9.png">
+<meta property="article:published_time" content="2023-08-31T07:38:26.000Z">
+<meta property="article:modified_time" content="2023-12-13T07:18:10.688Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/d050183c34e04581ab70d1c8edbb6cca.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://qm.qq.com/q/FDr6C2fVAY" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">29</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">20</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">7</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/AVL%E6%A0%91/" rel="tag">AVL树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" rel="tag">k近邻算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/priority-queue/" rel="tag">priority_queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyecharts/" rel="tag">pyecharts</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vector/" rel="tag">vector</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vi/" rel="tag">vi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BB%BF%E5%87%BD%E6%95%B0/" rel="tag">仿函数</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag">位图</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BA%94%E7%94%A8/" rel="tag">应用</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" rel="tag">循环结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8C%87%E9%92%88/" rel="tag">指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" rel="tag">斐波那契</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">最长上升子序列</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">神经网络</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%93%E8%AE%BA%E9%A2%98/" rel="tag">结论题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag">背包问题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E6%8E%A8/" rel="tag">递推</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——匿名管道" >
+            <div class="recent-link-text">
+              Linux进程间通信——匿名管道
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" title="Linux基础IO——文件系统与动静态库" >
+            <div class="recent-link-text">
+              Linux基础IO——文件系统与动静态库
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" title="Linux基础IO——重定向与文件缓冲区" >
+            <div class="recent-link-text">
+              Linux基础IO——重定向与文件缓冲区
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/" title="Linux基础IO——文件的系统调用与文件描述符的本质" >
+            <div class="recent-link-text">
+              Linux基础IO——文件的系统调用与文件描述符的本质
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/" title="Linux进程控制——进程程序替换、bash的模拟实现" >
+            <div class="recent-link-text">
+              Linux进程控制——进程程序替换、bash的模拟实现
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-类和对象" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        类和对象
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-08-31T07:38:26.000Z" itemprop="datePublished">2023-08-31</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            5k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="面向过程与面向对象"><a href="#面向过程与面向对象" class="headerlink" title="面向过程与面向对象"></a>面向过程与面向对象</h1><p>C语言是<strong>面向过程</strong>的，关注的是做一件事情的<strong>需要的步骤</strong>有哪些，通过一系列函数之间的调用配合来实现解决问题</p>
+<p>例如打游戏，需要 拿出电脑，开机，联网，登录，进入游戏这几个步骤</p>
+<p>C++是<strong>基于面向对象的</strong>，关注的是解决这一个问题参与的<strong>对象</strong>，依靠对象之间的交互来完成问题的解决</p>
+<p>例如打游戏，对象就是电脑和人，对于电脑这个对象，内部可能有一些机理，比如联网，登录，对于人也有一些机理，例如肌肉运动之类的，这就类似于类中的函数</p>
+<h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><p>C语言中的结构体只能定义变量，但是在C++中，结构体中还可以定义函数，那么其实对于C++来说结构体也是一个类，而在C++中更常用class表示真正的类</p>
+<h2 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ClassName</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> a;</span><br><span class="line">&#125;;<span class="comment">//注意分号</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>class</strong>为定义类的关键字，<strong>ClassName</strong>是类的名字，**{}<strong>是类的主体，之中是类的成员，包括</strong>成员变量和成员函数**</p>
+<h3 id="类的两种定义方式"><a href="#类的两种定义方式" class="headerlink" title="类的两种定义方式"></a>类的两种定义方式</h3><ol>
+<li>声明和定义全都在类中定义，成员函数可能会被当成内联函数处理</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">student</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			cin&gt;&gt;_name&gt;&gt;_sex&gt;&gt;_age;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="type">char</span>* _name;</span><br><span class="line">		<span class="type">char</span>* _sex;</span><br><span class="line">		<span class="type">int</span> _age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>类声明在头文件中，成员函数放在源文件中，<strong>成员函数需要加类名</strong></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">student</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="type">char</span>* _name;</span><br><span class="line">		<span class="type">char</span>* _sex;</span><br><span class="line">		<span class="type">int</span> _age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;student.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">student::init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cin&gt;&gt;_name&gt;&gt;_sex&gt;&gt;_age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下尽量使用第二种，在类中定义的内部变量为了和临时变量能够区分清楚需要加入一定的前缀和后缀</p>
+<h1 id="类的访问限定符及封装"><a href="#类的访问限定符及封装" class="headerlink" title="类的访问限定符及封装"></a>类的访问限定符及封装</h1><h2 id="访问限定符"><a href="#访问限定符" class="headerlink" title="访问限定符"></a>访问限定符</h2><p>C++实现封装的方式：<strong>用类将对象的属性和方法相结合，通过访问权限选择性的将接口提供给外部用户使用</strong><br><img src="https://img-blog.csdnimg.cn/d050183c34e04581ab70d1c8edbb6cca.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>注意</p>
+<ol>
+<li>public修饰的成员可以在类外被直接访问</li>
+<li>protected和private修饰的成员在类外不能被直接访问，两者类似</li>
+<li>访问权限作用域从该访问限定符的位置开始直到下个访问限定符出现位置，或者到类的结束</li>
+<li>class的默认访问权限为private，struct的为public</li>
+</ol>
+</blockquote>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>这里主要讲解面向对象的三大特性（封装，继承，多态）之一，封装<br>封装：<strong>将数据和操作数据的方法进行有机结合，隐藏对象的属性和实现细节，仅对外公开接口来和对象进行交互。</strong><br>说人话就是别问咋实现的，给你这东西你会用就行。<br>封装本质上是一种管理，让用户更方便使用类。在C++语言中实现封装，可以通过类将数据以及操作数据的方法进行有机结合，通过访问权限来隐藏对象内部实现细节，控制哪些方法可以在类外部直接被使用。</p>
+<h1 id="类的作用域"><a href="#类的作用域" class="headerlink" title="类的作用域"></a>类的作用域</h1><p>类本身就是一个作用域，类中的所有成员都在类的作用域中，要在类外定义成员，例如变量或函数，时，需要使用作用域操作符指明属于哪个域</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">student</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="type">char</span>* _name;</span><br><span class="line">		<span class="type">char</span>* _sex;</span><br><span class="line">		<span class="type">int</span> _age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">student::init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cin&gt;&gt;_name&gt;&gt;_sex&gt;&gt;_age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="类的实例化"><a href="#类的实例化" class="headerlink" title="类的实例化"></a>类的实例化</h1><p><strong>用类创建对象的过程，成为类的实例化</strong>，说人话就是用这个类创建了一个变量，例如 int a ，就是int实例化的一个过程。</p>
+<h1 id="类对象模型"><a href="#类对象模型" class="headerlink" title="类对象模型"></a>类对象模型</h1><h2 id="类对象的大小"><a href="#类对象的大小" class="headerlink" title="类对象的大小"></a>类对象的大小</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="type">void</span> <span class="title">PrintA</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">		   cout&lt;&lt;_a&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="type">char</span> _a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>虽然看上去这个函数在类中，但实际上函数所占的空间并不在类中，因为如果是在类中的话，实例化相当数量的对象时，内存的占用会大大提高，为了避免这种事情的发生，会把成员变量放在一起，而成员函数放在公共代码区，这样即使实例化多个对象，成员函数始终只存在一个而且方便调用。所以类和对象的大小实际上跟结构体大小的计算方法时完全相同的</p>
+<blockquote>
+<p>一个类的大小，实际就是该类中”成员变量”之和，当然要注意内存对齐<br>注意空类的大小，空类比较特殊，编译器给了空类一个字节来唯一标识这个类的对象。</p>
+</blockquote>
+<h3 id="结构体内存的对其规则"><a href="#结构体内存的对其规则" class="headerlink" title="结构体内存的对其规则"></a>结构体内存的对其规则</h3><ol>
+<li>第一个成员在与结构体偏移量为0的地址处。</li>
+<li>其他成员变量要对齐到某个数字（对齐数）的整数倍的地址处。<br>注意：对齐数 &#x3D; 编译器默认的一个对齐数 与 该成员大小的较小值。VS中默认的对齐数为8</li>
+<li>结构体总大小为：最大对齐数（所有变量类型最大者与默认对齐参数取最小）的整数倍。</li>
+<li>如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数（含嵌套结构体的对齐数）的整数倍。</li>
+</ol>
+<h1 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h1><h2 id="this-指针-1"><a href="#this-指针-1" class="headerlink" title="this 指针"></a>this 指针</h2><p>这里为了引出this指针，先定义一个日期类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Date</span></span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Init</span><span class="params">(<span class="type">int</span> year, <span class="type">int</span> month, <span class="type">int</span> day)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		_year = year;</span><br><span class="line">		_month = month;</span><br><span class="line"> 		_day = day;</span><br><span class="line"> 	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> 	</span>&#123;</span><br><span class="line"> 	cout &lt;&lt;_year&lt;&lt; <span class="string">&quot;-&quot;</span> &lt;&lt;_month &lt;&lt; <span class="string">&quot;-&quot;</span>&lt;&lt;_day&lt;&lt;endl;</span><br><span class="line"> 	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> _year;     <span class="comment">// 年</span></span><br><span class="line">	<span class="type">int</span> _month;    <span class="comment">// 月</span></span><br><span class="line">	<span class="type">int</span> _day;      <span class="comment">// 日</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Date d1, d2;</span><br><span class="line">	d1.<span class="built_in">Init</span>(<span class="number">2023</span>,<span class="number">8</span>,<span class="number">2</span>);</span><br><span class="line">	d2.<span class="built_in">Init</span>(<span class="number">2023</span>,<span class="number">8</span>,<span class="number">3</span>);</span><br><span class="line"> 	d1.<span class="built_in">Print</span>();</span><br><span class="line"> 	d2.<span class="built_in">Print</span>();</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么对于这个类Date，在函数中并没对不同对象进行区分，那么当d1调用Init函数和d2调用Init函数时，编译器如何对这两个对象进行区分呢</p>
+<p>实际上在对象中有一个隐藏的this指针，当函数对对象进行操作的时候就可以通过这个指针找到对象的成员变量</p>
+<h2 id="this-指针的特性"><a href="#this-指针的特性" class="headerlink" title="this 指针的特性"></a>this 指针的特性</h2><ol>
+<li><strong>this</strong>指针的类型是 *const，也就是不能再成员函数中给this指针赋值，this指针所指向的空间不能改变</li>
+<li>this指针本质上是一个形参，因此只能在成员函数的内部进行使用，而且在对象调用函数时，是将对象的地址作为实参传递给this形参，因此对象本身并不存储this指针</li>
+<li>this是隐藏的指针形参，所以并不需要用户传递，否则会报错，一般情况由编译器通过ecx寄存器自动传递</li>
+</ol>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/cb548214e0134b4ab9a85903577f9465.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<h1 id="类的六个默认成员函数"><a href="#类的六个默认成员函数" class="headerlink" title="类的六个默认成员函数"></a>类的六个默认成员函数</h1><p>如果类中什么都没有，就成为空类，会占一个字节的空间，来表示这里有一个类<br>但其实在空类中，编译器仍然会自动生成六个默认成员函数<br><img src="https://img-blog.csdnimg.cn/9f438b1224aa4bc79cfa8906772df15a.png" alt="在这里插入图片描述"></p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>我们之前写过一个Date类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Date</span></span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Init</span><span class="params">(<span class="type">int</span> year, <span class="type">int</span> month, <span class="type">int</span> day)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		_year = year;</span><br><span class="line">		_month = month;</span><br><span class="line"> 		_day = day;</span><br><span class="line"> 	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> 	</span>&#123;</span><br><span class="line"> 	cout &lt;&lt;_year&lt;&lt; <span class="string">&quot;-&quot;</span> &lt;&lt;_month &lt;&lt; <span class="string">&quot;-&quot;</span>&lt;&lt;_day&lt;&lt;endl;</span><br><span class="line"> 	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> _year;     <span class="comment">// 年</span></span><br><span class="line">	<span class="type">int</span> _month;    <span class="comment">// 月</span></span><br><span class="line">	<span class="type">int</span> _day;      <span class="comment">// 日</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Date d1, d2;</span><br><span class="line">	d1.<span class="built_in">Init</span>(<span class="number">2023</span>,<span class="number">8</span>,<span class="number">2</span>);</span><br><span class="line">	d2.<span class="built_in">Init</span>(<span class="number">2023</span>,<span class="number">8</span>,<span class="number">3</span>);</span><br><span class="line"> 	d1.<span class="built_in">Print</span>();</span><br><span class="line"> 	d2.<span class="built_in">Print</span>();</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以自己写一个公用的初始化函数Init()，但是，只要我们实例化一个类，就要进行一次调用，因此C++就会自动生成一个默认成员函数，名字与类名相同，称为默认构造函数，在每次实例化类的时候会自动进行调用，以保证每个数据成员都由一个合适的初始值<br>一般来说这个构造函数如何进行初始化是需要自己编写的，好在不需要自己进行调用，省了不少时间</p>
+<p>下面是使用的演示，具体内容我们会在接下来的内容中讲到</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Date</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Date</span>(<span class="type">int</span> year, <span class="type">int</span> month, <span class="type">int</span> day)</span><br><span class="line">	&#123;</span><br><span class="line">		_year = year;</span><br><span class="line">		_month = month;</span><br><span class="line">		_day = day;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		cout &lt;&lt; _year &lt;&lt; <span class="string">&quot;-&quot;</span> &lt;&lt; _month &lt;&lt; <span class="string">&quot;-&quot;</span> &lt;&lt; _day &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> _year;     <span class="comment">// 年</span></span><br><span class="line">	<span class="type">int</span> _month;    <span class="comment">// 月</span></span><br><span class="line">	<span class="type">int</span> _day;      <span class="comment">// 日</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">Date <span class="title">d1</span><span class="params">(<span class="number">2023</span>, <span class="number">8</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="function">Date <span class="title">d2</span><span class="params">(<span class="number">2023</span>, <span class="number">8</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以在调试信息中看到d1，d2中成员变量的值<br><img src="https://img-blog.csdnimg.cn/26ee933b5a074690bb3545c4fb4853ec.png" alt="在这里插入图片描述"><br>同理我们可以在输出窗口中加一些提示信息看到构造函数的调用情况<br><img src="https://img-blog.csdnimg.cn/f55d6ed347594e3cbdd3b54c4b2f64f9.png" alt="在这里插入图片描述"></p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>构造函数实际上是特殊的成员函数，而且构造函数本身的任务并不是创建变量而是初始化变量</p>
+<ol>
+<li>函数名与类名相同</li>
+<li>无返回值</li>
+<li>实例化时编译器会自动调用相应的构造函数</li>
+<li>构造函数可以重载，也就是说可以默认初始值，或者手动传参，都是很方便的操作，需要注意的是，在使用全缺省的时候，不需要加空括号，因为会和函数的声明混淆</li>
+<li>如果用户没有显示定义构造函数，那么编译器会自动生成一个无参的默认构造函数，一旦定义，编译器也就不会自动生成了</li>
+<li>实际上在自动初始化的时候，对于内置类型，包括整形，浮点型，指针等，编译器是不会自动初始化的，而对于自定义类型例如class类，编译器会自动调用他所定义的构造函数，所以对于最基本的类就只用初始化一次就足够了</li>
+<li>在C++11中，对于内置类型不支持初始化的缺陷进行了修补，在内置基本类型的声明时，可以给一个默认值，如果在初始化的时候没有给定，就会自动使用默认值</li>
+</ol>
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>同样的，与初始化相对应，还有变量的销毁，我们称之为析构函数，但要注意的是，销毁的其实是对象中的成员变量等，对象的销毁是由编译器自身完成的</p>
+<h3 id="特性-1"><a href="#特性-1" class="headerlink" title="特性"></a>特性</h3><ol>
+<li>析构函数的函数名是在类名前加~</li>
+<li>无参数无返回值类型</li>
+<li>一个类只用一个析构函数，若用户没有定义，编译器会自动生成，而且析构函数不能重载</li>
+<li>C++会自动调用析构函数、</li>
+<li>对于内置类型析构函数不会处理，对于自定义类型，析构函数会调用他自己的析构函数</li>
+<li>在没有进行内存申请时，析构函数可以不写，否则一定要写，不然会造成内存泄漏</li>
+</ol>
+<h1 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><p>用于拷贝和赋值自定义类型的值<br><strong>拷贝构造函数</strong>：<strong>只有单个形参</strong>，该形参是对本自定义类型对象的<strong>引用</strong>(一般常用const修饰)，在用已存在的类类型对象创建新对象时由编译器<strong>自动调用</strong>。</p>
+<h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><ol>
+<li>拷贝构造函数是<strong>构造函数的重载形式</strong>，因此函数名也和类名一样</li>
+<li>拷贝构造函数只有一个，必须是对自定义类的引用，用直接传值回引发无穷递归，因为传值本质上还是实参向形参拷贝</li>
+<li>若没有显示定义，编译器会生成默认的拷贝构造函数，这种拷贝构造函数只能按照字节进行拷贝，这种拷贝叫做浅拷贝，或值拷贝，存在许多弊端，例如在对栈进行拷贝的时候，只能将地址拷贝，并不能拷贝地址的内容，此时又因为存在析构函数，将对象析构两次，就会引发报错</li>
+<li>拷贝构造函数的调用场景<ol>
+<li>使用已存在对象创建新的对象</li>
+<li>函数参数类型为自定义类型对象</li>
+<li>函数返回值类型为自定义类型对象</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>后面两种情况实际上是因为在传值和返回值时会自动拷贝</p>
+</blockquote>
+<h1 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h1><p>C++为了增强代码的<strong>可读性</strong>引入了运算符重载，运算符重载是具有特殊函数名的函数，也具有其返回值类型，函数名字以及参数列表，其返回值类型与参数列表与普通的函数类似<br>比如对自定义类型对象的比较大小，加减，在写这类的函数时也应当考虑其实际含义是否有价值<br>函数名字为：关键字operator后面接需要重载的运算符符号<br>函数原型：返回值类型 operator操作符(参数列表)<br>注意：</p>
+<ul>
+<li>不能通过连接其他符号来创建新的操作符：比operator@ </li>
+<li>重载操作符必须有一个类类型参数</li>
+<li>用于内置类型的运算符，其含义不能改变，例如：内置的整型+，不 能改变其含义</li>
+<li>作为类成员函数重载时，其形参看起来比操作数数目少1，因为成员函数的第一个参数为藏的this</li>
+<li>.* :: sizeof ?: . 注意以上5个运算符不能重载。</li>
+</ul>
+<h2 id="const-对象"><a href="#const-对象" class="headerlink" title="const 对象"></a>const 对象</h2><p>在许多情况下，我们并不想让调用的成员函数改变对应的成员变量，而在成员函数定义或声明时又无法显式写出this指针来限制，因此c++提供了这样一种语法来限制this指针所指向的对象不能被修改</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Date</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		cout&lt;&lt;_year&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;_month&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;_day&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> _year;</span><br><span class="line">	<span class="type">int</span> _month;</span><br><span class="line">	<span class="type">int</span> _day;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以理解为下面的第二种形式，其中的this所指向的内容不能被改变</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Date* <span class="keyword">this</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>在实际的操作中，const对象和非const对象都存在读和写的需求。而在只读的成员函数中则可以只写const成员函数，因为非const对象也可以调用const成员函数，这里实际上是权限的缩小，那么也可以得到如下结论，const对象不能调用非const成员函数，因为权限扩大了。const成员函数不能调用其他非const成员函数，非const成员函数可以调用其他const成员函数</p>
+<h2 id="取地址操作符的重载"><a href="#取地址操作符的重载" class="headerlink" title="取地址操作符的重载"></a>取地址操作符的重载</h2><p>对于取地址操作符，我们需要定义const成员函数和非const函数的重载，在一般情况下直接使用默认生成的取地址重载即可，当然也可以自己写一个函数，达到保密的效果</p>
+<h1 id="构造函数之二"><a href="#构造函数之二" class="headerlink" title="构造函数之二"></a>构造函数之二</h1><h2 id="构造函数体的赋值"><a href="#构造函数体的赋值" class="headerlink" title="构造函数体的赋值"></a>构造函数体的赋值</h2><p>在创建对象时，编译器会调用构造函数赋予对象的成员变量的初始值，例如我们之前写过的日期类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Date</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="built_in">Date</span>(<span class="type">int</span> year, <span class="type">int</span> month, <span class="type">int</span> day)</span><br><span class="line">&#123;</span><br><span class="line">     _year = year;</span><br><span class="line">     _month = month;</span><br><span class="line">     _day = day;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> _year;</span><br><span class="line">	<span class="type">int</span> _month;</span><br><span class="line">	<span class="type">int</span> _day;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>但实际上这并不算初始化，而属于初赋值，在实际的使用过程中，我们会遇到一些无法赋值的情况，例如const成员变量，引用变量，自定义类型成员且没有默认构造函数，由此c++发展出了<strong>初始化列表</strong></p>
+<h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><p>初始化列表：以一个<strong>冒号开始</strong>，接着是一个以<strong>逗号分隔</strong>的数据成员列表，每个”成员变量”后面跟一个<strong>放在括号中的初始值或表达式</strong>。<br>还是上面的日期类，我们可以这样初始化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Date</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="built_in">Date</span>(<span class="type">int</span> year, <span class="type">int</span> month, <span class="type">int</span> day)</span><br><span class="line">	:_year(year)</span><br><span class="line">	,_month(month)</span><br><span class="line">	,_day(day)</span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> _year;</span><br><span class="line">	<span class="type">int</span> _month;</span><br><span class="line">	<span class="type">int</span> _day;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>每个成员变量在初始化列表中只能出现一次</li>
+<li>包含上面的特殊情况时必须放在初始化列表中初始化</li>
+<li>尽量使用初始化列表进行初始化，因为自定义类型成员变量一定会先使用初始化列表初始化</li>
+<li>初始化的顺序按照构造函数的声明顺序进行初始化</li>
+</ol>
+</blockquote>
+<h1 id="static-成员"><a href="#static-成员" class="headerlink" title="static 成员"></a>static 成员</h1><h2 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h2><p>static的类成员被称为<strong>类的静态成员</strong>，包含<strong>静态成员变量和静态成员函数</strong>，此外在使用<strong>静态成员变量</strong>时一定要在<strong>类外进行初始化</strong>，后续将介绍静态成员变量和静态成员函数特性</p>
+<h2 id="特性-2"><a href="#特性-2" class="headerlink" title="特性"></a>特性</h2><blockquote>
+<ol>
+<li><strong>静态成员</strong>属于整个类，不属于某个具体的对象，存放在静态区</li>
+<li><strong>静态成员变量</strong>必须在<strong>类外定义</strong>（注意区分定义与声明的概念），定义不添加static，声明时添加</li>
+<li>类的静态成员可以用<strong>类名::静态成员</strong>或者<strong>对象.静态成员</strong>来访问</li>
+<li>静态成员函数没有隐藏的this指针，因此也不能访问任何非静态成员</li>
+<li>静态成员也是类的成员，受public、protected、private的限制</li>
+</ol>
+<p>注意： <strong>区分static静态成员和const成员</strong></p>
+</blockquote>
+<h1 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h1><p>友元是一种突破类的限制的方法，为了提供便利，破坏封装，提高耦合度，通常不建议封装，同样的，友元也分为友元函数和友元类</p>
+<h2 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h2><p>友元函数可以直接访问类的私有成员，它是定义在类外部的普通函数，不属于任何类，但需要在类的内部声明，声明时需要加friend关键字，也就是说这个函数可以直接访问类中的成员，十分方便</p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><blockquote>
+<ol>
+<li>友元函数可以访问私有成员，但不是类的成员函数</li>
+<li>友元函数不能用const修饰、</li>
+<li>友元函数可以在类定义的任何地方声明，不受访问限定符的限制</li>
+<li>一个函数可以是多个类的友元函数</li>
+<li>友元函数的调用与普通函数的调用原理相同</li>
+</ol>
+</blockquote>
+<h2 id="友元类"><a href="#友元类" class="headerlink" title="友元类"></a>友元类</h2><p>友元类的所有成员函数都是另一个类的友元函数，都可以直接访问私有成员</p>
+<h3 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h3><blockquote>
+<ol>
+<li>友元关系是单向的，不可以交换</li>
+<li>友元关系是不可传递的</li>
+<li>友元关系不能继承，后续介绍</li>
+</ol>
+</blockquote>
+<h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><p>概念： 类定义在另一个类的内部，则成为内部类，内部类是独立的一个类，不属于外部类，也不能通过外部类访问内部类的成员</p>
+<p>注意：内部类是外部类的友元类，内部类可以通过外部类的对象参数访问外部类的所有成员，但外部类不是内部类的友元</p>
+<p>特性:</p>
+<ol>
+<li>内部类可以定义在外部类的public、protected、private</li>
+<li>内部类可以直接访问外部类中的static成员，不需要外部类的对象或者类名</li>
+<li>sizeof(外部类) &#x3D; 外部类成员的大小，不包含任何内部类成员</li>
+</ol>
+<h1 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h1><p>匿名对象与c语言中的匿名结构体类似，可以直接在函数中使用，因为匿名对象不需要取名字，匿名对象和实名对象的基本操作都还在，比如构造与析构，只是没有名字，其次匿名对象的生命周期只有这一行。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">class</span> <span class="title">A</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">A</span>(<span class="type">int</span> a = <span class="number">0</span>)</span><br><span class="line">		:_a = a;</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;A(int a = 0)&quot;</span>&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	~<span class="built_in">A</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;~A()&quot;</span>&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">Fun</span><span class="params">(<span class="type">int</span> input = x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> _n + x;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> _a;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> _n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> A::_n = <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	A a1;<span class="comment">//这里是实名对象，对象名为a1</span></span><br><span class="line">	<span class="built_in">A</span>();<span class="comment">//这里就是一个匿名对象</span></span><br><span class="line">	<span class="built_in">A</span>().<span class="built_in">Fun</span>(<span class="number">5</span>);<span class="comment">//如果想直接调用函数可以利用匿名对象</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="拷贝对象的优化"><a href="#拷贝对象的优化" class="headerlink" title="拷贝对象的优化"></a>拷贝对象的优化</h1><p>在传参和返回值时，编译器会做一些优化，减少对象的拷贝，大多数编译器都会优化</p>
+<p>例如要将返回的对象拷贝给一个新的对象，此时就会直接拷贝给新的对象，而不会利用临时对象再去拷贝，这样可以节省大量资源。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2023/09/01/C++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+      title="C++内存管理"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        C++内存管理
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/07/25/C++%E5%85%A5%E9%97%A8/"
+      title="C++入门"
+     >
+
+    <p class="title-text">
+      
+        C++入门
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

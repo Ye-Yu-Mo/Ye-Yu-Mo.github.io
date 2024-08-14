@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>百度飞桨大模型笔记1 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="生成式AI、提示词工程和零代码应用开发人工智能概念 这里我们逐一解释这些概念  AI是计算机学科下的一个分支学科，旨在使用计算机使之能像人类一样学习和思考问题 机器学习是AI的一个子集，他的一个重要特点就是不需要人去做显示编程（不用手撕函数），让计算机自行学习迭代总结规律，做出预测和决策  机器学习机器学习下就有很多分支了，例如监督学习、无监督学习、强化学习  监督学习目标是学习原始数据和标签之间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度飞桨大模型笔记1">
+<meta property="og:url" content="http://example.com/2024/03/15/%E7%99%BE%E5%BA%A6%E9%A3%9E%E6%A1%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B01/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="生成式AI、提示词工程和零代码应用开发人工智能概念 这里我们逐一解释这些概念  AI是计算机学科下的一个分支学科，旨在使用计算机使之能像人类一样学习和思考问题 机器学习是AI的一个子集，他的一个重要特点就是不需要人去做显示编程（不用手撕函数），让计算机自行学习迭代总结规律，做出预测和决策  机器学习机器学习下就有很多分支了，例如监督学习、无监督学习、强化学习  监督学习目标是学习原始数据和标签之间">
+<meta property="og:locale" content="en_UK">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/YSFup3O5WrmLDgK.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/XbmjVwN7gG1o5OS.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/RZaFD1VubiYUnqW.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/IUacDKdSYRWjTEf.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/QminL167sAYODGX.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/7KqLmHoW9rhZg8d.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/wnscXVbmGEKuTNC.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/wMe9PxbEgnmZkdL.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/9NtcObBVqZSYQsw.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/KBjEG4Zg2WsQdfO.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/15/BA6E3IGPhYkFmaJ.png">
+<meta property="article:published_time" content="2024-03-15T08:31:32.000Z">
+<meta property="article:modified_time" content="2024-03-15T10:12:48.477Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="大模型训练营">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/03/15/YSFup3O5WrmLDgK.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://qm.qq.com/q/FDr6C2fVAY" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">29</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">20</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">7</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/AVL%E6%A0%91/" rel="tag">AVL树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" rel="tag">k近邻算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/priority-queue/" rel="tag">priority_queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyecharts/" rel="tag">pyecharts</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vector/" rel="tag">vector</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vi/" rel="tag">vi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BB%BF%E5%87%BD%E6%95%B0/" rel="tag">仿函数</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag">位图</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BA%94%E7%94%A8/" rel="tag">应用</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" rel="tag">循环结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8C%87%E9%92%88/" rel="tag">指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" rel="tag">斐波那契</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">最长上升子序列</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">神经网络</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%93%E8%AE%BA%E9%A2%98/" rel="tag">结论题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag">背包问题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E6%8E%A8/" rel="tag">递推</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——匿名管道" >
+            <div class="recent-link-text">
+              Linux进程间通信——匿名管道
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" title="Linux基础IO——文件系统与动静态库" >
+            <div class="recent-link-text">
+              Linux基础IO——文件系统与动静态库
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" title="Linux基础IO——重定向与文件缓冲区" >
+            <div class="recent-link-text">
+              Linux基础IO——重定向与文件缓冲区
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/" title="Linux基础IO——文件的系统调用与文件描述符的本质" >
+            <div class="recent-link-text">
+              Linux基础IO——文件的系统调用与文件描述符的本质
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/" title="Linux进程控制——进程程序替换、bash的模拟实现" >
+            <div class="recent-link-text">
+              Linux进程控制——进程程序替换、bash的模拟实现
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-百度飞桨大模型笔记1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        百度飞桨大模型笔记1
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-03-15T08:31:32.000Z" itemprop="datePublished">2024-03-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">大模型训练营</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.3k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="生成式AI、提示词工程和零代码应用开发"><a href="#生成式AI、提示词工程和零代码应用开发" class="headerlink" title="生成式AI、提示词工程和零代码应用开发"></a>生成式AI、提示词工程和零代码应用开发</h2><h3 id="人工智能概念"><a href="#人工智能概念" class="headerlink" title="人工智能概念"></a>人工智能概念</h3><p><img src="https://s2.loli.net/2024/03/15/YSFup3O5WrmLDgK.png" alt="image.png"></p>
+<p>这里我们逐一解释这些概念</p>
+<ul>
+<li>AI是计算机学科下的一个分支学科，旨在使用计算机使之能像人类一样学习和思考问题</li>
+<li>机器学习是AI的一个子集，他的一个重要特点就是不需要人去做显示编程（不用手撕函数），让计算机自行学习迭代总结规律，做出预测和决策</li>
+</ul>
+<h4 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h4><p>机器学习下就有很多分支了，例如监督学习、无监督学习、强化学习</p>
+<ul>
+<li>监督学习目标是学习原始数据和标签之间的映射关系，他的一个特点就是是给定了原始数据和标签，让计算机自行总结归纳，他的经典的应用有对事物的分类、回归预测等</li>
+<li>无监督学习就是相对于监督学习，他只给原始数据而不给定标签，让计算机自行发现数据中的模式或规律，他的应用有聚类（就是分组）、降维、异值检测、自编码器（大语言模型中用到）、自监督学习等</li>
+<li>强化学习就是让模型在环境中采取行动，不断尝试，让他在环境中获得最大奖励的手段，类似于人类学习的模式，趋利避害，例如Alpha Go</li>
+</ul>
+<h4 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h4><p>深度学习具有这三类学习的一些特点，也有自己的模式，属于都有点但都不是的状态</p>
+<p>关于深度学习的核心就是两个词，一是连接，二是深度</p>
+<p>连接的意思是说，他采用了类似于神经元的模式，互相连接，而深度则是指一层一层的神经元来进行映射</p>
+<p><img src="https://s2.loli.net/2024/03/15/XbmjVwN7gG1o5OS.png" alt="image.png"></p>
+<p>深度学习有一个很经典的应用就是识别手写的数字，通过输入，进行一层一层的运算，让计算机逐渐掌握这些数字更深层次的特征，从而输出正确的结果</p>
+<p>关于深度学习的过程一般有如下几个步骤</p>
+<p>数据准备、模型构建、损失函数定义、优化器选择、模型训练、模型评估与调优、模型应用与部署</p>
+<p>这些步骤里面最最重要的其实是模型训练这一步</p>
+<p>这里有一些基本步骤的概念我们需要了解到</p>
+<ol>
+<li>前向传播：将训练数据输入到模型中，经过各层的计算得到输出</li>
+<li>计算损失：根据损失函数计算模型的输出与真实标签之间的损失值</li>
+<li>反向传播：根据损失值计算梯度，并讲梯度反向传播到模型的每一层</li>
+<li>参数更新：使用优化器根据梯度信息更新模型的权重参数</li>
+<li>迭代训练：重复上述步骤，直到在验证集上的性能达到满意水平或达到预设的训练轮数</li>
+</ol>
+<p>那么生成式AI其实就是深度学习的一种应用，而大语言模型并不都是生成式AI，生成式AI也不都是大语言模型，例如文生图、文生视频，还有谷歌的Bert模型都是特例</p>
+<h2 id="大语言模型"><a href="#大语言模型" class="headerlink" title="大语言模型"></a>大语言模型</h2><p>大语言模型又称为LLM（large language model）是一种利用自然语言的深度学习的模型</p>
+<p>简单说就是给一些输入，就会返回一定的输出，在这个过程中仿佛就有了理解，记忆的能力</p>
+<p>他能完成的任务就很多了，可以是续写，翻译，总结，对话等</p>
+<p><img src="https://s2.loli.net/2024/03/15/RZaFD1VubiYUnqW.png" alt="image.png"></p>
+<h3 id="大语言模型为什么大"><a href="#大语言模型为什么大" class="headerlink" title="大语言模型为什么大"></a>大语言模型为什么大</h3><p>他的“大”一是体现在训练的数据量巨大，用这些数据进行无监督学习</p>
+<p>二是体现在参数量巨大，这些参数实际上就类似于方程的系数，用于刻画一定的现象，概念等</p>
+<p>这里就有一个Scaling Law，称之为规模定律，当模型大小，数据集大小和用于训练的计算浮点数的增加，模型的性能会提高，为了获得最佳性能，三个因素必须同时放大，当达到一定规模时，就会发生智能涌现的现象</p>
+<h3 id="大语言模型为什么通用"><a href="#大语言模型为什么通用" class="headerlink" title="大语言模型为什么通用"></a>大语言模型为什么通用</h3><p>大模型也被称为通用大模型，一方面随着模型和参数的增加，一个模型对于更多的情景都能产生不同的相应的成果，不需要像分别对词频统计，主题提取等各类方面分别计算推导，只需要一个模型足矣</p>
+<h3 id="大语言模型的灵魂"><a href="#大语言模型的灵魂" class="headerlink" title="大语言模型的灵魂"></a>大语言模型的灵魂</h3><p><img src="https://s2.loli.net/2024/03/15/IUacDKdSYRWjTEf.png" alt="image.png"></p>
+<p>在2017年6月Transformer模型发布之后，大语言模型就开始发展了</p>
+<h3 id="Transformer之前"><a href="#Transformer之前" class="headerlink" title="Transformer之前"></a>Transformer之前</h3><p><img src="https://s2.loli.net/2024/03/15/QminL167sAYODGX.png" alt="image.png"></p>
+<p>那么在Transformer之前，主流的神经网络是RNN（循环式神经网络），而RNN训练是需要等待上一个步骤完成之后才能开始进行下一步的计算，无法并行计算，训练慢。除此之外RNN难以训练长文本，非常容易以往，文本距离越远，前面对后面的影响就越弱</p>
+<p>为了解决RNN的两个问题，他的改良版本LSTM（长短期记忆网络）就出现了 ，但是也没有办法完全解决上述问题，而在处理极长的序列时，仍然受到限制</p>
+<h3 id="Transformer的优势"><a href="#Transformer的优势" class="headerlink" title="Transformer的优势"></a>Transformer的优势</h3><p>Transformer有两个优势，一个是自注意力机制，另一个是位置编码</p>
+<p>他的自注意力机制体现在即使两个词的位置隔得很远，他依然可以捕捉到他们的相关性，依赖关系，而这不仅仅是两个词之间的关系，而是所有词之间的关系</p>
+<p>他的位置编码优势主要是因为首先在语言里，字的位置是非常重要的，他对于每个词赋予位置编码之后，那么就不需要再按照顺序进行输入，因为相当于词是自带位置的，那么此时就可以一次性输入大量的词，每一次都可以独立的计算，不需要等待其他位置的结果，也就是说可以进行并行训练</p>
+<h2 id="Transformer内部原理"><a href="#Transformer内部原理" class="headerlink" title="Transformer内部原理"></a>Transformer内部原理</h2><p>大语言模型输出的本质其实很简单，就是预测出下一个出现概率最高的词，例如搜索栏中预测的自动补全，那么在Transformer内部究竟发生了什么，他是如何进行预测的呢</p>
+<h3 id="第一步——数据预处理"><a href="#第一步——数据预处理" class="headerlink" title="第一步——数据预处理"></a>第一步——数据预处理</h3><p><img src="https://s2.loli.net/2024/03/15/7KqLmHoW9rhZg8d.png" alt="image.png"></p>
+<ol>
+<li>我们在输入一段文字时，计算机实际上是无法理解和处理的，这时候就需要进行预处理，这里称之为TOKEN化（或分词），他是将句子、段落、文章等长文本分解为以字词（token）为单位的数据结构</li>
+<li>在所有的文本都变成了token，数字化之后就需要进行词嵌入，他其实就是将token转化为一个向量，可以简单理解为他是一个有序的数组，他可以捕捉到token之间的语义和语法关系</li>
+<li>这时我们就需要加入之前提到的位置编码，捕捉词在句子中的顺序关系，维度和嵌入层一样（向量相加），得到一个包含了一个位置信息的新向量</li>
+</ol>
+<p>这三步预处理之后，我们就把长文本转化成了包含语法语义和位置信息的向量</p>
+<h3 id="第二步——编码器"><a href="#第二步——编码器" class="headerlink" title="第二步——编码器"></a>第二步——编码器</h3><p><img src="https://s2.loli.net/2024/03/15/wnscXVbmGEKuTNC.png" alt="image.png"></p>
+<p>编码器的主要作用就是把上面的输入转化成一种更抽象的表示形式，这种表示形式也是向量，最主要的就是要捕捉向量之间的关键特征了</p>
+<p>能进行这样的操作，主要就是依靠这里的自注意力机制了</p>
+<ol>
+<li>自注意力机制会计算句子中每个词与其他词之间的相关性得分，作为注意力权重，他反映了词与词之间的关联程度，可以用于确定哪些词在当前上下文中更加重要</li>
+<li>利用这些权重，调整每个词之间的表示，权重高的词将获得更大的关注，而权重低的词则相对被忽略</li>
+<li>最后使用权重对输入序列每个位置的嵌入向量加权求和，得到一个新的表示向量</li>
+</ol>
+<p>这样我们就把一开始的向量加入权重得到新的向量</p>
+<p>而这样的编码器，自注意力机制在这个过程中有很多个，称之为多头自注意力模块，他们可以从不同角度出发，互不影响，独立运算，关注文本中的不同方面或特征，类似于我们每个人对于同一件事情的看法是不同的</p>
+<h3 id="第三步——解码器"><a href="#第三步——解码器" class="headerlink" title="第三步——解码器"></a>第三步——解码器</h3><p><img src="https://s2.loli.net/2024/03/15/wMe9PxbEgnmZkdL.png" alt="image.png"></p>
+<p>这里解码器有两个输入来源，一是由编码器的输出，二是由之前上一轮文本的输出作为新的输入</p>
+<p>解码器的过程与编码器类似，不同之处是解码器会关注输入序列里所有其他词，在解码器中，自注意力只会关注这个词和他前面的所有词，确保生成过程的顺序性和正确性</p>
+<p>最终就可以得到包含输入序列的全局信息、关于当前位置信息和已生成的序列信息的新向量</p>
+<h3 id="第四步——Linear层和Softmax层"><a href="#第四步——Linear层和Softmax层" class="headerlink" title="第四步——Linear层和Softmax层"></a>第四步——Linear层和Softmax层</h3><p><img src="https://s2.loli.net/2024/03/15/9NtcObBVqZSYQsw.png" alt="image.png"></p>
+<p>最后阶段实际上就是输出的步骤</p>
+<ol>
+<li>在Linear层中，会将输入的向量映射到一个更大的logits向量上。logits向量的长度通常与词汇表的大小一致，每一个向量上的数字对应一个词汇</li>
+<li>在Softmax层中，将logits向量的每一个数字转换成0到1之间的概率值，这些概率表示词汇在当前位置被选择的概率，并且所有位置的概率和为1</li>
+</ol>
+<p>最终会将最高概率的token输出</p>
+<h3 id="拓展：Transformer的变形"><a href="#拓展：Transformer的变形" class="headerlink" title="拓展：Transformer的变形"></a>拓展：Transformer的变形</h3><blockquote>
+<ul>
+<li>仅编码器模型（自编码器模型）</li>
+</ul>
+<p>这类编码器只使用Transformer的编码器部分，Bert是这种模型的代表，他通过遮蔽部分输入并预测这些遮蔽的词来训练模型，从而学习文本的上下文表示，这类模型适用于理解语言的任务，如文本分类、情感分析、问答等</p>
+<ul>
+<li>仅解码器模型（自回归模型）</li>
+</ul>
+<p>这类模型只使用Transformer的解码器部分，并且通常通过自回归方式生成文本，GPT系列是这种模型的代表，他们通过预测序列中的下一个此来生成文本，这种模型适用于文本生成任务，文章协作，摘要生成</p>
+<ul>
+<li>编码器-解码器模型（序列到序列模型）</li>
+</ul>
+<p>这类模型同时保留了两部分，T5、Bart等模型是这种结构的例子，通常适用于一个序列转换为另一个序列的任务，如机器翻译，文本摘要等</p>
+</blockquote>
+<h2 id="产生类GPT模型的过程"><a href="#产生类GPT模型的过程" class="headerlink" title="产生类GPT模型的过程"></a>产生类GPT模型的过程</h2><p>这分为四个步骤，首先是无监督学习，得到基座大模型，之后是有监督的微调，得到可以对话的模型，再是有监督学习，得到能够评估回答质量的奖励模型，最后是强化学习，使之生成结果符合人类期望</p>
+<h3 id="第一步——无监督学习"><a href="#第一步——无监督学习" class="headerlink" title="第一步——无监督学习"></a>第一步——无监督学习</h3><ol>
+<li>数据准备与预处理：海量文本作为原料，使用分词器(tokenizer)将这些文本数据转化为token序列。如GPT3训练数据的整体规模是3,000亿的token</li>
+<li>任务构建：采用无监督学习的方式训练模型，常见的方法是掩码语言建模(Masked Language Modeling，MLM)。在这个任务中，我们随机选择输入序列中的一些token进行掩码(即用特殊符号替换)然后要求模型根据上下文预测这些被掩码的token</li>
+<li>模型训练：将预处理后的token序列输入到Transformer模型中，经过Transformer得到每个可能token的预测概率。将预测的概率分布与真实值(即被掩码的token)进行比较，计算交叉熵损失。通过反向传播算法，计算损失函数对模型参数的梯度，并使用优化算法(如梯度下降)更新模型的权重。这个过程迭代进行，直到模型在验证集上达到满意的性能</li>
+</ol>
+<h3 id="第二步——监督学习微调"><a href="#第二步——监督学习微调" class="headerlink" title="第二步——监督学习微调"></a>第二步——监督学习微调</h3><p><img src="https://s2.loli.net/2024/03/15/KBjEG4Zg2WsQdfO.png" alt="image.png"></p>
+<h3 id="第三步——人工评价和监督学习"><a href="#第三步——人工评价和监督学习" class="headerlink" title="第三步——人工评价和监督学习"></a>第三步——人工评价和监督学习</h3><p><img src="https://s2.loli.net/2024/03/15/BA6E3IGPhYkFmaJ.png" alt="image.png"></p>
+<h3 id="第四步——强化学习提升回复质量"><a href="#第四步——强化学习提升回复质量" class="headerlink" title="第四步——强化学习提升回复质量"></a>第四步——强化学习提升回复质量</h3><p>当模型生成一个行为或回答时，奖励函数会计算一个奖励值，这个奖励值会被优化算法用来计算损失函数，并进一步用来更新大模型的权重，在这个过程中我们不断朝着增加这些行为或回答发生概率的方向进行调整</p>
+<p>以此不断往复就可以逐渐熟练</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/03/16/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%8A%E5%85%B6%E8%A7%A3%E6%9E%90/"
+      title="MyLisp项目日志：解析用户输入与波兰表达式"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        MyLisp项目日志：解析用户输入与波兰表达式
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/03/15/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AMyLisp%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5%E5%AE%9E%E7%8E%B0/"
+      title="MyLisp项目日志：项目介绍和读取输入实现"
+     >
+
+    <p class="title-text">
+      
+        MyLisp项目日志：项目介绍和读取输入实现
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

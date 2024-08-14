@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>机器学习入门之模型性能评估与度量 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="性能评估机器学习的模型有很多，我们在选择的时候就需要对各个模型进行对比，这时候就需要一个靠谱的标准，能够评估模型的性能 这里的性能不是说算的有多快，而是说预测的结果和真实情况进行比较的来的结果 误差在我们对训练的结果进行分析之前，首先需要思考模型训练过程中是否可能有误差的产生，因为这同样会影响结果和对模型选择产生比较大的影响 误差主要会出现在数据集的三个部分，分别是训练集、测试集、新样本  训练集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习入门之模型性能评估与度量">
+<meta property="og:url" content="http://example.com/2024/05/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0%E4%B8%8E%E5%BA%A6%E9%87%8F/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="性能评估机器学习的模型有很多，我们在选择的时候就需要对各个模型进行对比，这时候就需要一个靠谱的标准，能够评估模型的性能 这里的性能不是说算的有多快，而是说预测的结果和真实情况进行比较的来的结果 误差在我们对训练的结果进行分析之前，首先需要思考模型训练过程中是否可能有误差的产生，因为这同样会影响结果和对模型选择产生比较大的影响 误差主要会出现在数据集的三个部分，分别是训练集、测试集、新样本  训练集">
+<meta property="og:locale" content="en_UK">
+<meta property="og:image" content="https://s2.loli.net/2024/05/05/2QjRE87rHV69BDP.png">
+<meta property="article:published_time" content="2024-05-05T12:26:57.000Z">
+<meta property="article:modified_time" content="2024-05-05T15:39:53.449Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="性能评估">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/05/05/2QjRE87rHV69BDP.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://qm.qq.com/q/FDr6C2fVAY" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">29</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">20</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">7</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/AVL%E6%A0%91/" rel="tag">AVL树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" rel="tag">k近邻算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/priority-queue/" rel="tag">priority_queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyecharts/" rel="tag">pyecharts</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vector/" rel="tag">vector</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vi/" rel="tag">vi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BB%BF%E5%87%BD%E6%95%B0/" rel="tag">仿函数</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag">位图</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BA%94%E7%94%A8/" rel="tag">应用</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" rel="tag">循环结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8C%87%E9%92%88/" rel="tag">指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" rel="tag">斐波那契</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">最长上升子序列</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">神经网络</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%93%E8%AE%BA%E9%A2%98/" rel="tag">结论题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag">背包问题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E6%8E%A8/" rel="tag">递推</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——匿名管道" >
+            <div class="recent-link-text">
+              Linux进程间通信——匿名管道
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" title="Linux基础IO——文件系统与动静态库" >
+            <div class="recent-link-text">
+              Linux基础IO——文件系统与动静态库
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" title="Linux基础IO——重定向与文件缓冲区" >
+            <div class="recent-link-text">
+              Linux基础IO——重定向与文件缓冲区
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/" title="Linux基础IO——文件的系统调用与文件描述符的本质" >
+            <div class="recent-link-text">
+              Linux基础IO——文件的系统调用与文件描述符的本质
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/" title="Linux进程控制——进程程序替换、bash的模拟实现" >
+            <div class="recent-link-text">
+              Linux进程控制——进程程序替换、bash的模拟实现
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-机器学习入门之模型性能评估与度量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        机器学习入门之模型性能评估与度量
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-05-05T12:26:57.000Z" itemprop="datePublished">2024-05-05</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.6k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="性能评估"><a href="#性能评估" class="headerlink" title="性能评估"></a>性能评估</h2><p>机器学习的模型有很多，我们在选择的时候就需要对各个模型进行对比，这时候就需要一个靠谱的标准，能够评估模型的性能</p>
+<p>这里的性能不是说算的有多快，而是说预测的结果和真实情况进行比较的来的结果</p>
+<h3 id="误差"><a href="#误差" class="headerlink" title="误差"></a>误差</h3><p>在我们对训练的结果进行分析之前，首先需要思考模型训练过程中是否可能有误差的产生，因为这同样会影响结果和对模型选择产生比较大的影响</p>
+<p>误差主要会出现在数据集的三个部分，分别是训练集、测试集、新样本</p>
+<ol>
+<li>训练集——训练误差</li>
+<li>测试集——测试误差</li>
+<li>新样本——泛化误差</li>
+</ol>
+<p>所谓的训练误差指的是训练集本身存在缺陷，从而模型提取的错误的特征信息，例如一个只认识红色苹果的模型，遇到绿色苹果时，他就不认为这是苹果了</p>
+<p>一般情况下拿到一个数据集，会将其分成两部分，分别作为训练集和测试集，那么对于训练完成的模型，此时测试集也相当于是一个新样本</p>
+<p>训练模型的时候，一开始训练误差和测试误差都会比较高，但是训练次数越多，训练误差会越来越小，但是测试误差可能会变大，而且模型的复杂度也会随之提升</p>
+<p>这样的现象我们分别称之为欠拟合和过拟合</p>
+<h3 id="欠拟合和过拟合"><a href="#欠拟合和过拟合" class="headerlink" title="欠拟合和过拟合"></a>欠拟合和过拟合</h3><p>欠拟合的概念很好理解，其实就是由于数据量不够大，模型的准确率不够多，也就是一开始我们学习的时候没有足够的理解一样，有时也称之为高偏差（high bias）</p>
+<p>而过拟合则是属于过犹不及的那种感觉，就好像呆板僵化的思维，好像有些人做数学题，尽管题目非常接近，仅仅是更换了数字，但是他仍然认为这是两种完全不同的题目，这样带来的一种效果就是对于训练集（已经做过的题目）正确率很高，但是对于新样本的能力就会比较差，有时也称为高方差（high variance）</p>
+<p>想要克服这两种现象，对于欠拟合是比较容易的，例如在决策树算法中扩展分支，在神经网络中增加训练的轮数，但是过拟合就困难的多，主要是因为模型过于复杂，我们需要的是简化模型，这种纠正策略称之为正则化（regularization）</p>
+<h3 id="模型选择与数据拟合"><a href="#模型选择与数据拟合" class="headerlink" title="模型选择与数据拟合"></a>模型选择与数据拟合</h3><p>我们在模型选择时一定不能一味追求降低训练误差，因为想要有较强的数据拟合能力，就需要将模型的复杂度不断提升</p>
+<p>也就是需要遵循一条原则，避免过拟合并且提高泛化能力</p>
+<p>例如我们想要对一组数据想要拟合出一个多项式函数</p>
+<p>假设有一个数据集$T&#x3D;{(x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)}$，$x_i$为样本的观测值（特征、自变量），$y_i$是对应的输出观测值（因变量）</p>
+<p>我们想要找到一个m次多项式函数能够拟合这些数据，目标是能够较好拟合并且预测</p>
+<p>设这个m次多项式函数的一般形式为：$f_m(x,w)&#x3D;w_0x^0+w_1x^1+w_2x^2+\dots+w_mx^m&#x3D;\sum_{j&#x3D;0}^{m}w_jx^j$</p>
+<p>对于这个公式的解读：</p>
+<ol>
+<li>有m+1个特征值，x的次数从0到m</li>
+<li>有m+1个需要通过训练（学习）得到的权值参数，w的下标从0到m</li>
+<li>这里参数的正负，绝对值大小就分别代表了对于这个特征的态度，绝对值越大权重越大</li>
+<li>可以有意识的调整某些权值让他趋近于0，从而抛弃某些特征，称之为权重衰减（weight decay），在某种程度上可以避免过拟合</li>
+</ol>
+<p>那如何训练学习这个m+1个参数呢，常用的策略之一是最小二乘法（Method of Least Squares）</p>
+<p>通过这个方法拟合出来的函数值$f(x_i,w)$（得到的预测结果）和真实的$y_i$是由误差的，数学上称之为残差（residual）</p>
+<p>$e_i&#x3D;f(x_i,w)-y_i$</p>
+<p>高斯证明了，在这个残差集合独立同分布的假定下，最小二乘法有一个优势，就是在所有的无偏线性估计类中方差最小，也就是当残差的平方和最小时，拟合函数的相似度最高，也就是如下函数取最小值时，拟合效果最好</p>
+<p>$L(w)&#x3D;\frac{1}{2}\sum_{i&#x3D;1}^{n}(f(x_i,w)-y_i)^2$</p>
+<h2 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h2><p>上面我们讲到的其实是性能评估的一般思路，接下来我们就需要找到一个标准，能够确切的评判性能的高低了</p>
+<h3 id="二分类的混淆矩阵"><a href="#二分类的混淆矩阵" class="headerlink" title="二分类的混淆矩阵"></a>二分类的混淆矩阵</h3><p>二值分类器（Binary Classifier）是在机器学习中应用最广泛的分类器之一，二值分类指的是正类和负类，我们为了方便陈述称之为真和假</p>
+<p>主要分四类</p>
+<ul>
+<li>真正类（True Positive，TP），实际为真，被模型预测为真，为了方便理解，我们说他是应该被选上且已经被选上了的</li>
+<li>假正类（False Positive，FP），实际为假，被模型预测为真，应该没被选上（被忽略）但是被选上了的</li>
+<li>真负类（True Negative，TN），实际为假，被模型预测为假，应该被忽略且已经被忽略了的</li>
+<li>假负类（False Negative，FN），实际为真，被模型预测为假，应该被忽略但被选上了的</li>
+</ul>
+<p>这四类加起来就是总样本数，然后第一类和第三类是正确预测了的，第二类和第四类是预测失误了的，分别称之为误报、第一类错误，漏报、第二类错误</p>
+<p>这四组样本就构成了混淆矩阵（confusion matrix），确实容易混淆</p>
+<p>由这四组样本就能产生一些比例作为判断，再通过这些比例之间的关系，我们就能找到更优的模型了</p>
+<p>主要有以下几个，查全率，查准率，F1分数，P-R曲线，ROC曲线</p>
+<p>我们尽量避免过于不说人话的描述，用最简单容易理解的话来讲清楚这些概念</p>
+<p>在说这些概念之前，我们先画一个简单的示意图，可以配合起来理解</p>
+<p><img src="https://s2.loli.net/2024/05/05/2QjRE87rHV69BDP.png" alt="image.png"></p>
+<h4 id="查全率"><a href="#查全率" class="headerlink" title="查全率"></a>查全率</h4><p>查全率（Recall，R，召回率），表示分类准确的正类样本数占全部正类样本数的比例，说人话就是在所有应该被选上的样本中，选上了的比例是多少，也就是左边那一半TP占的比例$R&#x3D;\frac{TP}{TP+FN}$</p>
+<h4 id="查准率"><a href="#查准率" class="headerlink" title="查准率"></a>查准率</h4><p>查准率（Precision，P），表示被预测正确的正类样本数占分类器判定为正类样本总数的比例，说人话就是所有被选上的样本中，选对了的样本比例是多少，也就是这个圆里面左边占的部分比例$P&#x3D;\frac{TP}{TP+FP}$</p>
+<p>需要注意的是，查准率和准确率是有区别的，准确率应该是正确判断的样本除总样本得到的比例</p>
+<p>一般来说查准率和查全率是呈负相关的，那有没有可以兼顾这样两个比率的呢，或者说有没有一个值可以用来调整他们之间的比重关系</p>
+<h4 id="F1分数"><a href="#F1分数" class="headerlink" title="F1分数"></a>F1分数</h4><p>本质上来说F1分数是查准率和查全率的调和平均数</p>
+<p>$\frac{1}{F1}&#x3D;\frac{1}{2}(\frac{1}{P}+\frac{1}{R})$整理一下就是$F1&#x3D;2\times\frac{P\times R}{P+R}$</p>
+<p>想要有所偏向，就可以引入参数$\beta$</p>
+<p>$\frac{1}{F_\beta}&#x3D;\frac{1}{1+\beta^2}(\frac{1}{P}+\frac{\beta^2}{R})$整理一下就是$F_\beta&#x3D;(1+\beta^2)\frac{1}{\frac{1}{P}+\frac{\beta^2}{R}}$</p>
+<p>当$\beta&gt;1$时，$\frac{\beta^2}{R}$项占比较大，即查全率的影响更大，反之则查准率的影响更大</p>
+<h3 id="P-R曲线"><a href="#P-R曲线" class="headerlink" title="P-R曲线"></a>P-R曲线</h3><p>P-R曲线其实很简单，因为查准率和查全率大致成负相关，就可以分别将查全率和查准率作为坐标轴画出图形，那么这其中变化的是什么呢，其实就是我们设定的临界值，之后的ROC曲线也是类似，选取的标准不同，查全率和查准率的数值也会不同</p>
+<p>当两个模型的P-R曲线都绘制出来之后，我们就可以根据曲线进行抉择了</p>
+<p>第一种情况是一个模型的曲线完全在另一个曲线的上方，也就是查全率和查准率都高于另一个，那就直接选了</p>
+<p>但是更通常的情况是交替出现，这时候就有一个所谓的平衡点（Break-Even Pont、BEP），就是y&#x3D;x这条直线和两条曲线的交点，一般认为谁的交点在上方，谁就更优</p>
+<p>P-R曲线的优点是非常直观，但是缺点也很明显，受样本分布的影响非常大</p>
+<p>于之相比，ROC曲线就相对更优，也因此作为重要的指标之一</p>
+<h3 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h3><p>于P-R曲线对应的，ROC曲线的横纵坐标也是两个比率</p>
+<p>第一个比率是真阳性率（True Positive Rate，TPR），简单说就是应该被忽略但没有被忽略的占比，$TPR&#x3D;\frac{FP}{TN+FP}$</p>
+<p>第二个比率是假阳性率（False Positive Rate，FPR），简单说就是应该被选中并且已经被选中的占比，$FPR&#x3D;\frac{TP}{TP+FN}$</p>
+<p>把假阳性率作为横轴，真阳性率作为纵轴，就能画出ROC曲线了，并且变化的仍然是选取的标准不同</p>
+<p>现在已经绘制出了对应的ROC曲线了，应该如何选取更优的模型呢</p>
+<h3 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h3><p>AUC是Area Under Curve，意思是曲线下的区域，那其实就是ROC曲线与X轴的面积</p>
+<p>一般认为AUC在0.5到1之间，如果不在这个范围内，只需要将模型的预测概率P反转成1-P就能得到一个更好的分类器</p>
+<p>并且AUC的值越高，我们认为这个模型就越优</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/05/09/sklearn%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/"
+      title="sklearn框架介绍"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        sklearn框架介绍
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/05/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"
+      title="机器学习入门之非监督学习和半监督学习"
+     >
+
+    <p class="title-text">
+      
+        机器学习入门之非监督学习和半监督学习
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
