@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Linux进程间通信——池化技术与模拟实现进程池 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="池化技术池化技术其实是分治思想的一个体现，在生活中也有很多例子 例如，河水的水资源非常丰富，但是要多次从河水中取水使用是比较繁琐且低效的，尤其是当家离河流较远的时候（消耗较大），这时候我们就可以每次取一大缸水，需要使用的时候直接取水使用就可以了 进程池也是类似的思想，因为每一次fork创建子进程都需要进行系统调用，也需要消耗一定的资源，因此我们可以一次申请一定数量的进程PCB，分别分配对应的任务给">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux进程间通信——池化技术与模拟实现进程池">
+<meta property="og:url" content="http://example.com/2024/08/15/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E6%B1%A0/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="池化技术池化技术其实是分治思想的一个体现，在生活中也有很多例子 例如，河水的水资源非常丰富，但是要多次从河水中取水使用是比较繁琐且低效的，尤其是当家离河流较远的时候（消耗较大），这时候我们就可以每次取一大缸水，需要使用的时候直接取水使用就可以了 进程池也是类似的思想，因为每一次fork创建子进程都需要进行系统调用，也需要消耗一定的资源，因此我们可以一次申请一定数量的进程PCB，分别分配对应的任务给">
+<meta property="og:locale" content="en_UK">
+<meta property="og:image" content="https://s2.loli.net/2024/08/15/7F2TSutrmODdWvM.png">
+<meta property="og:image" content="https://s2.loli.net/2024/08/15/StGg1nRziwFYKyv.png">
+<meta property="og:image" content="https://s2.loli.net/2024/08/16/H93DcTX1LR6ElfI.png">
+<meta property="article:published_time" content="2024-08-15T10:33:23.000Z">
+<meta property="article:modified_time" content="2024-08-16T08:14:37.811Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="进程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/15/7F2TSutrmODdWvM.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://qm.qq.com/q/FDr6C2fVAY" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">29</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">21</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">7</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">6 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/AVL%E6%A0%91/" rel="tag">AVL树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/g/" rel="tag">g++</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" rel="tag">k近邻算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/list/" rel="tag">list</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/map/" rel="tag">map</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/numpy/" rel="tag">numpy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/priority-queue/" rel="tag">priority_queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyecharts/" rel="tag">pyecharts</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/queue/" rel="tag">queue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/set/" rel="tag">set</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/stack/" rel="tag">stack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/string/" rel="tag">string</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vector/" rel="tag">vector</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vi/" rel="tag">vi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BB%BF%E5%87%BD%E6%95%B0/" rel="tag">仿函数</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag">位图</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B0%81%E8%A3%85/" rel="tag">封装</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BA%94%E7%94%A8/" rel="tag">应用</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" rel="tag">循环结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8C%87%E9%92%88/" rel="tag">指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/" rel="tag">斐波那契</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">最长上升子序列</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF/" rel="tag">模板</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">神经网络</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%93%E8%AE%BA%E9%A2%98/" rel="tag">结论题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag">背包问题</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%80%92%E6%8E%A8/" rel="tag">递推</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Recent Posts</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/08/15/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E6%B1%A0/" title="Linux进程间通信——池化技术与模拟实现进程池" >
+            <div class="recent-link-text">
+              Linux进程间通信——池化技术与模拟实现进程池
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——匿名管道" >
+            <div class="recent-link-text">
+              Linux进程间通信——匿名管道
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" title="Linux基础IO——文件系统与动静态库" >
+            <div class="recent-link-text">
+              Linux基础IO——文件系统与动静态库
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" title="Linux基础IO——重定向与文件缓冲区" >
+            <div class="recent-link-text">
+              Linux基础IO——重定向与文件缓冲区
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/" title="Linux基础IO——文件的系统调用与文件描述符的本质" >
+            <div class="recent-link-text">
+              Linux基础IO——文件的系统调用与文件描述符的本质
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Linux进程间通信——模拟实现进程池" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Linux进程间通信——池化技术与模拟实现进程池
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-15T10:33:23.000Z" itemprop="datePublished">2024-08-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.5k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="池化技术"><a href="#池化技术" class="headerlink" title="池化技术"></a>池化技术</h2><p>池化技术其实是分治思想的一个体现，在生活中也有很多例子</p>
+<p>例如，河水的水资源非常丰富，但是要多次从河水中取水使用是比较繁琐且低效的，尤其是当家离河流较远的时候（消耗较大），这时候我们就可以每次取一大缸水，需要使用的时候直接取水使用就可以了</p>
+<p>进程池也是类似的思想，因为每一次fork创建子进程都需要进行系统调用，也需要消耗一定的资源，因此我们可以一次申请一定数量的进程PCB，分别分配对应的任务给他们就可以了</p>
+<p>这实际上就是一种多进程并发运行的思想，我们可以用父进程来进行子进程的管理与任务分配、任务验收，然后让这些兄弟进程来运行不同的任务，这其中传递信息就需要用到我们前一篇所学的匿名管道</p>
+<p>但是在这里我们先不具体分配，只是体会其中的思想即可</p>
+<h2 id="进程池"><a href="#进程池" class="headerlink" title="进程池"></a>进程池</h2><h3 id="进程池原理"><a href="#进程池原理" class="headerlink" title="进程池原理"></a>进程池原理</h3><p>画成示意图就是这样的</p>
+<p><img src="https://s2.loli.net/2024/08/15/7F2TSutrmODdWvM.png" alt="image.png"></p>
+<p>蓝色是每一次我们fork子进程和pipe管道之后，需要关闭的接口，因为每一次的读接口都是3，所以从4、5、6以后的分别对应的就是不同的子进程的写管道</p>
+<p>这里其实还有一个隐藏起来的bug，就是在第二个子进程以及之后的子进程fork的时候，实际上他拷贝的是父进程的文件描述符表，因此他也存在一个接口指向之前申请的写接口，只有最后一个子进程是只有一个写接口的</p>
+<p><img src="https://s2.loli.net/2024/08/15/StGg1nRziwFYKyv.png" alt="image.png"></p>
+<p>这会造成什么影响呢，我们说过，当一个管道的写口被关闭了之后，读口再读的返回值就是0，这样就标志管道使用结束了，但是如果我们想通过父进程从从上至下主动关闭写口并等待子进程退出，就会导致阻塞（死循环）</p>
+<p>这是因为虽然父进程的写口关了，但是子进程2和3的写口仍然开的，从而导致管道1不关闭，子进程1就一直等待管道关闭</p>
+<p>这里就有两个解决的思路</p>
+<p>第一个思路是由下至上关闭退出子进程</p>
+<p>第一个方法是，因为最后一个子进程只有一个写口，关闭之后，管道也可以正常关闭，进程也就可以正常退出了</p>
+<p>第二个方法是，我一口气把所有的写口全部关了，等子进程自己退出，这样做是没有问题的，因为本质上还是第一个方法，因为只有关到最后一个写口的时候，子进程才开始从下到上依次退出</p>
+<p>第二个思路是</p>
+<p>产生这个bug的原因本质上是因为写口是直接被拷贝过来的，因此只需要在创建初始化子进程的时候，就把之前父进程拷贝来的其他子进程写口全部关掉就可以了</p>
+<p>我们采取第二个思路，因为第一个思路只能一口气全部关闭，或者关闭一个进程及其以后创建出来的进程，没有办法做到想关哪个关哪个，简直太不优雅了</p>
+<h2 id="模拟实现进程池"><a href="#模拟实现进程池" class="headerlink" title="模拟实现进程池"></a>模拟实现进程池</h2><p>在实现进程池之前，我们遇到的第一个问题就是，怎么管理这些进程</p>
+<p>在之前我们学习的过程中，只有一个子进程，我们可以在父进程的视角，通过进程id是否为0分出来子进程和父进程</p>
+<p>但是在进程池的视角来看，所有子进程的pid都是0，也就无从下手管理，了吗？</p>
+<h3 id="创建与初始化"><a href="#创建与初始化" class="headerlink" title="创建与初始化"></a>创建与初始化</h3><p>我们讲过所有管理的操作思想就是，先描述后组织，想要描述这些进程，我们可以用类和结构体，用到面向对象的思想进行管理即可</p>
+<p>请看实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;Task.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> process_num = <span class="number">5</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> number = <span class="number">1</span>; <span class="comment">// 表示进程数、信道数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">channel</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">channel</span>(<span class="type">int</span> fd, <span class="type">pid_t</span> id)</span><br><span class="line">        : <span class="built_in">CtrlFD</span>(fd)</span><br><span class="line">        , <span class="built_in">WorkerID</span>(id)</span><br><span class="line">        &#123;</span><br><span class="line">            name = <span class="string">&quot;Channel &quot;</span> + std::<span class="built_in">to_string</span>(number++);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> CtrlFD; <span class="comment">// 写口id</span></span><br><span class="line">    <span class="type">pid_t</span> WorkerID; <span class="comment">// 子进程id</span></span><br><span class="line">    std::string name; <span class="comment">// 信道名称</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PrintFd</span><span class="params">(<span class="type">const</span> std::vector&lt;<span class="type">int</span>&gt;&amp; fds)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;关闭的写口有：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> fd : fds)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout&lt;&lt;fd&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      std::cout&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateChannels</span><span class="params">(std::vector&lt;channel&gt;* channels)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; old_channels;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;process_num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> pipefd[<span class="number">2</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="type">int</span> n=<span class="built_in">pipe</span>(pipefd);</span><br><span class="line">        <span class="built_in">assert</span>(n==<span class="number">0</span>);</span><br><span class="line">        (<span class="type">void</span>)n;</span><br><span class="line"></span><br><span class="line">        <span class="type">pid_t</span> id = fork();</span><br><span class="line">        <span class="built_in">assert</span>(id!=<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(id==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 子进程创建成功</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 关闭之前子进程的写口</span></span><br><span class="line">            <span class="keyword">if</span>(!old_channels.<span class="built_in">empty</span>())</span><br><span class="line">            &#123;</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">auto</span> fd : old_channels)</span><br><span class="line">               &#123;</span><br><span class="line">                  <span class="built_in">close</span>(fd);</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="comment">// 打印已经关闭的写口提示信息</span></span><br><span class="line">               <span class="built_in">PrintFd</span>(old_channels);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">close</span>(pipefd[<span class="number">1</span>]); <span class="comment">// 关闭自己的写口</span></span><br><span class="line">            <span class="built_in">dup2</span>(pipefd[<span class="number">0</span>],<span class="number">0</span>); <span class="comment">// 将自己的读口设为默认读口</span></span><br><span class="line">            <span class="built_in">Work</span>(); <span class="comment">// 做自己的任务</span></span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">// 任务结束退出</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 父进程操作</span></span><br><span class="line">        <span class="built_in">close</span>(pipefd[<span class="number">0</span>]); <span class="comment">// 关闭父进程的读</span></span><br><span class="line">        channels-&gt;<span class="built_in">push_back</span>(<span class="built_in">channel</span>(pipefd[<span class="number">1</span>], id)); <span class="comment">// 存下子进程的信息，写口和子进程id</span></span><br><span class="line">        old_channels.<span class="built_in">push_back</span>(pipefd[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;channel&gt; channels;</span><br><span class="line">    <span class="built_in">CreateChannels</span>(&amp;channels);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>我们把进程用写口id、进程id、名字表述组成，称之为信道，这样可以控制写入（输入任务），关闭（waitpid）</li>
+<li>用create函数来控制信道的创建，这个函数由父进程执行，主要任务是创建规定数目的子进程，并且进行初始化，让子进程进Work函数准备进行工作</li>
+<li>初始化主要让子进程删除从父进程拷贝过来的写口，自己管道的写口也需要关闭</li>
+<li>父进程需要关闭管道的读口，将此次创建的进程口记录下来</li>
+<li>这里很巧妙的运用了子进程对父进程的拷贝，因为old_channel是在父进程声明的，所以每一个新创建的子进程都会复制一份，而不会拥有之后任意一个子进程的写口</li>
+</ul>
+<h3 id="分配任务"><a href="#分配任务" class="headerlink" title="分配任务"></a>分配任务</h3><p>接下来要做的工作就是让子进程运行并且获取父进程分配给他的任务</p>
+<p>我们可以设置很多种类的任务，分别设置对应的任务号，然后子进程可以获取对应的任务号，再使用自己的资源进行运行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="type">task_t</span> = std::function&lt;<span class="built_in">void</span>()&gt;; <span class="comment">// 包装器，可以理解为函数指针类型</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务1，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务2，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task3</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务3，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task4</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务4，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Init</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Init</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task1);</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task2);</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task3);</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task4);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="literal">nullptr</span>)^<span class="built_in">getpid</span>()); <span class="comment">// 产生随机种子</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">SelectTask</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 此处应为任务分配算法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">rand</span>() % tasks.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">std::string <span class="title">TaskName</span><span class="params">(<span class="type">int</span> code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (code)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> Task1_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task1&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Task2_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task2&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Task3_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task3&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Task4_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task4&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Unknow&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">CheckSafe</span><span class="params">(<span class="type">int</span> code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 确保子进程只能执行我们交付的任务</span></span><br><span class="line">        <span class="keyword">if</span>(code&gt;=<span class="number">0</span>&amp;&amp;code&lt;tasks.<span class="built_in">size</span>())</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">RunTask</span><span class="params">(<span class="type">int</span> code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tasks[code](); <span class="comment">// 调用函数指针</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task1_Code = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task2_Code = <span class="number">1</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task3_Code = <span class="number">2</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task4_Code = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 可以使用枚举对象</span></span><br><span class="line"></span><br><span class="line">    std::vector&lt;<span class="type">task_t</span>&gt; tasks; <span class="comment">// 可以理解为函数指针数组</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Init init; <span class="comment">// 创建一个初始化对象，避免重复使用匿名对象</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;Task.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> process_num = <span class="number">5</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> number = <span class="number">1</span>; <span class="comment">// 表示进程数、信道数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">channel</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">channel</span>(<span class="type">int</span> fd, <span class="type">pid_t</span> id)</span><br><span class="line">        : <span class="built_in">CtrlFD</span>(fd)</span><br><span class="line">        , <span class="built_in">WorkerID</span>(id)</span><br><span class="line">        &#123;</span><br><span class="line">            name = <span class="string">&quot;Channel &quot;</span> + std::<span class="built_in">to_string</span>(number++);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> CtrlFD; <span class="comment">// 写口id</span></span><br><span class="line">    <span class="type">pid_t</span> WorkerID; <span class="comment">// 子进程id</span></span><br><span class="line">    std::string name; <span class="comment">// 信道名称</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 子进程工作函数</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> code = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 准备读取父进程信息</span></span><br><span class="line">        <span class="type">ssize_t</span> n = <span class="built_in">read</span>(<span class="number">0</span>,&amp;code,<span class="built_in">sizeof</span>(code));</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="built_in">sizeof</span>(code))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 正确读取</span></span><br><span class="line">            <span class="keyword">if</span>(!init.<span class="built_in">CheckSafe</span>(code))</span><br><span class="line">            &#123;</span><br><span class="line">                std::cout&lt;&lt;<span class="string">&quot;子进程未收到正确任务&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;    </span><br><span class="line">            init.<span class="built_in">RunTask</span>(code); <span class="comment">// 执行任务</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 父进程写口关闭，子进程退出</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;子进程退出&quot;</span>&lt;&lt;std::endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PrintFd</span><span class="params">(<span class="type">const</span> std::vector&lt;<span class="type">int</span>&gt;&amp; fds)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;关闭的写口有：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> fd : fds)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout&lt;&lt;fd&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      std::cout&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateChannels</span><span class="params">(std::vector&lt;channel&gt;* channels)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; old_channels;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;process_num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> pipefd[<span class="number">2</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="type">int</span> n=<span class="built_in">pipe</span>(pipefd);</span><br><span class="line">        <span class="built_in">assert</span>(n==<span class="number">0</span>);</span><br><span class="line">        (<span class="type">void</span>)n;</span><br><span class="line"></span><br><span class="line">        <span class="type">pid_t</span> id = fork();</span><br><span class="line">        <span class="built_in">assert</span>(id!=<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(id==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 子进程创建成功</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 关闭之前子进程的写口</span></span><br><span class="line">            <span class="keyword">if</span>(!old_channels.<span class="built_in">empty</span>())</span><br><span class="line">            &#123;</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">auto</span> fd : old_channels)</span><br><span class="line">               &#123;</span><br><span class="line">                  <span class="built_in">close</span>(fd);</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="comment">// 打印已经关闭的写口提示信息</span></span><br><span class="line">               <span class="built_in">PrintFd</span>(old_channels);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">close</span>(pipefd[<span class="number">1</span>]); <span class="comment">// 关闭自己的写口</span></span><br><span class="line">            <span class="built_in">dup2</span>(pipefd[<span class="number">0</span>],<span class="number">0</span>); <span class="comment">// 将自己的读口设为默认读口</span></span><br><span class="line">            <span class="built_in">Work</span>(); <span class="comment">// 做子进程的任务</span></span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">// 任务结束退出</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 父进程操作</span></span><br><span class="line">        <span class="built_in">close</span>(pipefd[<span class="number">0</span>]); <span class="comment">// 关闭父进程的读</span></span><br><span class="line">        channels-&gt;<span class="built_in">push_back</span>(<span class="built_in">channel</span>(pipefd[<span class="number">1</span>], id)); <span class="comment">// 存下子进程的信息，写口和子进程id</span></span><br><span class="line">        old_channels.<span class="built_in">push_back</span>(pipefd[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SendTaskNum</span><span class="params">(<span class="type">const</span> std::vector&lt;channel&gt; &amp;c, <span class="type">bool</span> flag, <span class="type">int</span> num = <span class="number">-1</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 选择任务</span></span><br><span class="line">        <span class="type">int</span> TaskNum = init.<span class="built_in">SelectTask</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 选择进程</span></span><br><span class="line">        <span class="type">const</span> <span class="keyword">auto</span> &amp; channel = c[pos++];</span><br><span class="line">        pos%=c.<span class="built_in">size</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 输出控制信息</span></span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;指定的任务是&quot;</span>&lt;&lt;init.<span class="built_in">TaskName</span>(TaskNum)&lt;&lt;<span class="string">&quot;任务编号是&quot;</span>&lt;&lt;TaskNum&lt;&lt;<span class="string">&quot;交付的子进程是&quot;</span>&lt;&lt;channel.WorkerID&lt;&lt;std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送任务，写入管道</span></span><br><span class="line">        <span class="built_in">write</span>(channel.CtrlFD, &amp;TaskNum, <span class="built_in">sizeof</span>(TaskNum));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断是否循环执行</span></span><br><span class="line">        <span class="keyword">if</span>(!flag)</span><br><span class="line">        &#123;</span><br><span class="line">            num--;</span><br><span class="line">            <span class="keyword">if</span>(num&lt;=<span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sleep</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;channel&gt; channels;</span><br><span class="line">    <span class="built_in">CreateChannels</span>(&amp;channels);</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">bool</span> g_always_loop = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">SendTaskNum</span>(channels, !g_always_loop, <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里我们从主函数看起</p>
+<p>在创建完信道之后，我们设置了一个标志，用于表示这个任务是否循环执行</p>
+<p>在SendTaskNum函数中，后两个参数表示是否循环执行和循环执行的次数</p>
+<p>其次我们写了一个hpp文件，用来表示任务类，将所有任务放到包装器functions中，当作函数指针数组，方便任务类完成集中调用</p>
+<p>父进程这里的选取任务算法是随机的，轮流分配给五个信道，让五个信道执行10轮分配的任务</p>
+<p>子进程的work是一直循环接收父进程传递的消息，若有效接收，则判断是否为任务列表中的任务，然后执行，若父进程写口关闭，则跳出读取循环，关闭子进程</p>
+<h3 id="关闭子进程"><a href="#关闭子进程" class="headerlink" title="关闭子进程"></a>关闭子进程</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">ReleaseChannels</span><span class="params">(std::vector&lt;channel&gt; c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span> &amp;channel : c)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">close</span>(channel.CtrlFD);</span><br><span class="line">        <span class="built_in">waitpid</span>(channel.WorkerID, <span class="literal">nullptr</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出提示信息</span></span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;子进程释放完毕&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后的关闭子进程比较简单，因为我们在创建的过程中已经做好了bug排除，可以从头到尾依次释放</p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://s2.loli.net/2024/08/16/H93DcTX1LR6ElfI.png" alt="image.png"></p>
+<h2 id="进程池完整代码"><a href="#进程池完整代码" class="headerlink" title="进程池完整代码"></a>进程池完整代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Task.hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="type">task_t</span> = std::function&lt;<span class="built_in">void</span>()&gt;; <span class="comment">// 包装器，可以理解为函数指针类型</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务1，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务2，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task3</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务3，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Task4</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;这是任务4，交给pid：为&quot;</span>&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;运行&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Init</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Init</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task1);</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task2);</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task3);</span><br><span class="line">        tasks.<span class="built_in">push_back</span>(Task4);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="literal">nullptr</span>)^<span class="built_in">getpid</span>()); <span class="comment">// 产生随机种子</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">SelectTask</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 此处应为任务分配算法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">rand</span>() % tasks.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">std::string <span class="title">TaskName</span><span class="params">(<span class="type">int</span> code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (code)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> Task1_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task1&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Task2_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task2&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Task3_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task3&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> Task4_Code:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Task4&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Unknow&quot;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">CheckSafe</span><span class="params">(<span class="type">int</span> code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 确保子进程只能执行我们交付的任务</span></span><br><span class="line">        <span class="keyword">if</span>(code&gt;=<span class="number">0</span>&amp;&amp;code&lt;tasks.<span class="built_in">size</span>())</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">RunTask</span><span class="params">(<span class="type">int</span> code)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> tasks[code](); <span class="comment">// 调用函数指针</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task1_Code = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task2_Code = <span class="number">1</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task3_Code = <span class="number">2</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">static</span> <span class="type">int</span> Task4_Code = <span class="number">3</span>;</span><br><span class="line">    <span class="comment">// 可以使用枚举对象</span></span><br><span class="line"></span><br><span class="line">    std::vector&lt;<span class="type">task_t</span>&gt; tasks; <span class="comment">// 可以理解为函数指针数组</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Init init; <span class="comment">// 创建一个初始化对象，避免重复使用匿名对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ProcessPool.cc</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;Task.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> process_num = <span class="number">5</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> number = <span class="number">1</span>; <span class="comment">// 表示进程数、信道数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">channel</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">channel</span>(<span class="type">int</span> fd, <span class="type">pid_t</span> id)</span><br><span class="line">        : <span class="built_in">CtrlFD</span>(fd)</span><br><span class="line">        , <span class="built_in">WorkerID</span>(id)</span><br><span class="line">        &#123;</span><br><span class="line">            name = <span class="string">&quot;Channel &quot;</span> + std::<span class="built_in">to_string</span>(number++);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> CtrlFD; <span class="comment">// 写口id</span></span><br><span class="line">    <span class="type">pid_t</span> WorkerID; <span class="comment">// 子进程id</span></span><br><span class="line">    std::string name; <span class="comment">// 信道名称</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 子进程工作函数</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> code = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 准备读取父进程信息</span></span><br><span class="line">        <span class="type">ssize_t</span> n = <span class="built_in">read</span>(<span class="number">0</span>,&amp;code,<span class="built_in">sizeof</span>(code));</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="built_in">sizeof</span>(code))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 正确读取</span></span><br><span class="line">            <span class="keyword">if</span>(!init.<span class="built_in">CheckSafe</span>(code))</span><br><span class="line">            &#123;</span><br><span class="line">                std::cout&lt;&lt;<span class="string">&quot;子进程未收到正确任务&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;    </span><br><span class="line">            init.<span class="built_in">RunTask</span>(code); <span class="comment">// 执行任务</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 父进程写口关闭，子进程退出</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;子进程退出&quot;</span>&lt;&lt;std::endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PrintFd</span><span class="params">(<span class="type">const</span> std::vector&lt;<span class="type">int</span>&gt;&amp; fds)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="built_in">getpid</span>()&lt;&lt;<span class="string">&quot;关闭的写口有：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> fd : fds)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout&lt;&lt;fd&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      std::cout&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateChannels</span><span class="params">(std::vector&lt;channel&gt;* channels)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; old_channels;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;process_num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> pipefd[<span class="number">2</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="type">int</span> n=<span class="built_in">pipe</span>(pipefd);</span><br><span class="line">        <span class="built_in">assert</span>(n==<span class="number">0</span>);</span><br><span class="line">        (<span class="type">void</span>)n;</span><br><span class="line"></span><br><span class="line">        <span class="type">pid_t</span> id = fork();</span><br><span class="line">        <span class="built_in">assert</span>(id!=<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(id==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 子进程创建成功</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 关闭之前子进程的写口</span></span><br><span class="line">            <span class="keyword">if</span>(!old_channels.<span class="built_in">empty</span>())</span><br><span class="line">            &#123;</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">auto</span> fd : old_channels)</span><br><span class="line">               &#123;</span><br><span class="line">                  <span class="built_in">close</span>(fd);</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="comment">// 打印已经关闭的写口提示信息</span></span><br><span class="line">               <span class="built_in">PrintFd</span>(old_channels);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">close</span>(pipefd[<span class="number">1</span>]); <span class="comment">// 关闭自己的写口</span></span><br><span class="line">            <span class="built_in">dup2</span>(pipefd[<span class="number">0</span>],<span class="number">0</span>); <span class="comment">// 将自己的读口设为默认读口</span></span><br><span class="line">            <span class="built_in">Work</span>(); <span class="comment">// 做子进程的任务</span></span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">// 任务结束退出</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 父进程操作</span></span><br><span class="line">        <span class="built_in">close</span>(pipefd[<span class="number">0</span>]); <span class="comment">// 关闭父进程的读</span></span><br><span class="line">        channels-&gt;<span class="built_in">push_back</span>(<span class="built_in">channel</span>(pipefd[<span class="number">1</span>], id)); <span class="comment">// 存下子进程的信息，写口和子进程id</span></span><br><span class="line">        old_channels.<span class="built_in">push_back</span>(pipefd[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SendTaskNum</span><span class="params">(<span class="type">const</span> std::vector&lt;channel&gt; &amp;c, <span class="type">bool</span> flag, <span class="type">int</span> num = <span class="number">-1</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 选择任务</span></span><br><span class="line">        <span class="type">int</span> TaskNum = init.<span class="built_in">SelectTask</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 选择进程</span></span><br><span class="line">        <span class="type">const</span> <span class="keyword">auto</span> &amp; channel = c[pos++];</span><br><span class="line">        pos%=c.<span class="built_in">size</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 输出控制信息</span></span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;指定的任务是&quot;</span>&lt;&lt;init.<span class="built_in">TaskName</span>(TaskNum)&lt;&lt;<span class="string">&quot;任务编号是&quot;</span>&lt;&lt;TaskNum&lt;&lt;<span class="string">&quot;交付的子进程是&quot;</span>&lt;&lt;channel.WorkerID&lt;&lt;std::endl;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送任务，写入管道</span></span><br><span class="line">        <span class="built_in">write</span>(channel.CtrlFD, &amp;TaskNum, <span class="built_in">sizeof</span>(TaskNum));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断是否循环执行</span></span><br><span class="line">        <span class="keyword">if</span>(!flag)</span><br><span class="line">        &#123;</span><br><span class="line">            num--;</span><br><span class="line">            <span class="keyword">if</span>(num&lt;=<span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sleep</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ReleaseChannels</span><span class="params">(std::vector&lt;channel&gt; c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span> &amp;channel : c)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">close</span>(channel.CtrlFD);</span><br><span class="line">        <span class="built_in">waitpid</span>(channel.WorkerID, <span class="literal">nullptr</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出提示信息</span></span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;子进程释放完毕&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::vector&lt;channel&gt; channels;</span><br><span class="line">    <span class="built_in">CreateChannels</span>(&amp;channels);</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">bool</span> g_always_loop = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">SendTaskNum</span>(channels, !g_always_loop, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">ReleaseChannels</span>(channels);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/"
+      title="Linux进程间通信——匿名管道"
+     >
+
+    <p class="title-text">
+      
+        Linux进程间通信——匿名管道
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">Comments </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
