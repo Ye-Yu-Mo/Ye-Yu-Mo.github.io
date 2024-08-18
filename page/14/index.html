@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分類</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">22</div>
+                <div class="category-count">23</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">彙整</h3>
       
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
-          <div class="archive-count">7 </div>
+          <div class="archive-count">8 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -295,8 +295,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/" title="Linux进程间通信——SystemV共享内存" >
+            <div class="recent-link-text">
+              Linux进程间通信——SystemV共享内存
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/08/17/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——命名管道" >
             <div class="recent-link-text">
@@ -322,12 +328,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" title="Linux基础IO——重定向与文件缓冲区" >
-            <div class="recent-link-text">
-              Linux基础IO——重定向与文件缓冲区
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +338,122 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Python中Pandas详解之文件操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/12/26/Python%E4%B8%ADPandas%E8%AF%A6%E8%A7%A3%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">Python中Pandas详解之文件操作</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-26T02:03:06.000Z" itemprop="datePublished">2023-12-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/python/">python</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.5k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            Pandas的文件读取与分析Pandas是数据分析的重要工具，因此从外部读取数据的能力是十分重要的，常用的API如图
+
+
+
+文件类型
+文件说明
+读取函数
+写入函数
+
+
+
+CSV
+是以纯文本形式存储的，以逗号分隔的表格数据
+read_csv
+to_csv
+
+
+HDF
+是一种高效存储和分发科学数据的层级数据格式
+read_hdf
+to_hdf
+
+
+SQL
+是一种用格式化查询语言编写的数据库查询脚本文件
+read_sql
+to_sql
+
+
+JSON
+一种轻量级文本数据交换格式文件
+read_json
+to_json
+
+
+html
+一种由超文本标记语言编写的网页文件
+read_html
+read_html
+
+
+PICKLE
+Python内部支持的一种序列化文件
+read_pickle
+to_pickle
+
+
+利用Pandas读取文件Pandas可以读取到表格类型数据，转换成DF类型的数据，然后通过DF进行数据分析，数据预处理等操作
+对于Pandas来说他的核心在于数据分析，而不是进行读写
+需要注意的是，读取文件的方法配置了大量的参数，更多内容还需要阅读Pandas的官方文档
+DataFr...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/12/26/Python%E4%B8%ADPandas%E8%AF%A6%E8%A7%A3%E4%B9%8B%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Python中Pandas详解之数据结构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -370,7 +486,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k words 
+            1.7k 詞 
           </div>
         </div>
         
@@ -451,7 +567,7 @@ Series的创建Series的中文翻译是系列，是一种类似于一维数组�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 詞 
           </div>
         </div>
         
@@ -528,7 +644,7 @@ vim的基本操作进入vim，一般直接使用vim创建文件即可，例如
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 詞 
           </div>
         </div>
         
@@ -605,7 +721,7 @@ json与Python数据的相互转化1234567import json # 导入json模块data = [&
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.8k words 
+            2.8k 詞 
           </div>
         </div>
         
@@ -681,7 +797,7 @@ NumPy数组序列生成数组生成数组最简单的方法就是用array()方�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            671 words 
+            671 詞 
           </div>
         </div>
         
@@ -765,7 +881,7 @@ NumPy数组序列生成数组生成数组最简单的方法就是用array()方�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            967 words 
+            967 詞 
           </div>
         </div>
         
@@ -887,7 +1003,7 @@ w表示...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            949 words 
+            949 詞 
           </div>
         </div>
         
@@ -915,85 +1031,6 @@ w表示...
     <a class="right-panel  non-pic  "
       
       href="/2023/12/23/Python%E7%94%9F%E6%88%90%E5%99%A8%E4%B8%8E%E8%BF%AD%E4%BB%A3%E5%99%A8/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-STL中优先队列（堆）的详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/22/STL%E4%B8%AD%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89%E7%9A%84%E8%AF%A6%E8%A7%A3/">STL中优先队列（堆）的详解</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-22T08:55:48.000Z" itemprop="datePublished">2023-12-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>><a class="meta-cate-link" href="/categories/C/STL/">STL</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            866 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/heap/" rel="tag">heap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/priority-queue/" rel="tag">priority_queue</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            priority_queue的基本介绍这个priority_queue翻译成中文就是优先级队列，但其实我们很难去一眼看出他的意思到底是什么，他的逻辑结构实际上类似于数据结构中的堆(heap)，而且是大根堆，即为堆顶为序列的最大值
-堆(heap)堆实际上是一种特殊的二叉树，他最最特殊的点在于可以用数组来存储数据
-普通的二叉树是不适合用数组来存储的因为可能会存在大量的空间浪费，而对于完全二叉树更适合用顺序结构存储
-堆的概念与结构学术化的定义堆的概念过于难以理解，我们形象化的来理解他
-一棵完全二叉树，他的任意一个节点值总是不大于或者不小于他的父节点的值
-若堆顶为最大元素，则称为大根堆，若堆顶为最小元素，则称为小根堆
-我们可以按照层次遍历的顺序对二叉树的所有节点进行标号，我们可以发现
-$ parent &#x3D; (child -1) &#x2F; 2$
-$child &#x3D; parent*2+1$
-因此我们可以把它放入数组中，例如
-
-这里我们演示了一个小根堆的逻辑结构和存储结构
-对于堆的实现来说，他有两个主要的调整算法，向上调整和向下调整算法
-当构建堆时，我们采用向上调整算法，...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/22/STL%E4%B8%AD%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89%E7%9A%84%E8%AF%A6%E8%A7%A3/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
