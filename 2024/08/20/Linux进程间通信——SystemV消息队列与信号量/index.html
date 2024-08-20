@@ -14,21 +14,29 @@
   
 
   
-  <title>Tag: C语言 | jasmine</title>
+  <title>Linux进程间通信——SystemV消息队列与信号量 | jasmine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="a little blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="jasmine">
-<meta property="og:url" content="http://example.com/tags/C%E8%AF%AD%E8%A8%80/index.html">
+  <meta name="description" content="消息队列SystemV除了共享内存之外，还有一个进程间通信的方式，是消息队列 我们说一切进程间通信的方式本质其实就是让不同进程看到同一份资源 这个消息队列的本质其实就是让两个进程可以同时看到这个队列，但是管理者其实还是操作系统 进程将数据块使用接口发送给操作系统，操作系统处理好之后插入到队列中，另一个进程也可以这样进行操作，对队列进行插入操作 当操作取出的接口时，给第一个进程另一个进程的数据块，给">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux进程间通信——SystemV消息队列与信号量">
+<meta property="og:url" content="http://example.com/2024/08/20/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/index.html">
 <meta property="og:site_name" content="jasmine">
-<meta property="og:description" content="a little blog">
+<meta property="og:description" content="消息队列SystemV除了共享内存之外，还有一个进程间通信的方式，是消息队列 我们说一切进程间通信的方式本质其实就是让不同进程看到同一份资源 这个消息队列的本质其实就是让两个进程可以同时看到这个队列，但是管理者其实还是操作系统 进程将数据块使用接口发送给操作系统，操作系统处理好之后插入到队列中，另一个进程也可以这样进行操作，对队列进行插入操作 当操作取出的接口时，给第一个进程另一个进程的数据块，给">
 <meta property="og:locale" content="en_UK">
+<meta property="og:image" content="https://s2.loli.net/2024/08/20/ECMdKuo2jNRrVzH.png">
+<meta property="og:image" content="https://s2.loli.net/2024/08/20/6IRkPbDavcd9Uxg.png">
+<meta property="og:image" content="https://s2.loli.net/2024/08/20/CEDdFgVaMoeQ7Tk.png">
+<meta property="article:published_time" content="2024-08-20T10:20:19.000Z">
+<meta property="article:modified_time" content="2024-08-20T11:01:25.632Z">
 <meta property="article:author" content="许磊">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="进程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/20/ECMdKuo2jNRrVzH.png">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -339,120 +347,143 @@
     <div id="content-body">
        
 
-<div class="archive-main-card">
-    <div class="archive-top">
-      <div class="main-title-bar">
-        <div class="main-title-dot"></div>
-        <h1 class="article-title">Archives</h1>
-      </div>    
+<article id="post-Linux进程间通信——SystemV消息队列与信号量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Linux进程间通信——SystemV消息队列与信号量
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-20T10:20:19.000Z" itemprop="datePublished">2024-08-20</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>SystemV除了共享内存之外，还有一个进程间通信的方式，是消息队列</p>
+<p>我们说一切进程间通信的方式本质其实就是让不同进程看到同一份资源</p>
+<p>这个消息队列的本质其实就是让两个进程可以同时看到这个队列，但是管理者其实还是操作系统</p>
+<p>进程将数据块使用接口发送给操作系统，操作系统处理好之后插入到队列中，另一个进程也可以这样进行操作，对队列进行插入操作</p>
+<p>当操作取出的接口时，给第一个进程另一个进程的数据块，给第二个进程第一个进程的数据块</p>
+<p>那么其实这个消息队列并非一个严谨的先进先出，他是有标志的先进先出，本质上相当于两个队列，而且也不规定单向通信</p>
+<p>这里与之前不同的其实就是标志，就是数据块的类型</p>
+<p>操作系统对消息队列也需要进行管理，因此也有一个描述的结构体</p>
+<p>并且由于都是SystemV标准下的结构，接口也都差不多，这里我们不过多介绍，等之后我们会对这里进行模拟实现</p>
+<p><img src="https://s2.loli.net/2024/08/20/ECMdKuo2jNRrVzH.png" alt="image.png"></p>
+<p><img src="https://s2.loli.net/2024/08/20/6IRkPbDavcd9Uxg.png" alt="image.png"></p>
+<p><img src="https://s2.loli.net/2024/08/20/CEDdFgVaMoeQ7Tk.png" alt="image.png"></p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>这里是操作系统相关的内容，只做简单介绍，具体还是需要去读课本</p>
+<p>我们说进程之间是具有异步性的，说白了就是我们无法确定哪个进程先执行，哪个进程后执行</p>
+<p>这样就会造成一些问题</p>
+<p>例如内存共享，两个进程通信时</p>
+<p>写进程在还没写完的时候，读进程就读</p>
+<p>甚至一个进程写、很多个进程读，这样就会造成数据不完整的问题</p>
+<p>因此我们有必要让读进程等待，等到写进程写完之后，读进程再读</p>
+<p>例如共享内存传递大块数据，管道传递单个标志，当标志标记写完成，读才能进行读取</p>
+<p>这个东西叫做同步，也就是为了解决异步问题的一个东西</p>
+<h3 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h3><p>互斥在我们生活中也有遇到过，例如手机摄像头，当你打微信视频的时候，就没办法用相机拍照，当一个人用打印机的时候，另一个人就没办法控制</p>
+<p>这本质上是对有限资源的保护问题，确保在一个时间段内，只能有一个人访问资源</p>
+<p>这种资源称之为临界资源，那么共享内存其实就不算临界资源，除非我们也做保护，访问临界资源的代码也称为临界区</p>
+<h3 id="原语、原子性"><a href="#原语、原子性" class="headerlink" title="原语、原子性"></a>原语、原子性</h3><p>这两个本质上是一个东西，用来描述一段代码无法被中断，就像原子一样不可再分</p>
+<h3 id="信号量-1"><a href="#信号量-1" class="headerlink" title="信号量"></a>信号量</h3><p>既然临界资源是有限的，我们怎么去描述呢</p>
+<p>就是用信号量，信号量的本质其实就是计数器，用于描述临界资源数量的多少</p>
+<p>进程可以用信号量对资源进行预定</p>
+<p>但是信号量本身加减是不允许被中断的，因此操作系统专门封装了原语</p>
+<p>也就是PV操作，申请资源就是P操作、释放资源就是V操作</p>
+<h3 id="多线程并发访问"><a href="#多线程并发访问" class="headerlink" title="多线程并发访问"></a>多线程并发访问</h3><p>因为临界资源是有限的，操作系统就不会一次性给你全部的资源</p>
+<p>而是依次给进程一部分</p>
+<p>有一个下载器工具就是利用了这个原理</p>
+<p>百度网盘每次可能只用一个线程去申请网速资源，用于下载</p>
+<p>但是这个下载器可以截获下载的链接，自己开很多线程并发访问下载，于是下载速度就快了</p>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>信号量的本质其实就是一个计数器，用来表示资源的数量</p>
+<p>但是当资源本身只有一个时，计数器也就只有01两种状态，是一个二元信号量</p>
+<p>那么这个东西就称之为锁</p>
+<p>利用这个锁我们就可以做到同步和互斥</p>
+<p>因为资源是有限的，当进程无法获取资源时就会处于阻塞队列中</p>
+<p>当我们想让A进程先运行到某个节点之后，B进程才能运行</p>
+<p>我们就可以让A进程先使用P操作将资源占据，B进程再使用P操作的时候，发现资源没有了，只能阻塞，直到A进程执行了V操作释放资源，B进程才得以继续运行</p>
+<p>这里只是一个最最基础且不一定对的描述</p>
+<p>对于进程的同步与互斥问题，经典的同步互斥模型之后会介绍或实现</p>
+
+        
+      </div>
+
+         
     </div>
     
-    
-      
-      
-        
-        <div class="year-line">
-            <div class="year-num">2023</div>
-            <div class="dot-wrapper">
-                <div class="dot"></div>
-            </div>
-            <div class="article-count">5 articles</div>
-        </div>
-      
-      <a class="archive-article-link" href="/2023/07/16/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0/" title="栈和队列实现">
-        <div class="date">07-16</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    栈和队列实现
-                
-            </div>
-        </div>
-        <div class="tags">
-            #C语言 #数据结构
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/06/12/%E5%8F%8C%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0/" title="双链表实现">
-        <div class="date">06-12</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    双链表实现
-                
-            </div>
-        </div>
-        <div class="tags">
-            #C语言 #数据结构
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/04/05/%E6%8C%87%E9%92%88%E8%BF%9B%E9%98%B6/" title="指针进阶">
-        <div class="date">04-05</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    指针进阶
-                
-            </div>
-        </div>
-        <div class="tags">
-            #C语言 #指针
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/03/17/%E6%89%AB%E9%9B%B7%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="扫雷的实现">
-        <div class="date">03-17</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    扫雷的实现
-                
-            </div>
-        </div>
-        <div class="tags">
-            #C语言 #应用
-        </div>
-      </a>
-    
-      
-      
-      <a class="archive-article-link" href="/2023/02/26/%E4%BA%95%E5%AD%97%E6%A3%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="井字棋的实现">
-        <div class="date">02-26</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    井字棋的实现
-                
-            </div>
-        </div>
-        <div class="tags">
-            #C语言 #应用
-        </div>
-      </a>
-    
+     
   </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/"
+      title="Linux进程间通信——SystemV共享内存"
+     >
+
+    <p class="title-text">
+      
+        Linux进程间通信——SystemV共享内存
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">Comments </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
     </div>
     <div id="footer-wrapper">
       <footer id="footer">

@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">23</div>
+                <div class="category-count">24</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
-          <div class="archive-count">8 </div>
+          <div class="archive-count">9 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -295,8 +295,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/08/20/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/" title="Linux进程间通信——SystemV消息队列与信号量" >
+            <div class="recent-link-text">
+              Linux进程间通信——SystemV消息队列与信号量
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/" title="Linux进程间通信——SystemV共享内存" >
             <div class="recent-link-text">
@@ -322,12 +328,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" title="Linux基础IO——文件系统与动静态库" >
-            <div class="recent-link-text">
-              Linux基础IO——文件系统与动静态库
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +338,87 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-项目日志：MyLisp项目介绍和读取输入实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/03/15/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AMyLisp%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5%E5%AE%9E%E7%8E%B0/">MyLisp项目日志：项目介绍和读取输入实现</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-03-15T01:14:41.000Z" itemprop="datePublished">2024-03-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            895 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            项目介绍这是一个超轻量级的C&#x2F;C++项目，使用C&#x2F;C++模拟实现一个简单的Lisp（一种函数式程序设计语言），会使用一些外部的库进行初始化工作，例如mpc、editline等
+我们会使用类Python的REPL模式，使用Lisp程序，并不直接提供系统的编译运行环境，整个代码量大概在1000行左右
+主要难点
+
+语法规则与解析用户输入
+递归与错误处理
+S表达式，Q表达式
+函数，标准库
+
+我将会在这里逐步实现这个小项目并记录实现过程中出现的问题以及解决方案
+会先使用C语言实现，再考虑使用C++补充和优化
+读取输入的实现基本思路首先这是一个类Python的命令行输入的模式，基本思路就是使用一个while(1)循环，然后不断读入，再进行解析处理
+如下
+12345while(1)&#123;	char* input = readline(&quot;MyLisp&gt; &quot;);	printf(&quot;The sentence is %s\n&quot;, input);&#125;
+
+这里的readline是为了适配linux和mac，我们重新写的一个有相似...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/03/15/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AMyLisp%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5%E5%AE%9E%E7%8E%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-map和set的介绍和使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -370,7 +451,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.5k 詞 
+            1.5k words 
           </div>
         </div>
         
@@ -443,7 +524,7 @@ key表示关键字，类似于字典中的单词，value表示具体的值，也
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.6k 詞 
+            1.6k words 
           </div>
         </div>
         
@@ -532,7 +613,7 @@ key表示关键字，类似于字典中的单词，value表示具体的值，也
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.1k 詞 
+            2.1k words 
           </div>
         </div>
         
@@ -608,7 +689,7 @@ key表示关键字，类似于字典中的单词，value表示具体的值，也
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.6k 詞 
+            2.6k words 
           </div>
         </div>
         
@@ -679,7 +760,7 @@ key表示关键字，类似于字典中的单词，value表示具体的值，也
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 詞 
+            1.2k words 
           </div>
         </div>
         
@@ -749,7 +830,7 @@ key表示关键字，类似于字典中的单词，value表示具体的值，也
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.9k 詞 
+            1.9k words 
           </div>
         </div>
         
@@ -823,7 +904,7 @@ key表示关键字，类似于字典中的单词，value表示具体的值，也
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k 詞 
+            1.4k words 
           </div>
         </div>
         
@@ -866,95 +947,6 @@ CSS 代码写在单独的 CSS 文件中（**.css**）
     <a class="right-panel  non-pic  "
       
       href="/2024/02/06/css%E5%9F%BA%E7%A1%80/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-HTML进阶" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/02/04/HTML%E8%BF%9B%E9%98%B6/">HTML进阶</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-02-04T07:08:29.000Z" itemprop="datePublished">2024-02-04</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Web/">Web</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.6k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/" rel="tag">Web</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            列表列表是布局内容排列整齐的区域，分为无序列表、有序列表、定义列表。
-无序列表无序列表是布局排列整齐的不需要规定顺序的区域。
-标签：ul 嵌套 li，ul 是无序列表，li 是列表条目。
-例如
-123456&lt;ul&gt;  &lt;li&gt;第一项&lt;/li&gt;  &lt;li&gt;第二项&lt;/li&gt;  &lt;li&gt;第三项&lt;/li&gt;  ……&lt;/ul&gt;
-
-
-
-ul 标签里面只能包裹 li 标签
-li 标签里面可以包裹任何内容
-
-
-有序列表有序列表是布局排列整齐的需要规定顺序的区域。
-标签：ol 嵌套 li，ol 是有序列表，li 是列表条目。
-例如
-123456&lt;ol&gt;  &lt;li&gt;第一项&lt;/li&gt;  &lt;li&gt;第二项&lt;/li&gt;  &lt;li&gt;第三项&lt;/li&gt;  ……&lt;/ol&gt;
-
-
-
-ol 标签里面只能包裹 li 标签
-li 标签里面可以包裹任何内容
-
-
-定义列表标签：dl 嵌套 dt 和 dd，dl 是定义列表，dt 是定义列表的标题...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/02/04/HTML%E8%BF%9B%E9%98%B6/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
