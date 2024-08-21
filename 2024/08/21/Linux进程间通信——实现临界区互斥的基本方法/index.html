@@ -14,34 +14,25 @@
   
 
   
-  <title>map和set的介绍和使用 | jasmine</title>
+  <title>Linux进程间通信——软件实现临界区互斥的基本方法 | jasmine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="map和set关联式容器我们在之前讲过STL的一些基础容器，例如vector，list，deque，forward_list等 这些其实统一都称为序列式容器，因为其底层都是线性的序列数据结构，而且存储的内容是元素本身 关联式容器也是存储数据的容器，不同的是，里面存储的是&lt;key,value&gt;的键值对，类似于我们之前讲的二叉搜索树的KV模型 键值对键值对是我们用来表示一一对应关系的结构，">
+  <meta name="description" content="实现临界区互斥的基本方法我们说临界资源是在一段时间内只允许一个进程访问，而进程访问临界资源的那段代码称为临界区 为了防止两个进程同时进入临界区访问临界资源，我们设计的同步机制就需要满足下面的准则  空闲让进：不能占着茅坑不拉屎，当临界区空闲时可以允许另一个进程请求并进入临界区 忙则等待：不能别人上着呢冲进去也要拉，当临界区被占用时，其他请求访问的进程必须等待 有限等待：不能让等待的人憋死了，防止进">
 <meta property="og:type" content="article">
-<meta property="og:title" content="map和set的介绍和使用">
-<meta property="og:url" content="http://example.com/2024/03/13/map%E5%92%8Cset%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="Linux进程间通信——软件实现临界区互斥的基本方法">
+<meta property="og:url" content="http://example.com/2024/08/21/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="jasmine">
-<meta property="og:description" content="map和set关联式容器我们在之前讲过STL的一些基础容器，例如vector，list，deque，forward_list等 这些其实统一都称为序列式容器，因为其底层都是线性的序列数据结构，而且存储的内容是元素本身 关联式容器也是存储数据的容器，不同的是，里面存储的是&lt;key,value&gt;的键值对，类似于我们之前讲的二叉搜索树的KV模型 键值对键值对是我们用来表示一一对应关系的结构，">
+<meta property="og:description" content="实现临界区互斥的基本方法我们说临界资源是在一段时间内只允许一个进程访问，而进程访问临界资源的那段代码称为临界区 为了防止两个进程同时进入临界区访问临界资源，我们设计的同步机制就需要满足下面的准则  空闲让进：不能占着茅坑不拉屎，当临界区空闲时可以允许另一个进程请求并进入临界区 忙则等待：不能别人上着呢冲进去也要拉，当临界区被占用时，其他请求访问的进程必须等待 有限等待：不能让等待的人憋死了，防止进">
 <meta property="og:locale" content="en_UK">
-<meta property="og:image" content="https://s2.loli.net/2024/03/13/gNhVZAGJf2c9i8l.png">
-<meta property="og:image" content="https://s2.loli.net/2024/03/13/84eIfZYUrgpVqBs.png">
-<meta property="og:image" content="https://s2.loli.net/2024/03/13/2ngStZE4qOKkTyx.png">
-<meta property="og:image" content="https://s2.loli.net/2024/03/13/i9wMJVmSO7fZD6x.png">
-<meta property="og:image" content="https://s2.loli.net/2024/03/13/Kiep9Ty1vn7kJtx.png">
-<meta property="og:image" content="https://s2.loli.net/2024/03/13/vVWyjzTp37tsnEA.png">
-<meta property="og:image" content="https://s2.loli.net/2024/03/13/FkUeilswA97CYou.png">
-<meta property="article:published_time" content="2024-03-13T09:08:03.000Z">
-<meta property="article:modified_time" content="2024-03-13T13:30:27.661Z">
+<meta property="article:published_time" content="2024-08-21T03:24:03.000Z">
+<meta property="article:modified_time" content="2024-08-21T05:20:21.467Z">
 <meta property="article:author" content="许磊">
-<meta property="article:tag" content="数据结构">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="STL">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="进程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2024/03/13/gNhVZAGJf2c9i8l.png">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -352,7 +343,7 @@
     <div id="content-body">
        
 
-<article id="post-map和set的介绍和使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-Linux进程间通信——实现临界区互斥的基本方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -365,7 +356,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        map和set的介绍和使用
+        Linux进程间通信——软件实现临界区互斥的基本方法
       </h1>
     
   
@@ -373,97 +364,72 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-13T09:08:03.000Z" itemprop="datePublished">2024-03-13</time>
+  <time class="dt-published" datetime="2024-08-21T03:24:03.000Z" itemprop="datePublished">2024-08-21</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.5k words 
+            1.7k words 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="map和set"><a href="#map和set" class="headerlink" title="map和set"></a>map和set</h2><h3 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h3><p>我们在之前讲过STL的一些基础容器，例如vector，list，deque，forward_list等</p>
-<p>这些其实统一都称为序列式容器，因为其底层都是线性的序列数据结构，而且存储的内容是元素本身</p>
-<p>关联式容器也是存储数据的容器，不同的是，里面存储的是&lt;key,value&gt;的键值对，类似于我们之前讲的二叉搜索树的KV模型</p>
-<h3 id="键值对"><a href="#键值对" class="headerlink" title="键值对"></a>键值对</h3><p>键值对是我们用来表示一一对应关系的结构，包含key和value两个成员变量</p>
-<p>key表示关键字，类似于字典中的单词，value表示具体的值，也就是字典中对应的具体释义</p>
-<p>在C++中使用pair表示一对值，但并没有具体的对应关系，只是将这一对值进行了封装，可以读取和写入，当然pair也有一些非常有意思的内容，当我们观察其源码时可以看出</p>
-<p>这里给出SGI-STL对pair的定义</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T1</span>, <span class="keyword">class</span> <span class="title class_">T2</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">pair</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">typedef</span> T1 first_type;</span><br><span class="line">	<span class="keyword">typedef</span> T2 second_type;</span><br><span class="line">   	</span><br><span class="line">    T1 first;</span><br><span class="line">    T2 second;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">pair</span>() <span class="comment">// 构造</span></span><br><span class="line">        :<span class="built_in">first</span>(<span class="built_in">T1</span>())</span><br><span class="line">        ,<span class="built_in">second</span>(<span class="built_in">T2</span>())</span><br><span class="line">    &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">pair</span>(<span class="type">const</span> T1&amp; a, <span class="type">const</span> T2&amp; b) <span class="comment">// 拷贝构造</span></span><br><span class="line">    	:<span class="built_in">first</span>(a)</span><br><span class="line">    	,<span class="built_in">second</span>(b)</span><br><span class="line">    &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          <h2 id="实现临界区互斥的基本方法"><a href="#实现临界区互斥的基本方法" class="headerlink" title="实现临界区互斥的基本方法"></a>实现临界区互斥的基本方法</h2><p>我们说临界资源是在一段时间内只允许一个进程访问，而进程访问临界资源的那段代码称为临界区</p>
+<p>为了防止两个进程同时进入临界区访问临界资源，我们设计的同步机制就需要满足下面的准则</p>
+<ul>
+<li>空闲让进：不能占着茅坑不拉屎，当临界区空闲时可以允许另一个进程请求并进入临界区</li>
+<li>忙则等待：不能别人上着呢冲进去也要拉，当临界区被占用时，其他请求访问的进程必须等待</li>
+<li>有限等待：不能让等待的人憋死了，防止进程饥饿，要保证进程能在有限的时间内进入临界区</li>
+<li>让权等待：不能占着临界区、阻塞了还得占着CPU，防止忙等待</li>
+</ul>
+<h3 id="软件实现"><a href="#软件实现" class="headerlink" title="软件实现"></a>软件实现</h3><p>一般这种方法都是基于全局变量的，让全局变量作为标志位</p>
+<h4 id="单标志法"><a href="#单标志法" class="headerlink" title="单标志法"></a>单标志法</h4><p>最简单的一个想法其实就是设一个bool变量，0时表示P0进程可以进入，1时表示P1进程可以进入，假设全局bool变量为flag</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P0进程</span></span><br><span class="line"><span class="keyword">while</span>(flag != <span class="number">0</span>); <span class="comment">// 当flag不为0时，说明不允许P0进入临界区，则循环等待 进入区</span></span><br><span class="line"><span class="comment">// 访问临界资源... 临界区</span></span><br><span class="line">flag = <span class="number">1</span>; <span class="comment">// 访问完了 要让给P1进程访问了 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p><a target="_blank" rel="noopener" href="https://legacy.cplusplus.com/reference/set/set/">set的文档</a></p>
-<p>set直接翻译成中文是集合，而他与数学意义上的集合也有不同的地方，set是要求有序的，其次set中的元素不能被修改，元素是const的，但是允许插入删除</p>
-<p>set的有序是可以自行定义升序或者降序的，默认是按照小于排序（升序），不允许重复值</p>
-<p>set容器通过key访问单个元素的速度比unordered_set慢，但是都允许根据顺序对子集直接迭代</p>
-<p>set在底层是使用二叉搜索树的红黑树实现的</p>
-<p>set的底层实际上也是有pair的，只不过是&lt;value,value&gt;的形式，在插入元素时，只需要插入value即可</p>
-<p>set查找的时间复杂度是$\log_2n$</p>
-<h4 id="模板参数"><a href="#模板参数" class="headerlink" title="模板参数"></a>模板参数</h4><p><img src="https://s2.loli.net/2024/03/13/gNhVZAGJf2c9i8l.png" alt="屏幕截图 2024-03-13 172738.png"></p>
-<p>第一行的T是存放元素的类型，实际是存在底层的&lt;value,value&gt;键值对</p>
-<p>第二行的Compare是仿函数，用于确定是升序还是降序，默认为升序</p>
-<p>第三行是一个空间配置器</p>
-<p>这里其他的内容参考set的官方文档即可</p>
-<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><h4 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h4><p><a target="_blank" rel="noopener" href="https://legacy.cplusplus.com/reference/map/map/">map文档</a></p>
-<p>map是关联容器，直接翻译称为映射，是我们之前讲的二叉搜索树的KV模型，他存储的元素是一个有key和value构成的有序对</p>
-<p>在map中，key是唯一的，用于标识value</p>
-<p>STL中使用typedef来减少长度</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">const</span> key, T&gt; value_type;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P1进程</span></span><br><span class="line"><span class="keyword">while</span>(flag != <span class="number">1</span>); <span class="comment">// 当flag不为1时，说明不允许P1进入临界区，则循环等待 进入区</span></span><br><span class="line"><span class="comment">// 访问临界资源... 临界区</span></span><br><span class="line">flag = <span class="number">0</span>; <span class="comment">// 访问完了 要让给P0进程访问了 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
 
-<p>map内部是对key值排序，默认是升序，他对单个元素的访问速度比unordered_map慢，但是map允许根据顺序对元素进行直接迭代</p>
-<p>map支持下标访问，可以直接找到与key对应的value，这里的实现让人赞叹</p>
-<p>map的底层是由红黑树实现的，我们在之后的内容里也会使用红黑树实现set和map</p>
-<h4 id="模板参数-1"><a href="#模板参数-1" class="headerlink" title="模板参数"></a>模板参数</h4><p><img src="https://s2.loli.net/2024/03/13/84eIfZYUrgpVqBs.png" alt="image.png"></p>
-<p>Key是键值对中的key，T对应的是value，后面分别是仿函数和空间配置器</p>
-<p>需要注意的是，这里的map::key_type和map::mapped_type是typedef出的</p>
-<p><img src="https://s2.loli.net/2024/03/13/2ngStZE4qOKkTyx.png" alt="image.png"></p>
-<p>这里我们注意到一个细节，在定义pair的时候，first被const了，说明key值是不能被修改的</p>
-<h4 id="为什么map支持下标访问"><a href="#为什么map支持下标访问" class="headerlink" title="为什么map支持下标访问"></a>为什么map支持下标访问</h4><p>我们看map对方括号的重定义</p>
-<p><img src="https://s2.loli.net/2024/03/13/i9wMJVmSO7fZD6x.png" alt="image.png"></p>
-<p><img src="https://s2.loli.net/2024/03/13/Kiep9Ty1vn7kJtx.png" alt="image.png"></p>
-<p>也就是说他内部是这样实现的</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mapped_type&amp; <span class="keyword">operator</span>[] (<span class="type">const</span> key_type&amp; k)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> *((<span class="keyword">this</span>-&gt;<span class="built_in">insert</span>(<span class="built_in">make_pair</span>(k,<span class="built_in">mapped_type</span>())).first)).second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个算法是能够实现每次只让其中一个进程访问临界区的，但是每次访问完之后，必须让对方用，因为只有对方能把flag设置为自己的数字</p>
+<p>这就相当于自己拉完了让别人拉，但是如果别人一直不拉，自己想拉也不能再拉，因为对方没有先拉，只有对方拉完了之后自己才能被允许</p>
+<p>这就违背了空闲让进的原则，容易造成资源利用不充分，而且也会造成进程饥饿</p>
+<h4 id="双标志先检查法"><a href="#双标志先检查法" class="headerlink" title="双标志先检查法"></a>双标志先检查法</h4><p>有了之前的经验之后，我们要解决遗留下来的问题，那就再设一个标志位，bool flag[2]</p>
+<p>flag[0]表示P0进程进入临界区的意愿，flag[1]表示P1进程进入临界区的意愿</p>
+<p>假如P0进程想访问临界区，就先查看P1进程是否想用（flag[1]是否为true），是的话就等待，不是的话就把自己的设为true，然后访问临界区，访问完之后把自己设为false</p>
+<p>这就相当于一个人在拉之前先问一句，你要不要拉，你要拉的话那你先，你不拉那我要拉了，拉完之后跟他说拉完了，你可以去了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P0</span></span><br><span class="line"><span class="keyword">while</span>(flag[<span class="number">1</span>]); <span class="comment">// 检查P1是否在拉，在的话一直循环等待 进入区</span></span><br><span class="line">flag[<span class="number">0</span>] = <span class="literal">true</span>; <span class="comment">// 表示自己要拉，其他人要拉的话必须等待 进入区</span></span><br><span class="line"><span class="comment">// 访问临界区资源... 临界区</span></span><br><span class="line">flag[<span class="number">0</span>] = <span class="literal">false</span>; <span class="comment">// 表示自己拉完了，对方可以去 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
 
-<p>这里看上去比较复杂，我们剥洋葱一样的来看</p>
-<p>第一层是调用了map的insert插入函数，我们来看insert的定义</p>
-<p><img src="https://s2.loli.net/2024/03/13/vVWyjzTp37tsnEA.png" alt="image.png"></p>
-<p>这里调用的是单参数的insert，value_type是一个pair对象，我们可以通过make_pair的名称就知道，他是用于构建pair对象的</p>
-<p>insert的返回值是也一个pair对象，first是迭代器，bool是用来表示插入是否成功，如果成果，first指向的就是新pair，如果失败first指向的就是已经存在的pair</p>
-<p>然后来看看make_pair函数的定义</p>
-<p><img src="https://s2.loli.net/2024/03/13/FkUeilswA97CYou.png" alt="image.png"></p>
-<p>这里就和我们设想的是一样的了，用于构建pair</p>
-<p>然后我们看回去，他的参数有两个k和mapped_type()，这里的mapped_type实际上就是value的构造函数，因为在我们插入时只指定了key，没有value，因此直接调用value的构造函数即可</p>
-<p>然后构造完成之后，返回的pair被插入到map中，返回值就是pair&lt;iterator, bool&gt;，这时我们取第一个iterator，表示指向插入的pair（无论是否成功插入，都会指向），然后再取第二个值，也就是插入之后的pair的value</p>
-<p>返回值也就是pair之中的value</p>
-<p>这里有个细节，重定义的返回值是引用的，说明可以支持赋值操作，初始化操作等</p>
-<p>例如</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map&lt;string, string&gt; m;</span><br><span class="line">m[<span class="string">&quot;加&quot;</span>] = <span class="string">&quot;plus&quot;</span>;</span><br><span class="line">m[<span class="string">&quot;减&quot;</span>] = <span class="string">&quot;sub&quot;</span>;</span><br><span class="line">m[<span class="string">&quot;加&quot;</span>] = <span class="string">&quot;add&quot;</span>;</span><br><span class="line">m[<span class="string">&quot;乘&quot;</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P1</span></span><br><span class="line"><span class="keyword">while</span>(flag[<span class="number">0</span>]); <span class="comment">// 检查P0是否在拉，在的话一直循环等待 进入区</span></span><br><span class="line">flag[<span class="number">1</span>] = <span class="literal">true</span>; <span class="comment">// 表示自己要拉，其他人要拉的话必须等待 进入区</span></span><br><span class="line"><span class="comment">// 访问临界区资源... 临界区</span></span><br><span class="line">flag[<span class="number">1</span>] = <span class="literal">false</span>; <span class="comment">// 表示自己拉完了，对方可以去 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p>总结一下就是分四步</p>
-<ol>
-<li>用&lt;key,value_type()&gt;构建一个键值对，调用inset()插入到map中</li>
-<li>如果key存在，插入失败，返回key所在位置的迭代器</li>
-<li>如果key不存在，插入成功，返回新插入元素位置的迭代器</li>
-<li>返回插入的键值对的引用</li>
-</ol>
-<h3 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h3><h4 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h4><p><a target="_blank" rel="noopener" href="https://legacy.cplusplus.com/reference/set/multiset/">multiset文档</a></p>
-<p>multiset与set类似，其中的元素是可以重复的，他的底层也是红黑树</p>
-<p>红黑树是二叉搜索树，我们可以先按照二叉搜索树理解，他为什么也可以有序呢</p>
-<p>实际上是因为他的插入规则是确定的，例如小于在左子树，大于等于在右子树，这样他的中序遍历就依然是有序的</p>
-<h3 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h3><p><a target="_blank" rel="noopener" href="https://legacy.cplusplus.com/reference/map/multimap/">multimap文档</a></p>
-<p>multimap与map类似，需要注意的是，multimap不支持下标访问了，其他都是相同的</p>
+<p>这个算法就完美解决了必须交替执行的问题，如果对方一直不想用的话自己就可以一直用了</p>
+<p>但是别忘了进程是并发执行的，而且具有异步性，这就导致一个巨大的问题</p>
+<p>一开始while循环的时候，两个标志位都是false，都没人要用，然后又几乎同时说自己要用就开始拉了，同时把标志位设置为true了</p>
+<p>着就违反了忙则等待的原则，主要原因其实就是检查和设置的操作这个过程有可能会被中断并发换下来</p>
+<h4 id="双标志后检查法"><a href="#双标志后检查法" class="headerlink" title="双标志后检查法"></a>双标志后检查法</h4><p>那么把进入区的两行代码换一下呢</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P0</span></span><br><span class="line">flag[<span class="number">0</span>] = <span class="literal">true</span>; <span class="comment">// 表示自己要拉，其他人要拉的话必须等待 进入区</span></span><br><span class="line"><span class="keyword">while</span>(flag[<span class="number">1</span>]); <span class="comment">// 检查P1是否在拉，在的话一直循环等待 进入区</span></span><br><span class="line"><span class="comment">// 访问临界区资源... 临界区</span></span><br><span class="line">flag[<span class="number">0</span>] = <span class="literal">false</span>; <span class="comment">// 表示自己拉完了，对方可以去 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P1</span></span><br><span class="line">flag[<span class="number">1</span>] = <span class="literal">true</span>; <span class="comment">// 表示自己要拉，其他人要拉的话必须等待 进入区</span></span><br><span class="line"><span class="keyword">while</span>(flag[<span class="number">0</span>]); <span class="comment">// 检查P0是否在拉，在的话一直循环等待 进入区</span></span><br><span class="line"><span class="comment">// 访问临界区资源... 临界区</span></span><br><span class="line">flag[<span class="number">1</span>] = <span class="literal">false</span>; <span class="comment">// 表示自己拉完了，对方可以去 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
+
+<p>这就相当于先声明我要拉，后一步检查对方要不要，但是我们继续考虑并发的情况，如果两个进程几乎同时声明自己要拉，检查的时候两个进程都会一直循环等待，结果就导致谁都没办法拉了</p>
+<p>这就违背了空闲让进的原则了，也就会导致饥饿现象</p>
+<p>似乎进入了死局？</p>
+<h4 id="Peterson算法"><a href="#Peterson算法" class="headerlink" title="Peterson算法"></a>Peterson算法</h4><p>既然两个标志不够完成我们的要求，三个标志足够吗</p>
+<p>Peterson算法就是这么干的，利用flag[2]表示想不想拉，用turn表示有没有进去拉，这样就把有限等待和空闲让进都解决了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P0</span></span><br><span class="line">flag[<span class="number">0</span>] = <span class="literal">true</span>; <span class="comment">// 表示自己想拉</span></span><br><span class="line">turn = <span class="number">1</span>; <span class="comment">// 表示对方可以拉，谦让一下</span></span><br><span class="line"><span class="keyword">while</span>(flag[<span class="number">1</span>]&amp;&amp;turn==<span class="number">1</span>); <span class="comment">// 如果对方谦让了，并且对方没有想拉，那自己就拉 进入区</span></span><br><span class="line"><span class="comment">// 访问临界资源... 临界区</span></span><br><span class="line">flag[<span class="number">0</span>] = <span class="literal">false</span>; <span class="comment">// 表示自己拉完了 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// P1</span></span><br><span class="line">flag[<span class="number">1</span>] = <span class="literal">true</span>; <span class="comment">// 表示自己想拉</span></span><br><span class="line">turn = <span class="number">0</span>; <span class="comment">// 表示对方可以拉，谦让一下</span></span><br><span class="line"><span class="keyword">while</span>(flag[<span class="number">0</span>]&amp;&amp;turn==<span class="number">0</span>); <span class="comment">// 如果对方谦让了，并且对方没有想拉，那自己就拉 进入区</span></span><br><span class="line"><span class="comment">// 访问临界资源... 临界区</span></span><br><span class="line">flag[<span class="number">1</span>] = <span class="literal">false</span>; <span class="comment">// 表示自己拉完了 退出区</span></span><br><span class="line"><span class="comment">// 其他代码 剩余区</span></span><br></pre></td></tr></table></figure>
+
+<p>即便两个进程并发执行，turn也只有一个值，也就是两个循环必定会走一个，就完美的遵循了前三个原则，但还没有完成让权等待的功能</p>
 
         
       </div>
@@ -476,27 +442,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/03/15/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AMyLisp%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5%E5%AE%9E%E7%8E%B0/"
-      title="MyLisp项目日志：项目介绍和读取输入实现"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        MyLisp项目日志：项目介绍和读取输入实现
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2024/03/08/%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/"
-      title="泛型实现搜索二叉树"
+      href="/2024/08/20/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/"
+      title="Linux进程间通信——SystemV消息队列与信号量"
      >
 
     <p class="title-text">
       
-        泛型实现搜索二叉树
+        Linux进程间通信——SystemV消息队列与信号量
         
     </p>
     <i class="fa-solid fa-angle-right"></i>

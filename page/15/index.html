@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">24</div>
+                <div class="category-count">25</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
-          <div class="archive-count">9 </div>
+          <div class="archive-count">10 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -298,6 +298,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/08/21/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" title="Linux进程间通信——软件实现临界区互斥的基本方法" >
+            <div class="recent-link-text">
+              Linux进程间通信——软件实现临界区互斥的基本方法
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/08/20/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/" title="Linux进程间通信——SystemV消息队列与信号量" >
             <div class="recent-link-text">
               Linux进程间通信——SystemV消息队列与信号量
@@ -322,12 +328,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" title="Linux进程间通信——匿名管道" >
-            <div class="recent-link-text">
-              Linux进程间通信——匿名管道
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +338,128 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux权限详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/12/23/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/">Linux权限详解</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-23T09:07:29.000Z" itemprop="datePublished">2023-12-23</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            967 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vi/" rel="tag">vi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            LInux 权限管理Linux中有两种用户，root和普通用户
+对于root用户，命令提示符是#，可以做任何事，不受限制
+对于普通用户，命令提示符是$
+1su [用户名]
+
+用这个命令可以切换登录用户
+12su usersu root
+
+root可以省略，需要输入root用户的口令
+文件我们可以通过ls -l命令查看文件夹内的详细信息
+例如
+
+我们依次来解释这些内容的意思
+文件访问者我们可以看到在file1这个文件中有一串是root root 
+这里其实对应了两个身份，第一个root的位置表示该文件的所属用户，第二个root表示该文件的所属用户组，即这个文件属于哪个组
+还有第三个身份就是其他用户，即不属于组的用户
+文件类型与基本权限这里最前面有一串字符 -rw-rw-r–
+这里其实是分块理解的，第一个字符表示文件类型
+
+
+
+字符
+说明
+
+
+
+d
+文件夹
+
+
+-
+普通文件
+
+
+l
+软连接(类似于快捷方式)
+
+
+b
+块设备文件
+
+
+p
+管道文件
+
+
+c
+字符设备文件(输入输出设备)
+
+
+s
+套接口文件
+
+
+后面九个字符，三个三个一组，分别对应三种身份的各种权限
+r表示有读权限
+w表示...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/12/23/Linux%E6%9D%83%E9%99%90%E8%AF%A6%E8%A7%A3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Python生成器与迭代器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -868,89 +990,6 @@ $child &#x3D; parent*2+1$
     <a class="right-panel  non-pic  "
       
       href="/2023/12/20/Python%E5%87%BD%E6%95%B0%E8%BF%9B%E9%98%B6/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Python特性之推导式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/19/Python%E7%89%B9%E6%80%A7%E4%B9%8B%E6%8E%A8%E5%AF%BC%E5%BC%8F/">Python特性之推导式</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-19T10:28:42.000Z" itemprop="datePublished">2023-12-19</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/python/">python</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            482 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            推导式推导式其实可以理解为简易版的for循环，是Python独有的特性，它能够非常简洁的按照某种规则以一个序列推导出另一个新的序列，也可以理解为是切片的升级
-列表推导式列表的推导式非常简单
-1[生成表达式 for 变量 in 序列或迭代对象]
-
-最外层的方括号表明生成结果为列表，在功能上，列表推导式相当于一个循环，只是形式更加简介
-例如
-1list1 = [x**2 for x in range(4)]
-
-前面我们讲过range的基本使用，这里的代码等效于下面的for循环，这里的**表示乘方
-123list1 = []for x in range(4):    list1.append(x**2)
-
-数据的过滤在列表推导式中，我们可以使用if语句筛选符合条件的元素，例如我们想提取1到10中平方数为偶数的数
-1list2 = [x**2 for x in range(10) if (x**2)%2 == 0]
-
-
-这里只演示了一层循环，实际上也支持两层循环，但是应用场景较少并且易读性不高，这里不过多介绍了
-字典推导式字典和集合不支持切片，推导式则极大的简化了其遍历的过程
-字典推导式...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/19/Python%E7%89%B9%E6%80%A7%E4%B9%8B%E6%8E%A8%E5%AF%BC%E5%BC%8F/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
