@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">25</div>
+                <div class="category-count">26</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
-          <div class="archive-count">10 </div>
+          <div class="archive-count">11 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -298,6 +298,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" title="Linux进程间通信——硬件实现临界区互斥的基本方法" >
+            <div class="recent-link-text">
+              Linux进程间通信——硬件实现临界区互斥的基本方法
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/08/21/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" title="Linux进程间通信——软件实现临界区互斥的基本方法" >
             <div class="recent-link-text">
               Linux进程间通信——软件实现临界区互斥的基本方法
@@ -322,12 +328,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/15/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E6%B1%A0/" title="Linux进程间通信——池化技术与模拟实现进程池" >
-            <div class="recent-link-text">
-              Linux进程间通信——池化技术与模拟实现进程池
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +338,85 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-机器学习入门之模型性能评估与度量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/05/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0%E4%B8%8E%E5%BA%A6%E9%87%8F/">机器学习入门之模型性能评估与度量</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-05-05T12:26:57.000Z" itemprop="datePublished">2024-05-05</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.6k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            性能评估机器学习的模型有很多，我们在选择的时候就需要对各个模型进行对比，这时候就需要一个靠谱的标准，能够评估模型的性能
+这里的性能不是说算的有多快，而是说预测的结果和真实情况进行比较的来的结果
+误差在我们对训练的结果进行分析之前，首先需要思考模型训练过程中是否可能有误差的产生，因为这同样会影响结果和对模型选择产生比较大的影响
+误差主要会出现在数据集的三个部分，分别是训练集、测试集、新样本
+
+训练集——训练误差
+测试集——测试误差
+新样本——泛化误差
+
+所谓的训练误差指的是训练集本身存在缺陷，从而模型提取的错误的特征信息，例如一个只认识红色苹果的模型，遇到绿色苹果时，他就不认为这是苹果了
+一般情况下拿到一个数据集，会将其分成两部分，分别作为训练集和测试集，那么对于训练完成的模型，此时测试集也相当于是一个新样本
+训练模型的时候，一开始训练误差和测试误差都会比较高，但是训练次数越多，训练误差会越来越小，但是测试误差可能会变大，而且模型的复杂度也会随之提升
+这样的现象我们分别称之为欠拟合和过拟合
+欠拟合和过拟合欠拟合的概念很好理解，其实就是由于数据量不够大，模型的准确率不够多，也就是一开...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/05/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0%E4%B8%8E%E5%BA%A6%E9%87%8F/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-机器学习入门之非监督学习和半监督学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -842,85 +921,6 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
     <a class="right-panel  non-pic  "
       
       href="/2024/04/12/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%B0%81%E8%A3%85map%E5%92%8Cset/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-C-手撕红黑树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/04/08/C-%E6%89%8B%E6%92%95%E7%BA%A2%E9%BB%91%E6%A0%91/">C++手撕红黑树</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-04-08T05:40:38.000Z" itemprop="datePublished">2024-04-08</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.6k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            红黑树概念和AVL树一样，红黑树也是一种二叉搜索树，是解决二叉搜索树不平衡的另一种方案，他在每个节点上增加一个存储位，用于表示节点的颜色，是Red或者Black
-红黑树的核心思想是通过一些着色的条件限制，达到一种最长路径不超过最短路径的两倍的状态
-所以说红黑树并不是严格平衡的树，而是一种近似平衡
-例如
-
-性质（条件限制）红黑树一共有五条性质，由此来保证最长路径不超过最短路径的两倍
-
-每个节点都有颜色，不是黑色就是红色
-根节点是黑色的
-如果一共节点是红色，那么他的子节点一定是黑色（不会出现两个红色节点连接的情况）
-对于每个节点，以这个节点到所有后代的任意路径上，均包含相同数目的黑色节点
-每个叶子节点（空节点）是黑色的（为了满足第四条性质，某些情况下如果没有第五条第四条会失效）
-
-节点的定义123456789101112131415161718192021222324// 颜色enum Color &#123;	RED,	BLACK&#125;;template&lt;class T&gt;struct RBTreeNode &#123;	RBTreeNode&lt;T&gt;* _...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/04/08/C-%E6%89%8B%E6%92%95%E7%BA%A2%E9%BB%91%E6%A0%91/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

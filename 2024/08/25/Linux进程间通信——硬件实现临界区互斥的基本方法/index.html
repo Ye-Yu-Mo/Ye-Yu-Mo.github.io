@@ -14,28 +14,25 @@
   
 
   
-  <title>计算机体系结构——冯诺依曼系统与操作系统 | jasmine</title>
+  <title>Linux进程间通信——硬件实现临界区互斥的基本方法 | jasmine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="在深入学习Linux进程等概念之前，我们对于计算机的体系结构还需要有一个基础的认识，这一部分在大多高校中复杂冗长，但十分严谨广泛适用 我们在这里主要介绍的是感性的直观上对计算机工作原理系统调度的理解 冯诺依曼体系结构现代计算机都是基于冯诺依曼体系结构的，也就是我们在计算机组成原理上学的那个东西  当然现代计算机不以存储器为核心，而以运算器和控制器为核心，这些都是后话了，我们也不深入了解其中的原理，">
+  <meta name="description" content="硬件实现方法之前的软件方法出现各种问题的根本原因其实是因为检查是否被占用和设置自己想要占用，这两个动作没有办法一气呵成导致的 而硬件实现的好处就是他的权限足够高，无法随意被中断 中断屏蔽方法操作系统有一个系统级的指令是中断指令，主要分为两个步骤，一个是关中断指令，另一个是开中断指令 什么意思呢，就是说是否允许被中断，关中断就之后不允许被中断，开中断就是之后可以被中断 因此我们想要确保进程访问临界区">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机体系结构——冯诺依曼系统与操作系统">
-<meta property="og:url" content="http://example.com/2024/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:title" content="Linux进程间通信——硬件实现临界区互斥的基本方法">
+<meta property="og:url" content="http://example.com/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="jasmine">
-<meta property="og:description" content="在深入学习Linux进程等概念之前，我们对于计算机的体系结构还需要有一个基础的认识，这一部分在大多高校中复杂冗长，但十分严谨广泛适用 我们在这里主要介绍的是感性的直观上对计算机工作原理系统调度的理解 冯诺依曼体系结构现代计算机都是基于冯诺依曼体系结构的，也就是我们在计算机组成原理上学的那个东西  当然现代计算机不以存储器为核心，而以运算器和控制器为核心，这些都是后话了，我们也不深入了解其中的原理，">
+<meta property="og:description" content="硬件实现方法之前的软件方法出现各种问题的根本原因其实是因为检查是否被占用和设置自己想要占用，这两个动作没有办法一气呵成导致的 而硬件实现的好处就是他的权限足够高，无法随意被中断 中断屏蔽方法操作系统有一个系统级的指令是中断指令，主要分为两个步骤，一个是关中断指令，另一个是开中断指令 什么意思呢，就是说是否允许被中断，关中断就之后不允许被中断，开中断就是之后可以被中断 因此我们想要确保进程访问临界区">
 <meta property="og:locale" content="en_UK">
-<meta property="og:image" content="https://s2.loli.net/2024/07/12/OkZYK6oPAb2fvc7.jpg">
-<meta property="og:image" content="https://s2.loli.net/2024/07/12/lweZuEDQX6gVsxP.jpg">
-<meta property="og:image" content="https://s2.loli.net/2024/07/12/GkuYvjNerwSQZJy.jpg">
-<meta property="article:published_time" content="2024-07-12T07:22:01.000Z">
-<meta property="article:modified_time" content="2024-07-12T08:00:44.621Z">
+<meta property="article:published_time" content="2024-08-25T02:58:46.000Z">
+<meta property="article:modified_time" content="2024-08-25T03:20:28.026Z">
 <meta property="article:author" content="许磊">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="进程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2024/07/12/OkZYK6oPAb2fvc7.jpg">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -346,7 +343,7 @@
     <div id="content-body">
        
 
-<article id="post-计算机体系结构——冯诺依曼系统与操作系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-Linux进程间通信——硬件实现临界区互斥的基本方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -359,7 +356,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        计算机体系结构——冯诺依曼系统与操作系统
+        Linux进程间通信——硬件实现临界区互斥的基本方法
       </h1>
     
   
@@ -367,7 +364,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-12T07:22:01.000Z" itemprop="datePublished">2024-07-12</time>
+  <time class="dt-published" datetime="2024-08-25T02:58:46.000Z" itemprop="datePublished">2024-08-25</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -378,45 +375,39 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k words 
+            748 words 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>在深入学习Linux进程等概念之前，我们对于计算机的体系结构还需要有一个基础的认识，这一部分在大多高校中复杂冗长，但十分严谨广泛适用</p>
-<p>我们在这里主要介绍的是感性的直观上对计算机工作原理系统调度的理解</p>
-<h1 id="冯诺依曼体系结构"><a href="#冯诺依曼体系结构" class="headerlink" title="冯诺依曼体系结构"></a>冯诺依曼体系结构</h1><p>现代计算机都是基于冯诺依曼体系结构的，也就是我们在计算机组成原理上学的那个东西</p>
-<p><img src="https://s2.loli.net/2024/07/12/OkZYK6oPAb2fvc7.jpg" alt="40a83ed75500ae0dbf2a4312e6706c2f.jpg"></p>
-<p>当然现代计算机不以存储器为核心，而以运算器和控制器为核心，这些都是后话了，我们也不深入了解其中的原理，只分别介绍一下这些在计算机中代表什么</p>
-<p>输入设备主要有，键盘、鼠标、摄像头、磁盘、网卡等</p>
-<p>存储器，这里的存储器指的是内存而非磁盘</p>
-<p>中央处理器有，运算器和和控制器，其中也有一部分cache缓存</p>
-<p>输出设备主要有、显示器、磁盘、扬声器、网卡等</p>
-<h2 id="内存体系"><a href="#内存体系" class="headerlink" title="内存体系"></a>内存体系</h2><p>用一张图就可以解释清楚</p>
-<p><img src="https://s2.loli.net/2024/07/12/lweZuEDQX6gVsxP.jpg" alt="212a62805f9dd68306e22b8f0a429eec.jpeg"></p>
-<p>由下到上是计算机的内存分级，因为不同存储器的处理数据速度不尽相同，而处理的速度越快，就导致成本越高，在总成本有限的情况下，使用这样的金字塔体系就可以保证有相当快的数据存取速度和相当大的存储空间了</p>
-<p>而整个计算机中最快的就是CPU了，为了不被磁盘拖后腿，我们只允许CPU和内存（主存）以上的存储器打交道，这样就能在保证速度的同时确保存储量足够</p>
-<p>在体系设置上，我们把速度越快的存储器放的离CPU越近</p>
-<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>目前我们还很难严谨的描述进程这个概念，但可以主观的理解为进行中的程序，加上个状语就是，在内存中进行中的程序</p>
-<p>进行中我们替换为运行中似乎更为合适，首先CPU只能和内存以上的存储器打交道，那么想要修改磁盘中的数据或者是运行存在磁盘中的程序，就需要将磁盘中的数据内容加载到内存中</p>
-<p>我们知道一个程序主要包含代码和数据，这些数据都是要交给CPU处理的，这些数据和代码存储的地方都在内存中，这样一个运行中的程序，就可以理解为一个进程</p>
-<p>那么磁盘中的数据和代码怎么传到内存，内存的数据又怎么交给CPU这些内容其实是交给操作系统来解决的</p>
-<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><p>操作系统的本质就是一个软件，用来进行计算机的软硬件资源管理</p>
-<p><img src="https://s2.loli.net/2024/07/12/GkuYvjNerwSQZJy.jpg" alt="1377a4d39de95b07d3b8d8df5e8d61fc.jpeg"></p>
-<p>那么对于这个图，操作系统其实就管理的是他和他以下的两层，他做的就是一个管理者的角色</p>
-<p>从管理的角度来看，我们需要对被管理的对象进行描述、组织，才能进行管理</p>
-<p>例如我们想对一个班的学生进行管理，每个学生都有学号、性别、成绩等数据（描述），但是如果把学生叫过来问过于麻烦，那么我们可以使用顺序表、链表等数据结构将这些数据存下来再进行管理（组织）</p>
-<p>体现在计算机中就是，一堆包含很多成员变量的结构体（描述），用顺序表或者链表（组织）的形式链接起来，我们再对其进行管理，例如修改状态，成绩等</p>
-<p>我们在做管理的这个过程中，其实我们并没有直接跟学生打交道，而是对他存在我们表中的数据打交道</p>
-<h3 id="操作系统的管理"><a href="#操作系统的管理" class="headerlink" title="操作系统的管理"></a>操作系统的管理</h3><p>操作系统对于硬件等内容的管理同样也不是直接管理硬件，而是管理硬件映射出的信息，操作系统会对每个硬件创建一个结构体，对于结构体中存放该硬件的状态信息等内容，再组织成数据结构来统一管理</p>
-<p>所有管理的核心原则就是，先描述，再组织</p>
-<p>操作系统主要管理的是进程、内存、文件、IO、驱动</p>
-<p>每一个硬件都有其对应的驱动，其实也就是给操作系统管理该硬件的授权</p>
-<p>在操作系统的安全、高效、稳定的管理下，我们才能在操作系统之上产生各种软件和服务</p>
+          <h3 id="硬件实现方法"><a href="#硬件实现方法" class="headerlink" title="硬件实现方法"></a>硬件实现方法</h3><p>之前的软件方法出现各种问题的根本原因其实是因为检查是否被占用和设置自己想要占用，这两个动作没有办法一气呵成导致的</p>
+<p>而硬件实现的好处就是他的权限足够高，无法随意被中断</p>
+<h4 id="中断屏蔽方法"><a href="#中断屏蔽方法" class="headerlink" title="中断屏蔽方法"></a>中断屏蔽方法</h4><p>操作系统有一个系统级的指令是中断指令，主要分为两个步骤，一个是关中断指令，另一个是开中断指令</p>
+<p>什么意思呢，就是说是否允许被中断，关中断就之后不允许被中断，开中断就是之后可以被中断</p>
+<p>因此我们想要确保进程访问临界区时不被其他进程打扰，只需要在临界区之前执行关中断指令，在临界区之后执行开中断指令，确保进程互斥的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 关中断;</span><br><span class="line">// 临界区;</span><br><span class="line">// 开中断;</span><br></pre></td></tr></table></figure>
+
+<p>这个方法的缺点是限制了CPU交替并发执行程序的能力，即便是时间片到也无法中断，因此系统的效率就会降低</p>
+<p>其次这个方法其实是权限的下放，就是将系统的权限交给用户的进程，这样进程有可能会一直占用CPU</p>
+<p>这个方法还无法限制其他CPU，只能限制一个CPU不执行相同临界区的代码</p>
+<h4 id="TestAndSet指令"><a href="#TestAndSet指令" class="headerlink" title="TestAndSet指令"></a>TestAndSet指令</h4><p>这是一条硬件指令，TS指令，这条指令是原子操作，也就是原语，不允许被中断</p>
+<p>他的代码描述如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="title function_">TestAndSet</span><span class="params">(<span class="type">bool</span>* lock)</span> <span class="comment">// 交换逻辑</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">bool</span> old = *lock; <span class="comment">// old 存放旧的bool值</span></span><br><span class="line">    *lock = <span class="literal">true</span>; <span class="comment">// 设置为true</span></span><br><span class="line">    <span class="keyword">return</span> old; <span class="comment">// 返回旧值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>外面的代码如何进行调用呢，是这样的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(TestAndSet(&amp;lock)); <span class="comment">// 进入区</span></span><br><span class="line"><span class="comment">// 临界区</span></span><br><span class="line">lock = <span class="literal">false</span>; <span class="comment">// 退出区</span></span><br><span class="line"><span class="comment">// 剩余区</span></span><br></pre></td></tr></table></figure>
+
+<p>这一段是多进程代码，也就是有两个进程都有相同的这一段，lock是全局变量，true表示临界资源被占用，初始值为false</p>
+<p>当两个进程都不使用时，lock为false，执行到进入区时，另一个进程不允许再次进入执行，第一个进程检查并上锁后，第二个进程只能等待第一个进程执行完临界区代码</p>
+<p>再次强调，这个硬件指令是由硬件指令实现的，并非代码</p>
+<p>因此这个指令是一气呵成无法中断，其次这个方法的好处就是因为lock是全局变量，即便其他CPU想要访问也是同一个lock，也就无法抢占了</p>
+<p>缺点就是没有解决让权等待的问题，因为while循环还是会一直占用CPU进行判断，除此之外也会导致饥饿现象</p>
+<h4 id="Swap指令"><a href="#Swap指令" class="headerlink" title="Swap指令"></a>Swap指令</h4><p>在上面的标注也提到了，其实这两个指令的软件逻辑是几乎一模一样的</p>
+<p>因此优缺点也是相同的</p>
 
         
       </div>
@@ -429,27 +420,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/07/12/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/"
-      title="Linux进程——进程的概念"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        Linux进程——进程的概念
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2024/05/28/C-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"
-      title="C++智能指针详解"
+      href="/2024/08/21/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/"
+      title="Linux进程间通信——软件实现临界区互斥的基本方法"
      >
 
     <p class="title-text">
       
-        C++智能指针详解
+        Linux进程间通信——软件实现临界区互斥的基本方法
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
