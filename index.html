@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">27</div>
+                <div class="category-count">29</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">14 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -295,8 +295,20 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/08/27/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BF%9D%E5%AD%98%E3%80%81%E5%A4%84%E7%90%86%E3%80%81%E6%8D%95%E6%8D%89/" title="Linux进程信号——信号的捕捉、保存、处理" >
+            <div class="recent-link-text">
+              Linux进程信号——信号的捕捉、保存、处理
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/08/26/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%AF%A6%E8%A7%A3/" title="Linux进程间通信——互斥锁与信号量详解" >
+            <div class="recent-link-text">
+              Linux进程间通信——互斥锁与信号量详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%A7%E7%94%9F/" title="Linux进程信号——信号的概念与产生" >
             <div class="recent-link-text">
@@ -316,18 +328,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/20/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/" title="Linux进程间通信——SystemV消息队列与信号量" >
-            <div class="recent-link-text">
-              Linux进程间通信——SystemV消息队列与信号量
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/" title="Linux进程间通信——SystemV共享内存" >
-            <div class="recent-link-text">
-              Linux进程间通信——SystemV共享内存
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +338,169 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程信号——信号的保存、处理、捕捉" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/27/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BF%9D%E5%AD%98%E3%80%81%E5%A4%84%E7%90%86%E3%80%81%E6%8D%95%E6%8D%89/">Linux进程信号——信号的捕捉、保存、处理</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-27T03:11:03.000Z" itemprop="datePublished">2024-08-27</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            信号的基本概念
+信号递达：实际处理信号的动作
+信号未决：信号从产生到递达之间的状态
+信号阻塞：不会被递达的信号
+信号忽略：递达的动作是忽略
+
+阻塞和忽略的区别
+阻塞指的是这个信号不会被递达，也就是不对其进行操作处理
+忽略指的是这个信号可以递达，只是处理的动作是忽略
+信号保存
+在进程的PCB中有如下三个数据结构和信号相关
+前两个是位图，后一个是数组
+block位图这个位图表示哪些信号被阻塞，0或1表示是否被阻塞，某一个位置表示对应的信号
+pending位图这个位图用来存储收到的信号，0或1表示是否收到，某一个位置表示对应的信号，这个位图也称之为信号集，也就是未决的情况
+handler数组这个数组是一个函数指针数组，里面的内容是函数指针，下标表示收到n号信号，调用的处理方法就是对应的函数指针
+SIG_DFL宏代表这个函数是默认处理函数
+SIG_IGN宏代表收到这个信号后，进行忽略这个信号
+信号处理
+这个函数可以手动更改handler数组，让进程在捕捉到对应信号的时候调用我们指定的函数处理
+1234567891011121314151617181920#include&lt;iostr...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/27/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BF%9D%E5%AD%98%E3%80%81%E5%A4%84%E7%90%86%E3%80%81%E6%8D%95%E6%8D%89/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux进程间通信——互斥锁与信号量详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/26/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%AF%A6%E8%A7%A3/">Linux进程间通信——互斥锁与信号量详解</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-26T06:22:08.000Z" itemprop="datePublished">2024-08-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.7k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            互斥锁现实中的锁有两种状态，打开和关闭，分别对应这资源可以被使用，和不可以被使用，我们可以通过使用钥匙对锁的状态进行改变
+那么解决临界区的最简单的工具其实就是锁（mutex lock），我们称之为互斥锁
+当一个进程进入临界区的时候，调用acquire函数，进行上锁，相当于不让别人再访问资源
+退出临界区的时候调用release函数，来打开锁，可以让别人访问资源
+一个锁只能上锁一次，因此在互斥锁中也有一个bool变量available，表示锁是否可以被上锁，可以被上锁时acquire函数就可以调用成功
+这两个函数的执行必须是原子的，不允许被中断，因此通常都是硬件实现的
+这种互斥锁也称之为自旋锁，主要问题是忙等待，也就是必须循环检查available是否可用
+这种互斥锁可以用来解决同步问题
+信号量我们之前简单了解过信号量，本质上其实就是描述资源的数量
+可以用来解决互斥和同步的问题，他只能被wait和signal原语访问，也称为PV操作，分别对应着申请和释放资源两个操作
+整形信号量这种就是最基础的用法，描述资源的数目
+wait操作和P操作是申请操作，原理可以这样表示
+12345void ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/26/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%AF%A6%E8%A7%A3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程信号——信号的概念与产生" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -370,7 +533,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            1.1k words 
           </div>
         </div>
         
@@ -449,7 +612,7 @@ ctrl + c其实就对应着2号信号
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            748 词 
+            748 words 
           </div>
         </div>
         
@@ -527,7 +690,7 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k 词 
+            1.7k words 
           </div>
         </div>
         
@@ -605,7 +768,7 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -687,7 +850,7 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            728 词 
+            728 words 
           </div>
         </div>
         
@@ -769,7 +932,7 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            279 词 
+            279 words 
           </div>
         </div>
         
@@ -805,161 +968,6 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
     <a class="right-panel  non-pic  "
       
       href="/2024/08/17/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程间通信——模拟实现进程池" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/15/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E6%B1%A0/">Linux进程间通信——池化技术与模拟实现进程池</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-15T10:33:23.000Z" itemprop="datePublished">2024-08-15</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            3.5k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            池化技术池化技术其实是分治思想的一个体现，在生活中也有很多例子
-例如，河水的水资源非常丰富，但是要多次从河水中取水使用是比较繁琐且低效的，尤其是当家离河流较远的时候（消耗较大），这时候我们就可以每次取一大缸水，需要使用的时候直接取水使用就可以了
-进程池也是类似的思想，因为每一次fork创建子进程都需要进行系统调用，也需要消耗一定的资源，因此我们可以一次申请一定数量的进程PCB，分别分配对应的任务给他们就可以了
-这实际上就是一种多进程并发运行的思想，我们可以用父进程来进行子进程的管理与任务分配、任务验收，然后让这些兄弟进程来运行不同的任务，这其中传递信息就需要用到我们前一篇所学的匿名管道
-但是在这里我们先不具体分配，只是体会其中的思想即可
-进程池进程池原理画成示意图就是这样的
-
-蓝色是每一次我们fork子进程和pipe管道之后，需要关闭的接口，因为每一次的读接口都是3，所以从4、5、6以后的分别对应的就是不同的子进程的写管道
-这里其实还有一个隐藏起来的bug，就是在第二个子进程以及之后的子进程fork的时候，实际上他拷贝的是父进程的文件描述符表，因此他也存在一个接口指向之前申请的写...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/15/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E6%B1%A0/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程间通信——匿名管道" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/">Linux进程间通信——匿名管道</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-14T10:44:01.000Z" itemprop="datePublished">2024-08-14</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.2k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            进程间通信进程设计的特点之一就是独立性，要避免其他东西影响自身的数据
-但有时候我们需要共享数据或者传递信息，传统的父子进程也只能父进程传递给子进程信息
-因此进程间通信还是很必要的，除此之外网络通信中所说的进程间通信本质上也是两个进程进行通信，只不过信息传递经过了繁杂的计算机网络
-进程间通信有很多类型，但是利用管道进行进程间通信对我们了解底层原理还是很有帮助的，因此我们也从管道开始介绍
-管道在我们学习Linux指令的时候，有一个字符是|，用于将前一个指令的输出传递给下一个指令作为输入
-通过这么久的学习，我们可以大概猜测出这个管道的原理是什么样的
-两个指令本质上就是两个进程，利用管道进行通信，将两个管道连接起来
-如何控制这两个进程的输入输出呢，其实就用到了之前的重定向功能
-头一个指令的输出进行重定向，后一个指令的输入重定向就可以实现这样的功能了
-
-再深入一点，管道的本质其实就是一个被打开的文件，但同时能被两个进程访问，而且只能一个进程写，另一个进程读
-匿名管道匿名管道通常用于父子进程的通信
-父进程使用pipe函数创建管道
-
-
-这个函数的参数是一个描述符数组，下标0表示读，下标1表示写...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
