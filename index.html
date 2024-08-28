@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">29</div>
+                <div class="category-count">30</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
-          <div class="archive-count">14 </div>
+          <div class="archive-count">15 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -298,6 +298,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/08/28/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8E%A7%E5%88%B6/" title="Linux多线程——线程的概念和控制" >
+            <div class="recent-link-text">
+              Linux多线程——线程的概念和控制
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/08/27/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BF%9D%E5%AD%98%E3%80%81%E5%A4%84%E7%90%86%E3%80%81%E6%8D%95%E6%8D%89/" title="Linux进程信号——信号的捕捉、保存、处理" >
             <div class="recent-link-text">
               Linux进程信号——信号的捕捉、保存、处理
@@ -322,12 +328,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/21/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" title="Linux进程间通信——软件实现临界区互斥的基本方法" >
-            <div class="recent-link-text">
-              Linux进程间通信——软件实现临界区互斥的基本方法
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +338,84 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux多线程——线程的概念和控制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/28/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8E%A7%E5%88%B6/">Linux多线程——线程的概念和控制</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-28T04:37:47.000Z" itemprop="datePublished">2024-08-28</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.4k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            线程的概念线程是我们经常听到的一个概念，他和进程有什么关系呢
+从操作系统课本里我们可能听说过，线程是一个微缩版的进程，他拥有TCB，不会被分配资源，是CPU进行调度的单位
+我们其实可以更直观的理解，程序中的一个执行路线我们就可以称之为线程，也可以说是执行流
+那么一个进程他的执行路线至少有一个，也就算做是一个线程，这个进程本身也可以创建分支线程，那么原来的这个进程也就叫做主线程
+在Linux中，线程其实没有自己的TCB，而是和进程公用PCB，内存空间也是共享的
+因此在Linux中线程其实是要比进程更加轻量化的
+每个线程都拥有自己的PCB，但都是自己从主线程中写时拷贝来的
+在CPU的视角来看，他的所调度的所有单位都是PCB，是同一个进程，CPU也无法分辨他运行的是线程还是进程
+进程和线程对比线程其实是被CPU调度运行的的基本单位，因为一个CPU只能运行一个执行流
+而进程是操作系统分配资源的基本单位，也就是说这个进程和他所属的线程内存空间全部共享，一个全局变量，不同线程之间也能共享
+线程也拥有自己的特征数据，否则就无法对线程进行管理了
+线程ID，栈区资源，信号屏蔽字，调度优先级
+共享的...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/28/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8E%A7%E5%88%B6/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程信号——信号的保存、处理、捕捉" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -900,86 +978,6 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
 
  
 
-   
-
-<article id="post-Linux进程间通信——命名管道" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/17/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93/">Linux进程间通信——命名管道</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-17T09:12:59.000Z" itemprop="datePublished">2024-08-17</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            279 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            命名管道之前我们使用的都是匿名管道，命名管道与之不同的就是他拥有实体文件，文件类型为p，而且他的文件大小永远为0
-这时因为打开文件的同时也打开了缓冲区
-当两个进程分别打开管道时，如果分别分配两个缓冲区，连接着管道文件本体，这样实在低效
-不如直接两个进程连接同一个缓冲区
-命名管道也称之为fifo，先进先出，也可以理解其是单向的
-创建命名管道命令行1mkfifo fifo
-
-函数1mkfifo(&quot;./testfifo&quot;,0666);
-
-第一个参数是管道文件，第二个参数是权限，和open系统调用一样
-他的返回值是int类型，返回值为-1时表示出创建管道失败
-创建管道文件完成之后的任务就简单了
-只用像正常读写文件的操作进行读写就可以了
-可以使用系统调用接口，也可以使用C语言接口都是没问题的
-  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/17/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
 
   <nav id="page-nav">
     <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
@@ -987,7 +985,7 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
       <i class="fa-solid fa-angle-left"></i>
     </a>
     <div id="num-bar">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a>  
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a>  
     </div>
     <a id="next-btn" class="page-nav-btn " href="/page/2/">
       <i class="fa-solid fa-angle-right"></i>
