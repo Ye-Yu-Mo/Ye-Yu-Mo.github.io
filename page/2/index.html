@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">29</div>
+                <div class="category-count">30</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
-          <div class="archive-count">15 </div>
+          <div class="archive-count">16 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/07 ">
@@ -298,6 +298,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/08/31/C-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%89%B9%E6%AE%8A%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="C++单例模式与特殊类的设计" >
+            <div class="recent-link-text">
+              C++单例模式与特殊类的设计
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/08/28/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8E%A7%E5%88%B6/" title="Linux多线程——线程的概念和控制" >
             <div class="recent-link-text">
               Linux多线程——线程的概念和控制
@@ -322,12 +328,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" title="Linux进程间通信——硬件实现临界区互斥的基本方法" >
-            <div class="recent-link-text">
-              Linux进程间通信——硬件实现临界区互斥的基本方法
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +338,88 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程间通信——SystemV内存共享" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/">Linux进程间通信——SystemV共享内存</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-18T09:23:13.000Z" itemprop="datePublished">2024-08-18</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            728 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            System V共享内存System V是一种进程间通信的标准，在这种标准之下，本地通信的方式一般由三种，内存共享、消息队列、信号量
+这里我们主要介绍共享内存
+创建内存共享
+这是内存共享的系统调用
+第一个参数是共享内存在内核中的标识，类似于文件标识符的地位
+第二个参数是创建共享内存的大小
+第三个参数有两个选项IPC_CREAT和IPC_EXCL
+如果只有第一个，则使用共享内存，不存在则创建后继续使用
+第二个不能单独使用，两个相或之后表示创建共享内存后使用，存在则出错返回
+第三种方法主要是为了确保所使用的共享一定是新鲜的
+创建成功会返回共享内存的标识符，失败返回-1，错误码表示错误原因
+共享内存存在内存的共享区中，可以有很多个，是被操作系统描述组织管理的
+对于第一个参数，key是需要确定唯一的，类似于手机号，你自己有，别人不能再有一模一样的，并且别人想要打给你也必须输入一模一样的
+我们可以使用ftok函数进行生成，只要两个参数相同，则能生成相同的key，类似于哈希函数
+
+需要注意的是，共享内存在进程退出时是不会主动释放的，需要用户手动释放，除非系统内核关闭
+释放共享内存命令行1ip...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程间通信——命名管道" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -858,82 +940,6 @@ execl这是里面最简单的函数，他的函数有两个，第一个是执行
     <a class="right-panel  non-pic  "
       
       href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程控制——进程等待" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/28/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AD%89%E5%BE%85/">Linux进程控制——进程等待</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-28T09:12:17.000Z" itemprop="datePublished">2024-07-28</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            935 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            进程等待进程等待的过程其实是父进程等待子进程死亡的过程
-进程等待的必要性如果子进程退出，父进程不进行处理，子进程会变成僵尸进程，有内存泄漏的风险
-僵尸进程只有父进程有权处理，其他指令对其都没有效果了
-父进程创建子进程是为了完成某项任务，当子进程结束后，父进程有必要了解任务完成的如何
-父进程需要对子进程进行回收
-进程等待的方法waitpid系统调用的返回值是pid_t，如果等待成功则返回进程pid，失败则返回-1
-这个函数有三个参数，第一个参数是pid_t pid，表示需要等待的进程id，输入-1表示等待任一子进程结束
-第二个参数是int* stat_loc，这是一个输出型参数，采用指针的方法获取子进程退出状态，如果我们不关心这个状态直接传入NULL即可
-第三个参数是int options，默认为0，代表阻塞等待，也有非阻塞等待的情况
-还有一个wait的系统调用，只有第二个参数，就相当于waitpid的默认使用情况
-12345678910111213141516171819202122#include&lt;sys/wait.h&gt;#include&lt;stdlib.h&gt...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/28/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AD%89%E5%BE%85/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
