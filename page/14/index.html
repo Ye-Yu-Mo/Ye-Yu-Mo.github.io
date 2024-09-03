@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">30</div>
+                <div class="category-count">31</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,8 +204,13 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          September 2024 
+          <div class="archive-count">1 </div>
+        </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
           August 2024 
@@ -295,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/03/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94C-%E5%AF%B9%E5%8E%9F%E7%94%9F%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/" title="Linux多线程——利用C++模板对pthread线程库封装" >
+            <div class="recent-link-text">
+              Linux多线程——利用C++模板对pthread线程库封装
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/08/31/C-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%89%B9%E6%AE%8A%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="C++单例模式与特殊类的设计" >
             <div class="recent-link-text">
@@ -322,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%A7%E7%94%9F/" title="Linux进程信号——信号的概念与产生" >
-            <div class="recent-link-text">
-              Linux进程信号——信号的概念与产生
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -338,6 +343,91 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-每日算法打卡：带分数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/04/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%B8%A6%E5%88%86%E6%95%B0/">每日算法打卡：带分数</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-04T02:51:53.000Z" itemprop="datePublished">2024-01-04</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%AA%E6%9E%9D/" rel="tag">剪枝</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            原题链接1209. 带分数
+题目难度：简单（我感觉挺难的）
+题目来源：第四届蓝桥杯省赛C++B&#x2F;C组,第四届蓝桥杯省赛JAVAA&#x2F;B组
+题目描述100 可以表示为带分数的形式：$100 &#x3D; 3 + \frac{69258}{714}$
+还可以表示为：$100 &#x3D; 82 + \frac{3546}{197}$
+注意特征：带分数中，数字 $1 \sim 9$ 分别出现且只出现一次（不包含 0）。
+类似这样的带分数，100 有 11 种表示法。
+输入格式一个正整数。
+输出格式输出输入数字用数码 $1∼9$ 不重复不遗漏地组成带分数表示的全部种数。
+数据范围$1 \le N &lt; 10^6$
+输入样例1：1100 
+
+输出样例1：111 
+
+输入样例2：1105 
+
+输出样例2：16 
+
+题目分析这个题目的理解是比较简单的，就是将一共数字分解成一个整数加一个分数的形式，这里可以形式化的理解为将数字n分解为$n &#x3D; a + \frac{b}{c}$的形式，需要注意的是b除c并不是整除，在a、b、c中需要出现数字1到9
+数据范围是到10的...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/04/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%B8%A6%E5%88%86%E6%95%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-每日算法打卡：递归实现组合型枚举" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -370,7 +460,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 词 
           </div>
         </div>
         
@@ -452,7 +542,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k words 
+            1.4k 词 
           </div>
         </div>
         
@@ -541,7 +631,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            627 words 
+            627 词 
           </div>
         </div>
         
@@ -624,7 +714,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            844 words 
+            844 词 
           </div>
         </div>
         
@@ -706,7 +796,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            853 words 
+            853 词 
           </div>
         </div>
         
@@ -790,7 +880,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            464 words 
+            464 词 
           </div>
         </div>
         
@@ -868,7 +958,7 @@ make是一条命令，而makefile是一个文件，我们需要搭配使用完�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k words 
+            1.2k 词 
           </div>
         </div>
         
@@ -900,84 +990,6 @@ make是一条命令，而makefile是一个文件，我们需要搭配使用完�
     <a class="right-panel  non-pic  "
       
       href="/2023/12/28/Linux%E4%B8%AD%E7%9A%84gccg-%E4%BD%BF%E7%94%A8/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Python可视化之Matplotlib" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/27/Python%E5%8F%AF%E8%A7%86%E5%8C%96%E4%B9%8BMatplotlib/">Python可视化之Matplotlib</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-27T11:00:03.000Z" itemprop="datePublished">2023-12-27</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/python/">python</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            718 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matplotlib/" rel="tag">matplotlib</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            Matplotlib与可视化分析我们之前对数据的处理与分析，其实最终还是要利用可视化工具进行更加直观的输出
-我们开业通过
-1pip install matplotlib
-
-命令来安装对应的模块
-简单图形的绘制我们可以通过matplotlib的子模块pyplot来进行平面图像的绘制，比较便捷，而且输出格式也更加多样化
-我们可以给他起个名字叫plt
-例如
-1234567891011121314import mathimport matplotlib.pyplot as pltnbSamples = 256xRange = (-math.pi, math.pi)x, y = [], []for n in range(nbSamples):    ratio = (n + 0.5) / nbSamples    x.append(xRange[0] + (xRange[1] - xRange[0]) * ratio)    y.append(math.sin(x[-1]))plt.plot(x, y)plt.show()
-
-结果如下
-
-这里最复杂的其实是对x和y函数的构造，实际上关于绘图...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/27/Python%E5%8F%AF%E8%A7%86%E5%8C%96%E4%B9%8BMatplotlib/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
