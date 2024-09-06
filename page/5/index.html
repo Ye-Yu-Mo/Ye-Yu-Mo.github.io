@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">32</div>
+                <div class="category-count">33</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">7 </div>
+          <div class="archive-count">8 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Linux多线程——互斥锁的封装与生产消费模型的实现" >
+            <div class="recent-link-text">
+              Linux多线程——互斥锁的封装与生产消费模型的实现
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——实用工具类的设计、实现、测试" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/04/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E4%BA%92%E6%96%A5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" title="Linux多线程——线程互斥与同步和其他概念" >
-            <div class="recent-link-text">
-              Linux多线程——线程互斥与同步和其他概念
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,78 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-sklearn之神经网络学习算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/14/sklearn%E4%B9%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/">sklearn之神经网络学习算法</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-14T10:48:39.000Z" itemprop="datePublished">2024-07-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">神经网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            近几年深度学习还是比较火的，尤其是在大语言模型之后，在本质上深度学习网络就是层数比较多的神经网络。sklearn并不支持深度学习，但是支持多层感知机（浅层神经网络）
+首先我们需要了解一下神经网络的相关概念，再学习如何使用sklearn构造简单的神经网络算法
+什么是神经网络学术上来讲：人工神经网络是一种由具有自适应的简单单元构成的并行互联的网络，它的组织结构能够模拟生物神经系统对真实世界所做出的交互反应
+我们知道，大脑通过突触传递信息来增强或者弱化反应，以达到学习的目的，当这样的链接足够多时，就会形成一个复杂的网络，用计算机的术语也称之为分布式特征网络（没有核心处理机制的网络）
+人工神经网络的强大之处在于他的学习能力非常强，在得到训练集之后，他能通过学习提取所观察事物的各个特征，将特征之间使用不同的网络节点（突触）链接，通过训练链接的网络权重（突触的强与弱），直到顶层输出得到正确的答案
+这里我们不再赘述生物神经之间传递信息的方式，根据赫布假说，在我们学习的前后，只是突触的强度发生了变化，这也是神将网络学习的生物学基础，才有了人工神经网络
+我们知道，人工神经网络性能的好坏，高度依赖于...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/14/sklearn%E4%B9%8B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程——子进程详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +447,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.9k 词 
+            1.9k words 
           </div>
         </div>
         
@@ -453,7 +525,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            967 词 
+            967 words 
           </div>
         </div>
         
@@ -532,7 +604,7 @@ PCB上一节内容中，我们说到，管理是管理的数据，需要先描�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 词 
+            1.2k words 
           </div>
         </div>
         
@@ -610,7 +682,7 @@ PCB上一节内容中，我们说到，管理是管理的数据，需要先描�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -684,7 +756,7 @@ RAII思想RAII思想说白了就是一种利用对象的声明周期来控制程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            917 词 
+            917 words 
           </div>
         </div>
         
@@ -756,7 +828,7 @@ regression的意思是回归，但其实这个算法是一种分类算法
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            1.1k words 
           </div>
         </div>
         
@@ -830,7 +902,7 @@ try：这个是用于执行可能会出错的代码，在代码中出错的语�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.5k 词 
+            2.5k words 
           </div>
         </div>
         
@@ -862,79 +934,6 @@ try：这个是用于执行可能会出错的代码，在代码中出错的语�
     <a class="right-panel  non-pic  "
       
       href="/2024/05/16/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%89%EF%BC%89/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-C-11特性（二）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/14/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">C++11特性（二）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-14T10:53:03.000Z" itemprop="datePublished">2024-05-14</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            右值引用和移动语义左值引用和右值引用所谓的引用就是给变量起别名，那么左值引用和右值引用的区别其实就在于左值和右值
-左值与左值引用左值表示的是一个数据的表达式，比如说变量的名字，或者是解引用的指针，我们可以获取左值的地址，并且可以对左值赋值，左值可以出现在赋值符号的左边，而右值不行
-const的左值不能赋值但是可以取地址，左值引用就是给左值取引用，左值引用依然是左值
-例如
-1234567891011121314int main()&#123;    // 左值    int a = 1;    int* pa = &amp;a;    const int b = 2;        // 左值引用    int&amp; ra = a;    int*&amp; rpa = pa;    const int&amp; b = b;    int&amp; rpaval = *pa;    return 0;&#125;
-
-这些用法是我们可以容易理解的
-右值与右值引用右值的本质上也是数据的表达式，但是与左值有不同，例如字面常量，表达式的返回值，函数的返回值（非左值引用返回），右值可以...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/14/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">32</div>
+                <div class="category-count">33</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">7 </div>
+          <div class="archive-count">8 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Linux多线程——互斥锁的封装与生产消费模型的实现" >
+            <div class="recent-link-text">
+              Linux多线程——互斥锁的封装与生产消费模型的实现
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——实用工具类的设计、实现、测试" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/04/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E4%BA%92%E6%96%A5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" title="Linux多线程——线程互斥与同步和其他概念" >
-            <div class="recent-link-text">
-              Linux多线程——线程互斥与同步和其他概念
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,79 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-C-单例模式与特殊类的设计" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/31/C-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%89%B9%E6%AE%8A%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1/">C++单例模式与特殊类的设计</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-31T08:42:33.000Z" itemprop="datePublished">2024-08-31</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            设计模式我们以前学的面向过程、面向对象，还有封装、继承、多态
+这些就像是武功里面的内功，练到了会用了就是会，而不会想学也都是从0到1，一步步学习练习
+而设计模式就像是武功里的外功，属于是学会了，但是要怎么样才能把这个功力的作用最大化，在哪些条件下用什么样的内功能破解，研究的是这个问题
+例如，我想设计一个只能在栈或堆上实例化的类应该怎么做，我想设计一个不能被拷贝或继承的类应该怎么做，这些就是外功，是有固定章法的
+但是在C++中，设计模式关注的内容没有那么多那么全，我们暂时只了解单例模式即可
+特殊类的设计不能被拷贝的类在C++11中，引入了delete关键字，可以直接禁用拷贝构造和赋值重载
+在C++98中，虽然没有这个关键字，但是我们可以直接把类的拷贝构造和赋值重载设置为私有即可
+12345678910111213141516171819// C++11class A &#123;public:	A(int x = 1) :num(x) &#123;&#125;;、	A(const A&amp; a) = delete;	A&amp; operator=(const A&amp; a...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/31/C-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%89%B9%E6%AE%8A%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux多线程——线程的概念和控制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +448,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k 词 
+            1.4k words 
           </div>
         </div>
         
@@ -453,7 +526,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -538,7 +611,7 @@ SIG_IGN宏代表收到这个信号后，进行忽略这个信号
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k 词 
+            1.7k words 
           </div>
         </div>
         
@@ -616,7 +689,7 @@ wait操作和P操作是申请操作，原理可以这样表示
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            1.1k words 
           </div>
         </div>
         
@@ -695,7 +768,7 @@ ctrl + c其实就对应着2号信号
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            748 词 
+            748 words 
           </div>
         </div>
         
@@ -773,7 +846,7 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k 词 
+            1.7k words 
           </div>
         </div>
         
@@ -851,7 +924,7 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -889,88 +962,6 @@ TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操�
     <a class="right-panel  non-pic  "
       
       href="/2024/08/20/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程间通信——SystemV内存共享" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/">Linux进程间通信——SystemV共享内存</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-18T09:23:13.000Z" itemprop="datePublished">2024-08-18</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            728 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            System V共享内存System V是一种进程间通信的标准，在这种标准之下，本地通信的方式一般由三种，内存共享、消息队列、信号量
-这里我们主要介绍共享内存
-创建内存共享
-这是内存共享的系统调用
-第一个参数是共享内存在内核中的标识，类似于文件标识符的地位
-第二个参数是创建共享内存的大小
-第三个参数有两个选项IPC_CREAT和IPC_EXCL
-如果只有第一个，则使用共享内存，不存在则创建后继续使用
-第二个不能单独使用，两个相或之后表示创建共享内存后使用，存在则出错返回
-第三种方法主要是为了确保所使用的共享一定是新鲜的
-创建成功会返回共享内存的标识符，失败返回-1，错误码表示错误原因
-共享内存存在内存的共享区中，可以有很多个，是被操作系统描述组织管理的
-对于第一个参数，key是需要确定唯一的，类似于手机号，你自己有，别人不能再有一模一样的，并且别人想要打给你也必须输入一模一样的
-我们可以使用ftok函数进行生成，只要两个参数相同，则能生成相同的key，类似于哈希函数
-
-需要注意的是，共享内存在进程退出时是不会主动释放的，需要用户手动释放，除非系统内核关闭
-释放共享内存命令行1ip...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/18/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94SystemV%E5%86%85%E5%AD%98%E5%85%B1%E4%BA%AB/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
