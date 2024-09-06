@@ -28,10 +28,11 @@
 <meta property="og:description" content="设计模式的六大原则设计类的六大原则 单一职责原则 就是说每一个类只做一件事情，职责划分清晰 两个不一样的功能就不能放在同一个类中，一个类中应当是一组相关性很高的函数、数据   开闭原则 对扩展开放，只添加新内容，对修改封闭，不修改旧内容   里氏替换原则 简单说就是父类能够出现完成的任务，子类也应当能够出现完成 在继承类的时候，需要重写父类中的所有方法，尤其需要注意父类中的protected方法，">
 <meta property="og:locale" content="en_UK">
 <meta property="article:published_time" content="2024-09-05T04:51:31.000Z">
-<meta property="article:modified_time" content="2024-09-05T10:03:11.250Z">
+<meta property="article:modified_time" content="2024-09-06T01:17:23.692Z">
 <meta property="article:author" content="许磊">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
   
   
@@ -192,7 +193,7 @@
         
             <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
                 项目
-                <div class="category-count">10</div>
+                <div class="category-count">12</div>
             </a>
         
             <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
@@ -213,7 +214,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">5 </div>
+          <div class="archive-count">7 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -307,6 +308,18 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——实用工具类的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——实用工具类的设计、实现、测试
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/" title="项目日志——框架模块设计" >
+            <div class="recent-link-text">
+              项目日志——框架模块设计
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/05/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%A1%A5%E5%85%85%EF%BC%882%EF%BC%89/" title="项目日志——相关技术补充（2）" >
             <div class="recent-link-text">
               项目日志——相关技术补充（2）
@@ -322,18 +335,6 @@
           <a class="recent-link" href="/2024/09/04/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E4%BA%92%E6%96%A5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" title="Linux多线程——线程互斥与同步和其他概念" >
             <div class="recent-link-text">
               Linux多线程——线程互斥与同步和其他概念
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/04/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/" title="项目日志——日志系统项目介绍" >
-            <div class="recent-link-text">
-              项目日志——日志系统项目介绍
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/03/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94C-%E5%AF%B9%E5%8E%9F%E7%94%9F%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/" title="Linux多线程——利用C++模板对pthread线程库封装" >
-            <div class="recent-link-text">
-              Linux多线程——利用C++模板对pthread线程库封装
             </div>
           </a>
         
@@ -384,7 +385,7 @@
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
@@ -477,10 +478,15 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left  disabled "
+  <a class="article-nav-btn left "
+    
+      href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/"
+      title="项目日志——框架模块设计"
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
+      
+        项目日志——框架模块设计
         
     </p>
   </a>
