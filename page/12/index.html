@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">33</div>
+                <div class="category-count">34</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">11 </div>
+          <div class="archive-count">12 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
+            <div class="recent-link-text">
+              Linux多线程——POSIX信号量与环形队列版本之生产消费模型
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志输出格式化模块的设计、实现、测试" >
             <div class="recent-link-text">
               项目日志——日志输出格式化模块的设计、实现、测试
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——实用工具类的设计、实现、测试" >
-            <div class="recent-link-text">
-              项目日志——实用工具类的设计、实现、测试
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,85 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-每日算法打卡：日期问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%97%A5%E6%9C%9F%E9%97%AE%E9%A2%98/">每日算法打卡：日期问题</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-23T07:57:28.000Z" itemprop="datePublished">2024-01-23</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            565 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            原题链接1229. 日期问题
+题目难度：简单
+题目来源：第八届蓝桥杯省赛C++ B组,第八届蓝桥杯省赛Java B&#x2F;C组
+题目描述小明正在整理一批历史文献。这些历史文献中出现了很多日期。
+小明知道这些日期都在1960年1月1日至2059年12月31日。
+令小明头疼的是，这些日期采用的格式非常不统一，有采用年&#x2F;月&#x2F;日的，有采用月&#x2F;日&#x2F;年的，还有采用日&#x2F;月&#x2F;年的。
+更加麻烦的是，年份也都省略了前两位，使得文献上的一个日期，存在很多可能的日期与其对应。
+比如02&#x2F;03&#x2F;04，可能是2002年03月04日、2004年02月03日或2004年03月02日。
+给出一个文献上的日期，你能帮助小明判断有哪些可能的日期对其对应吗？
+输入格式一个日期，格式是”AA&#x2F;BB&#x2F;CC”。
+即每个’&#x2F;’隔开的部分由两个 0-9 之间的数字（不一定相同）组成。
+输出格式输出若干个不相同的日期，每个日期一行，格式是”yyyy-MM-dd”。
+多个日期按从早到晚排列。
+数据范围$0 \le A,B...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%97%A5%E6%9C%9F%E9%97%AE%E9%A2%98/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-MySQL之SQL与数据库简介" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -930,89 +1009,6 @@ $A_i &lt; B_j &lt; C_k$
     <a class="right-panel  non-pic  "
       
       href="/2024/01/17/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E7%89%B9%E5%88%AB%E6%95%B0%E7%9A%84%E5%92%8C/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-每日算法打卡：波动数列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/16/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%B3%A2%E5%8A%A8%E6%95%B0%E5%88%97/">每日算法打卡：波动数列</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-16T02:56:31.000Z" itemprop="datePublished">2024-01-16</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            857 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            原题链接1214. 波动数列
-题目难度：中等
-题目来源：第五届蓝桥杯省赛C++ A组,第五届蓝桥杯省赛Java A组
-题目描述观察这个数列：
-1 3 0 2 -1 1 -2 …
-这个数列中后一项总是比前一项增加2或者减少3，且每一项都为整数。
-栋栋对这种数列很好奇，他想知道长度为 n 和为 s 而且后一项总是比前一项增加 a 或者减少 b 的整数数列可能有多少种呢？
-输入格式共一行，包含四个整数 n,s,a,b，含义如前面所述。
-输出格式共一行，包含一个整数，表示满足条件的方案数。
-由于这个数很大，请输出方案数除以 100000007 的余数。
-数据范围$1 \le n \le 1000$,$-10^9 \le s \le 10^9$,$1 \le a,b \le 10^6$
-输入样例：14 10 2 3 
-
-输出样例：12 
-
-样例解释两个满足条件的数列分别是2 4 1 3和7 4 1 -2。
-题目分析这道题的意思很简单就是长度为 n 和为 s 而且后一项总是比前一项增加 a 或者减少 b 的整数数列可能有多少种
-我们可以从数学角度来看，第一项假设为$x$，第二项就为$x+d_...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/16/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%B3%A2%E5%8A%A8%E6%95%B0%E5%88%97/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

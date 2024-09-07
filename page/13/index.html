@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">33</div>
+                <div class="category-count">34</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">11 </div>
+          <div class="archive-count">12 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
+            <div class="recent-link-text">
+              Linux多线程——POSIX信号量与环形队列版本之生产消费模型
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志输出格式化模块的设计、实现、测试" >
             <div class="recent-link-text">
               项目日志——日志输出格式化模块的设计、实现、测试
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——实用工具类的设计、实现、测试" >
-            <div class="recent-link-text">
-              项目日志——实用工具类的设计、实现、测试
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,89 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-每日算法打卡：波动数列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/16/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%B3%A2%E5%8A%A8%E6%95%B0%E5%88%97/">每日算法打卡：波动数列</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-16T02:56:31.000Z" itemprop="datePublished">2024-01-16</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            857 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            原题链接1214. 波动数列
+题目难度：中等
+题目来源：第五届蓝桥杯省赛C++ A组,第五届蓝桥杯省赛Java A组
+题目描述观察这个数列：
+1 3 0 2 -1 1 -2 …
+这个数列中后一项总是比前一项增加2或者减少3，且每一项都为整数。
+栋栋对这种数列很好奇，他想知道长度为 n 和为 s 而且后一项总是比前一项增加 a 或者减少 b 的整数数列可能有多少种呢？
+输入格式共一行，包含四个整数 n,s,a,b，含义如前面所述。
+输出格式共一行，包含一个整数，表示满足条件的方案数。
+由于这个数很大，请输出方案数除以 100000007 的余数。
+数据范围$1 \le n \le 1000$,$-10^9 \le s \le 10^9$,$1 \le a,b \le 10^6$
+输入样例：14 10 2 3 
+
+输出样例：12 
+
+样例解释两个满足条件的数列分别是2 4 1 3和7 4 1 -2。
+题目分析这道题的意思很简单就是长度为 n 和为 s 而且后一项总是比前一项增加 a 或者减少 b 的整数数列可能有多少种
+我们可以从数学角度来看，第一项假设为$x$，第二项就为$x+d_...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/16/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%B3%A2%E5%8A%A8%E6%95%B0%E5%88%97/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-每日算法打卡：地宫取宝" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -911,88 +994,6 @@ Hello Kitty只能向东或向南走，不能向西或向北走。
     <a class="right-panel  non-pic  "
       
       href="/2024/01/12/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E4%B9%B0%E4%B8%8D%E5%88%B0%E7%9A%84%E6%95%B0%E7%9B%AE/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-每日算法打卡：机器人跳跃" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/12/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%B3%E8%B7%83/">每日算法打卡：机器人跳跃</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-12T06:17:38.000Z" itemprop="datePublished">2024-01-12</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            820 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%92%E6%8E%A8/" rel="tag">递推</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            原题链接730. 机器人跳跃问题
-题目难度：中等
-题目来源：笔试题
-题目描述机器人正在玩一个古老的基于 DOS 的游戏。
-游戏中有 N+1 座建筑——从 0 到 N 编号，从左到右排列。
-编号为 0 的建筑高度为 0 个单位，编号为 iii 的建筑高度为 $H(i)$ 个单位。
-起初，机器人在编号为 0 的建筑处。
-每一步，它跳到下一个（右边）建筑。
-假设机器人在第 k 个建筑，且它现在的能量值是 EEE，下一步它将跳到第 $k+1$ 个建筑。
-如果 $H(k+1)&gt;E$，那么机器人就失去 $H(k+1)-E$ 的能量值，否则它将得到 $E-H(k+1)$ 的能量值。
-游戏目标是到达第 N 个建筑，在这个过程中能量值不能为负数个单位。
-现在的问题是机器人至少以多少能量值开始游戏，才可以保证成功完成游戏？
-输入格式第一行输入整数 N。
-第二行是 N 个空格分隔的整数，$H(1),H(2),…,H(N)$ 代表建筑物的高度。
-输出格式输出一个整数，表示所需的最少单位的初始能量值上取整后的结果。
-数据范围$1 \le N,H(i) \le 10^5,$
-输入样例1：1253 4 ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/12/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%B3%E8%B7%83/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
