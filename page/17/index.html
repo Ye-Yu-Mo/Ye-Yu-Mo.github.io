@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">34</div>
+                <div class="category-count">35</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
+            <div class="recent-link-text">
+              Linux多线程——日志任务的线程池实现
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Linux多线程——互斥锁的封装与生产消费模型的实现" >
-            <div class="recent-link-text">
-              Linux多线程——互斥锁的封装与生产消费模型的实现
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,83 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Python中json模块的使用与pyecharts绘图的基本介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/12/24/Python%E4%B8%ADjson%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8Epyecharts%E7%BB%98%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">Python中json模块的使用与pyecharts绘图的基本介绍</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-12-24T11:26:15.000Z" itemprop="datePublished">2023-12-24</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/python/">python</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pyecharts/" rel="tag">pyecharts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            json模块json实际上是一种数据存储格式，是一种轻量级的数据交互格式，可以把他理解成一个特定格式的字符串以文件的形式存储起来
+主要是在各个编程语言中交流的数据格式
+从形式上看，json数据格式类似于Python的字典，列表，元组等数据容器
+他长得像这样
+123&#123;&quot;name&quot;:&quot;summer&quot;,&quot;age&quot;:18&#125;[&#123;&quot;name&quot;:&quot;summer&quot;,&quot;age&quot;:18&#125;,&#123;&quot;name&quot;:&quot;morty&quot;,&quot;age&quot;:14&#125;]
+
+我们可以利用一些工具将这些数据的格式层次显示清楚一点
+在线JSON格式化工具
+例如
+
+当数据量巨大时，或者嵌套层数比较深的时候，这样的工具就比较方便了
+json与Python数据的相互转化1234567import json # 导入json模块data = [&#123;&quot;name&quot;:&quot;sum...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/12/24/Python%E4%B8%ADjson%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8Epyecharts%E7%BB%98%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Python中NumPy详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +452,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.8k words 
+            2.8k 词 
           </div>
         </div>
         
@@ -451,7 +528,7 @@ NumPy数组序列生成数组生成数组最简单的方法就是用array()方�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            671 words 
+            671 词 
           </div>
         </div>
         
@@ -535,7 +612,7 @@ NumPy数组序列生成数组生成数组最简单的方法就是用array()方�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            967 words 
+            967 词 
           </div>
         </div>
         
@@ -657,7 +734,7 @@ w表示...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            949 words 
+            949 词 
           </div>
         </div>
         
@@ -729,7 +806,7 @@ w表示...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            866 words 
+            866 词 
           </div>
         </div>
         
@@ -808,7 +885,7 @@ $child &#x3D; parent*2+1$
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.8k words 
+            2.8k 词 
           </div>
         </div>
         
@@ -887,7 +964,7 @@ $child &#x3D; parent*2+1$
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 词 
           </div>
         </div>
         
@@ -919,88 +996,6 @@ $child &#x3D; parent*2+1$
     <a class="right-panel  non-pic  "
       
       href="/2023/12/21/STL%E4%B8%ADstack%E4%B8%8Equeue%E8%AF%A6%E8%A7%A3/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Python模块、异常、包" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/12/21/Python%E6%A8%A1%E5%9D%97%E3%80%81%E5%BC%82%E5%B8%B8%E3%80%81%E5%8C%85/">Python模块</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2023-12-21T04:26:38.000Z" itemprop="datePublished">2023-12-21</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/python/">python</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            模块与包模块的导入可以说，Python的灵魂之一就是他丰富多样的库，这些就是他人已经写好的模块化的工具，使用者只需要调用，避免造轮子的工作，例如NumPy，Matplotlib等
-模块在本质上来说就是一个Python文件
-在使用之前，我们需要使用导入模块的语句
-1import 模块名 [as 别名] # 这里的方括号表示可选项
-
-当你想使用这个模块中的函数时，只需要
-1模块名.函数名
-
-即可
-我们为了之后对模块的各个函数调用方便，可以取一个简单的别名，例如NumPy-&gt;np，Pandas-&gt;pd等
-还有一种导入的方式是
-1from 模块 import *
-
-这样是直接导入了模块中的所有函数，当然也可以将*替换成你想要的对象或者函数
-这样在你使用他的时候就可以像Python自带的函数一样，不需要写模块名称了
-编写自己的模块对于C和C++抑或是Java等各式各样的语言，都有一个main函数作为所有程序的入口，但是对于Python来说，他对于一个Python文件就是从头到尾依次解释执行，没有统一的入口
-但是模块也是一个Python文件，我们在导入之后，并不希望导入的函数依次...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2023/12/21/Python%E6%A8%A1%E5%9D%97%E3%80%81%E5%BC%82%E5%B8%B8%E3%80%81%E5%8C%85/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

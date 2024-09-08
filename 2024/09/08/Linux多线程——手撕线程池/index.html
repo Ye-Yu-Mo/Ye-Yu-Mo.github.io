@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Linux多线程——日志任务的线程池实现 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="线程池线程池可以说是把之前所有的内容全部串联起来的一个项目 我们这里实现一个简单的版本，可以对其进行扩展 线程池也是一种生产者消费者模型 生产者布置任务而消费者处理任务 主要运用的场景是需要大量现场完成任务，任务完成时间较短，例如WEB服务器中的网页请求 线程池的使用非常简单 就是创建固定数量的线程，然后往任务列表里推送任务即可 线程池会自动分派线程去完成 我们将之前的所有内容可以串联起来做一个小">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux多线程——日志任务的线程池实现">
+<meta property="og:url" content="http://example.com/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="线程池线程池可以说是把之前所有的内容全部串联起来的一个项目 我们这里实现一个简单的版本，可以对其进行扩展 线程池也是一种生产者消费者模型 生产者布置任务而消费者处理任务 主要运用的场景是需要大量现场完成任务，任务完成时间较短，例如WEB服务器中的网页请求 线程池的使用非常简单 就是创建固定数量的线程，然后往任务列表里推送任务即可 线程池会自动分派线程去完成 我们将之前的所有内容可以串联起来做一个小">
+<meta property="og:locale" content="en_UK">
+<meta property="article:published_time" content="2024-09-08T01:10:13.000Z">
+<meta property="article:modified_time" content="2024-09-08T05:12:57.234Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="线程池">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://s2.loli.net/2024/08/16/z8xO9lbBnqUdt6Q.png" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分类</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">30</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">35</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          September 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">16 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
+            <div class="recent-link-text">
+              Linux多线程——日志任务的线程池实现
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
+            <div class="recent-link-text">
+              Linux多线程——POSIX信号量与环形队列版本之生产消费模型
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志输出格式化模块的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志输出格式化模块的设计、实现、测试
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E6%B6%88%E6%81%AF%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志消息类的设计、实现" >
+            <div class="recent-link-text">
+              项目日志——日志消息类的设计、实现
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E7%AD%89%E7%BA%A7%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志等级类的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志等级类的设计、实现、测试
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Linux多线程——手撕线程池" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Linux多线程——日志任务的线程池实现
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-08T01:10:13.000Z" itemprop="datePublished">2024-09-08</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            794 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="tag">线程池</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>线程池可以说是把之前所有的内容全部串联起来的一个项目</p>
+<p>我们这里实现一个简单的版本，可以对其进行扩展</p>
+<p>线程池也是一种生产者消费者模型</p>
+<p>生产者布置任务而消费者处理任务</p>
+<p>主要运用的场景是需要大量现场完成任务，任务完成时间较短，例如WEB服务器中的网页请求</p>
+<p>线程池的使用非常简单</p>
+<p>就是创建固定数量的线程，然后往任务列表里推送任务即可</p>
+<p>线程池会自动分派线程去完成</p>
+<p>我们将之前的所有内容可以串联起来做一个小型项目，非常建议阅读并自行实现，写代码才是学习编程的最好方式</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://ye-yu-mo.github.io/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/">互斥锁和信号量封装</a></li>
+<li><a target="_blank" rel="noopener" href="https://ye-yu-mo.github.io/2024/09/03/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94C-%E5%AF%B9%E5%8E%9F%E7%94%9F%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/">线程库封装</a></li>
+<li><a target="_blank" rel="noopener" href="https://ye-yu-mo.github.io/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/">日志系统</a></li>
+</ol>
+<h2 id="日志系统完善"><a href="#日志系统完善" class="headerlink" title="日志系统完善"></a>日志系统完善</h2><p>这里主要完善了日志系统写的方式，可以向屏幕输出、单个文件输出、按照等级划分的文件输出</p>
+<p>借用了隔壁日志系统的代码，那边也还没写完</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;level.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;format.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;util.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> std::string logdir = <span class="string">&quot;./log/&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">WriteStyle</span></span><br><span class="line">&#123;</span><br><span class="line">    Screen = <span class="number">114</span>, <span class="comment">// 屏幕打印</span></span><br><span class="line">    OneFile,      <span class="comment">// 全部打印到一个文件</span></span><br><span class="line">    ClassFile     <span class="comment">// 按等级分类打印</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">WriteToOneFile</span><span class="params">(<span class="type">const</span> std::string &amp;str, <span class="type">const</span> std::string &amp;logname = <span class="string">&quot;logALL&quot;</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Xulog::Util::File::<span class="built_in">createDirectory</span>(logdir);</span><br><span class="line">    std::string fullLogName = logdir + logname;</span><br><span class="line">    <span class="function">std::ofstream <span class="title">out</span><span class="params">(fullLogName, std::ios_base::app)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!out.<span class="built_in">is_open</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; fullLogName &lt;&lt; <span class="string">&quot;:文件打开失败&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    out.<span class="built_in">write</span>(str.<span class="built_in">c_str</span>(), str.<span class="built_in">size</span>());</span><br><span class="line">    out.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">WriteToClassFile</span><span class="params">(<span class="type">const</span> std::string &amp;str, Xulog::LogLevel::value val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string logname = <span class="string">&quot;log&quot;</span>;</span><br><span class="line">    logname += Xulog::LogLevel::<span class="built_in">toString</span>(val);</span><br><span class="line">    <span class="built_in">WriteToOneFile</span>(str, logname);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">WriteLog</span><span class="params">(Xulog::LogMsg msg, Xulog::Formatter fmt, WriteStyle style = Screen)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string str = fmt.<span class="built_in">Format</span>(msg);</span><br><span class="line">    <span class="keyword">switch</span> (style)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> Screen:</span><br><span class="line">        std::cout &lt;&lt; str;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> OneFile:</span><br><span class="line">        <span class="built_in">WriteToOneFile</span>(str);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> ClassFile:</span><br><span class="line">        <span class="built_in">WriteToClassFile</span>(str, msg._level);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程池的实现"><a href="#线程池的实现" class="headerlink" title="线程池的实现"></a>线程池的实现</h2><h3 id="线程数据"><a href="#线程数据" class="headerlink" title="线程数据"></a>线程数据</h3><p>定义一个ThreadData，用于获取当前线程的信息，可以添加别的信息，例如创建时间，运行时间等</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ThreadData</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ThreadData</span>(<span class="type">const</span> std::string &amp;name)</span><br><span class="line">        : <span class="built_in">threadname</span>(name)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">ThreadData</span>() &#123;&#125;</span><br><span class="line">    std::string threadname;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程池的实现-1"><a href="#线程池的实现-1" class="headerlink" title="线程池的实现"></a>线程池的实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Thread.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;LockGuard.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;write.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">int</span> THREAD_NUM = <span class="number">5</span>;</span><br><span class="line">Xulog::Formatter fmt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ThreadData</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ThreadData</span>(<span class="type">const</span> std::string &amp;name)</span><br><span class="line">        : <span class="built_in">threadname</span>(name)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">ThreadData</span>() &#123;&#125;</span><br><span class="line">    std::string threadname;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ThreadPool</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ThreadPool</span>(<span class="type">int</span> thread_num = THREAD_NUM)</span><br><span class="line">        : _thread_num(thread_num)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">pthread_mutex_init</span>(&amp;_mutex, <span class="literal">nullptr</span>);</span><br><span class="line">        <span class="built_in">pthread_cond_init</span>(&amp;_cond, <span class="literal">nullptr</span>);</span><br><span class="line">        <span class="comment">// 构建线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; _thread_num; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            std::string threadname = <span class="string">&quot;thread-&quot;</span>;</span><br><span class="line">            threadname += std::<span class="built_in">to_string</span>(i + <span class="number">1</span>);</span><br><span class="line">            <span class="function">ThreadData <span class="title">td</span><span class="params">(threadname)</span></span>;</span><br><span class="line">            _threads.<span class="built_in">emplace_back</span>(threadname, std::<span class="built_in">bind</span>(&amp;ThreadPool::ThreadRun, <span class="keyword">this</span>, std::placeholders::_1), td);</span><br><span class="line">            <span class="function">Xulog::LogMsg <span class="title">msg</span><span class="params">(Xulog::LogLevel::value::DEBUG, <span class="number">0</span>, <span class="string">&quot;default&quot;</span>, td.threadname.c_str(), <span class="string">&quot;线程已经启动&quot;</span>)</span></span>;</span><br><span class="line">            <span class="built_in">WriteLog</span>(msg, fmt);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">ThreadRun</span><span class="params">(ThreadData &amp;td)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 取到任务</span></span><br><span class="line">            T task;</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="function">LockGuard <span class="title">lockguard</span><span class="params">(&amp;_mutex)</span></span>;</span><br><span class="line">                <span class="keyword">while</span> (_task_que.<span class="built_in">empty</span>())</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">ThreadWait</span>(td);</span><br><span class="line">                &#125;</span><br><span class="line">                task = _task_que.<span class="built_in">front</span>();</span><br><span class="line">                _task_que.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 处理任务</span></span><br><span class="line">            <span class="built_in">task</span>();</span><br><span class="line">            <span class="function">Xulog::LogMsg <span class="title">msg</span><span class="params">(Xulog::LogLevel::value::DEBUG, <span class="number">0</span>, <span class="string">&quot;default&quot;</span>, td.threadname.c_str(), <span class="string">&quot;任务已经完成,结果是:&quot;</span> + task.PrintResult())</span></span>;</span><br><span class="line">            <span class="built_in">WriteLog</span>(msg, fmt);</span><br><span class="line">            <span class="built_in">sleep</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">ThreadWait</span><span class="params">(ThreadData &amp;td)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">Xulog::LogMsg <span class="title">msg</span><span class="params">(Xulog::LogLevel::value::INFO, <span class="number">0</span>, <span class="string">&quot;default&quot;</span>, <span class="string">&quot;root&quot;</span>, td.threadname + <span class="string">&quot;休眠了&quot;</span>)</span></span>;</span><br><span class="line">        <span class="built_in">WriteLog</span>(msg, fmt);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">pthread_cond_wait</span>(&amp;_cond, &amp;_mutex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">ThreadWeakUp</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">pthread_cond_signal</span>(&amp;_cond);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 启动线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;thread : _threads)</span><br><span class="line">        &#123;</span><br><span class="line">            thread.<span class="built_in">Start</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Push</span><span class="params">(<span class="type">const</span> T &amp;in)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">Xulog::LogMsg <span class="title">msg</span><span class="params">(Xulog::LogLevel::value::DEBUG, <span class="number">0</span>, <span class="string">&quot;default&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;生成了一个任务,任务是:&quot;</span> + in.PrintTask())</span></span>;</span><br><span class="line">        <span class="built_in">WriteLog</span>(msg, fmt);</span><br><span class="line"></span><br><span class="line">        <span class="function">LockGuard <span class="title">lockguard</span><span class="params">(&amp;_mutex)</span></span>;</span><br><span class="line">        _task_que.<span class="built_in">push</span>(in);</span><br><span class="line">        <span class="built_in">ThreadWeakUp</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Wait</span><span class="params">()</span> <span class="comment">// 调试方法</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;thread : _threads)</span><br><span class="line">        &#123;</span><br><span class="line">            thread.<span class="built_in">Join</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">ThreadPool</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">pthread_mutex_destroy</span>(&amp;_mutex);</span><br><span class="line">        <span class="built_in">pthread_cond_destroy</span>(&amp;_cond);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::queue&lt;T&gt; _task_que;</span><br><span class="line">    std::vector&lt;Thread&lt;ThreadData&gt;&gt; _threads;</span><br><span class="line">    <span class="type">int</span> _thread_num;</span><br><span class="line">    <span class="type">pthread_mutex_t</span> _mutex;</span><br><span class="line">    <span class="type">pthread_cond_t</span> _cond;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><p><a target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo/LearnRep/tree/main/CppCode/5.%E7%BA%BF%E7%A8%8B%E6%B1%A0%2B%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F">线程池+日志系统(github.com)</a></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/"
+      title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型"
+     >
+
+    <p class="title-text">
+      
+        Linux多线程——POSIX信号量与环形队列版本之生产消费模型
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

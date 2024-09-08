@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">34</div>
+                <div class="category-count">35</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
+            <div class="recent-link-text">
+              Linux多线程——日志任务的线程池实现
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Linux多线程——互斥锁的封装与生产消费模型的实现" >
-            <div class="recent-link-text">
-              Linux多线程——互斥锁的封装与生产消费模型的实现
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,104 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-项目日志——相关技术补充（2）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/05/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%A1%A5%E5%85%85%EF%BC%882%EF%BC%89/">项目日志——相关技术补充（2）</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-05T04:51:31.000Z" itemprop="datePublished">2024-09-05</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.1k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            设计模式的六大原则设计类的六大原则
+单一职责原则
+就是说每一个类只做一件事情，职责划分清晰
+两个不一样的功能就不能放在同一个类中，一个类中应当是一组相关性很高的函数、数据
+
+
+开闭原则
+对扩展开放，只添加新内容，对修改封闭，不修改旧内容
+
+
+里氏替换原则
+简单说就是父类能够出现完成的任务，子类也应当能够出现完成
+在继承类的时候，需要重写父类中的所有方法，尤其需要注意父类中的protected方法，子类尽量不要暴露自己的public方法给外界调用
+
+
+依赖倒置原则
+就是说高层模块不应该依赖底层模块，而应该依赖他原本的抽象类
+相同层模块之间的依赖应当通过接口来完成
+
+
+迪米特法则
+尽量减少对象之间的交互，来降低类之间的耦合度
+
+
+接口隔离原则
+不要对外部暴露没有实际意义的接口，并且接口应当精简、单一
+
+
+
+四种设计模式及其实现设计模式我们已经在之前有介绍过了，这里我们介绍并实现具体的四种设计模式
+单例模式一个类只能创建一个对象
+在整个系统中只有一个实例，并且提供一个访问它的全局访问点，这个实例被所有程序模块共享
+饿汉模式程序启动的时候就会创建实例对象，因为单例对象已经确定了，因此比较...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/05/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%A1%A5%E5%85%85%EF%BC%882%EF%BC%89/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-项目日志——相关技术补充（1）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +473,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            655 words 
+            655 词 
           </div>
         </div>
         
@@ -449,7 +547,7 @@ C语言1234567891011121314151617181920#include &lt;cstdarg&gt;void LOG2(int cnt,
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 词 
           </div>
         </div>
         
@@ -533,7 +631,7 @@ int pthread_mutex_init(pthread_mutex_t* restrict mutex, const pthread_mutexattr_
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            574 words 
+            574 词 
           </div>
         </div>
         
@@ -633,7 +731,7 @@ C++11多线程、智能指针、右值引用
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1k words 
+            1k 词 
           </div>
         </div>
         
@@ -704,7 +802,7 @@ void*使用模板解决，函数指针使用包装器解决
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 词 
           </div>
         </div>
         
@@ -777,7 +875,7 @@ void*使用模板解决，函数指针使用包装器解决
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k words 
+            1.4k 词 
           </div>
         </div>
         
@@ -855,7 +953,7 @@ void*使用模板解决，函数指针使用包装器解决
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 词 
           </div>
         </div>
         
@@ -896,84 +994,6 @@ SIG_IGN宏代表收到这个信号后，进行忽略这个信号
     <a class="right-panel  non-pic  "
       
       href="/2024/08/27/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BF%9D%E5%AD%98%E3%80%81%E5%A4%84%E7%90%86%E3%80%81%E6%8D%95%E6%8D%89/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程间通信——互斥锁与信号量详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/26/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%AF%A6%E8%A7%A3/">Linux进程间通信——互斥锁与信号量详解</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-26T06:22:08.000Z" itemprop="datePublished">2024-08-26</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.7k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            互斥锁现实中的锁有两种状态，打开和关闭，分别对应这资源可以被使用，和不可以被使用，我们可以通过使用钥匙对锁的状态进行改变
-那么解决临界区的最简单的工具其实就是锁（mutex lock），我们称之为互斥锁
-当一个进程进入临界区的时候，调用acquire函数，进行上锁，相当于不让别人再访问资源
-退出临界区的时候调用release函数，来打开锁，可以让别人访问资源
-一个锁只能上锁一次，因此在互斥锁中也有一个bool变量available，表示锁是否可以被上锁，可以被上锁时acquire函数就可以调用成功
-这两个函数的执行必须是原子的，不允许被中断，因此通常都是硬件实现的
-这种互斥锁也称之为自旋锁，主要问题是忙等待，也就是必须循环检查available是否可用
-这种互斥锁可以用来解决同步问题
-信号量我们之前简单了解过信号量，本质上其实就是描述资源的数量
-可以用来解决互斥和同步的问题，他只能被wait和signal原语访问，也称为PV操作，分别对应着申请和释放资源两个操作
-整形信号量这种就是最基础的用法，描述资源的数目
-wait操作和P操作是申请操作，原理可以这样表示
-12345void ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/26/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%AF%A6%E8%A7%A3/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

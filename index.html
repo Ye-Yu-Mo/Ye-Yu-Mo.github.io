@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">34</div>
+                <div class="category-count">35</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
+            <div class="recent-link-text">
+              Linux多线程——日志任务的线程池实现
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Linux多线程——互斥锁的封装与生产消费模型的实现" >
-            <div class="recent-link-text">
-              Linux多线程——互斥锁的封装与生产消费模型的实现
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,88 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux多线程——手撕线程池" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Linux多线程——日志任务的线程池实现</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-08T01:10:13.000Z" itemprop="datePublished">2024-09-08</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            794 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="tag">线程池</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            线程池线程池可以说是把之前所有的内容全部串联起来的一个项目
+我们这里实现一个简单的版本，可以对其进行扩展
+线程池也是一种生产者消费者模型
+生产者布置任务而消费者处理任务
+主要运用的场景是需要大量现场完成任务，任务完成时间较短，例如WEB服务器中的网页请求
+线程池的使用非常简单
+就是创建固定数量的线程，然后往任务列表里推送任务即可
+线程池会自动分派线程去完成
+我们将之前的所有内容可以串联起来做一个小型项目，非常建议阅读并自行实现，写代码才是学习编程的最好方式
+
+互斥锁和信号量封装
+线程库封装
+日志系统
+
+日志系统完善这里主要完善了日志系统写的方式，可以向屏幕输出、单个文件输出、按照等级划分的文件输出
+借用了隔壁日志系统的代码，那边也还没写完
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#pragma once#include &quot;level.hpp&quot;#include &quot;format.hpp&quot;#includ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux多线程——Posix信号量与环形队列版本之生产消费模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +457,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            444 words 
+            444 词 
           </div>
         </div>
         
@@ -458,7 +540,7 @@ POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.5k words 
+            1.5k 词 
           </div>
         </div>
         
@@ -532,7 +614,7 @@ pattern成员
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            256 words 
+            256 词 
           </div>
         </div>
         
@@ -609,7 +691,7 @@ pattern成员
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            335 words 
+            335 词 
           </div>
         </div>
         
@@ -688,7 +770,7 @@ OFF 关闭所有日志的输出
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            961 words 
+            961 词 
           </div>
         </div>
         
@@ -763,7 +845,7 @@ OFF 关闭所有日志的输出
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            308 words 
+            308 词 
           </div>
         </div>
         
@@ -836,7 +918,7 @@ OFF 关闭所有日志的输出
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            461 words 
+            461 词 
           </div>
         </div>
         
@@ -892,104 +974,6 @@ FATAL：致命，代码异常
     <a class="right-panel  non-pic  "
       
       href="/2024/09/06/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-项目日志——相关技术补充（2）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/05/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%A1%A5%E5%85%85%EF%BC%882%EF%BC%89/">项目日志——相关技术补充（2）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-05T04:51:31.000Z" itemprop="datePublished">2024-09-05</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.1k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            设计模式的六大原则设计类的六大原则
-单一职责原则
-就是说每一个类只做一件事情，职责划分清晰
-两个不一样的功能就不能放在同一个类中，一个类中应当是一组相关性很高的函数、数据
-
-
-开闭原则
-对扩展开放，只添加新内容，对修改封闭，不修改旧内容
-
-
-里氏替换原则
-简单说就是父类能够出现完成的任务，子类也应当能够出现完成
-在继承类的时候，需要重写父类中的所有方法，尤其需要注意父类中的protected方法，子类尽量不要暴露自己的public方法给外界调用
-
-
-依赖倒置原则
-就是说高层模块不应该依赖底层模块，而应该依赖他原本的抽象类
-相同层模块之间的依赖应当通过接口来完成
-
-
-迪米特法则
-尽量减少对象之间的交互，来降低类之间的耦合度
-
-
-接口隔离原则
-不要对外部暴露没有实际意义的接口，并且接口应当精简、单一
-
-
-
-四种设计模式及其实现设计模式我们已经在之前有介绍过了，这里我们介绍并实现具体的四种设计模式
-单例模式一个类只能创建一个对象
-在整个系统中只有一个实例，并且提供一个访问它的全局访问点，这个实例被所有程序模块共享
-饿汉模式程序启动的时候就会创建实例对象，因为单例对象已经确定了，因此比较...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/05/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%A1%A5%E5%85%85%EF%BC%882%EF%BC%89/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

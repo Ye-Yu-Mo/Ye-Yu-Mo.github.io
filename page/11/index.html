@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">34</div>
+                <div class="category-count">35</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
+            <div class="recent-link-text">
+              Linux多线程——日志任务的线程池实现
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Linux多线程——互斥锁的封装与生产消费模型的实现" >
-            <div class="recent-link-text">
-              Linux多线程——互斥锁的封装与生产消费模型的实现
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,90 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-每日算法打卡：动态求连续区间和" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/31/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%8A%A8%E6%80%81%E6%B1%82%E8%BF%9E%E7%BB%AD%E5%8C%BA%E9%97%B4%E5%92%8C/">每日算法打卡：动态求连续区间和</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-31T06:59:02.000Z" itemprop="datePublished">2024-01-31</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            709 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            原题链接1264. 动态求连续区间和
+题目难度：简单
+题目来源：《信息学奥赛一本通》
+题目描述给定 n 个数组成的一个数列，规定有两种操作，一是修改某个元素，二是求子数列 [a,b] 的连续和。
+输入格式第一行包含两个整数 n 和 m，分别表示数的个数和操作次数。
+第二行包含 n 个整数，表示完整数列。
+接下来 m 行，每行包含三个整数 k,a,b （k &#x3D; 0，表示求子数列[a,b]的和；k&#x3D;1，表示第 a 个数加 b）。
+数列从 1 开始计数。
+输出格式输出若干行数字，表示 k &#x3D; 0 时，对应的子数列 [a,b] 的连续和。
+数据范围1≤n≤100000,1≤m≤100000，1≤a≤b≤n,数据保证在任何时候，数列中所有元素之和均在 int 范围内。
+输入样例：123456710 51 2 3 4 5 6 7 8 9 101 1 50 1 30 4 81 7 50 4 8 
+
+输出样例：123113035 
+
+题目分析这道题的意思就是单点操作，区间查询
+对于树状数组的来说是和我们之前讲解的内容相差无几
+算法基础之树状数组
+算法基础之线段树
+示...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/31/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%8A%A8%E6%80%81%E6%B1%82%E8%BF%9E%E7%BB%AD%E5%8C%BA%E9%97%B4%E5%92%8C/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-MySQL之约束" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +459,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 词 
           </div>
         </div>
         
@@ -481,7 +565,7 @@ foreign key(FK)
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            355 words 
+            355 词 
           </div>
         </div>
         
@@ -562,7 +646,7 @@ foreign key(FK)
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            559 words 
+            559 词 
           </div>
         </div>
         
@@ -637,7 +721,7 @@ foreign key(FK)
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            416 words 
+            416 词 
           </div>
         </div>
         
@@ -709,7 +793,7 @@ foreign key(FK)
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            711 words 
+            711 词 
           </div>
         </div>
         
@@ -792,7 +876,7 @@ foreign key(FK)
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k words 
+            1.2k 词 
           </div>
         </div>
         
@@ -897,7 +981,7 @@ alter database mydb1 character set utf8;
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            928 words 
+            928 词 
           </div>
         </div>
         
@@ -940,91 +1024,6 @@ h1:m1:s1 h4:m4:s4 (+2)...
     <a class="right-panel  non-pic  "
       
       href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E8%88%AA%E7%8F%AD%E6%97%B6%E9%97%B4/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-每日算法打卡：移动距离" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E7%A7%BB%E5%8A%A8%E8%B7%9D%E7%A6%BB/">每日算法打卡：移动距离</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-23T08:48:35.000Z" itemprop="datePublished">2024-01-23</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            497 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            原题链接1219. 移动距离
-题目难度：简单
-题目来源：第六届蓝桥杯省赛C++ B组,第六届蓝桥杯省赛Java A&#x2F;C组
-题目描述X星球居民小区的楼房全是一样的，并且按矩阵样式排列。
-其楼房的编号为 1,2,3…
-当排满一行时，从下一行相邻的楼往反方向排号。
-比如：当小区排号宽度为 6 时，开始情形如下：
-1231  2  3  4  5  612 11 10 9  8  713 14 15 ..... 
-
-我们的问题是：已知了两个楼号 m 和 n，需要求出它们之间的最短移动距离（不能斜线方向移动）。
-输入格式输入共一行，包含三个整数 w,m,n，w 为排号宽度，m,n 为待计算的楼号。
-输出格式输出一个整数，表示 m, n 两楼间最短移动距离。
-数据范围1≤w,m,n≤10000
-输入样例：16 8 2 
-
-输出样例：14 
-
-题目分析这道题目的意思非常简单，重在如何进行模拟，或者通过找规律也能做出来
-这道题目要求的距离实际上在数学中叫做曼哈顿距离，给定两个点的坐标可以用公式表示为$|x_1-x_2|+|y_1-y_2|$
-那么其实问题就变成了如何求这两个编号的坐标了...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E7%A7%BB%E5%8A%A8%E8%B7%9D%E7%A6%BB/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

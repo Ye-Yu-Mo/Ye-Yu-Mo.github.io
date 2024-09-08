@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">34</div>
+                <div class="category-count">35</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
+            <div class="recent-link-text">
+              Linux多线程——日志任务的线程池实现
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Linux多线程——互斥锁的封装与生产消费模型的实现" >
-            <div class="recent-link-text">
-              Linux多线程——互斥锁的封装与生产消费模型的实现
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,91 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程——环境变量详解与程序地址空间的认识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E7%9A%84%E8%AE%A4%E8%AF%86/">Linux进程——环境变量之二</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T12:24:46.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            895 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            环境变量查看环境变量在上一篇文章中我们只说了查看某个环境变量的值，那么如何查看所有的环境变量呢
+使用指令env即可
+例如
+
+这里我们也不需要全部记住，只需要记住一些比较常见的
+
+PWD这个环境变量就是给pwd指令的结果了
+HOME这里对应的就是cd ~命令了，找到家在哪里
+
+那其实在我们登录Xshell时，他所做的工作就是认证信息，将bash加载到内存，形成进程，根据用户名初始化环境变量，进入家目录
+这样我们其实就能理解为什么当我们直接改环境变量值的之后，直接重启Xshell就能恢复了，因为每一次都要重新加载初始化
+获取环境变量那么在C语言中是如何获取环境变量呢
+就是使用getenv()函数即可，返回值即为环境变量的值，参数是环境变量名称
+例如
+12char* ret = NULL;ret = getenv(&quot;PATH&quot;);
+
+main()的第三个参数我们之前说了main的前两个参数，表示命令行参数表
+1int main(int argc, char* argv[], char* env[])
+
+这里的第三个参数其实就是环境变量的指针数组，他指向的就是环境变量...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E7%9A%84%E8%AE%A4%E8%AF%86/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程——进程切换与环境变量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +460,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k words 
+            1.4k 词 
           </div>
         </div>
         
@@ -455,7 +540,7 @@ eip则会保存当前代码运行到了哪一行
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            956 words 
+            956 词 
           </div>
         </div>
         
@@ -531,7 +616,7 @@ eip则会保存当前代码运行到了哪一行
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 词 
           </div>
         </div>
         
@@ -609,7 +694,7 @@ k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.6k words 
+            1.6k 词 
           </div>
         </div>
         
@@ -684,7 +769,7 @@ k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 词 
           </div>
         </div>
         
@@ -756,7 +841,7 @@ k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.9k words 
+            1.9k 词 
           </div>
         </div>
         
@@ -834,7 +919,7 @@ k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            967 words 
+            967 词 
           </div>
         </div>
         
@@ -869,84 +954,6 @@ PCB上一节内容中，我们说到，管理是管理的数据，需要先描�
     <a class="right-panel  non-pic  "
       
       href="/2024/07/12/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-计算机体系结构——冯诺依曼系统与操作系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">计算机体系结构——冯诺依曼系统与操作系统</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-12T07:22:01.000Z" itemprop="datePublished">2024-07-12</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.2k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            在深入学习Linux进程等概念之前，我们对于计算机的体系结构还需要有一个基础的认识，这一部分在大多高校中复杂冗长，但十分严谨广泛适用
-我们在这里主要介绍的是感性的直观上对计算机工作原理系统调度的理解
-冯诺依曼体系结构现代计算机都是基于冯诺依曼体系结构的，也就是我们在计算机组成原理上学的那个东西
-
-当然现代计算机不以存储器为核心，而以运算器和控制器为核心，这些都是后话了，我们也不深入了解其中的原理，只分别介绍一下这些在计算机中代表什么
-输入设备主要有，键盘、鼠标、摄像头、磁盘、网卡等
-存储器，这里的存储器指的是内存而非磁盘
-中央处理器有，运算器和和控制器，其中也有一部分cache缓存
-输出设备主要有、显示器、磁盘、扬声器、网卡等
-内存体系用一张图就可以解释清楚
-
-由下到上是计算机的内存分级，因为不同存储器的处理数据速度不尽相同，而处理的速度越快，就导致成本越高，在总成本有限的情况下，使用这样的金字塔体系就可以保证有相当快的数据存取速度和相当大的存储空间了
-而整个计算机中最快的就是CPU了，为了不被磁盘拖后腿，我们只允许CPU和内存（主存）以上的存储器打交道，这样就能在保证速度的同时...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
