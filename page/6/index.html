@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -188,7 +188,7 @@
         
             <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
                 项目
-                <div class="category-count">16</div>
+                <div class="category-count">17</div>
             </a>
         
             <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
@@ -204,12 +204,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">14 </div>
+          <div class="archive-count">15 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +300,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/10/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块的设计、同步日志器实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志器模块的设计、同步日志器实现、测试
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/09/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%90%BD%E5%9C%B0%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志落地模块的设计、实现、测试" >
             <div class="recent-link-text">
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E6%B6%88%E6%81%AF%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志消息类的设计、实现" >
-            <div class="recent-link-text">
-              项目日志——日志消息类的设计、实现
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,84 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程——子进程详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/13/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E5%AD%90%E8%BF%9B%E7%A8%8B%E8%AF%A6%E8%A7%A3/">Linux进程——子进程详解</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-13T14:52:19.000Z" itemprop="datePublished">2024-07-13</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.9k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            在上一节中我们简单介绍了进程的概念，还有父进程和子进程
+这篇文章的主要内容是介绍如何使用fork函数创建子进程，fork函数的一些特点
+查看进程的另一种方式在上一节中主要使用ps命令列举进程条目，但我们知道，在Linux系统中，一切皆文件
+因此所谓的进程条目，本质上也是存着的一个动态文件proc，这里面存放着所有的进程信息
+因为这个文件是会随着进程的改变实时更新其中的内容，因此我们称之为动态文件
+我们可以使用ls /proc/查看所有进程文件，也可以在其后加上特定进程的pid，查看特定进程
+例如
+
+我们同样可以创建一个死循环，然后来使用这个命令来查看其中的内容
+
+在我们自行创建的进程当中存在着许多文件，这里有两个文件值得我们注意，一个是exe文件，另一个是cwd文件
+其中exe文件指的是可执行程序的位置，而cwd代表默认的当前文件，或者可以简单理解为当前的文件路径，就好比pwd命令查看当前路径，他就是从cwd文件获取的路径
+如何创建子进程众所周知Linux的底层是使用c语言实现的，因此所谓的创建进程本质上就是调用了一个c语言函数，也就是用代码创建进程，而我们用户使用代码创建进程称...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/13/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E5%AD%90%E8%BF%9B%E7%A8%8B%E8%AF%A6%E8%A7%A3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程——进程的概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +453,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            967 詞 
+            967 words 
           </div>
         </div>
         
@@ -454,7 +532,7 @@ PCB上一节内容中，我们说到，管理是管理的数据，需要先描�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 詞 
+            1.2k words 
           </div>
         </div>
         
@@ -532,7 +610,7 @@ PCB上一节内容中，我们说到，管理是管理的数据，需要先描�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 詞 
+            1.3k words 
           </div>
         </div>
         
@@ -606,7 +684,7 @@ RAII思想RAII思想说白了就是一种利用对象的声明周期来控制程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            917 詞 
+            917 words 
           </div>
         </div>
         
@@ -678,7 +756,7 @@ regression的意思是回归，但其实这个算法是一种分类算法
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k words 
           </div>
         </div>
         
@@ -752,7 +830,7 @@ try：这个是用于执行可能会出错的代码，在代码中出错的语�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.5k 詞 
+            2.5k words 
           </div>
         </div>
         
@@ -828,7 +906,7 @@ try：这个是用于执行可能会出错的代码，在代码中出错的语�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k words 
           </div>
         </div>
         
@@ -869,80 +947,6 @@ const的左值不能赋值但是可以取地址，左值引用就是给左值取
 
  
 
-   
-
-<article id="post-sklearn之k近邻算法——以鸢尾花分类为例" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/14/sklearn%E4%B9%8Bk%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E4%BB%A5%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB%E4%B8%BA%E4%BE%8B/">sklearn之k近邻算法——以鸢尾花分类为例</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-14T06:02:57.000Z" itemprop="datePublished">2024-05-14</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.3k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/" rel="tag">k近邻算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            k近邻算法k近邻算法是经典的监督学习算法，我们这里主要介绍k近邻算法的基本内容和如何应用
-算法原理k近邻算法的基本原理其实很简单
-首先k近邻算法是一个分类算法，在我们进行分类之前，需要先定义“距离”，或者我们可以形象的理解为样本点之间的相似程度
-训练集是已经准备好的，也已经完全分好了类别，接下来拿出每一个需要分类的测试点，找到训练集中和他最近的k个点，也就是最相似的k个点，如果这k个点都属于同一个类别，我们就有把握认为这个测试点也是这个类别的了
-这个过程完成其实算法也就结束了，更加形象的说法可能是投票，比如说这个人有多少分像自己，然后取出最高的k个得分，如果这k个得分是同一类，就说明这个人是这一类的
-k近邻算法是一种基于实例的学习，也是惰性学习的代表，没有显示的训练过程，因为我们一开始就没有对训练集做处理，而是直接使用，所以训练时间为0。与之对应的是急切学习，就是需要从训练集中建模
-其次这个过程实际上是属于少数付出多数的，那么k值的选取和距离的定义就显得尤为重要
-接下来我们会对这几个规则进行介绍
-k值的选取正如我们之前所说，k值的选取对分类的准确性有很大影响，当k比较小时，模型对...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/14/sklearn%E4%B9%8Bk%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E4%BB%A5%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB%E4%B8%BA%E4%BE%8B/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
 
   <nav id="page-nav">
     <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
@@ -950,7 +954,7 @@ k值的选取正如我们之前所说，k值的选取对分类的准确性有很
       <i class="fa-solid fa-angle-left"></i>
     </a>
     <div id="num-bar">
-      <a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a>  
+      <a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a>  
     </div>
     <a id="next-btn" class="page-nav-btn " href="/page/7/">
       <i class="fa-solid fa-angle-right"></i>
