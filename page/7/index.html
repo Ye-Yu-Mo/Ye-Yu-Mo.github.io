@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">35</div>
+                <div class="category-count">36</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">15 </div>
+          <div class="archive-count">16 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" title="Linux网络——从《计算机网络》到网络编程" >
+            <div class="recent-link-text">
+              Linux网络——从《计算机网络》到网络编程
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/10/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块的设计、同步日志器实现、测试" >
             <div class="recent-link-text">
               项目日志——日志器模块的设计、同步日志器实现、测试
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志输出格式化模块的设计、实现、测试" >
-            <div class="recent-link-text">
-              项目日志——日志输出格式化模块的设计、实现、测试
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,79 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-C-11特性（二）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/05/14/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">C++11特性（二）</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-05-14T10:53:03.000Z" itemprop="datePublished">2024-05-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            右值引用和移动语义左值引用和右值引用所谓的引用就是给变量起别名，那么左值引用和右值引用的区别其实就在于左值和右值
+左值与左值引用左值表示的是一个数据的表达式，比如说变量的名字，或者是解引用的指针，我们可以获取左值的地址，并且可以对左值赋值，左值可以出现在赋值符号的左边，而右值不行
+const的左值不能赋值但是可以取地址，左值引用就是给左值取引用，左值引用依然是左值
+例如
+1234567891011121314int main()&#123;    // 左值    int a = 1;    int* pa = &amp;a;    const int b = 2;        // 左值引用    int&amp; ra = a;    int*&amp; rpa = pa;    const int&amp; b = b;    int&amp; rpaval = *pa;    return 0;&#125;
+
+这些用法是我们可以容易理解的
+右值与右值引用右值的本质上也是数据的表达式，但是与左值有不同，例如字面常量，表达式的返回值，函数的返回值（非左值引用返回），右值可以...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/05/14/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%BA%8C%EF%BC%89/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-sklearn之k近邻算法——以鸢尾花分类为例" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -853,79 +926,6 @@ sklearn主打一个只做机器学习，不轻易支持新的算法，他的好�
     <a class="right-panel  non-pic  "
       
       href="/2024/05/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-哈希应用之布隆过滤器及其实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/02/%E5%93%88%E5%B8%8C%E5%BA%94%E7%94%A8%E4%B9%8B%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/">哈希应用之布隆过滤器及其实现</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-02T09:36:36.000Z" itemprop="datePublished">2024-05-02</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            841 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            布隆过滤器我们在上一篇中主要说的是位图，是用于判断整形是否存在的一种应用，但是他不好的地方就是只能判断整形了，如果是字符串的话就难再应用了
-在之前哈希表中，我们使用了一些哈希函数来将字符串转化成整形，再存入哈希表
-这里我们是否可以使用同样的方法呢
-其实我们讲，可以但是还不够，因为相似的字符串很容易就会产生哈希冲突，本质上来说还是因为字符串的数量太庞大，远远超出了整形能承受的范围，从而形成一种多对少的效果，产生了冲突
-那么对于这样的冲突，也不能直接存字符串，因为使用位图本身就是为了节省空间的
-这时候就有人想到了一个方法，既然一个关键字（哈希地址）容易产生冲突，那么我如果使用两种不同的哈希函数，每一个字符串对应两个哈希地址，只有当两个哈希地址都是1的时候，我们才认为该字符串是已经存在的
-但是这种存在依旧是“不可靠”的，在数据量特别巨大的时候，可能是别的字符串，恰好占用了这两个地址，此时就会误判，但是判断不存在的时候就是可靠的了，因为只要有一个是0，就说明这个字符串并不存在
-这也就是为什么我们称之为过滤器，简单说一种应用就是用户注册时不允许重复名称，当我们查询时，发现不存在，这时就不需...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/02/%E5%93%88%E5%B8%8C%E5%BA%94%E7%94%A8%E4%B9%8B%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

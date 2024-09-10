@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Linux网络——从《计算机网络》到网络编程 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="从《计算机网络》到网络编程科班的同学大多学过计算机网络，而非科班的同学也多多少少听说过一些 计算机网络体系十分繁杂且精妙，这三四十年来计算机网络技术不断进步，但是核心是TCP&#x2F;IP、UDP协议 从计算机到计算机网络我们说一个计算机中的进程可以处理一定的任务 当他想与另一个进程进行通信时，就需要IPC的各种方式 但无论是管道、共享内存都是利用内存作为中转 如果想让另一台计算机的进程也能与这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux网络——从《计算机网络》到网络编程">
+<meta property="og:url" content="http://example.com/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="从《计算机网络》到网络编程科班的同学大多学过计算机网络，而非科班的同学也多多少少听说过一些 计算机网络体系十分繁杂且精妙，这三四十年来计算机网络技术不断进步，但是核心是TCP&#x2F;IP、UDP协议 从计算机到计算机网络我们说一个计算机中的进程可以处理一定的任务 当他想与另一个进程进行通信时，就需要IPC的各种方式 但无论是管道、共享内存都是利用内存作为中转 如果想让另一台计算机的进程也能与这">
+<meta property="og:locale" content="en_UK">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/4c82c0eda2904ff912f80e9531065753.png">
+<meta property="og:image" content="https://i-blog.csdnimg.cn/blog_migrate/4c492fc61559a6baf2e9568dc4b96795.png">
+<meta property="article:published_time" content="2024-09-10T12:43:09.000Z">
+<meta property="article:modified_time" content="2024-09-10T13:55:25.962Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i-blog.csdnimg.cn/blog_migrate/4c82c0eda2904ff912f80e9531065753.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://s2.loli.net/2024/08/16/z8xO9lbBnqUdt6Q.png" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">30</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">36</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">17</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          September 2024 
+          <div class="archive-count">16 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">16 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Recent Posts</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" title="Linux网络——从《计算机网络》到网络编程" >
+            <div class="recent-link-text">
+              Linux网络——从《计算机网络》到网络编程
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/10/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块的设计、同步日志器实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志器模块的设计、同步日志器实现、测试
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/09/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%90%BD%E5%9C%B0%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志落地模块的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志落地模块的设计、实现、测试
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
+            <div class="recent-link-text">
+              Linux多线程——日志任务的线程池实现
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" title="Linux多线程——POSIX信号量与环形队列版本之生产消费模型" >
+            <div class="recent-link-text">
+              Linux多线程——POSIX信号量与环形队列版本之生产消费模型
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Linux网络——从《计算机网络》到网络编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Linux网络——从《计算机网络》到网络编程
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-10T12:43:09.000Z" itemprop="datePublished">2024-09-10</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.1k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="从《计算机网络》到网络编程"><a href="#从《计算机网络》到网络编程" class="headerlink" title="从《计算机网络》到网络编程"></a>从《计算机网络》到网络编程</h2><p>科班的同学大多学过计算机网络，而非科班的同学也多多少少听说过一些</p>
+<p>计算机网络体系十分繁杂且精妙，这三四十年来计算机网络技术不断进步，但是核心是TCP&#x2F;IP、UDP协议</p>
+<h3 id="从计算机到计算机网络"><a href="#从计算机到计算机网络" class="headerlink" title="从计算机到计算机网络"></a>从计算机到计算机网络</h3><p>我们说一个计算机中的进程可以处理一定的任务</p>
+<p>当他想与另一个进程进行通信时，就需要IPC的各种方式</p>
+<p>但无论是管道、共享内存都是利用内存作为中转</p>
+<p>如果想让另一台计算机的进程也能与这个计算机的进程进行通信呢</p>
+<p>聪明的你肯定想到，把内存连起来呗，让他们都能访问到就行</p>
+<p>诶，恭喜你，发明了计算机网络</p>
+<p>所谓的计算机网络其实就是若干台计算机进程之间进行通信的一个过程</p>
+<p>但是这里就有了很多问题</p>
+<ol>
+<li>当时的计算机系统各异，Linux、MacOS、Windows，怎么样让他们也能进行通信，甚至同一个操作系统搭载在不同型号的计算机上都有可能不同</li>
+<li>如果传输过程中出错了怎么办，要重传吗，还是将就着用</li>
+<li>如果计算机之间怎么认得彼此，要知道计算机网络中可不止两台计算机，找到计算机了之后又要怎么找到你想找的进程呢</li>
+<li>怎样让我在合肥的计算机访问到在北京的服务器</li>
+<li>为什么无线网跟有线网都能进行通信呢</li>
+</ol>
+<p>怪不得说计算机网络复杂呢，这些问题解决起来可是一点都不轻松</p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>大家其实都遇到了同样的问题，那么最好的解决方式就是开大会，定标准</p>
+<p>这个标准我们就称之为协议，学过计算机网络的同学都懂，那些协议名字看起来就脑袋瓜疼</p>
+<p>除此之外，我们在组织数据，处理任务的时候，从来都是将大问题化成小问题，解决了小问题再将各个模块拼起来，就成了如今庞大的知识体系</p>
+<p>如果有过项目开发经验，会更有切身的体会</p>
+<p>计算机网络也是如此，OSI标准将从下向上设计了七层网络模型，他设计的非常非常好，但是在实践中四层模型就能很好的解决问题，也称之为TCP&#x2F;IP四层模型，在我们学习的过程中将物理层和数据链路层分开，变成五层模型</p>
+<p>TCP和UDP是传输层协议，IP是网络层协议，TCP和IP都单独拿出来命名整个计算机网络协议，可想而知这两个协议簇对于计算机网络的重要性</p>
+<p>我们这里简单介绍一下五层协议，并且说明一下这五层协议是如何解决那些个问题的</p>
+<ul>
+<li>物理层：规定了广电信号的传递方式，用什么线，以前用电缆，现在用双绞线，远距离会用光纤什么的，wifi的电磁波频率也算，主要是规定了传输距离、传输速率等等，集线器工作在物理层，稍后我们会讲这些网络设备有什么用</li>
+<li>数据链路层：这一层规定了设备之间数据的传送和识别，主要是让计算机分得清楚，什么样的01信号算这个数据包（数据帧）的开始，什么样的01信号算这个数据帧的结束，冲突检测（又冲突就自动重发），数据纠错，还有以太网、令牌环网、无线LAN的标准，交换机工作在数据链路层</li>
+<li>网络层：网络层主要负责地址管理和路由选择，数据走在大街上，他需要一个可以问路的人（路由器），才能知道自己下一步是直走还是左转，为了描述目的地，就需要一个地址，也就是ip地址，路由器工作在网络层</li>
+<li>传输层：主要负责主机之间的数据传输，如果传输出错了怎么办，是重传（TCP），还是放弃（UDP）</li>
+<li>应用层：负责应用程序之间的沟通，电子邮件传输协议SMTP，文件传输协议FTP，网络远程访问协议Telnet，还有耳熟能详的HTTP协议</li>
+</ul>
+<p>下面是网络设备的介绍</p>
+<ul>
+<li>集线器：其实就是延长版的网线，解决了网线不够长的问题，三台计算机如何连接的问题，总不能用剥线钳吧</li>
+<li>交换机：交换机就稍微带点脑子了，他可以解决计算机互联时数据冲突的问题，一条线不能既往左发数据又往右发数据，就像一条路不能既有向左开的车又有向右开的车一样，数据也会发生碰撞，而交换机就能屏蔽两个接口的碰撞，把他们分为两个碰撞域，而上面的集线器就没有这个功能了，因为他的本质就是网线</li>
+<li>路由器：路由器就像是热心大叔一样，你想去哪里他都知道，你只管问，他不仅能让你不撞车，还能告诉你怎么走，让你不绕弯子，也就是路由器可以划分广播域，让你知道往这条路走一定是对的，而上面的交换机和集线器就没有这个功能，因为他们也不认识路</li>
+</ul>
+<h3 id="网络与计算机系统"><a href="#网络与计算机系统" class="headerlink" title="网络与计算机系统"></a>网络与计算机系统</h3><p>除了上面说的搭积木原理，其实这些层次也对应着操作系统的层次</p>
+<p>因为是计算机先生出来的，才有的计算机网络</p>
+<p>如果计算机网络违背了计算机系统的设计原则，那还有什么用</p>
+<p>仔细看其实就可以发现，网络和计算机的对应关系</p>
+<p>物理层对应着计算机的硬件，各种接口、设备</p>
+<p>数据链路层对应着驱动，网卡驱动、显卡驱动</p>
+<p>传输层和网络层对应着操作系统，他们处理了来自各个设备的信息，让上层用户看起来并没有什么区别</p>
+<p>应用层对应着各种库，shell，应用软件</p>
+<h3 id="计算机网络的传输流程"><a href="#计算机网络的传输流程" class="headerlink" title="计算机网络的传输流程"></a>计算机网络的传输流程</h3><p><img src="https://i-blog.csdnimg.cn/blog_migrate/4c82c0eda2904ff912f80e9531065753.png" alt="在这里插入图片描述"></p>
+<p>网络的每一层都有着自己的协议方案，因此也有着自己专门的标识（报头）</p>
+<p>当应用层的两个进程想要通信时，实际上的数据是自己的电脑从应用层到传输层到网络层到链路层，层层套上自己的包头，让别人认识自己，让对方认识自己</p>
+<p>通过以太网或者无线网传输</p>
+<p>当对方收到之后，从下到上一层一层剥开，才能拿到最终的想要的报文数据</p>
+<p>但是如果每一层对应着看，他们似乎都是和对面的同一层进行交流</p>
+<p>在数据传输的过程中，可能经历了数个路由器，这是一个艰难的旅程</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/4c492fc61559a6baf2e9568dc4b96795.png" alt="在这里插入图片描述"></p>
+<h3 id="IP地址与MAC地址"><a href="#IP地址与MAC地址" class="headerlink" title="IP地址与MAC地址"></a>IP地址与MAC地址</h3><p>IP地址有两个版本，IPv4和IPv6，是网络层协议的内容</p>
+<p>6是4的升级版，但是还是以4为基础的，毕竟现在6还是推广阶段，4仍然在使用</p>
+<p>一般我们常用的还是4，使用点分十进制来表示，例如，192.168.0.1、127.0.0.1等等，每一个数字是32位，取值从0到255</p>
+<p>MAC地址也算物理地址</p>
+<p>用来标识数据链路层的地址，一般来说，一个设备就有一个甚至多个MAC，长度是48位一共6字节，一般来说MAC地址是全球唯一的</p>
+<p>从下一篇开始我们就着手实践，将从前学习的内容全部串联起来，C++、Linux系统编程、进程间通信</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/09/10/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/"
+      title="项目日志——日志器模块的设计、同步日志器实现、测试"
+     >
+
+    <p class="title-text">
+      
+        项目日志——日志器模块的设计、同步日志器实现、测试
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">Comments </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
