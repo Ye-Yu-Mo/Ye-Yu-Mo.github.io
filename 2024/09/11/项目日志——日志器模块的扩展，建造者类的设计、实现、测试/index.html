@@ -14,27 +14,25 @@
   
 
   
-  <title>每日算法打卡：摘花生 | jasmine</title>
+  <title>项目日志——日志器模块的扩展，建造者类的设计、实现、测试 | jasmine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="原题链接1015. 摘花生 题目难度：简单 题目来源：《信息学奥赛一本通》 题目描述Hello Kitty想摘点花生送给她喜欢的米老鼠。 她来到一片有网格状道路的矩形花生地(如下图)，从西北角进去，东南角出来。 地里每个道路的交叉点上都有种着一株花生苗，上面有若干颗花生，经过一株花生苗就能摘走该它上面所有的花生。 Hello Kitty只能向东或向南走，不能向西或向北走。 问Hello Kitty">
+  <meta name="description" content="建造者模式建造者模式就是为了方便对象的构造，当零部件的构建和组装过于复杂时，就需要建造者模式来帮帮忙 这里我们的日志器很适合，但是也没有特别复杂，所以可以对整个设计模式进行简化，不需要指挥者，直接使用建造者进行组装 因为指挥者主要是为了各个零件构造的顺序而存在的，但是我们这里不需要规定顺序 设计 抽象日志器建造者类 设置日志器类型 将不同类型的日志器类型放在同一个日志器建造者类去完成   派生出具">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每日算法打卡：摘花生">
-<meta property="og:url" content="http://example.com/2024/01/14/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%91%98%E8%8A%B1%E7%94%9F/index.html">
+<meta property="og:title" content="项目日志——日志器模块的扩展，建造者类的设计、实现、测试">
+<meta property="og:url" content="http://example.com/2024/09/11/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E7%9A%84%E6%89%A9%E5%B1%95%EF%BC%8C%E5%BB%BA%E9%80%A0%E8%80%85%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="jasmine">
-<meta property="og:description" content="原题链接1015. 摘花生 题目难度：简单 题目来源：《信息学奥赛一本通》 题目描述Hello Kitty想摘点花生送给她喜欢的米老鼠。 她来到一片有网格状道路的矩形花生地(如下图)，从西北角进去，东南角出来。 地里每个道路的交叉点上都有种着一株花生苗，上面有若干颗花生，经过一株花生苗就能摘走该它上面所有的花生。 Hello Kitty只能向东或向南走，不能向西或向北走。 问Hello Kitty">
+<meta property="og:description" content="建造者模式建造者模式就是为了方便对象的构造，当零部件的构建和组装过于复杂时，就需要建造者模式来帮帮忙 这里我们的日志器很适合，但是也没有特别复杂，所以可以对整个设计模式进行简化，不需要指挥者，直接使用建造者进行组装 因为指挥者主要是为了各个零件构造的顺序而存在的，但是我们这里不需要规定顺序 设计 抽象日志器建造者类 设置日志器类型 将不同类型的日志器类型放在同一个日志器建造者类去完成   派生出具">
 <meta property="og:locale" content="en_UK">
-<meta property="og:image" content="https://cdn.acwing.com/media/article/image/2019/09/12/19_a8509f26d5-1.gif">
-<meta property="article:published_time" content="2024-01-14T08:52:10.000Z">
-<meta property="article:modified_time" content="2024-01-14T09:16:10.245Z">
+<meta property="article:published_time" content="2024-09-11T07:05:55.000Z">
+<meta property="article:modified_time" content="2024-09-11T07:54:00.995Z">
 <meta property="article:author" content="许磊">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="DP">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.acwing.com/media/article/image/2019/09/12/19_a8509f26d5-1.gif">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -350,7 +348,7 @@
     <div id="content-body">
        
 
-<article id="post-每日算法打卡：摘花生" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-项目日志——日志器模块的扩展，建造者类的设计、实现、测试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -363,7 +361,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        每日算法打卡：摘花生
+        项目日志——日志器模块的扩展，建造者类的设计、实现、测试
       </h1>
     
   
@@ -371,52 +369,44 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-14T08:52:10.000Z" itemprop="datePublished">2024-01-14</time>
+  <time class="dt-published" datetime="2024-09-11T07:05:55.000Z" itemprop="datePublished">2024-09-11</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            764 words 
+            514 words 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="原题链接"><a href="#原题链接" class="headerlink" title="原题链接"></a>原题链接</h2><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1017/">1015. 摘花生</a></p>
-<p>题目难度：简单</p>
-<p>题目来源：《信息学奥赛一本通》</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Hello Kitty想摘点花生送给她喜欢的米老鼠。</p>
-<p>她来到一片有网格状道路的矩形花生地(如下图)，从西北角进去，东南角出来。</p>
-<p>地里每个道路的交叉点上都有种着一株花生苗，上面有若干颗花生，经过一株花生苗就能摘走该它上面所有的花生。</p>
-<p>Hello Kitty只能向东或向南走，不能向西或向北走。</p>
-<p>问Hello Kitty最多能够摘到多少颗花生。</p>
-<p><img src="https://cdn.acwing.com/media/article/image/2019/09/12/19_a8509f26d5-1.gif" alt="1.gif"></p>
-<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行是一个整数T，代表一共有多少组数据。</p>
-<p>接下来是T组数据。</p>
-<p>每组数据的第一行是两个整数，分别代表花生苗的行数R和列数 C。</p>
-<p>每组数据的接下来R行数据，从北向南依次描述每行花生苗的情况。每行数据有C个整数，按从西向东的顺序描述了该行每株花生苗上的花生数目M。</p>
-<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>对每组输入数据，输出一行，内容为Hello Kitty能摘到得最多的花生颗数。</p>
-<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>1≤T≤100,<br>1≤R,C≤100,<br>0≤M≤1000</p>
-<h4 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">2 2</span><br><span class="line">1 1</span><br><span class="line">3 4</span><br><span class="line">2 3</span><br><span class="line">2 3 4</span><br><span class="line">1 6 5 </span><br></pre></td></tr></table></figure>
+          <h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>建造者模式就是为了方便对象的构造，当零部件的构建和组装过于复杂时，就需要建造者模式来帮帮忙</p>
+<p>这里我们的日志器很适合，但是也没有特别复杂，所以可以对整个设计模式进行简化，不需要指挥者，直接使用建造者进行组装</p>
+<p>因为指挥者主要是为了各个零件构造的顺序而存在的，但是我们这里不需要规定顺序</p>
+<h3 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h3><ol>
+<li>抽象日志器建造者类<ol>
+<li>设置日志器类型</li>
+<li>将不同类型的日志器类型放在同一个日志器建造者类去完成</li>
+</ol>
+</li>
+<li>派生出具体的建造者<ol>
+<li>局部日志器建造者</li>
+<li>全局日志器建造者（单例管理）</li>
+</ol>
+</li>
+</ol>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用建造者模式建造日志器，无需用户构造</span></span><br><span class="line">    <span class="keyword">enum class</span> <span class="title class_">LoggerType</span></span><br><span class="line">    &#123;</span><br><span class="line">        LOGGER_SYNC,</span><br><span class="line">        LOGGER_ASYNC</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">LoggerBuilder</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">LoggerBuilder</span>()</span><br><span class="line">            : _logger_type(LoggerType::LOGGER_SYNC), _limit_level(LogLevel::value::DEBUG)</span><br><span class="line">        &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">buildLoggerType</span><span class="params">(LoggerType type)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            _logger_type = type;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">buildLoggerName</span><span class="params">(<span class="type">const</span> std::string &amp;name)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            _logger_name = name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">buildLoggerLevel</span><span class="params">(LogLevel::value level)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            _limit_level = level;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">buildFormatter</span><span class="params">(<span class="type">const</span> std::string &amp;pattern = <span class="string">&quot;[%d&#123;%y-%m-%d|%H:%M:%S&#125;][%t][%c][%f:%l][%p]%T%m%n&quot;</span>)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            _formatter = std::<span class="built_in">make_shared</span>&lt;Formatter&gt;(pattern);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SinkType, <span class="keyword">typename</span>... Args&gt;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">buildSink</span><span class="params">(Args &amp;&amp;...args)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            LogSink::ptr psink = SinkFactory::<span class="built_in">create</span>&lt;SinkType&gt;(std::forward&lt;Args&gt;(args)...);</span><br><span class="line">            _sinks.<span class="built_in">push_back</span>(psink);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">virtual</span> Logger::ptr <span class="title">build</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span>:</span><br><span class="line">        LoggerType _logger_type;</span><br><span class="line">        std::string _logger_name;</span><br><span class="line">        LogLevel::value _limit_level;</span><br><span class="line">        Formatter::ptr _formatter;</span><br><span class="line">        std::vector&lt;LogSink::ptr&gt; _sinks;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 局部日志器建造者</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">LocalLoggerBuild</span> : <span class="keyword">public</span> LoggerBuilder</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function">Logger::ptr <span class="title">build</span><span class="params">()</span> <span class="keyword">override</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="built_in">assert</span>(!_logger_name.<span class="built_in">empty</span>());</span><br><span class="line">            <span class="keyword">if</span> (_sinks.<span class="built_in">empty</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">buildSink</span>&lt;StdoutSink&gt;();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (_logger_type == LoggerType::LOGGER_ASYNC)</span><br><span class="line">            &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> std::<span class="built_in">make_shared</span>&lt;SyncLogger&gt;(_logger_name, _limit_level, _formatter, _sinks);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TODO 全局日志器建造者</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">16 </span><br></pre></td></tr></table></figure>
-
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题的意思就是要选择一条能摘到最多花生的数量的路线</p>
-<p>对于这道题来说，我们依旧采用集合的思想来考虑，因为地图是二维的，所以我们考虑采用二位数组，f[i][j]他代表着走到第i，j位置的所有路线的最大值</p>
-<p>从状态计算的角度来看，也就是集合划分，因为到达i，j的路线只有两种路线，一种是从i-1，j到i，j的位置，也就是从上到下，第二种就是从左到右走的</p>
-<p>那么对于第i，j位置的结果就是</p>
-<p>$f(i,j)&#x3D;\max{f(i-1,j),f(i,j-1)}+w_{i,j}$</p>
-<p>这里其实隐藏了一个初始化问题，就是边界情况，但是由于是要取最大值，恰好省略了，在其他DP问题是一定要分析初始化和边界问题的，其次是在递推的过程种，按照什么样的顺序计算呢，因为每一次算i，j时都需要知道之前的两个数值，这是可以画出一个有向图的，这里的顺序就是要按照拓扑序来计算，这道题按照数组遍历就恰好满足</p>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">110</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> w[N][N];</span><br><span class="line"><span class="type">int</span> f[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                cin&gt;&gt;w[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                f[i][j] = <span class="built_in">max</span>(f[i<span class="number">-1</span>][j],f[i][j<span class="number">-1</span>]) + w[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;f[n][m]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试建造者模式</span></span><br><span class="line"><span class="function">std::unique_ptr&lt;Xulog::LoggerBuilder&gt; <span class="title">builder</span><span class="params">(<span class="keyword">new</span> Xulog::LocalLoggerBuild())</span></span>;</span><br><span class="line">builder-&gt;<span class="built_in">buildLoggerLevel</span>(Xulog::LogLevel::value::WARN);</span><br><span class="line">builder-&gt;<span class="built_in">buildLoggerName</span>(<span class="string">&quot;synclog&quot;</span>);</span><br><span class="line">builder-&gt;<span class="built_in">buildFormatter</span>();</span><br><span class="line">builder-&gt;<span class="built_in">buildLoggerType</span>(Xulog::LoggerType::LOGGER_SYNC);</span><br><span class="line">builder-&gt;<span class="built_in">buildSink</span>&lt;Xulog::StdoutSink&gt;();</span><br><span class="line">builder-&gt;<span class="built_in">buildSink</span>&lt;Xulog::FileSink&gt;(<span class="string">&quot;./log/test.log&quot;</span>);</span><br><span class="line">builder-&gt;<span class="built_in">buildSink</span>&lt;Xulog::RollSinkBySize&gt;(<span class="string">&quot;./log/roll-&quot;</span>, <span class="number">1024</span> * <span class="number">1024</span>);</span><br><span class="line">builder-&gt;<span class="built_in">buildSink</span>&lt;RollSinkByTime&gt;(<span class="string">&quot;./log/roll-&quot;</span>, TimeGap::GAP_SECOND);</span><br><span class="line">Xulog::Logger::ptr logger = builder-&gt;<span class="built_in">build</span>();</span><br><span class="line"></span><br><span class="line">std::string str = <span class="string">&quot;测试同步日志器-&quot;</span>;</span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">debug</span>(__FILE__, __LINE__, <span class="string">&quot;%s&quot;</span>, str.<span class="built_in">c_str</span>());</span><br><span class="line">logger-&gt;<span class="built_in">error</span>(__FILE__, __LINE__, <span class="string">&quot;%s&quot;</span>, str.<span class="built_in">c_str</span>());</span><br><span class="line">logger-&gt;<span class="built_in">fatal</span>(__FILE__, __LINE__, <span class="string">&quot;%s&quot;</span>, str.<span class="built_in">c_str</span>());</span><br><span class="line">logger-&gt;<span class="built_in">info</span>(__FILE__, __LINE__, <span class="string">&quot;%s&quot;</span>, str.<span class="built_in">c_str</span>());</span><br><span class="line">logger-&gt;<span class="built_in">warn</span>(__FILE__, __LINE__, <span class="string">&quot;%s&quot;</span>, str.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> size = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (size &lt; <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>) <span class="comment">// 10 个</span></span><br><span class="line">&#123;</span><br><span class="line">    logger-&gt;<span class="built_in">fatal</span>(__FILE__, __LINE__, <span class="string">&quot;%s-%d&quot;</span>, str.<span class="built_in">c_str</span>(), cnt++);</span><br><span class="line">    size += <span class="number">20</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
         
@@ -430,27 +420,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/01/16/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%9C%B0%E5%AE%AB%E5%8F%96%E5%AE%9D/"
-      title="每日算法打卡：地宫取宝"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        每日算法打卡：地宫取宝
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2024/01/14/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/"
-      title="每日算法打卡：最长上升子序列"
+      href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"
+      title="Linux网络——从《计算机网络》到网络编程"
      >
 
     <p class="title-text">
       
-        每日算法打卡：最长上升子序列
+        Linux网络——从《计算机网络》到网络编程
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
