@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">36</div>
+                <div class="category-count">37</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">17 </div>
+          <div class="archive-count">18 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
+            <div class="recent-link-text">
+              Linux网络——socket编程与UDP实现服务器与客户机通信
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/11/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E7%9A%84%E6%89%A9%E5%B1%95%EF%BC%8C%E5%BB%BA%E9%80%A0%E8%80%85%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块的扩展，建造者类的设计、实现、测试" >
             <div class="recent-link-text">
               项目日志——日志器模块的扩展，建造者类的设计、实现、测试
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/08/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E6%89%8B%E6%92%95%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="Linux多线程——日志任务的线程池实现" >
-            <div class="recent-link-text">
-              Linux多线程——日志任务的线程池实现
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,78 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-机器学习入门之非监督学习和半监督学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/05/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">机器学习入门之非监督学习和半监督学习</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-05-03T11:31:00.000Z" itemprop="datePublished">2024-05-03</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            527 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            非监督学习与监督学习相反，非监督学习的训练数据集是完全没有标签的数据，他本质上所做的工作都是聚类的
+给定数据之后，聚类能从中学习到什么，就完全取决于数据本身的特性的，简单说就是自动给数据贴标签
+比较有名的非监督学习蒜贩有K均值聚类（K-Means Clustering）、层次聚类（Hierarchical Clustering）、主成分分析（Principal Components Analysis，PCA）、DBSCAN、深度信念网络（Deep Belief Net）等
+半监督学习半监督学习其实是使用最多的一种了，就像我们人生的学习过程一样，不是所有的东西都有人来教，总有需要自己去理解总结的时候
+他的形式化的定义如下
+给定一个来自于某个位置分布的有标记实例集合${(x_1,y_1),(x_2,y_2),\dots,(x_k,y_k)}$这里$x_i$是输入数据，而$y_i$是标签；然后还有一个未标记的示例集合$U&#x3D;{x_{k+1},x_{k+2},\dots,x_{k+u}}$那么这里的u就是未标记的数据个数
+我们希望模型通过学习得到某个函数，通过他能够准确的对未标记...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/05/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-机器学习入门之监督学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -854,89 +926,6 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
     <a class="right-panel  non-pic  "
       
       href="/2024/04/08/C-%E6%89%8B%E6%92%95%E7%BA%A2%E9%BB%91%E6%A0%91/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-MyLisp项目日志：函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/29/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E5%87%BD%E6%95%B0/">MyLisp项目日志：函数</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-29T07:40:56.000Z" itemprop="datePublished">2024-03-29</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            3k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            函数 我们想让用户可以定义自己的函数，而不仅仅是使用我们提供的内建函数
-那我们要提供这样的功能就要首先就得提供一个内置函数，可以使用户通过这个函数创建自定义的函数
-他使用起来有两个参数，第一个是形参列表，也就是要使用的参数，第二个参数是另一个列表，也就是函数的具体内容，运行函数时，我们调用对应函数进行处理即可
-我们使用\来表示定义函数
-例如
-1\ &#123;x y&#125; &#123;+ x y&#125;
-
-然后可以将其作为普通的S表达式使用，也就是计算的符号
-1(\ &#123;x y&#125; &#123;+ x y&#125;) 10 20
-
-如果我们想命名这个函数，只需要使用def给他起个名字，这样就能使用名字直接调用了
-123def &#123;add-together&#125; (\ &#123;x y&#125; &#123;+ x y&#125;)add-together 10 20
-
-函数类型我们要将函数存储为一种MLval的值，就需要考虑他的组成部分
-根据刚刚功能的描述，可以基本确定如下内容：
-
-函数有三个部分构成
-第一个是形参列表，并且需要绑定参...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/03/29/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E5%87%BD%E6%95%B0/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
