@@ -188,7 +188,7 @@
         
             <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
                 项目
-                <div class="category-count">18</div>
+                <div class="category-count">19</div>
             </a>
         
             <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">18 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/12/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E5%BC%82%E6%AD%A5%E7%BC%93%E5%86%B2%E5%8C%BA%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块一部缓冲区的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志器模块一部缓冲区的设计、实现、测试
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
             <div class="recent-link-text">
               Linux网络——socket编程与UDP实现服务器与客户机通信
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/09/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%90%BD%E5%9C%B0%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志落地模块的设计、实现、测试" >
-            <div class="recent-link-text">
-              项目日志——日志落地模块的设计、实现、测试
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,80 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-项目日志——日志输出格式化模块的设计、实现、测试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/">项目日志——日志输出格式化模块的设计、实现、测试</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-07T00:30:43.000Z" itemprop="datePublished">2024-09-07</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.5k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            日志输出格式化模块日志格式化的设计对日志消息进行格式化，指定成为指定格式的字符串
+定义有下面的格式化字符，支持用户自定义输出格式
+
+pattern成员
+%d 日期，子格式
+
+
+
+  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/07/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-项目日志——日志消息类的设计、实现、测试" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -907,90 +981,6 @@ C语言1234567891011121314151617181920#include &lt;cstdarg&gt;void LOG2(int cnt,
     <a class="right-panel  non-pic  "
       
       href="/2024/09/04/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%A1%A5%E5%85%85%EF%BC%881%EF%BC%89/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux多线程——线程互斥与线程同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/04/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E4%BA%92%E6%96%A5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">Linux多线程——线程互斥与同步和其他概念</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-04T05:55:06.000Z" itemprop="datePublished">2024-09-04</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%92%E6%96%A5/" rel="tag">互斥</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8C%E6%AD%A5/" rel="tag">同步</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            线程互斥我们之前介绍过互斥的概念，但没有介绍Linux中线程互斥的操作
-互斥存在的必要性是因为访问共享资源时，有可能被CPU换下，这样就会产生bug
-例如说我们上一篇中说过的抢票，我们虽然设置的是当ticket小于等于0时结束线程
-但是当五个线程几乎同时进入这个判断，就会导致过量运行
-主要是因为这些操作并非原子的，不是原语
-要解决这个问题就需要互斥锁
-互斥锁的使用互斥锁的使用一般分为四个步骤
-
-初始化互斥锁
-临界区前加锁
-临界区后解锁
-用完后销毁
-
-初始化互斥锁这里有两个方法，第一个是静态分配
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER
-第二个是动态分配
-int pthread_mutex_init(pthread_mutex_t* restrict mutex, const pthread_mutexattr_t* restrict attr)
-第一个是要初始化的互斥量，我们在调用之前声明一共传入即可，第二个我们传入NULL
-加锁和解锁int pthread_mutex_lock(pthread_mutex_t* mute...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/04/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E4%BA%92%E6%96%A5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

@@ -188,7 +188,7 @@
         
             <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
                 项目
-                <div class="category-count">18</div>
+                <div class="category-count">19</div>
             </a>
         
             <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">18 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/12/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E5%BC%82%E6%AD%A5%E7%BC%93%E5%86%B2%E5%8C%BA%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块一部缓冲区的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志器模块一部缓冲区的设计、实现、测试
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
             <div class="recent-link-text">
               Linux网络——socket编程与UDP实现服务器与客户机通信
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/09/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%90%BD%E5%9C%B0%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志落地模块的设计、实现、测试" >
-            <div class="recent-link-text">
-              项目日志——日志落地模块的设计、实现、测试
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,87 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-算法基础之线段树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/25/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BA%BF%E6%AE%B5%E6%A0%91/">算法基础之线段树</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-25T03:29:38.000Z" itemprop="datePublished">2024-01-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            355 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            线段树线段树的原理十分简单，但是在代码上会相对复杂一点
+他也是用来维护一个序列，是一个完全二叉树的形状
+对于每一个节点是一个结构体
+12345struct Node&#123;	int L,R;    	int sum; // 以和为例&#125;;
+
+假设序列为1到7，那么根节点存的就是这7个数的总和，如果区间长度不是1的话，就会平均分成两部分，这两部分就是根节点的子节点，如此递归下去
+
+他有两个操作，第一个操作是单点修改，是一个递归的过程，只用修改信息需要变化的节点，我们需要改变叶子节点，然后回溯时重新计算即可
+第二个操作称之为区间查询，查询时，如果有查询区间可以包含某一个区间，那么就直接返回，如果是不包含，那么就是进行递归，直到包含，然后进行计算再回溯
+线段树中有四个函数
+第一个是pushup，用子节点信息更新当前节点信息，这个一般不用写，就一句话
+第二个是build，在一段区间上初始化线段树
+第三个是modify，是修改操作
+第四个是query，查询操作
+我们之后在题目中实践即可
+  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/25/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BA%BF%E6%AE%B5%E6%A0%91/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-算法基础之树状数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -917,102 +998,6 @@ h1:m1:s1 h4:m4:s4 (+2)...
     <a class="right-panel  non-pic  "
       
       href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%97%A5%E6%9C%9F%E9%97%AE%E9%A2%98/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-MySQL之SQL与数据库简介" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/22/MySQL%E4%B9%8BSQL%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B/">MySQL之SQL与数据库简介</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-22T07:34:00.000Z" itemprop="datePublished">2024-01-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/MySQL/">MySQL</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            531 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            SQL简介SQL首先是一门高级语言，同其他的C&#x2F;C++，Java等语言类似，不同的是他是一种结构化查询语言，用户访问和处理数据库的语言，那类似于C语言，SQL也有自己的标准，目前市面上的数据库系统都支持SQL-92标准
-SQL这门语言是具有统一性的，但是不同的数据库支持的SQL有略微差别，他是一门非过程化语言，不像C语言，用户并不关心操作是如何完成的，SQL也是跟其他语言结合有相当广泛的应用的，例如Java，Python
-首先SQL对大小写不敏感，其次灵活度非常高，一条语句只以分号结尾，可以任意换行
-数据库系统简介数据库（DataBases，DB）其实就是以某种组织方式存储数据的集合，这里的组织方式有很多，例如有使用表（table）的
-数据库的应用非常广泛，小到网站，大到各类应用系统，都是基于数据库的
-我们对数据库基本分为两类，一类叫做关系型数据库（RDBMS）
-
-
-
-名称
-简介
-
-
-
-Oracle
-行业巨头
-
-
-MySQL
-最流行的中大型数据库
-
-
-SQL server
-Windows上最好用的数据库
-
-
-PostgreSQL
-功能最强大的开源数据库
-
-
-SQLite...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/22/MySQL%E4%B9%8BSQL%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

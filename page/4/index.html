@@ -188,7 +188,7 @@
         
             <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
                 项目
-                <div class="category-count">18</div>
+                <div class="category-count">19</div>
             </a>
         
             <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">18 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/12/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E5%BC%82%E6%AD%A5%E7%BC%93%E5%86%B2%E5%8C%BA%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块一部缓冲区的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志器模块一部缓冲区的设计、实现、测试
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
             <div class="recent-link-text">
               Linux网络——socket编程与UDP实现服务器与客户机通信
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/09/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%90%BD%E5%9C%B0%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志落地模块的设计、实现、测试" >
-            <div class="recent-link-text">
-              项目日志——日志落地模块的设计、实现、测试
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,84 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程间通信——硬件实现临界区互斥的基本方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/">Linux进程间通信——硬件实现临界区互斥的基本方法</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-25T02:58:46.000Z" itemprop="datePublished">2024-08-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            748 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            硬件实现方法之前的软件方法出现各种问题的根本原因其实是因为检查是否被占用和设置自己想要占用，这两个动作没有办法一气呵成导致的
+而硬件实现的好处就是他的权限足够高，无法随意被中断
+中断屏蔽方法操作系统有一个系统级的指令是中断指令，主要分为两个步骤，一个是关中断指令，另一个是开中断指令
+什么意思呢，就是说是否允许被中断，关中断就之后不允许被中断，开中断就是之后可以被中断
+因此我们想要确保进程访问临界区时不被其他进程打扰，只需要在临界区之前执行关中断指令，在临界区之后执行开中断指令，确保进程互斥的实现
+123// 关中断;// 临界区;// 开中断;
+
+这个方法的缺点是限制了CPU交替并发执行程序的能力，即便是时间片到也无法中断，因此系统的效率就会降低
+其次这个方法其实是权限的下放，就是将系统的权限交给用户的进程，这样进程有可能会一直占用CPU
+这个方法还无法限制其他CPU，只能限制一个CPU不执行相同临界区的代码
+TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操作，也就是原语，不允许被中断
+他的代码描述如下
+123456bool TestAndSet(bool* ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程间通信——实现临界区互斥的基本方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -886,74 +964,6 @@
     <a class="right-panel  non-pic  "
       
       href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux基础IO——重定向与文件缓冲区" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/">Linux基础IO——重定向与文件缓冲区</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-07T10:53:18.000Z" itemprop="datePublished">2024-08-07</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            863 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            重定向我们在学习Linux的基本内容时候，知道&gt;&gt; &gt;都可以用来表示重定向，那么重定向的本质是什么呢，其实就是更改了标号为1的文件描述符
-1表示标准输出，那么我们也就可以手动实现输出重定向，将标准输出更改为我们指定的文件
-1234567891011121314 1 #include&lt;unistd.h&gt; 2 #include&lt;sys/types.h&gt; 3 #include&lt;sys/stat.h&gt; 4 #include&lt;fcntl.h&gt; 5 #include&lt;stdio.h&gt; 6  7 int main() 8 &#123; 9   close(1);10   int fd = open(&quot;log.txt&quot;,O_WRONLY|O_CREAT|O_TRUNC,0666);11   printf(&quot;关闭1之后新建文件标识符为%d\n&quot;,fd);12   fprintf(stdout,&quot;输出到更改后的标准输出\n&quot;);               13 ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

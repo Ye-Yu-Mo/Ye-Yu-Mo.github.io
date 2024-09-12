@@ -188,7 +188,7 @@
         
             <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
                 项目
-                <div class="category-count">18</div>
+                <div class="category-count">19</div>
             </a>
         
             <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
@@ -209,7 +209,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">18 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -303,6 +303,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/12/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E5%99%A8%E6%A8%A1%E5%9D%97%E5%BC%82%E6%AD%A5%E7%BC%93%E5%86%B2%E5%8C%BA%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志器模块一部缓冲区的设计、实现、测试" >
+            <div class="recent-link-text">
+              项目日志——日志器模块一部缓冲区的设计、实现、测试
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
             <div class="recent-link-text">
               Linux网络——socket编程与UDP实现服务器与客户机通信
@@ -327,12 +333,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/09/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E8%90%BD%E5%9C%B0%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E3%80%81%E5%AE%9E%E7%8E%B0%E3%80%81%E6%B5%8B%E8%AF%95/" title="项目日志——日志落地模块的设计、实现、测试" >
-            <div class="recent-link-text">
-              项目日志——日志落地模块的设计、实现、测试
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +343,85 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-C-手撕红黑树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/04/08/C-%E6%89%8B%E6%92%95%E7%BA%A2%E9%BB%91%E6%A0%91/">C++手撕红黑树</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-04-08T05:40:38.000Z" itemprop="datePublished">2024-04-08</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.6k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            红黑树概念和AVL树一样，红黑树也是一种二叉搜索树，是解决二叉搜索树不平衡的另一种方案，他在每个节点上增加一个存储位，用于表示节点的颜色，是Red或者Black
+红黑树的核心思想是通过一些着色的条件限制，达到一种最长路径不超过最短路径的两倍的状态
+所以说红黑树并不是严格平衡的树，而是一种近似平衡
+例如
+
+性质（条件限制）红黑树一共有五条性质，由此来保证最长路径不超过最短路径的两倍
+
+每个节点都有颜色，不是黑色就是红色
+根节点是黑色的
+如果一共节点是红色，那么他的子节点一定是黑色（不会出现两个红色节点连接的情况）
+对于每个节点，以这个节点到所有后代的任意路径上，均包含相同数目的黑色节点
+每个叶子节点（空节点）是黑色的（为了满足第四条性质，某些情况下如果没有第五条第四条会失效）
+
+节点的定义123456789101112131415161718192021222324// 颜色enum Color &#123;	RED,	BLACK&#125;;template&lt;class T&gt;struct RBTreeNode &#123;	RBTreeNode&lt;T&gt;* _...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/04/08/C-%E6%89%8B%E6%92%95%E7%BA%A2%E9%BB%91%E6%A0%91/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-MyLisp项目日志：函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -895,81 +974,6 @@ state表示这个节点所处的状态，例如行数和列数，这里不会用
     <a class="right-panel  non-pic  "
       
       href="/2024/03/17/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97%E4%B8%8E%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-MyLisp项目日志：波兰表达式及其解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/16/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%8A%E5%85%B6%E8%A7%A3%E6%9E%90/">MyLisp项目日志：解析用户输入与波兰表达式</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-16T08:35:54.000Z" itemprop="datePublished">2024-03-16</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.5k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            编程语言编程语言是类似于自然语言的，虽然我们是自然而然就学会了自己的母语，但实际上自然语言是建立在递归和重复的子结构之上的
-在语文的学习过程中我们会学到一些语法，例如名词、动词、谓语、连词
-他的结构体现在，例如谓语可以是形容词，是动词，是副词加动词
-他的递归体现在，主语可以是名词，可以是形容词加名词，甚至是一个句子，再由这个主语去构成另一个句子
-这些说白了是一种有限的规则，而由这些优先的规则延申出来的就是无限的句子
-为了定义我们的编程语言（MyLisp），我们首先需要正确解析用户按照语法规则写的代码，因此我们就需要编写一个语法解析器，用于判断用户的输入是否合法，并且产生解析后的内部表示
-但是这一步十分繁琐且枯燥，我们使用mpc库来帮助我们完成这个工作，这个库是一个解析器组合子库，可以为任何语言编写语法解析器，他极大的简化了原本枯燥无聊的工作，仅仅编写高层的抽象语法规则即可
-mpc库的项目地址，非常感谢Daniel Holden大佬！！
-模拟自然语言下面我们将使用mpc的一些函数，尝试描述英语的部分语法，熟悉mpc的使用步骤，更多的函数请移步项目主页
-我们只采用最基础的语法，以后如...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/03/16/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%8A%E5%85%B6%E8%A7%A3%E6%9E%90/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
