@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -195,6 +195,11 @@
                 机器学习
                 <div class="category-count">9</div>
             </a>
+        
+            <a class="category-link" href="/categories/%E6%A1%86%E6%9E%B6/">
+                框架
+                <div class="category-count">1</div>
+            </a>
         </div>
     </div>
   </div>
@@ -204,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">11 </div>
+          <div class="archive-count">12 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -300,8 +305,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
+            <div class="recent-link-text">
+              ProtoBuf序列化框架介绍
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/18/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" title="Linux网络——HTTP协议详解(1)" >
             <div class="recent-link-text">
@@ -327,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" title="Linux网络——从《计算机网络》到网络编程" >
-            <div class="recent-link-text">
-              Linux网络——从《计算机网络》到网络编程
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -343,6 +348,84 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux基础IO——文件系统与动静态库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/">Linux基础IO——文件系统与动静态库</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-11T06:20:21.000Z" itemprop="datePublished">2024-08-11</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            什么是文件系统我们之前所说的文件读写都是通过进程对已经打开的文件进行操作，也就是对操作系统对文件所创建的结构体进行操作
+那么对于磁盘中没有打开的文件是如何进行管理的
+磁盘的物理结构这里我们主要讨论机械磁盘而非固态磁盘，因为机械磁盘的价格较低，而且学习之后也能更好的理解整个系统
+
+这是机械硬盘内部的样子，有点像光盘的样子，不同的是光盘只能读，机械磁盘可以读写，而且机械磁盘是一摞的，利用这个磁头来感应出来0和1
+
+绕着这个转轴，就是圆心，有不同的半径的圆，我们称之为磁道，同一个磁道所组成的称为柱面，而为了同时读取数据，按照不同的圆心角划分成了不同的扇区
+我们可以把某一个磁道的扇区单独取出来，看成一个数组，这样就能把文件系统划分成众多这样的数组，再将其组织起来即可
+这样对磁盘问题就变成了对数组的问题，存储数据到磁盘就变成了存数据到数组，从磁盘取数据就是找到数组中的位置，对磁盘的管理也就成了对数组的管理
+这样一个扇区的大小是512字节，接下来就是对扇区如何进行划分管理了
+扇区中的块组直接管理512字节还是过于麻烦，我们仍然需要对其进行设计才能很好的管理其中的内容
+
+一个扇区会分成若干个这...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux基础IO——重定向与文件缓冲区" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -375,7 +458,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            863 words 
+            863 词 
           </div>
         </div>
         
@@ -443,7 +526,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 词 
           </div>
         </div>
         
@@ -519,7 +602,7 @@ open
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.5k words 
+            1.5k 词 
           </div>
         </div>
         
@@ -594,7 +677,7 @@ execl这是里面最简单的函数，他的函数有两个，第一个是执行
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            935 words 
+            935 词 
           </div>
         </div>
         
@@ -670,7 +753,7 @@ execl这是里面最简单的函数，他的函数有两个，第一个是执行
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 词 
           </div>
         </div>
         
@@ -744,7 +827,7 @@ execl这是里面最简单的函数，他的函数有两个，第一个是执行
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k words 
+            1.7k 词 
           </div>
         </div>
         
@@ -816,7 +899,7 @@ execl这是里面最简单的函数，他的函数有两个，第一个是执行
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            895 words 
+            895 词 
           </div>
         </div>
         
@@ -857,86 +940,6 @@ main()的第三个参数我们之前说了main的前两个参数，表示命令�
     <a class="right-panel  non-pic  "
       
       href="/2024/07/25/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E7%9A%84%E8%AE%A4%E8%AF%86/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程——进程切换与环境变量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/16/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">Linux进程——进程切换与环境变量</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-16T06:23:22.000Z" itemprop="datePublished">2024-07-16</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.4k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            进程间切换我们在之前讲过CPU在调度进程时，不是一个进程一直占用CPU，而是会过段时间就会放入其他进程，那么就一定存在进程切换的过程
-运行到一半的进程数据去哪了第一个想到的问题就是，当一个进程中途被取下，再次放上去时，计算机怎么知道这个进程运行到哪里了
-了解计算机组成原理的朋友都知道CPU中有一些寄存器，例如eax、ebx、esp、ebp、eip等
-
-eax可以帮助函数返回一个值
-esp和ebp用来维护函数的栈帧
-eip则会保存当前代码运行到了哪一行
-
-所以在进程运行时，这些寄存器就会临时保存进程产生的各种数据
-这里需要注意的是，进程在切换时会不断的对自己的数据进行保存和恢复，当进程进行保存时是保存寄存器中的数据，而非寄存器本身，这些数据会被保存到进程的PCB中
-进程被取下时，CPU数据是否会被删除事实上，一个进程被取下时，CPU不会删除他的临时数据，而是当下一个进程被放入时，直接进行覆盖
-命令行参数我们之前在学习C&#x2F;C++的时候，有的默认代码在main函数内也放置了两个参数
-1int main(int argc, char* argv[]);
-
-这两个参数也称之为命令...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/16/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
