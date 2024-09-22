@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">40</div>
+                <div class="category-count">41</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
+            <div class="recent-link-text">
+              Linux网络——HTTP协议详解（2）
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
             <div class="recent-link-text">
@@ -332,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
-            <div class="recent-link-text">
-              Linux网络——socket编程与UDP实现服务器与客户机通信
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,84 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-计算机体系结构——冯诺依曼系统与操作系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">计算机体系结构——冯诺依曼系统与操作系统</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-12T07:22:01.000Z" itemprop="datePublished">2024-07-12</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.2k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            在深入学习Linux进程等概念之前，我们对于计算机的体系结构还需要有一个基础的认识，这一部分在大多高校中复杂冗长，但十分严谨广泛适用
+我们在这里主要介绍的是感性的直观上对计算机工作原理系统调度的理解
+冯诺依曼体系结构现代计算机都是基于冯诺依曼体系结构的，也就是我们在计算机组成原理上学的那个东西
+
+当然现代计算机不以存储器为核心，而以运算器和控制器为核心，这些都是后话了，我们也不深入了解其中的原理，只分别介绍一下这些在计算机中代表什么
+输入设备主要有，键盘、鼠标、摄像头、磁盘、网卡等
+存储器，这里的存储器指的是内存而非磁盘
+中央处理器有，运算器和和控制器，其中也有一部分cache缓存
+输出设备主要有、显示器、磁盘、扬声器、网卡等
+内存体系用一张图就可以解释清楚
+
+由下到上是计算机的内存分级，因为不同存储器的处理数据速度不尽相同，而处理的速度越快，就导致成本越高，在总成本有限的情况下，使用这样的金字塔体系就可以保证有相当快的数据存取速度和相当大的存储空间了
+而整个计算机中最快的就是CPU了，为了不被磁盘拖后腿，我们只允许CPU和内存（主存）以上的存储器打交道，这样就能在保证速度的同时...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-C-智能指针" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +458,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -454,7 +532,7 @@ RAII思想RAII思想说白了就是一种利用对象的声明周期来控制程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            917 词 
+            917 words 
           </div>
         </div>
         
@@ -526,7 +604,7 @@ regression的意思是回归，但其实这个算法是一种分类算法
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            1.1k words 
           </div>
         </div>
         
@@ -600,7 +678,7 @@ try：这个是用于执行可能会出错的代码，在代码中出错的语�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.5k 词 
+            2.5k words 
           </div>
         </div>
         
@@ -676,7 +754,7 @@ try：这个是用于执行可能会出错的代码，在代码中出错的语�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            1.1k words 
           </div>
         </div>
         
@@ -749,7 +827,7 @@ const的左值不能赋值但是可以取地址，左值引用就是给左值取
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -823,7 +901,7 @@ k值的选取正如我们之前所说，k值的选取对分类的准确性有很
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 词 
+            1.2k words 
           </div>
         </div>
         
@@ -853,80 +931,6 @@ C++11就更像是把花括号括起来的数据作为了一种新的容器，把
     <a class="right-panel  non-pic  "
       
       href="/2024/05/12/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-sklearn之线性回归——以上证红利指数为例" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/11/sklearn%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E4%BB%A5%E4%B8%8A%E8%AF%81%E7%BA%A2%E5%88%A9%E6%8C%87%E6%95%B0%E4%B8%BA%E4%BE%8B/">sklearn之线性回归——以上证红利指数为例</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-11T13:47:14.000Z" itemprop="datePublished">2024-05-11</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.4k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            线性回归线性回归（Linear Regression）模型是最简单的线性模型之一，很具代表性
-概念我们在高中时代其实就学过使用最小二乘法进行线性回归分析
-这实际上是统计学部分的内容，会有大量的自变量，或者说解释变量，还有就是对应的因变量，也就是输出结果，回归分析就是找出他们对应的关系，并且使用某个模型描述出来，这样一来给出新的变量，就能利用模型实现预测
-这也就是我们一开始介绍机器学习说明的过程，给出输入和输出，找到一个模型T能够很好的拟合这些数据，从而使用T就能预测结果了
-从几何层面，回归就是找到具有代表性的直线、曲线、甚至是面，来进行拟合
-回归的种类有很多，一元和多元，那么一元其实就是线性回归。我们这里先讨论线性回归，而且我们假设因变量和自变量之间是满足线性关系的，也就是$y&#x3D;w_0+w_1x$
-这里的$w_0$和$w_1$我们称之为回归系数，我们需要拟合的，求出来的就是这两个权值，一个经典的示意图是这样的
-
-这里的每一个点就是实际的数据，红色的线是我们拟合出来的，很容易可以看得到，有些点离线近，有些点离线远，我们使用残差（Residual）来描述这里的远和近，也就是...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/11/sklearn%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E4%BB%A5%E4%B8%8A%E8%AF%81%E7%BA%A2%E5%88%A9%E6%8C%87%E6%95%B0%E4%B8%BA%E4%BE%8B/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

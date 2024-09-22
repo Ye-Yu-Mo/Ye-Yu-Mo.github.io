@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">40</div>
+                <div class="category-count">41</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
+            <div class="recent-link-text">
+              Linux网络——HTTP协议详解（2）
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
             <div class="recent-link-text">
@@ -332,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
-            <div class="recent-link-text">
-              Linux网络——socket编程与UDP实现服务器与客户机通信
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,89 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux多线程——Posix信号量与环形队列版本之生产消费模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/">Linux多线程——POSIX信号量与环形队列版本之生产消费模型</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-07T07:29:45.000Z" itemprop="datePublished">2024-09-07</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            444 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97/" rel="tag">环形队列</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" rel="tag">生产消费模型</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            POSIX信号量POSIX信号量和System V信号量是不同的标准
+但是实现的功能是一样的，都是为了解决同步的问题
+我们说信号量指的就是资源的数量
+在生产者与消费者模型里面，生产者与消费者所认为的资源是不同的
+生产者认为空间是资源，因为每次都要往里面放东西，空间会变少
+消费者认为数据是资源，因为每次都会拿东西，数据会变少
+POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int pshared, unsigned int value);
+
+第一个是声明的信号量，第二个是选项，0表示线程间共享，非0表示进程间共享，第三个表示信号量的初始值
+销毁1int sem_destory(sem_t *sem);
+
+等待信号量（申请资源）申请资源就是P操作
+1int sem_wait(sem_t* sem);
+
+发布信号量（放下资源）发布信号量就是V操作
+1int sem_post(sem_t* sem);
+
+环形队列之生产消费模型上一篇文章的生产消费模型是基于阻塞队列的，而且只用了互斥同步锁的内容，我们感觉效率...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/07/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94Posix%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%BD%A2%E9%98%9F%E5%88%97%E7%89%88%E6%9C%AC%E4%B9%8B%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux多线程——互斥锁的封装与生产消费模型的实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +463,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            961 词 
+            961 words 
           </div>
         </div>
         
@@ -455,7 +538,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 词 
+            1.1k words 
           </div>
         </div>
         
@@ -539,7 +622,7 @@ int pthread_mutex_init(pthread_mutex_t* restrict mutex, const pthread_mutexattr_
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 词 
+            1.2k words 
           </div>
         </div>
         
@@ -639,7 +722,7 @@ C++11多线程、智能指针、右值引用
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1k 词 
+            1k words 
           </div>
         </div>
         
@@ -710,7 +793,7 @@ void*使用模板解决，函数指针使用包装器解决
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -783,7 +866,7 @@ void*使用模板解决，函数指针使用包装器解决
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k 词 
+            1.4k words 
           </div>
         </div>
         
@@ -861,7 +944,7 @@ void*使用模板解决，函数指针使用包装器解决
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -902,84 +985,6 @@ SIG_IGN宏代表收到这个信号后，进行忽略这个信号
     <a class="right-panel  non-pic  "
       
       href="/2024/08/27/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BF%9D%E5%AD%98%E3%80%81%E5%A4%84%E7%90%86%E3%80%81%E6%8D%95%E6%8D%89/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程间通信——互斥锁与信号量详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/26/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%AF%A6%E8%A7%A3/">Linux进程间通信——互斥锁与信号量详解</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-26T06:22:08.000Z" itemprop="datePublished">2024-08-26</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.7k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            互斥锁现实中的锁有两种状态，打开和关闭，分别对应这资源可以被使用，和不可以被使用，我们可以通过使用钥匙对锁的状态进行改变
-那么解决临界区的最简单的工具其实就是锁（mutex lock），我们称之为互斥锁
-当一个进程进入临界区的时候，调用acquire函数，进行上锁，相当于不让别人再访问资源
-退出临界区的时候调用release函数，来打开锁，可以让别人访问资源
-一个锁只能上锁一次，因此在互斥锁中也有一个bool变量available，表示锁是否可以被上锁，可以被上锁时acquire函数就可以调用成功
-这两个函数的执行必须是原子的，不允许被中断，因此通常都是硬件实现的
-这种互斥锁也称之为自旋锁，主要问题是忙等待，也就是必须循环检查available是否可用
-这种互斥锁可以用来解决同步问题
-信号量我们之前简单了解过信号量，本质上其实就是描述资源的数量
-可以用来解决互斥和同步的问题，他只能被wait和signal原语访问，也称为PV操作，分别对应着申请和释放资源两个操作
-整形信号量这种就是最基础的用法，描述资源的数目
-wait操作和P操作是申请操作，原理可以这样表示
-12345void ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/26/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E4%B8%8E%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%AF%A6%E8%A7%A3/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

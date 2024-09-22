@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">40</div>
+                <div class="category-count">41</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
+            <div class="recent-link-text">
+              Linux网络——HTTP协议详解（2）
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
             <div class="recent-link-text">
@@ -332,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
-            <div class="recent-link-text">
-              Linux网络——socket编程与UDP实现服务器与客户机通信
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,80 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-unordered系列关联式容器和开散列与闭散列的模拟实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/04/19/unordered%E7%B3%BB%E5%88%97%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8%E5%92%8C%E5%BC%80%E6%95%A3%E5%88%97%E4%B8%8E%E9%97%AD%E6%95%A3%E5%88%97%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">unordered系列关联式容器和开散列与闭散列的模拟实现</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-04-19T04:53:18.000Z" itemprop="datePublished">2024-04-19</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.5k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            unordered系列关联式容器之前我们讲到，STL提供了底层为红黑树的一系列关联式容器，可以在相当高的效率下进行查询
+但是在树的节点非常多的时候，查询效率也不够理想，因此在C++11中又提供了unordered系列的容器，unordered_map、unordered_set、unordered_multimap、unordered_multiset
+这四个容器的使用和原本的map和set基本完全相同，只是没有了排序的功能，也就是没有中序有序的特性，我们可以在文档中看到他的各种使用，这里就不过多赘述了
+我们主要想了解他实现的底层原理和封装过程
+底层结构unordered系列的关联式容器他不需要排序的功能，也就意味着他的底层并非红黑树
+实际上他的底层使用了哈希结构
+需要注意的是，哈希其实是一种思想，是将原先的数据通过某种方法处理过后，对应到另一种数据上的思想；哈希表是哈希的一种应用，是将数据通过处理后，对应到表的某个位置上
+哈希的概念在过往我们学习顺序结构或树状结构进行查找时，是通过一次次的比较来查找，而效率则是取决于查找过程中元素的比较次数
+那是否存在一种查找方法是可以不通过任...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/04/19/unordered%E7%B3%BB%E5%88%97%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8%E5%92%8C%E5%BC%80%E6%95%A3%E5%88%97%E4%B8%8E%E9%97%AD%E6%95%A3%E5%88%97%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-红黑树封装map和set" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +454,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.8k 词 
+            2.8k words 
           </div>
         </div>
         
@@ -454,7 +528,7 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.6k 词 
+            2.6k words 
           </div>
         </div>
         
@@ -533,7 +607,7 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3k 词 
+            3k words 
           </div>
         </div>
         
@@ -616,7 +690,7 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k 词 
+            1.4k words 
           </div>
         </div>
         
@@ -693,7 +767,7 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.6k 词 
+            1.6k words 
           </div>
         </div>
         
@@ -790,7 +864,7 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5.6k 词 
+            5.6k words 
           </div>
         </div>
         
@@ -865,7 +939,7 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4.2k 词 
+            4.2k words 
           </div>
         </div>
         
@@ -902,76 +976,6 @@ Q表达式与S表达式非常类似，不同的是Q表达式存在大括号内�
     <a class="right-panel  non-pic  "
       
       href="/2024/03/20/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AQ%E8%A1%A8%E8%BE%BE%E5%BC%8F/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-MyLisp项目日志：S表达式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/18/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AS%E8%A1%A8%E8%BE%BE%E5%BC%8F/">MyLisp项目日志：S表达式</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-18T05:01:32.000Z" itemprop="datePublished">2024-03-18</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            3.2k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            S表达式Lisp列表Lisp的程序代码也是数据形式的一种，这个结构被称之为S表达式，他存在一个Lisp列表中，我们需要用这个列表结构递归的表示出数字、操作符号和其他的列表，因此我们需要扩展MLval的内容，同时会重构之前写过的函数
-我们需要将求值过程分为读取存入，求值两个过程
-解析表达式这里就要由波兰表达式扩展到S表达式，因此首先需要更新一下语法解析器，这里笔者在创建的时候会有一部分内存泄漏的问题，但是重新写一遍这个解析器问题就消失了，也不会报错，可能是正则表达式的部分有出问题
-除此之外我们需要把operator操作重命名为symbol，以便之后添加更多的操作符、变量、函数做准备
-12345678910111213141516171819// 创建解析器mpc_parser_t* Number = mpc_new(&quot;number&quot;);mpc_parser_t* Symbol = mpc_new(&quot;symbol&quot;);mpc_parser_t* Sexpr = mpc_new(&quot;sexpr&quot;);mpc_parser_t* E...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/03/18/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AS%E8%A1%A8%E8%BE%BE%E5%BC%8F/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

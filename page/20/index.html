@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">40</div>
+                <div class="category-count">41</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">12 </div>
+          <div class="archive-count">13 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
+            <div class="recent-link-text">
+              Linux网络——HTTP协议详解（2）
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
             <div class="recent-link-text">
@@ -332,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/11/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94socket%E7%BC%96%E7%A8%8B/" title="Linux网络——socket编程与UDP实现服务器与客户机通信" >
-            <div class="recent-link-text">
-              Linux网络——socket编程与UDP实现服务器与客户机通信
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,83 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-类和对象" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/08/31/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">类和对象</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-08-31T07:38:26.000Z" itemprop="datePublished">2023-08-31</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            5k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            面向过程与面向对象C语言是面向过程的，关注的是做一件事情的需要的步骤有哪些，通过一系列函数之间的调用配合来实现解决问题
+例如打游戏，需要 拿出电脑，开机，联网，登录，进入游戏这几个步骤
+C++是基于面向对象的，关注的是解决这一个问题参与的对象，依靠对象之间的交互来完成问题的解决
+例如打游戏，对象就是电脑和人，对于电脑这个对象，内部可能有一些机理，比如联网，登录，对于人也有一些机理，例如肌肉运动之类的，这就类似于类中的函数
+类C语言中的结构体只能定义变量，但是在C++中，结构体中还可以定义函数，那么其实对于C++来说结构体也是一个类，而在C++中更常用class表示真正的类
+类的定义12345678class ClassName&#123;	void fun()	&#123;		&#125;	int a;&#125;;//注意分号
+
+class为定义类的关键字，ClassName是类的名字，**{}是类的主体，之中是类的成员，包括成员变量和成员函数**
+类的两种定义方式
+声明和定义全都在类中定义，成员函数可能会被当成内联函数处理
+
+123456789101112class stud...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/08/31/%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-C++入门" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +457,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.6k 词 
+            3.6k words 
           </div>
         </div>
         
@@ -448,7 +525,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            806 词 
+            806 words 
           </div>
         </div>
         
@@ -516,7 +593,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            691 词 
+            691 words 
           </div>
         </div>
         
@@ -584,7 +661,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            437 词 
+            437 words 
           </div>
         </div>
         
@@ -661,7 +738,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            570 词 
+            570 words 
           </div>
         </div>
         
@@ -727,7 +804,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            831 词 
+            831 words 
           </div>
         </div>
         
