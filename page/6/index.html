@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">41</div>
+                <div class="category-count">42</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -214,7 +214,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">13 </div>
+          <div class="archive-count">14 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -308,6 +308,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" title="HTTPS详解" >
+            <div class="recent-link-text">
+              HTTPS详解
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
             <div class="recent-link-text">
               Linux网络——HTTP协议详解（2）
@@ -332,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/" title="Linux网络——守护进程、会话、进程组" >
-            <div class="recent-link-text">
-              Linux网络——守护进程、会话、进程组
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,85 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程——进程的概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/12/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/">Linux进程——进程的概念</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-12T08:07:53.000Z" itemprop="datePublished">2024-07-12</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            967 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            我们在上一节内容中有简单谈到进程的感性理解，他在课本上的概念是，程序的一个执行实例或正在执行的程序
+但在本质上，他其实就是一个被分配了系统资源（CPU，内存）的实体
+PCB上一节内容中，我们说到，管理是管理的数据，需要先描述再组织
+那在内存中，操作系统对多个进程应当如何管理呢
+这时候就有聪明的同学回答了，先描述再组织
+我们还是使用结构体来进行描述，对于一个进程来说可能会有进程ID、代码存储地址、进程状态、进程优先级，如果是用链表的形式存储还会有指向下一个结构体的指针
+12345678struct data&#123;	// id    // 代码地址    // 状态    // 优先级    struct data* next;&#125;;
+
+
+
+那么这样一个结构体，我们给她起一个名字，叫做PCB，进程控制块
+当然在不同的操作系统中，管理所用的PCB名称也不一定相同，在Linux中，这个PCB具体叫做struct task_struct，进程控制块
+那么操作系统对进程的管理就变成了对链表的增删查改
+进程排队当进程在链表中，就会等待CPU去找PCB来进行处理，那么CPU是如何知...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/12/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-计算机体系结构——冯诺依曼系统与操作系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -857,80 +936,6 @@ k值的选取正如我们之前所说，k值的选取对分类的准确性有很
     <a class="right-panel  non-pic  "
       
       href="/2024/05/14/sklearn%E4%B9%8Bk%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E4%BB%A5%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB%E4%B8%BA%E4%BE%8B/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-C-11特性（一）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/12/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89/">C++11特性（一）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-12T14:32:20.000Z" itemprop="datePublished">2024-05-12</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.2k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            C++11简介C++11可以说是C语言演变成C++之后第二个重大的标准了，上一个重大的标准是C++98
-C++11相较于C++98带来了数量非常非常多的变化，新特性，对C++03进行了很多修正，甚至让C++11变得很不“C++”
-但是C++11能更好的用于系统开发和库开发，语法也更进一步泛化，简单化，稳定，安全
-这里介绍一些比较实用的语法特性
-统一的列表初始化需要注意这里的列表初始化和类的初始化列表不要混淆
-花括号初始化在C++98中，我们可以使用花括号对数组和结构体进行统一的初始值的设定
-12345678910111213struct S&#123;    int _a;    int _b;&#125;;int main()&#123;    int arr[] = &#123;1,2,3&#125;;    int arr[5] = &#123;0&#125;;    S s = &#123;1,2&#125;;    return 0;&#125;
-
-C++11就更像是把花括号括起来的数据作为了一种新的容器，把这种容器再作用于所有的内置类型和自定义类型的初始化，就像使用v...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/12/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%80%EF%BC%89/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

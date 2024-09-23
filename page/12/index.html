@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">41</div>
+                <div class="category-count">42</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -214,7 +214,7 @@
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">13 </div>
+          <div class="archive-count">14 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -308,6 +308,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" title="HTTPS详解" >
+            <div class="recent-link-text">
+              HTTPS详解
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
             <div class="recent-link-text">
               Linux网络——HTTP协议详解（2）
@@ -332,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/" title="Linux网络——守护进程、会话、进程组" >
-            <div class="recent-link-text">
-              Linux网络——守护进程、会话、进程组
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,93 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-每日算法打卡：航班时间" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E8%88%AA%E7%8F%AD%E6%97%B6%E9%97%B4/">每日算法打卡：航班时间</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-23T09:15:28.000Z" itemprop="datePublished">2024-01-23</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            928 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            原题链接1231. 航班时间
+题目难度：简单
+题目来源：第九届蓝桥杯省赛C++ A组,第九届蓝桥杯省赛Java A组
+题目描述小 h 前往美国参加了蓝桥杯国际赛。
+小 h 的女朋友发现小 h 上午十点出发，上午十二点到达美国，于是感叹到“现在飞机飞得真快，两小时就能到美国了”。
+小 h 对超音速飞行感到十分恐惧。
+仔细观察后发现飞机的起降时间都是当地时间。
+由于北京和美国东部有 12 小时时差，故飞机总共需要 14 小时的飞行时间。
+不久后小 h 的女朋友去中东交换。
+小 h 并不知道中东与北京的时差。
+但是小 h 得到了女朋友来回航班的起降时间。
+小 h 想知道女朋友的航班飞行时间是多少。
+对于一个可能跨时区的航班，给定来回程的起降时间。
+假设飞机来回飞行时间相同，求飞机的飞行时间。
+输入格式一个输入包含多组数据。
+输入第一行为一个正整数 T，表示输入数据组数。
+每组数据包含两行，第一行为去程的起降时间，第二行为回程的起降时间。
+起降时间的格式如下:
+
+h1:m1:s1 h2:m2:s2
+h1:m1:s1 h3:m3:s3 (+1)
+h1:m1:s1 h4:m4:s4 (+2)...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/23/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E8%88%AA%E7%8F%AD%E6%97%B6%E9%97%B4/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-每日算法打卡：移动距离" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -932,92 +1019,6 @@ SQLite...
     <a class="right-panel  non-pic  "
       
       href="/2024/01/18/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E9%94%99%E8%AF%AF%E7%A5%A8%E6%8D%AE/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-每日算法打卡：递增三元组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/17/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E9%80%92%E5%A2%9E%E4%B8%89%E5%85%83%E7%BB%84/">每日算法打卡：递增三元组</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-17T01:59:02.000Z" itemprop="datePublished">2024-01-17</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            818 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            原题链接1236. 递增三元组
-题目难度：中等
-题目来源：第九届蓝桥杯省赛C++ B组,第九届蓝桥杯省赛Java B组
-题目描述给定三个整数数组
-$A &#x3D; [A_1, A_2, … A_N]$,$B &#x3D; [B_1, B_2, … B_N]$,$C &#x3D; [C_1, C_2, … C_N]$,
-请你统计有多少个三元组 $(i, j, k)$ 满足：
-
-$1 \le i, j, k \le N$
-$A_i &lt; B_j &lt; C_k$
-
-输入格式第一行包含一个整数 $N$。
-第二行包含 $N$ 个整数 $A_1, A_2, … A_N$。
-第三行包含 $N$ 个整数 $B_1, B_2, … B_N$。
-第四行包含 $N$ 个整数 $C_1, C_2, … C_N$。
-输出格式一个整数表示答案。
-数据范围$1 \le N \le 10^5$,$0 \le A_i,B_i,C_i \le 10^5$
-输入样例：123431 1 12 2 23 3 3 
-
-输出样例：127 
-
-题目分析这道题的意思很清楚，就是从A、B、C三个数组中选出三个数满足严格小...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/17/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E9%80%92%E5%A2%9E%E4%B8%89%E5%85%83%E7%BB%84/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
