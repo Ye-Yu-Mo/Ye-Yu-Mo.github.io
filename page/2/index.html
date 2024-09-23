@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">42</div>
+                <div class="category-count">43</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">14 </div>
+          <div class="archive-count">15 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E4%B9%8BUDP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" title="Linux网络之UDP与TCP协议详解" >
+            <div class="recent-link-text">
+              Linux网络之UDP与TCP协议详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" title="HTTPS详解" >
             <div class="recent-link-text">
@@ -332,12 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/16/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94TCP%E8%BF%9E%E6%8E%A5%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%81%E5%88%B6%E5%AE%9A%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E3%80%81%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E7%89%88%E6%9C%AC%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8/" title="Linux网络——手撕TCP服务器，制定应用层协议，实现网络版计算器" >
-            <div class="recent-link-text">
-              Linux网络——手撕TCP服务器，制定应用层协议，实现网络版计算器
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,89 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux网络——从《计算机网络》到网络编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">Linux网络——从《计算机网络》到网络编程</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-10T12:43:09.000Z" itemprop="datePublished">2024-09-10</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.1k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            从《计算机网络》到网络编程科班的同学大多学过计算机网络，而非科班的同学也多多少少听说过一些
+计算机网络体系十分繁杂且精妙，这三四十年来计算机网络技术不断进步，但是核心是TCP&#x2F;IP、UDP协议
+从计算机到计算机网络我们说一个计算机中的进程可以处理一定的任务
+当他想与另一个进程进行通信时，就需要IPC的各种方式
+但无论是管道、共享内存都是利用内存作为中转
+如果想让另一台计算机的进程也能与这个计算机的进程进行通信呢
+聪明的你肯定想到，把内存连起来呗，让他们都能访问到就行
+诶，恭喜你，发明了计算机网络
+所谓的计算机网络其实就是若干台计算机进程之间进行通信的一个过程
+但是这里就有了很多问题
+
+当时的计算机系统各异，Linux、MacOS、Windows，怎么样让他们也能进行通信，甚至同一个操作系统搭载在不同型号的计算机上都有可能不同
+如果传输过程中出错了怎么办，要重传吗，还是将就着用
+如果计算机之间怎么认得彼此，要知道计算机网络中可不止两台计算机，找到计算机了之后又要怎么找到你想找的进程呢
+怎样让我在合肥的计算机访问到在北京的服务器
+为什么无线网跟有线网都能进行通信呢
+
+怪不得...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux多线程——手撕线程池" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +463,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            794 words 
+            794 词 
           </div>
         </div>
         
@@ -462,7 +545,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            444 words 
+            444 词 
           </div>
         </div>
         
@@ -545,7 +628,7 @@ POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            961 words 
+            961 词 
           </div>
         </div>
         
@@ -620,7 +703,7 @@ POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 词 
           </div>
         </div>
         
@@ -704,7 +787,7 @@ int pthread_mutex_init(pthread_mutex_t* restrict mutex, const pthread_mutexattr_
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k words 
+            1.2k 词 
           </div>
         </div>
         
@@ -804,7 +887,7 @@ C++11多线程、智能指针、右值引用
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1k words 
+            1k 词 
           </div>
         </div>
         
@@ -875,7 +958,7 @@ void*使用模板解决，函数指针使用包装器解决
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 词 
           </div>
         </div>
         
@@ -916,84 +999,6 @@ void*使用模板解决，函数指针使用包装器解决
 
  
 
-   
-
-<article id="post-Linux多线程——线程的概念和控制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/28/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8E%A7%E5%88%B6/">Linux多线程——线程的概念和控制</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-28T04:37:47.000Z" itemprop="datePublished">2024-08-28</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.4k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            线程的概念线程是我们经常听到的一个概念，他和进程有什么关系呢
-从操作系统课本里我们可能听说过，线程是一个微缩版的进程，他拥有TCB，不会被分配资源，是CPU进行调度的单位
-我们其实可以更直观的理解，程序中的一个执行路线我们就可以称之为线程，也可以说是执行流
-那么一个进程他的执行路线至少有一个，也就算做是一个线程，这个进程本身也可以创建分支线程，那么原来的这个进程也就叫做主线程
-在Linux中，线程其实没有自己的TCB，而是和进程公用PCB，内存空间也是共享的
-因此在Linux中线程其实是要比进程更加轻量化的
-每个线程都拥有自己的PCB，但都是自己从主线程中写时拷贝来的
-在CPU的视角来看，他的所调度的所有单位都是PCB，是同一个进程，CPU也无法分辨他运行的是线程还是进程
-进程和线程对比线程其实是被CPU调度运行的的基本单位，因为一个CPU只能运行一个执行流
-而进程是操作系统分配资源的基本单位，也就是说这个进程和他所属的线程内存空间全部共享，一个全局变量，不同线程之间也能共享
-线程也拥有自己的特征数据，否则就无法对线程进行管理了
-线程ID，栈区资源，信号屏蔽字，调度优先级
-共享的...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/28/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8E%A7%E5%88%B6/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
 
   <nav id="page-nav">
     <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
@@ -1001,7 +1006,7 @@ void*使用模板解决，函数指针使用包装器解决
       <i class="fa-solid fa-angle-left"></i>
     </a>
     <div id="num-bar">
-      <a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a>  
+      <a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a>  
     </div>
     <a id="next-btn" class="page-nav-btn " href="/page/3/">
       <i class="fa-solid fa-angle-right"></i>
