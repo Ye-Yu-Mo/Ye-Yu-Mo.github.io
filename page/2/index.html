@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分類</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">44</div>
+                <div class="category-count">46</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -198,7 +198,7 @@
         
             <a class="category-link" href="/categories/%E6%A1%86%E6%9E%B6/">
                 框架
-                <div class="category-count">1</div>
+                <div class="category-count">2</div>
             </a>
         </div>
     </div>
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">彙整</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">16 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,26 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/27/muduo%E7%BD%91%E7%BB%9C%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="muduo网络库介绍" >
+            <div class="recent-link-text">
+              muduo网络库介绍
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/27/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8Bpoll%E4%B8%8Eepoll/" title="Linux高级IO之poll与epoll" >
+            <div class="recent-link-text">
+              Linux高级IO之poll与epoll
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/" title="Linux高阶IO之select多路转接" >
+            <div class="recent-link-text">
+              Linux高阶IO之select多路转接
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8B%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/" title="Linux高级IO之五种IO模型" >
             <div class="recent-link-text">
@@ -320,24 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" title="HTTPS详解" >
-            <div class="recent-link-text">
-              HTTPS详解
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
-            <div class="recent-link-text">
-              Linux网络——HTTP协议详解（2）
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
-            <div class="recent-link-text">
-              ProtoBuf序列化框架介绍
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,245 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux网络——HTTP协议详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/18/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/">Linux网络——HTTP协议详解(1)</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-18T08:29:03.000Z" itemprop="datePublished">2024-09-18</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            671 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            HTTP协议HTTP可以说是当今应用最广泛的应用层协议之一，主要面向的是浏览器（客户端）和服务器之间通信的规定
+HTTP协议的底层是TCP协议，我们先大概认识一下这个协议是如何使用的
+URLURL也称为统一资源定位器，但其实我们可以感性的将其看作网址
+例如https://www.google.com，但这个其实是省略过后的，完整的长这样
+
+
+http就是标识用的http协议，https可以先认为他是一个安全加密版本的http
+登录信息一般都不太带了，因为有了数据库等线上的注册登录系统
+服务器地址也就是我们常说的域名，他的本质就是用来表示IP地址
+因为这个点分十进制四个大数字太难记住，但是像baidu这样的拼音就好记很多
+DNS是域名服务器，他的工作就是将域名解析成IP地址
+
+
+服务器端口号就是对应着Socket编程的端口号，HTTP的默认端口号一般固定为80，不允许更改
+带层次的文件路径，/与系统并不同，他表示的是网络根目录，下一篇我们会讲
+在?之后的是传递的参数
+
+HTTP报文无论是客户端服务器（CS）还是浏览器服务器（BS）
+都是通过报文传递信息的，我们将其分为请求报文和响应...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/18/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux网络——TCP连接、序列化、制定应用层协议、实现网络版本的计算器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/16/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94TCP%E8%BF%9E%E6%8E%A5%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%81%E5%88%B6%E5%AE%9A%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E3%80%81%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E7%89%88%E6%9C%AC%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8/">Linux网络——手撕TCP服务器，制定应用层协议，实现网络版计算器</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-16T11:21:47.000Z" itemprop="datePublished">2024-09-16</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.3k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            TCP连接我们这里不去直接讲TCP连接的各种复杂的内容，只是先简单认识，先熟悉再逐步理解原理
+前面我们说TCP是面向字节流的，并且需要先连接才能进行传输数据
+那么这对于计算机来说意味着什么
+序列化首先计算机网络中的各类设备本身就是没办法做到完全相同的，计算机各种型号，操作系统的各种型号
+我们想发送的数据不一定是单纯的数值、字符，完全有可能是结构体，是类，我们想要传输这些内容，需要做的就是讲这些数据和结构体转换为字节流，这个过程我们称之为序列化
+那么反过来，从字节流解释出来各种数据和结构体的过程就是反序列化
+而且这个序列化和反序列化的过程是必须要相同的规则，不然就像字符串加密解密一样，没办法得到你想要的数据，这个相同的规则规矩，我们就称之为协议
+这个序列化和反序列化可以自己定制协议，我们后面也会手动实现
+也有常见的序列化方案，都是现成写好的，例如json、protobuf、xml，我们也会进行使用
+除此之外，既然是面向字节流的，我们如何知道一段数据的开始和结尾呢，就像水流一样，如果不做限制是很难分清的，因此我们还需要在数据的开始和结尾做标识
+网络版本的计算器123456789101...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/16/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94TCP%E8%BF%9E%E6%8E%A5%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%81%E5%88%B6%E5%AE%9A%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E3%80%81%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E7%89%88%E6%9C%AC%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux网络——守护进程与TCP服务器和客户机通信" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/">Linux网络——守护进程、会话、进程组</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-15T13:10:07.000Z" itemprop="datePublished">2024-09-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            934 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            会话会话是session，代表的是客户端与服务器的一次交互过程，我们可以简单理解为，当我们打开一个终端，在用户登录时，就是创建了一个会话
+一般来说会话都与各自的终端关联，这个会话中的第一个进程称之为首进程，也称为进程组长
+一个会话中可能有很多进程，我们称之为进程组，为了表示也就有了进程组ID：PGID，会话ID：SIG
+
+使用setsid系统调用可以创建新会话
+
+需要注意的是，创建会话的进程不能是组长进程
+进程组的主要特征就是信号可以发给一个进程组中的所有进程，可以进行作业控制
+PGID就是这个进程组的唯一标识，其实也就是进程组组长的id
+也就是要求一个进程只能当一个组的组长，否则id不就重复了嘛
+但是说进程组长挂了，进程组中只要还有一个进程存在，整个进程组还在
+守护进程守护进程也叫做精灵进程，Deamon，是一种运行在后台的进程，所谓前台后台可以简单理解为能否直接收到键盘指令的进程
+守护进程独立于终端，并且周期性的执行某种任务或者等待处理某些发生的事件
+当Linux系统启动时，或者bash启动时，会启动很多进程服务，例如ssh连接，或者一些代理服务，在进程终止或者系统终止时服务...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux网络——socket编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +619,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.2k words 
+            2.2k 詞 
           </div>
         </div>
         
@@ -463,7 +702,7 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.1k words 
+            2.1k 詞 
           </div>
         </div>
         
@@ -546,7 +785,7 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            794 words 
+            794 詞 
           </div>
         </div>
         
@@ -628,7 +867,7 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            444 words 
+            444 詞 
           </div>
         </div>
         
@@ -711,7 +950,7 @@ POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            961 words 
+            961 詞 
           </div>
         </div>
         
@@ -742,261 +981,6 @@ POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int
     <a class="right-panel  non-pic  "
       
       href="/2024/09/06/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%94%9F%E4%BA%A7%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux多线程——线程互斥与线程同步" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/04/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E4%BA%92%E6%96%A5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">Linux多线程——线程互斥与同步和其他概念</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-04T05:55:06.000Z" itemprop="datePublished">2024-09-04</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%92%E6%96%A5/" rel="tag">互斥</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8C%E6%AD%A5/" rel="tag">同步</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            线程互斥我们之前介绍过互斥的概念，但没有介绍Linux中线程互斥的操作
-互斥存在的必要性是因为访问共享资源时，有可能被CPU换下，这样就会产生bug
-例如说我们上一篇中说过的抢票，我们虽然设置的是当ticket小于等于0时结束线程
-但是当五个线程几乎同时进入这个判断，就会导致过量运行
-主要是因为这些操作并非原子的，不是原语
-要解决这个问题就需要互斥锁
-互斥锁的使用互斥锁的使用一般分为四个步骤
-
-初始化互斥锁
-临界区前加锁
-临界区后解锁
-用完后销毁
-
-初始化互斥锁这里有两个方法，第一个是静态分配
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER
-第二个是动态分配
-int pthread_mutex_init(pthread_mutex_t* restrict mutex, const pthread_mutexattr_t* restrict attr)
-第一个是要初始化的互斥量，我们在调用之前声明一共传入即可，第二个我们传入NULL
-加锁和解锁int pthread_mutex_lock(pthread_mutex_t* mute...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/04/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94%E7%BA%BF%E7%A8%8B%E4%BA%92%E6%96%A5%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-项目日志——日志系统项目介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/04/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/">项目日志——日志系统项目介绍</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-04T05:35:43.000Z" itemprop="datePublished">2024-09-04</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.2k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            C++基于多设计模式下的同步和异步日志系统主要功能本项目主要实现一个日志系统，主要支持以下功能
-
-支持多级别的日志消息
-支持同步日志和异步日志
-支持可靠写入日志到控制台、文件、滚动文件中
-支持多线程并发写入日志
-支持扩展不同的日志落地目标地
-
-开发环境
-WSL(Ubuntu 22.04)
-VSCode
-g++&#x2F;gdb
-Makefile
-
-核心技术点
-类的继承和多态
-C++11多线程、智能指针、右值引用
-双缓冲区
-生产者消费者模型
-多线程
-设计模式（单例模式、工厂模式、代理模式、建造者模式）
-
-日志系统介绍在生产环境中，有时候是不允许我们程序员利用调试器排查问题，不允许服务暂停
-在高频操作中，少量调试次数并不一定能够复现出对应的bug，可能需要重复操作非常多次的情况，导致效率低下
-在分布式、多线程代码中，bug更难以定位
-因此就需要日志系统进行开发问题的排查
-技术实现日志系统的技术实现主要分为两大类
-
-输出日志到控制台
-
-输出日志到文件或数据库系统
-
-
-这里分为同步和异步写日志
-同步日志同步日志是指当输出日志时，程序必须等待日志输出语句执行完毕后才能执行后面的逻辑语句，日...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/04/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux多线程——C-对原生线程库封装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/03/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94C-%E5%AF%B9%E5%8E%9F%E7%94%9F%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/">Linux多线程——利用C++模板对pthread线程库封装</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-03T07:16:29.000Z" itemprop="datePublished">2024-09-03</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            线程封装我们之前介绍过pthread的线程库，这个线程库主要是基于C语言的void*指针来进行传参和返回
-我们使用C++的模板对其封装可以让他的使用更加方便，并且经过测试可以让我们更加直观的了解到线程互斥和同步的重要性
-主要框架要对线程库进行封装，但是首先这个线程库的基本功能肯定要有
-void*使用模板解决，函数指针使用包装器解决
-那么基本框架就能搭建出来了
-1234567891011121314151617181920212223242526272829303132333435363738#pragma once#include&lt;iostream&gt;#include&lt;string&gt;#include&lt;functional&gt;#include&lt;pthread.h&gt;template&lt;class T&gt;using Func_t = std::function&lt;void(T)&gt;; // 参数类型为T 返回值为空的函数template&lt;class T&gt;class Thread&#123;public:    Th...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/03/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94C-%E5%AF%B9%E5%8E%9F%E7%94%9F%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

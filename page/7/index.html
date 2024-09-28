@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分類</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">44</div>
+                <div class="category-count">46</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -198,7 +198,7 @@
         
             <a class="category-link" href="/categories/%E6%A1%86%E6%9E%B6/">
                 框架
-                <div class="category-count">1</div>
+                <div class="category-count">2</div>
             </a>
         </div>
     </div>
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">彙整</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">16 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,26 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/27/muduo%E7%BD%91%E7%BB%9C%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="muduo网络库介绍" >
+            <div class="recent-link-text">
+              muduo网络库介绍
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/27/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8Bpoll%E4%B8%8Eepoll/" title="Linux高级IO之poll与epoll" >
+            <div class="recent-link-text">
+              Linux高级IO之poll与epoll
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/" title="Linux高阶IO之select多路转接" >
+            <div class="recent-link-text">
+              Linux高阶IO之select多路转接
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8B%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/" title="Linux高级IO之五种IO模型" >
             <div class="recent-link-text">
@@ -320,24 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" title="HTTPS详解" >
-            <div class="recent-link-text">
-              HTTPS详解
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
-            <div class="recent-link-text">
-              Linux网络——HTTP协议详解（2）
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
-            <div class="recent-link-text">
-              ProtoBuf序列化框架介绍
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,228 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-sklearn之logistic回归" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/05/28/sklearn%E4%B9%8Blogistic%E5%9B%9E%E5%BD%92/">sklearn之logistic回归</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-05-28T05:10:33.000Z" itemprop="datePublished">2024-05-28</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            917 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            logistic回归logistic regression被称之为logistic回归，对于logistic这个单词来说，他本身的翻译其实不太容易，比较有名的译法是对数几率回归，我也认为这种译法是比较合适的，虽然并非logistic的本意，但却是最贴切这个算法本身的译法
+regression的意思是回归，但其实这个算法是一种分类算法
+回到我们讲线性回归的时候，主要是对指数本身进行预测，但是想要更实用的话，我们其实更希望知道涨跌的情况，那其实这样的输出值就只有两类，涨或者跌，也就是二分类问题
+这种情况其实非常常见，例如销售额和顾客买不买之间的问题，播放量和用户会不会点击的问题
+但问题在于，我们统计出来的样本特征往往是一个连续的实数值，而目标则是一个0或1的问题，那么我们简单的线性回归模型就会失效，难以再进行有效的预测
+如果直接拟合比较困难，那我们可以将输出值变化一下，从一个非0即1的问题变成涨跌的概率问题，那么概率是连续值，我们就又回到了从连续值到连续值的映射，这似乎就还是回归的内容
+那我们给出一个阈值（$\theta$），当概率大于阈值时，认为涨的可能性大，当概率小于阈值时，认为...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/05/28/sklearn%E4%B9%8Blogistic%E5%9B%9E%E5%BD%92/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-C-异常处理机制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/05/20/C-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/">C++异常处理机制</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-05-20T06:02:12.000Z" itemprop="datePublished">2024-05-20</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            异常在我们之前学习的时候，C语言遇到内存泄漏或者内存越界的时候，要么程序直接就崩了，给一个错误码，写的好一点也就是给个assert，但是程序仍会终止，要么就根本发现不来，C++中我们也常说，当越界时会抛异常
+异常的概念异常是是C++处理程序错误的一种方式，当程序发生错误的时候，就会抛出异常，这个异常可以是程序自发给出的，也有可能是我们手动写的throw，当抛出异常之后，我们可以在别的地方捕获异常，catch到就可以对异常进行提示和处理
+这样做有一个好处是，当程序出错时不一定会完全终止程序，而是可以有一个补救措施
+一般有三个关键字
+throw：这个就是扔出去的意思，扔出一个异常，所谓的异常其实就是一个类
+catch：这个是捕获异常，当捕获到了这个异常（类）的时候，需要执行的语句
+try：这个是用于执行可能会出错的代码，在代码中出错的语句抛出就可以被catch到
+例如
+123456789101112131415161718double func(int a, int b)&#123;    if(b==0)        throw &quot;division by zero&qu...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/05/20/C-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-C-11特性（三）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/05/16/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%89%EF%BC%89/">C++11特性（三）</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-05-16T10:53:56.000Z" itemprop="datePublished">2024-05-16</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.5k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            类的新增功能默认构造在原有的C++类中，会有6个默认的成员函数，分别是构造函数、析构函数、拷贝构造、赋值重载、取地址重载、const取地址重载
+最重要并且经常用的是前四个，后两个用处不大
+所谓默认成员函数是当构建一个类的时候，我们不写这些函数，编译器会帮我们生成一个默认的
+在C++11中，又新增了移动构造函数和移动赋值重载，这两个我们在上一篇中有详细解释
+但是生成的规则会有不同
+当你没有显式的写析构、拷贝构造和赋值重载时，编译器会自动生成默认的移动构造和移动赋值重载
+默认生成的移动构造函数，对于内置类型会执行按字节拷贝，对于自定义类型，就需要看这个类型是否定义移动构造，有的话就直接调用，没有的话就调用拷贝构造
+移动赋值重载和上面的移动构造完全类似
+但是当我们自己写了移动构造或者移动赋值，编译器就不会生成拷贝构造和赋值重载了
+类成员变量初始化C++11允许在类定义的时候给成员变量缺省值，默认生成的构造函数会使用这些缺省值进行构造，例如
+1234567class Date&#123;private:	int _year = 1970;    int _month = 1;    in...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/05/16/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%89%EF%BC%89/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-C-11特性（二）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +602,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 詞 
           </div>
         </div>
         
@@ -453,7 +675,7 @@ const的左值不能赋值但是可以取地址，左值引用就是给左值取
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 詞 
           </div>
         </div>
         
@@ -527,7 +749,7 @@ k值的选取正如我们之前所说，k值的选取对分类的准确性有很
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k words 
+            1.2k 詞 
           </div>
         </div>
         
@@ -601,7 +823,7 @@ C++11就更像是把花括号括起来的数据作为了一种新的容器，把
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.4k words 
+            2.4k 詞 
           </div>
         </div>
         
@@ -675,7 +897,7 @@ C++11就更像是把花括号括起来的数据作为了一种新的容器，把
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 詞 
           </div>
         </div>
         
@@ -707,230 +929,6 @@ sklearn主打一个只做机器学习，不轻易支持新的算法，他的好�
     <a class="right-panel  non-pic  "
       
       href="/2024/05/09/sklearn%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-机器学习入门之模型性能评估与度量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0%E4%B8%8E%E5%BA%A6%E9%87%8F/">机器学习入门之模型性能评估与度量</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-05T12:26:57.000Z" itemprop="datePublished">2024-05-05</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.6k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0/" rel="tag">性能评估</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            性能评估机器学习的模型有很多，我们在选择的时候就需要对各个模型进行对比，这时候就需要一个靠谱的标准，能够评估模型的性能
-这里的性能不是说算的有多快，而是说预测的结果和真实情况进行比较的来的结果
-误差在我们对训练的结果进行分析之前，首先需要思考模型训练过程中是否可能有误差的产生，因为这同样会影响结果和对模型选择产生比较大的影响
-误差主要会出现在数据集的三个部分，分别是训练集、测试集、新样本
-
-训练集——训练误差
-测试集——测试误差
-新样本——泛化误差
-
-所谓的训练误差指的是训练集本身存在缺陷，从而模型提取的错误的特征信息，例如一个只认识红色苹果的模型，遇到绿色苹果时，他就不认为这是苹果了
-一般情况下拿到一个数据集，会将其分成两部分，分别作为训练集和测试集，那么对于训练完成的模型，此时测试集也相当于是一个新样本
-训练模型的时候，一开始训练误差和测试误差都会比较高，但是训练次数越多，训练误差会越来越小，但是测试误差可能会变大，而且模型的复杂度也会随之提升
-这样的现象我们分别称之为欠拟合和过拟合
-欠拟合和过拟合欠拟合的概念很好理解，其实就是由于数据量不够大，模型的准确率不够多，也就是一开...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0%E4%B8%8E%E5%BA%A6%E9%87%8F/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-机器学习入门之非监督学习和半监督学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">机器学习入门之非监督学习和半监督学习</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-03T11:31:00.000Z" itemprop="datePublished">2024-05-03</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            527 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">半监督学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            非监督学习与监督学习相反，非监督学习的训练数据集是完全没有标签的数据，他本质上所做的工作都是聚类的
-给定数据之后，聚类能从中学习到什么，就完全取决于数据本身的特性的，简单说就是自动给数据贴标签
-比较有名的非监督学习蒜贩有K均值聚类（K-Means Clustering）、层次聚类（Hierarchical Clustering）、主成分分析（Principal Components Analysis，PCA）、DBSCAN、深度信念网络（Deep Belief Net）等
-半监督学习半监督学习其实是使用最多的一种了，就像我们人生的学习过程一样，不是所有的东西都有人来教，总有需要自己去理解总结的时候
-他的形式化的定义如下
-给定一个来自于某个位置分布的有标记实例集合${(x_1,y_1),(x_2,y_2),\dots,(x_k,y_k)}$这里$x_i$是输入数据，而$y_i$是标签；然后还有一个未标记的示例集合$U&#x3D;{x_{k+1},x_{k+2},\dots,x_{k+u}}$那么这里的u就是未标记的数据个数
-我们希望模型通过学习得到某个函数，通过他能够准确的对未标记...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-机器学习入门之监督学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">机器学习入门之监督学习</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-02T10:59:51.000Z" itemprop="datePublished">2024-05-02</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.6k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">监督学习</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            机器学习初步什么是机器学习我们人类学习的过程就像是在理解一个知识并且能够运用这种知识，而理解知识过程本身就是一种改善提高自我的过程。这里面最重要的其实就是从过往的，已有的数据中，提取知识，并且能够运用
-机器学习的三个步骤在人类学习的过程中，例如学习将实物苹果和文字“苹果”做对应，我们通过观看苹果的图片或者实物，提取出共同的特征，例如都有类似红色的颜色，顶部和底部都有凹陷的窝，一般有梗，叶子是绿色的等等一系列特征，再将这些特征与苹果这两个文字联系起来，就完成了从实物到文字的这样一个映射（学习过程）
-那么对于机器学习也是一样的，我们有特定输入，预期输出，处理函数
-对于特定输入，其实就是苹果的图片或者实物，但是对于计算机而言，他是无法观看这些实物的影像的。因此我们考虑将这些影响转化为具有特征值的向量空间，例如使用灰度矩阵来表示图片
-预期输出也就是我们最终学习到的“苹果”两个字，也就是学习之后的结果
-而处理函数就是我们的大脑
-每一个具体的输入称之为实例（instance），由特征向量（feature vector）构成，所有特征向量存在的空间称之为特征空间（feature space）
-...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%E4%B9%8B%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分類</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">44</div>
+                <div class="category-count">46</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -198,7 +198,7 @@
         
             <a class="category-link" href="/categories/%E6%A1%86%E6%9E%B6/">
                 框架
-                <div class="category-count">1</div>
+                <div class="category-count">2</div>
             </a>
         </div>
     </div>
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">彙整</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">16 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,26 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/27/muduo%E7%BD%91%E7%BB%9C%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="muduo网络库介绍" >
+            <div class="recent-link-text">
+              muduo网络库介绍
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/27/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8Bpoll%E4%B8%8Eepoll/" title="Linux高级IO之poll与epoll" >
+            <div class="recent-link-text">
+              Linux高级IO之poll与epoll
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/" title="Linux高阶IO之select多路转接" >
+            <div class="recent-link-text">
+              Linux高阶IO之select多路转接
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8B%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/" title="Linux高级IO之五种IO模型" >
             <div class="recent-link-text">
@@ -320,24 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" title="HTTPS详解" >
-            <div class="recent-link-text">
-              HTTPS详解
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
-            <div class="recent-link-text">
-              Linux网络——HTTP协议详解（2）
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
-            <div class="recent-link-text">
-              ProtoBuf序列化框架介绍
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,235 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程——进程优先级" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/15/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/">Linux进程——进程优先级与僵尸进程孤儿进程</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-15T11:00:54.000Z" itemprop="datePublished">2024-07-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            956 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            僵尸进程僵尸状态进程本质上就是死亡状态
+在进程死亡之后，不会直接对进程进行释放，而是先会处理一些后事
+进程在结束退出的时候，也会有一些信息来表示任务完成的如何
+一个最最直接的例子就是，C&#x2F;C++中主函数的return0，在一开始学的时候很不理解为什么要return0，但其实0只是表示正常执行结束的信息，程序也可以返回1、2、3等内容来表示别的情况
+当进程退出，但是还没有处理完后事的时候，就处于僵尸状态
+变成僵尸状态的过程我们在退出进程的时候，需要一些信息来表示任务完成的如何，那么这些信息要交给谁呢，也就是这个return给了谁
+答案就是父进程，当一个进程在退出的时候，退出信息会由操作系统写入到当前退出进程的PCB中，可以允许进程的代码和数据空间被释放，但是不允许进程的PCB被立即释放
+所以僵尸状态的定义就是，当一个进程退出，但退出信息没有被父进程读取，此时退出进程的PCB没有被释放，就处于僵尸状态
+但是当一个进程长期处于僵尸状态时，如果不及时处理，就会有内存泄漏的风险
+我们可以用下面的代码来观察和僵尸进程
+12345678910111213141516171819202...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/15/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-非监督学习之k均值聚类" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/15/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B9%8Bk%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB/">非监督学习之k均值聚类</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-15T08:56:54.000Z" itemprop="datePublished">2024-07-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            聚类分析在模式识别、机器学习以及图像分割领域有着重要作用。k均值聚类由于算法的时间复杂度比较低，从而广泛应用于各类数据信息挖掘业务中
+聚类的概念聚类指的是将物理或者抽象的对象集合分成由相似对象组成的多个类的过程
+这个过程中的关键就是如何度量对象间的相似性
+较为常见的指标由距离、密度等。我们把聚类完成之后的一组数据对象的集合称为簇，同一个簇内的对象相似性高，而不同的则反之，并且非监督学习没有预先定义好的分类
+簇的划分直观上我们会把样本点散落在坐标系中，然后根据相似性放一起，这样自然就能形成一个示意图
+如果在某一固定范围内，样本较为集中，其实就说明这一簇中的对象特征相似，而且有别于其他簇，例如扑克牌中的四种花色
+但是当簇的特征不是那么明显的时候，我们没办法一眼就看出簇的个数，这时候就需要一个算法来划分，也就是k均值聚类算法
+k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
+
+选取k个点，作为k个簇的中心，这个k是认为设定的参数
+将数据对象分配到距离自己最近的簇中
+
+假设样本集中由l个样本，每个样本都有n个特征，用$x_i$表示，假设我们要把这些样本分为k个簇$S&#x3D;{...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/15/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B9%8Bk%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux进程——进程状态" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/14/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81/">Linux进程——进程状态</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-14T11:39:55.000Z" itemprop="datePublished">2024-07-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.6k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            这里我们终于开始进程本身的内容了，我们之前讲操作系统管理的是进程的PCB块，那么很显然，进程状态就是PCB中的一个变量，可以使用宏定义来实现
+12345678#define NEW 1#define RUNNING 2#define BLOCK 3struct PCB&#123;    // ...其他配置    int state; // 进程状态&#125;
+
+这里我们主要介绍三种操作系统进程状态，分别是运行状态、阻塞状态、挂起状态，并且讲解Linux中具体的进程状态，分别是R状态（运行状态），S状态（睡眠状态）
+操作系统进程状态运行状态现在我们使用的电脑和手机CPU说是8核心，16核心，也就是相当于CPU可以分别同时处理多个任务，我们为了方便称之为小CPU，每一个小CPU都有其对应的运行队列，他会从自己的运行队列中寻找数据来进行处理，但这里有一个容易混淆的点，就是无论这个进程是否被处理，只要他处于运行队列中，他就是运行状态
+例如
+
+以上的PCB1到PCB5，全都是运行状态
+阻塞状态我们先不去深究阻塞状态究竟是什么，先从感性上感受一下
+当CPU处理一个进程时，或多或少都会访问...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/14/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-sklearn之神经网络学习算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +609,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            1.1k 詞 
           </div>
         </div>
         
@@ -452,7 +681,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.9k words 
+            1.9k 詞 
           </div>
         </div>
         
@@ -530,7 +759,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            967 words 
+            967 詞 
           </div>
         </div>
         
@@ -609,7 +838,7 @@ PCB上一节内容中，我们说到，管理是管理的数据，需要先描�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k words 
+            1.2k 詞 
           </div>
         </div>
         
@@ -687,7 +916,7 @@ PCB上一节内容中，我们说到，管理是管理的数据，需要先描�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k words 
+            1.3k 詞 
           </div>
         </div>
         
@@ -717,228 +946,6 @@ RAII思想RAII思想说白了就是一种利用对象的声明周期来控制程
     <a class="right-panel  non-pic  "
       
       href="/2024/05/28/C-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-sklearn之logistic回归" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/28/sklearn%E4%B9%8Blogistic%E5%9B%9E%E5%BD%92/">sklearn之logistic回归</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-28T05:10:33.000Z" itemprop="datePublished">2024-05-28</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            917 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logistic%E5%9B%9E%E5%BD%92/" rel="tag">logistic回归</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            logistic回归logistic regression被称之为logistic回归，对于logistic这个单词来说，他本身的翻译其实不太容易，比较有名的译法是对数几率回归，我也认为这种译法是比较合适的，虽然并非logistic的本意，但却是最贴切这个算法本身的译法
-regression的意思是回归，但其实这个算法是一种分类算法
-回到我们讲线性回归的时候，主要是对指数本身进行预测，但是想要更实用的话，我们其实更希望知道涨跌的情况，那其实这样的输出值就只有两类，涨或者跌，也就是二分类问题
-这种情况其实非常常见，例如销售额和顾客买不买之间的问题，播放量和用户会不会点击的问题
-但问题在于，我们统计出来的样本特征往往是一个连续的实数值，而目标则是一个0或1的问题，那么我们简单的线性回归模型就会失效，难以再进行有效的预测
-如果直接拟合比较困难，那我们可以将输出值变化一下，从一个非0即1的问题变成涨跌的概率问题，那么概率是连续值，我们就又回到了从连续值到连续值的映射，这似乎就还是回归的内容
-那我们给出一个阈值（$\theta$），当概率大于阈值时，认为涨的可能性大，当概率小于阈值时，认为...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/28/sklearn%E4%B9%8Blogistic%E5%9B%9E%E5%BD%92/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-C-异常处理机制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/20/C-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/">C++异常处理机制</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-20T06:02:12.000Z" itemprop="datePublished">2024-05-20</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            异常在我们之前学习的时候，C语言遇到内存泄漏或者内存越界的时候，要么程序直接就崩了，给一个错误码，写的好一点也就是给个assert，但是程序仍会终止，要么就根本发现不来，C++中我们也常说，当越界时会抛异常
-异常的概念异常是是C++处理程序错误的一种方式，当程序发生错误的时候，就会抛出异常，这个异常可以是程序自发给出的，也有可能是我们手动写的throw，当抛出异常之后，我们可以在别的地方捕获异常，catch到就可以对异常进行提示和处理
-这样做有一个好处是，当程序出错时不一定会完全终止程序，而是可以有一个补救措施
-一般有三个关键字
-throw：这个就是扔出去的意思，扔出一个异常，所谓的异常其实就是一个类
-catch：这个是捕获异常，当捕获到了这个异常（类）的时候，需要执行的语句
-try：这个是用于执行可能会出错的代码，在代码中出错的语句抛出就可以被catch到
-例如
-123456789101112131415161718double func(int a, int b)&#123;    if(b==0)        throw &quot;division by zero&qu...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/20/C-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-C-11特性（三）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/16/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%89%EF%BC%89/">C++11特性（三）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-16T10:53:56.000Z" itemprop="datePublished">2024-05-16</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.5k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            类的新增功能默认构造在原有的C++类中，会有6个默认的成员函数，分别是构造函数、析构函数、拷贝构造、赋值重载、取地址重载、const取地址重载
-最重要并且经常用的是前四个，后两个用处不大
-所谓默认成员函数是当构建一个类的时候，我们不写这些函数，编译器会帮我们生成一个默认的
-在C++11中，又新增了移动构造函数和移动赋值重载，这两个我们在上一篇中有详细解释
-但是生成的规则会有不同
-当你没有显式的写析构、拷贝构造和赋值重载时，编译器会自动生成默认的移动构造和移动赋值重载
-默认生成的移动构造函数，对于内置类型会执行按字节拷贝，对于自定义类型，就需要看这个类型是否定义移动构造，有的话就直接调用，没有的话就调用拷贝构造
-移动赋值重载和上面的移动构造完全类似
-但是当我们自己写了移动构造或者移动赋值，编译器就不会生成拷贝构造和赋值重载了
-类成员变量初始化C++11允许在类定义的时候给成员变量缺省值，默认生成的构造函数会使用这些缺省值进行构造，例如
-1234567class Date&#123;private:	int _year = 1970;    int _month = 1;    in...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/16/C-11%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%89%EF%BC%89/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

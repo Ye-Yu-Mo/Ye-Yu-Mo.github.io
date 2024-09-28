@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Categories</h3>
+      <h3 class="widget-title">分類</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -158,7 +158,7 @@
         </div></div>
             <a class="category-link" href="/categories/Linux/">
                 Linux
-                <div class="category-count">44</div>
+                <div class="category-count">46</div>
             </a>
         
             <a class="category-link" href="/categories/python/">
@@ -198,7 +198,7 @@
         
             <a class="category-link" href="/categories/%E6%A1%86%E6%9E%B6/">
                 框架
-                <div class="category-count">1</div>
+                <div class="category-count">2</div>
             </a>
         </div>
     </div>
@@ -209,12 +209,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Archives</h3>
+      <h3 class="widget-title">彙整</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">16 </div>
+          <div class="archive-count">19 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,8 +305,26 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">Recent Posts</h3>
+      <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/27/muduo%E7%BD%91%E7%BB%9C%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="muduo网络库介绍" >
+            <div class="recent-link-text">
+              muduo网络库介绍
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/27/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8Bpoll%E4%B8%8Eepoll/" title="Linux高级IO之poll与epoll" >
+            <div class="recent-link-text">
+              Linux高级IO之poll与epoll
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/" title="Linux高阶IO之select多路转接" >
+            <div class="recent-link-text">
+              Linux高阶IO之select多路转接
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8B%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/" title="Linux高级IO之五种IO模型" >
             <div class="recent-link-text">
@@ -320,24 +338,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" title="HTTPS详解" >
-            <div class="recent-link-text">
-              HTTPS详解
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" title="Linux网络——HTTP协议详解（2）" >
-            <div class="recent-link-text">
-              Linux网络——HTTP协议详解（2）
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/21/ProtoBuf%E4%BB%8B%E7%BB%8D/" title="ProtoBuf序列化框架介绍" >
-            <div class="recent-link-text">
-              ProtoBuf序列化框架介绍
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -348,6 +348,245 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-C-手撕红黑树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/04/08/C-%E6%89%8B%E6%92%95%E7%BA%A2%E9%BB%91%E6%A0%91/">C++手撕红黑树</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-04-08T05:40:38.000Z" itemprop="datePublished">2024-04-08</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.6k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            红黑树概念和AVL树一样，红黑树也是一种二叉搜索树，是解决二叉搜索树不平衡的另一种方案，他在每个节点上增加一个存储位，用于表示节点的颜色，是Red或者Black
+红黑树的核心思想是通过一些着色的条件限制，达到一种最长路径不超过最短路径的两倍的状态
+所以说红黑树并不是严格平衡的树，而是一种近似平衡
+例如
+
+性质（条件限制）红黑树一共有五条性质，由此来保证最长路径不超过最短路径的两倍
+
+每个节点都有颜色，不是黑色就是红色
+根节点是黑色的
+如果一共节点是红色，那么他的子节点一定是黑色（不会出现两个红色节点连接的情况）
+对于每个节点，以这个节点到所有后代的任意路径上，均包含相同数目的黑色节点
+每个叶子节点（空节点）是黑色的（为了满足第四条性质，某些情况下如果没有第五条第四条会失效）
+
+节点的定义123456789101112131415161718192021222324// 颜色enum Color &#123;	RED,	BLACK&#125;;template&lt;class T&gt;struct RBTreeNode &#123;	RBTreeNode&lt;T&gt;* _...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/04/08/C-%E6%89%8B%E6%92%95%E7%BA%A2%E9%BB%91%E6%A0%91/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-MyLisp项目日志：函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/03/29/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E5%87%BD%E6%95%B0/">MyLisp项目日志：函数</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-03-29T07:40:56.000Z" itemprop="datePublished">2024-03-29</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            函数 我们想让用户可以定义自己的函数，而不仅仅是使用我们提供的内建函数
+那我们要提供这样的功能就要首先就得提供一个内置函数，可以使用户通过这个函数创建自定义的函数
+他使用起来有两个参数，第一个是形参列表，也就是要使用的参数，第二个参数是另一个列表，也就是函数的具体内容，运行函数时，我们调用对应函数进行处理即可
+我们使用\来表示定义函数
+例如
+1\ &#123;x y&#125; &#123;+ x y&#125;
+
+然后可以将其作为普通的S表达式使用，也就是计算的符号
+1(\ &#123;x y&#125; &#123;+ x y&#125;) 10 20
+
+如果我们想命名这个函数，只需要使用def给他起个名字，这样就能使用名字直接调用了
+123def &#123;add-together&#125; (\ &#123;x y&#125; &#123;+ x y&#125;)add-together 10 20
+
+函数类型我们要将函数存储为一种MLval的值，就需要考虑他的组成部分
+根据刚刚功能的描述，可以基本确定如下内容：
+
+函数有三个部分构成
+第一个是形参列表，并且需要绑定参...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/03/29/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E5%87%BD%E6%95%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-C-手撕AVL树" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/03/26/C-%E6%89%8B%E6%92%95AVL%E6%A0%91/">C++手撕AVL树</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-03-26T10:48:00.000Z" itemprop="datePublished">2024-03-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.4k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AVL%E6%A0%91/" rel="tag">AVL树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            AVL树之前我们讲了二叉搜索树的相关内容，但是也了解到二叉搜索树有其自身的缺陷，就是当插入的元素有序或者接近有序，退化成单支树的时候，他的时间复杂度就会退化成O(N)，因此我们需要对他进行优化，有两种，一种是AVL树，也就是平衡二叉树，另一种是红黑树，这里我们先介绍AVL树
+概念在发现这个问题之后，两个俄罗斯数学家发明了解决这个问题的一种办法
+当向二叉搜索树中插入节点之后，检查每个节点的左右子树高度只差绝对值不超过一，否则需要进行调整
+这样就能降低树的高度，从而减少平均的搜索长度
+一棵AVL树是空树或者有如下性质
+
+左右子树都是AVL树
+左右子树高度差（平衡因子）的绝对值不超过1
+
+例如
+
+节点12345678910111213141516template&lt;class K, class V&gt;struct AVLTreeNode &#123;	AVLTreeNode&lt;K, V&gt;* _left; // 左子树	AVLTreeNode&lt;K, V&gt;* _right; // 右子树	AVLTreeNode&lt;K, V&gt;* _parent; //...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/03/26/C-%E6%89%8B%E6%92%95AVL%E6%A0%91/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-百度飞桨大模型训练营：零代码对话式大模型应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +619,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.6k words 
+            1.6k 詞 
           </div>
         </div>
         
@@ -477,7 +716,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            5.6k words 
+            5.6k 詞 
           </div>
         </div>
         
@@ -552,7 +791,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            4.2k words 
+            4.2k 詞 
           </div>
         </div>
         
@@ -633,7 +872,7 @@ Q表达式与S表达式非常类似，不同的是Q表达式存在大括号内�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.2k words 
+            3.2k 詞 
           </div>
         </div>
         
@@ -703,7 +942,7 @@ Q表达式与S表达式非常类似，不同的是Q表达式存在大括号内�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.7k words 
+            2.7k 詞 
           </div>
         </div>
         
@@ -740,242 +979,6 @@ state表示这个节点所处的状态，例如行数和列数，这里不会用
     <a class="right-panel  non-pic  "
       
       href="/2024/03/17/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97%E4%B8%8E%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-MyLisp项目日志：波兰表达式及其解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/16/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%8A%E5%85%B6%E8%A7%A3%E6%9E%90/">MyLisp项目日志：解析用户输入与波兰表达式</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-16T08:35:54.000Z" itemprop="datePublished">2024-03-16</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.5k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            编程语言编程语言是类似于自然语言的，虽然我们是自然而然就学会了自己的母语，但实际上自然语言是建立在递归和重复的子结构之上的
-在语文的学习过程中我们会学到一些语法，例如名词、动词、谓语、连词
-他的结构体现在，例如谓语可以是形容词，是动词，是副词加动词
-他的递归体现在，主语可以是名词，可以是形容词加名词，甚至是一个句子，再由这个主语去构成另一个句子
-这些说白了是一种有限的规则，而由这些优先的规则延申出来的就是无限的句子
-为了定义我们的编程语言（MyLisp），我们首先需要正确解析用户按照语法规则写的代码，因此我们就需要编写一个语法解析器，用于判断用户的输入是否合法，并且产生解析后的内部表示
-但是这一步十分繁琐且枯燥，我们使用mpc库来帮助我们完成这个工作，这个库是一个解析器组合子库，可以为任何语言编写语法解析器，他极大的简化了原本枯燥无聊的工作，仅仅编写高层的抽象语法规则即可
-mpc库的项目地址，非常感谢Daniel Holden大佬！！
-模拟自然语言下面我们将使用mpc的一些函数，尝试描述英语的部分语法，熟悉mpc的使用步骤，更多的函数请移步项目主页
-我们只采用最基础的语法，以后如...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/03/16/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%8A%E5%85%B6%E8%A7%A3%E6%9E%90/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-百度飞桨大模型笔记1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/15/%E7%99%BE%E5%BA%A6%E9%A3%9E%E6%A1%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B01/">百度飞桨大模型笔记1</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-15T08:31:32.000Z" itemprop="datePublished">2024-03-15</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">大模型训练营</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            3.3k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/" rel="tag">大模型训练营</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            生成式AI、提示词工程和零代码应用开发人工智能概念
-这里我们逐一解释这些概念
-
-AI是计算机学科下的一个分支学科，旨在使用计算机使之能像人类一样学习和思考问题
-机器学习是AI的一个子集，他的一个重要特点就是不需要人去做显示编程（不用手撕函数），让计算机自行学习迭代总结规律，做出预测和决策
-
-机器学习机器学习下就有很多分支了，例如监督学习、无监督学习、强化学习
-
-监督学习目标是学习原始数据和标签之间的映射关系，他的一个特点就是是给定了原始数据和标签，让计算机自行总结归纳，他的经典的应用有对事物的分类、回归预测等
-无监督学习就是相对于监督学习，他只给原始数据而不给定标签，让计算机自行发现数据中的模式或规律，他的应用有聚类（就是分组）、降维、异值检测、自编码器（大语言模型中用到）、自监督学习等
-强化学习就是让模型在环境中采取行动，不断尝试，让他在环境中获得最大奖励的手段，类似于人类学习的模式，趋利避害，例如Alpha Go
-
-深度学习深度学习具有这三类学习的一些特点，也有自己的模式，属于都有点但都不是的状态
-关于深度学习的核心就是两个词，一是连接，二是深度
-连接的意思是说，他采用了类似...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/03/15/%E7%99%BE%E5%BA%A6%E9%A3%9E%E6%A1%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%AC%94%E8%AE%B01/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-项目日志：MyLisp项目介绍和读取输入实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/15/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AMyLisp%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5%E5%AE%9E%E7%8E%B0/">MyLisp项目日志：项目介绍和读取输入实现</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-15T01:14:41.000Z" itemprop="datePublished">2024-03-15</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            895 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            项目介绍这是一个超轻量级的C&#x2F;C++项目，使用C&#x2F;C++模拟实现一个简单的Lisp（一种函数式程序设计语言），会使用一些外部的库进行初始化工作，例如mpc、editline等
-我们会使用类Python的REPL模式，使用Lisp程序，并不直接提供系统的编译运行环境，整个代码量大概在1000行左右
-主要难点
-
-语法规则与解析用户输入
-递归与错误处理
-S表达式，Q表达式
-函数，标准库
-
-我将会在这里逐步实现这个小项目并记录实现过程中出现的问题以及解决方案
-会先使用C语言实现，再考虑使用C++补充和优化
-读取输入的实现基本思路首先这是一个类Python的命令行输入的模式，基本思路就是使用一个while(1)循环，然后不断读入，再进行解析处理
-如下
-12345while(1)&#123;	char* input = readline(&quot;MyLisp&gt; &quot;);	printf(&quot;The sentence is %s\n&quot;, input);&#125;
-
-这里的readline是为了适配linux和mac，我们重新写的一个有相似...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/03/15/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9AMyLisp%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5%E5%AE%9E%E7%8E%B0/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
