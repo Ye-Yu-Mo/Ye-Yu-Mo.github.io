@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">30</div>
+                <div class="category-count">31</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -198,6 +198,11 @@
         
             <a class="category-link" href="/categories/%E6%A1%86%E6%9E%B6/">
                 框架
+                <div class="category-count">3</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                数据库
                 <div class="category-count">2</div>
             </a>
         </div>
@@ -209,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/09 ">
           September 2024 
-          <div class="archive-count">19 </div>
+          <div class="archive-count">23 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/08 ">
@@ -305,36 +310,36 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/09/30/SQLite%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="SQLite数据库介绍" >
+            <div class="recent-link-text">
+              SQLite数据库介绍
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/30/C-C-static%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%A6%E8%A7%A3/" title="C/C++static关键字详解" >
+            <div class="recent-link-text">
+              C/C++static关键字详解
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/30/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" title="MySQL数据库基础" >
+            <div class="recent-link-text">
+              MySQL数据库基础
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/09/29/%E5%9F%BA%E4%BA%8Emuduo%E5%BA%93%E5%AE%9E%E7%8E%B0protobuf%E5%8D%8F%E8%AE%AE%E7%9A%84%E9%80%9A%E4%BF%A1/" title="基于muduo库实现protobuf协议的通信详解" >
+            <div class="recent-link-text">
+              基于muduo库实现protobuf协议的通信详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/09/27/muduo%E7%BD%91%E7%BB%9C%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="muduo网络库介绍" >
             <div class="recent-link-text">
               muduo网络库介绍
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/27/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8Bpoll%E4%B8%8Eepoll/" title="Linux高级IO之poll与epoll" >
-            <div class="recent-link-text">
-              Linux高级IO之poll与epoll
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/" title="Linux高阶IO之select多路转接" >
-            <div class="recent-link-text">
-              Linux高阶IO之select多路转接
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/26/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8B%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/" title="Linux高级IO之五种IO模型" >
-            <div class="recent-link-text">
-              Linux高级IO之五种IO模型
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E4%B9%8BUDP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" title="Linux网络之UDP与TCP协议详解" >
-            <div class="recent-link-text">
-              Linux网络之UDP与TCP协议详解
             </div>
           </a>
         
@@ -348,6 +353,317 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程控制——进程终止" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/27/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%BB%88%E6%AD%A2/">Linux进程控制——进程终止</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-27T09:17:32.000Z" itemprop="datePublished">2024-07-27</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            进程终止我们之前在命令行界面要终止一个进程时直接ctrl+c来干掉一个进程是比较暴力的做法
+实际上我们通常会使用一些函数调用接口或者系统调用接口来控制进程的退出
+就像我们完成一个任务一样，有完成和未完成两种结果，完成也可以分为完美完成和不完美完成
+对应下来就是三种结果，代码执行完成、结果正确；代码执行完成、结果不正确；代码异常终止
+前两个都属于是程序正常退出，一般有三种常见的方法，main函数return返回、调用exit终止进程、调用_exit终止进程
+而第三种则是异常退出，一般情况下异常往往是与信号相关的内容，我们之后再做介绍，这里我们只考虑ctrl+c终止进程
+从main函数return返回在一开始学习C&#x2F;C++时，在main函数结尾都会写一个return 0，当时的解释就是表示程序正常结束
+那么也就说明有异常结束的情况了，首先要说明的一些情况是这样的
+一个进程中只有一个main函数，也有的书中将函数称之为子程序，这是因为函数也可以return值，那么其实就可以说明，非main函数return时，表示这个函数完毕，而main函数执行到return时，说明这个进程执...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/27/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%BB%88%E6%AD%A2/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux进程——程序地址空间详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/26/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E7%A8%8B%E5%BA%8F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E8%AF%A6%E8%A7%A3/">Linux进程——程序地址空间详解</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-26T10:57:49.000Z" itemprop="datePublished">2024-07-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.7k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            程序地址空间我们之前学习内存的时候，有说内存的分布大概是这样的
+
+其中堆由下而上，栈由上而下
+除此之外，实际上C&#x2F;C++的常量字符串处于正文代码区，因此常量字符串是不允许修改的
+其次虽然栈是由上而下的，但是数组和结构体的地址是从下而上开辟的，简单说就是a[0]的地址比a[1]的地址低
+地址空间与物理内存我们考虑下面这样的代码
+123456789101112131415161718192021222324252627#include &lt;stdio.h&gt;    #include &lt;unistd.h&gt;    #include &lt;sys/types.h&gt;    #include &lt;stdlib.h&gt;    int main()    &#123;        int id=fork();        int tmp=10;        if(id==0)//子进程执行的代码        &#123;            tmp=20;            while(1)            &#123;      ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/26/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E7%A8%8B%E5%BA%8F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E8%AF%A6%E8%A7%A3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux进程——环境变量详解与程序地址空间的认识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E7%9A%84%E8%AE%A4%E8%AF%86/">Linux进程——环境变量之二</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T12:24:46.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            895 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            环境变量查看环境变量在上一篇文章中我们只说了查看某个环境变量的值，那么如何查看所有的环境变量呢
+使用指令env即可
+例如
+
+这里我们也不需要全部记住，只需要记住一些比较常见的
+
+PWD这个环境变量就是给pwd指令的结果了
+HOME这里对应的就是cd ~命令了，找到家在哪里
+
+那其实在我们登录Xshell时，他所做的工作就是认证信息，将bash加载到内存，形成进程，根据用户名初始化环境变量，进入家目录
+这样我们其实就能理解为什么当我们直接改环境变量值的之后，直接重启Xshell就能恢复了，因为每一次都要重新加载初始化
+获取环境变量那么在C语言中是如何获取环境变量呢
+就是使用getenv()函数即可，返回值即为环境变量的值，参数是环境变量名称
+例如
+12char* ret = NULL;ret = getenv(&quot;PATH&quot;);
+
+main()的第三个参数我们之前说了main的前两个参数，表示命令行参数表
+1int main(int argc, char* argv[], char* env[])
+
+这里的第三个参数其实就是环境变量的指针数组，他指向的就是环境变量...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AF%A6%E8%A7%A3%E4%B8%8E%E7%A8%8B%E5%BA%8F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E7%9A%84%E8%AE%A4%E8%AF%86/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux进程——进程切换与环境变量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/16/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">Linux进程——进程切换与环境变量</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-16T06:23:22.000Z" itemprop="datePublished">2024-07-16</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.4k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            进程间切换我们在之前讲过CPU在调度进程时，不是一个进程一直占用CPU，而是会过段时间就会放入其他进程，那么就一定存在进程切换的过程
+运行到一半的进程数据去哪了第一个想到的问题就是，当一个进程中途被取下，再次放上去时，计算机怎么知道这个进程运行到哪里了
+了解计算机组成原理的朋友都知道CPU中有一些寄存器，例如eax、ebx、esp、ebp、eip等
+
+eax可以帮助函数返回一个值
+esp和ebp用来维护函数的栈帧
+eip则会保存当前代码运行到了哪一行
+
+所以在进程运行时，这些寄存器就会临时保存进程产生的各种数据
+这里需要注意的是，进程在切换时会不断的对自己的数据进行保存和恢复，当进程进行保存时是保存寄存器中的数据，而非寄存器本身，这些数据会被保存到进程的PCB中
+进程被取下时，CPU数据是否会被删除事实上，一个进程被取下时，CPU不会删除他的临时数据，而是当下一个进程被放入时，直接进行覆盖
+命令行参数我们之前在学习C&#x2F;C++的时候，有的默认代码在main函数内也放置了两个参数
+1int main(int argc, char* argv[]);
+
+这两个参数也称之为命令...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/16/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程——进程优先级" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -380,7 +696,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            956 詞 
+            956 words 
           </div>
         </div>
         
@@ -456,7 +772,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k words 
           </div>
         </div>
         
@@ -534,7 +850,7 @@ k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.6k 詞 
+            1.6k words 
           </div>
         </div>
         
@@ -609,7 +925,7 @@ k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k words 
           </div>
         </div>
         
@@ -649,315 +965,6 @@ k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
 
  
 
-   
-
-<article id="post-Linux进程——子进程详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/13/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E5%AD%90%E8%BF%9B%E7%A8%8B%E8%AF%A6%E8%A7%A3/">Linux进程——子进程详解</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-13T14:52:19.000Z" itemprop="datePublished">2024-07-13</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.9k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            在上一节中我们简单介绍了进程的概念，还有父进程和子进程
-这篇文章的主要内容是介绍如何使用fork函数创建子进程，fork函数的一些特点
-查看进程的另一种方式在上一节中主要使用ps命令列举进程条目，但我们知道，在Linux系统中，一切皆文件
-因此所谓的进程条目，本质上也是存着的一个动态文件proc，这里面存放着所有的进程信息
-因为这个文件是会随着进程的改变实时更新其中的内容，因此我们称之为动态文件
-我们可以使用ls /proc/查看所有进程文件，也可以在其后加上特定进程的pid，查看特定进程
-例如
-
-我们同样可以创建一个死循环，然后来使用这个命令来查看其中的内容
-
-在我们自行创建的进程当中存在着许多文件，这里有两个文件值得我们注意，一个是exe文件，另一个是cwd文件
-其中exe文件指的是可执行程序的位置，而cwd代表默认的当前文件，或者可以简单理解为当前的文件路径，就好比pwd命令查看当前路径，他就是从cwd文件获取的路径
-如何创建子进程众所周知Linux的底层是使用c语言实现的，因此所谓的创建进程本质上就是调用了一个c语言函数，也就是用代码创建进程，而我们用户使用代码创建进程称...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/13/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E5%AD%90%E8%BF%9B%E7%A8%8B%E8%AF%A6%E8%A7%A3/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程——进程的概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/12/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/">Linux进程——进程的概念</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-12T08:07:53.000Z" itemprop="datePublished">2024-07-12</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            967 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            我们在上一节内容中有简单谈到进程的感性理解，他在课本上的概念是，程序的一个执行实例或正在执行的程序
-但在本质上，他其实就是一个被分配了系统资源（CPU，内存）的实体
-PCB上一节内容中，我们说到，管理是管理的数据，需要先描述再组织
-那在内存中，操作系统对多个进程应当如何管理呢
-这时候就有聪明的同学回答了，先描述再组织
-我们还是使用结构体来进行描述，对于一个进程来说可能会有进程ID、代码存储地址、进程状态、进程优先级，如果是用链表的形式存储还会有指向下一个结构体的指针
-12345678struct data&#123;	// id    // 代码地址    // 状态    // 优先级    struct data* next;&#125;;
-
-
-
-那么这样一个结构体，我们给她起一个名字，叫做PCB，进程控制块
-当然在不同的操作系统中，管理所用的PCB名称也不一定相同，在Linux中，这个PCB具体叫做struct task_struct，进程控制块
-那么操作系统对进程的管理就变成了对链表的增删查改
-进程排队当进程在链表中，就会等待CPU去找PCB来进行处理，那么CPU是如何知...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/12/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-计算机体系结构——冯诺依曼系统与操作系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">计算机体系结构——冯诺依曼系统与操作系统</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-12T07:22:01.000Z" itemprop="datePublished">2024-07-12</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.2k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            在深入学习Linux进程等概念之前，我们对于计算机的体系结构还需要有一个基础的认识，这一部分在大多高校中复杂冗长，但十分严谨广泛适用
-我们在这里主要介绍的是感性的直观上对计算机工作原理系统调度的理解
-冯诺依曼体系结构现代计算机都是基于冯诺依曼体系结构的，也就是我们在计算机组成原理上学的那个东西
-
-当然现代计算机不以存储器为核心，而以运算器和控制器为核心，这些都是后话了，我们也不深入了解其中的原理，只分别介绍一下这些在计算机中代表什么
-输入设备主要有，键盘、鼠标、摄像头、磁盘、网卡等
-存储器，这里的存储器指的是内存而非磁盘
-中央处理器有，运算器和和控制器，其中也有一部分cache缓存
-输出设备主要有、显示器、磁盘、扬声器、网卡等
-内存体系用一张图就可以解释清楚
-
-由下到上是计算机的内存分级，因为不同存储器的处理数据速度不尽相同，而处理的速度越快，就导致成本越高，在总成本有限的情况下，使用这样的金字塔体系就可以保证有相当快的数据存取速度和相当大的存储空间了
-而整个计算机中最快的就是CPU了，为了不被磁盘拖后腿，我们只允许CPU和内存（主存）以上的存储器打交道，这样就能在保证速度的同时...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-C-智能指针" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/05/28/C-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">C++智能指针详解</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-05-28T11:39:55.000Z" itemprop="datePublished">2024-05-28</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/C/">C++</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.3k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            智能指针前面我们一直在铺垫智能指针，这个词听上去非常高大上，但其实我们不需要害怕，就像一开始我们学什么封装继承多态，这些东西本质上就是对类和对象的补充
-智能指针出现的背景其实为了是内存空间管理的问题，尤其是加了异常处理机制之后，就变得更为复杂
-那我们其实就想，有没有一种东西，可以自动的控制内存资源
-RAII思想RAII思想说白了就是一种利用对象的声明周期来控制程序资源的简单技术，例如内存、文件句柄、网络连接等
-在对象构造的时候，获取资源，在对象析构的时候，释放资源，让这个对象在生命周期之内，始终可以进行访问
-这样做的本质其实是将这个资源托管给了对象，我们之前学类和对象的时候，他是可以自动调用构造和析构函数的，这就意味着我们不需要显示释放资源，并且可以让资源在其生命周期内始终有效，因为在调用析构的时候，才会释放资源
-那更直白一点，所谓的智能指针本质上其实就是一个类，这个类可以管理资源
-例如
-12345678910111213141516template&lt;class T&gt;class SmartPtr&#123;public:    SmartPtr(T* ptr = nu...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/05/28/C-%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
 
   <nav id="page-nav">
     <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
@@ -965,7 +972,7 @@ RAII思想RAII思想说白了就是一种利用对象的声明周期来控制程
       <i class="fa-solid fa-angle-left"></i>
     </a>
     <div id="num-bar">
-      <a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a>  
+      <a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a>  
     </div>
     <a id="next-btn" class="page-nav-btn " href="/page/7/">
       <i class="fa-solid fa-angle-right"></i>
