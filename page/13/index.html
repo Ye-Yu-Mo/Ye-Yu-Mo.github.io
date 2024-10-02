@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">31</div>
+                <div class="category-count">33</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -214,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">3 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -318,6 +318,18 @@
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/10/02/C-%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC%E8%AF%A6%E8%A7%A3reinterpret-cast-static-cast%E4%B8%8Edynamic-cast/" title="C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast" >
+            <div class="recent-link-text">
+              C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/02/C-11%E7%89%B9%E6%80%A7%E4%B9%8B%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="C++11特性之异步操作实现线程池" >
+            <div class="recent-link-text">
+              C++11特性之异步操作实现线程池
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/10/01/gtest%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/" title="GTest测试框架介绍" >
             <div class="recent-link-text">
               GTest测试框架介绍
@@ -336,18 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/30/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" title="MySQL数据库基础" >
-            <div class="recent-link-text">
-              MySQL数据库基础
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/29/%E5%9F%BA%E4%BA%8Emuduo%E5%BA%93%E5%AE%9E%E7%8E%B0protobuf%E5%8D%8F%E8%AE%AE%E7%9A%84%E9%80%9A%E4%BF%A1/" title="基于muduo库实现protobuf协议的通信详解" >
-            <div class="recent-link-text">
-              基于muduo库实现protobuf协议的通信详解
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,153 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-算法基础之树状数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/25/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">算法基础之树状数组</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-25T02:14:55.000Z" itemprop="datePublished">2024-01-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            559 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            树状数组树状数组能解决的最关键的问题就是能够$O(\log n)$内，给某个位置上的数，加上一个数，或者求前缀和
+他和前缀和数组的区别就是，树状数组支持修改原数组的内容，而前缀和数组不支持，需要重新求前缀和数组
+总结一下树状数组能做的操作就是单点修改和区间查询，对于他的其他的功能，例如区间修改，单点查询，区间修改，区间查询都是使用差分的思想转化成最基础的思想
+这里我们需要利用图像来表示
+
+
+这里的树状数组虽然画出来是个树，但本质上还是一维数组
+其中的任意一个数字其实表示的是一段数的和，例如$C[8]&#x3D;A[1]+\dots+A[8]$
+那么对于$C[x]$，我们如何确定x的层数呢，其实是可以利用x的二进制表示，其中末尾有几个0，就是第几层的数字，假设他最后有k个0，那么$C[x]&#x3D;\sum_{x-2^k+1}^xA[x]$，C++中有一个lowbit(x)函数，可以返回$2^k$,因此这个表达式也可以写成$C[x]&#x3D;\sum_{x-lowbit(x)+1}^xA[x]$，补充这里这里的lowbit(x)函数的原理就是位运算$x&amp;-x$
+有了这部...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/25/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-MySQL之数据库DML" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/24/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93DML/">MySQL之数据库DML</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-24T05:49:50.000Z" itemprop="datePublished">2024-01-24</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/MySQL/">MySQL</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            416 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            数据操作DML这里的数据操作就是增删改的更新操作，不包括查询
+插入12insert into 表 (列名1,列名2,列名3...) values (值1,值2,值3...); //向表中插入对应列insert into 表 values (值1,值2,值3...);     //向表中插入所有列
+
+第一种是需要按照列名对应写数值的，可以省略，但必须对应
+第二种是一次插入一行，是都要写的
+也可以插入多行只需在之后填入新的行即可
+1234insert into student(sid,name,gender,age,birth,address,score)            values(1001,&#x27;男&#x27;,18,&#x27;1996-12-23&#x27;,&#x27;北京&#x27;,83.5),            	  (1001,&#x27;男&#x27;,18,&#x27;1996-12-23&#x27;,&#x27;北京&#x27;,83.5);insert into student values(1001,&#x27;男&#x27;,18,&#...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/24/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93DML/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-每日算法打卡：逆序对的数量" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -390,7 +537,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            711 詞 
+            711 词 
           </div>
         </div>
         
@@ -473,7 +620,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 詞 
+            1.2k 词 
           </div>
         </div>
         
@@ -578,7 +725,7 @@ alter database mydb1 character set utf8;
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            928 詞 
+            928 词 
           </div>
         </div>
         
@@ -665,7 +812,7 @@ h1:m1:s1 h4:m4:s4 (+2)...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            497 詞 
+            497 词 
           </div>
         </div>
         
@@ -750,7 +897,7 @@ h1:m1:s1 h4:m4:s4 (+2)...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            565 詞 
+            565 词 
           </div>
         </div>
         
@@ -829,7 +976,7 @@ h1:m1:s1 h4:m4:s4 (+2)...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            531 詞 
+            531 词 
           </div>
         </div>
         
@@ -881,171 +1028,6 @@ SQLite...
     <a class="right-panel  non-pic  "
       
       href="/2024/01/22/MySQL%E4%B9%8BSQL%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-每日算法打卡：归并排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/22/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">每日算法打卡：归并排序</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-22T07:03:28.000Z" itemprop="datePublished">2024-01-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            453 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            原题链接787. 归并排序
-题目难度：简单
-题目描述给定你一个长度为 n 的整数数列。
-请你使用归并排序对这个数列按照从小到大进行排序。
-并将排好序的数列按顺序输出。
-输入格式输入共两行，第一行包含整数 n。
-第二行包含 n 个整数（所有整数均在 $1 \sim 10^9$ 范围内），表示整个数列。
-输出格式输出共一行，包含 n 个整数，表示排好序的数列。
-数据范围$1 \le n \le 100000$
-输入样例：1253 1 2 4 5 
-
-输出样例：11 2 3 4 5 
-
-题目分析归并排序是一种非常重要的分治思想，而且代码不是很复杂，是很有可能在做题时被要求手搓归并的
-归并排序的整体思想是先递归拆分，再排序，最后合并
-拆分是按照位置拆分的，一般都是按照中间位置拆分
-这里的难点在于如何合并
-我们用双指针，分别指向两个排好序的数组，然后总是选择较小的数存入到新数组中
-示例代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/22/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-每日算法打卡：回文日期" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/22/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/">每日算法打卡：回文日期</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-22T06:40:36.000Z" itemprop="datePublished">2024-01-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            824 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            原题链接466. 回文日期
-题目难度：简单
-题目来源：NOIP2016普及组
-题目描述在日常生活中，通过年、月、日这三个要素可以表示出一个唯一确定的日期。
-牛牛习惯用 8 位数字表示一个日期，其中，前 4 位代表年份，接下来 2 位代表月份，最后 2 位代表日期。
-显然：一个日期只有一种表示方法，而两个不同的日期的表示方法不会相同。
-牛牛认为，一个日期是回文的，当且仅当表示这个日期的 8 位数字是回文的。
-现在，牛牛想知道：在他指定的两个日期之间（包含这两个日期本身），有多少个真实存在的日期是回文的。
-一个 8 位数字是回文的，当且仅当对于所有的 i(1≤i≤8) 从左向右数的第 i 个数字和第 9−i 个数字（即从右向左数的第 i 个数字）是相同的。
-例如：
-
-对于 2016 年 11 月 19 日，用 8 位数字 20161119 表示，它不是回文的。
-对于 2010 年 1 月 2 日，用 8 位数字 20100102 表示，它是回文的。
-对于 2010 年 10 月 2 日，用 8 位数字 20101002 表示，它不是回文的。
-
-输入格式输入包括两行，每行包括一个 8 ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/22/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%9B%9E%E6%96%87%E6%97%A5%E6%9C%9F/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

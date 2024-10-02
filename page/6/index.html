@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">分类</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">31</div>
+                <div class="category-count">33</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -214,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">归档</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">3 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -318,6 +318,18 @@
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/10/02/C-%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC%E8%AF%A6%E8%A7%A3reinterpret-cast-static-cast%E4%B8%8Edynamic-cast/" title="C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast" >
+            <div class="recent-link-text">
+              C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/02/C-11%E7%89%B9%E6%80%A7%E4%B9%8B%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="C++11特性之异步操作实现线程池" >
+            <div class="recent-link-text">
+              C++11特性之异步操作实现线程池
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/10/01/gtest%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/" title="GTest测试框架介绍" >
             <div class="recent-link-text">
               GTest测试框架介绍
@@ -336,18 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/30/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" title="MySQL数据库基础" >
-            <div class="recent-link-text">
-              MySQL数据库基础
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/29/%E5%9F%BA%E4%BA%8Emuduo%E5%BA%93%E5%AE%9E%E7%8E%B0protobuf%E5%8D%8F%E8%AE%AE%E7%9A%84%E9%80%9A%E4%BF%A1/" title="基于muduo库实现protobuf协议的通信详解" >
-            <div class="recent-link-text">
-              基于muduo库实现protobuf协议的通信详解
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,157 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux基础IO——文件描述符的本质" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/">Linux基础IO——文件的系统调用与文件描述符的本质</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-05T08:14:30.000Z" itemprop="datePublished">2024-08-05</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            在Linux系统下有句名言是，Linux中一切皆文件
+C语言中的文件接口在C语言中有三个数据流，分别是stdin、stdout、stderr，这三个标准文件是交给程序员来输入输出的
+可以从键盘读入，显示器输出，也可以输出到文件中，那么其实在操作系统内部，他是把显示器、键盘等外设也看作是文件，向显示器输出和向磁盘文件中输出写入是没有本质区别的
+C语言打开文件的函数是fopen，读取是fread、fscanf、fgets，写入是fwrite、fprintf、fputs，和基础的scanf、gets使用都是一致的，只需要在末尾加上写入的文件指针即可
+fopen的返回值和三个数据流都是文件指针类型的，是FILE*
+操作文件的系统调用每一种语言都有各自不同的文件操作函数，但不管语言如何改变，想要对文件进行读写都需要让操作系统帮忙，使用系统调用才能对文件进行操作
+操作系统有四个系统调用
+open、close、write、read
+open
+我们主要看第一个定义，他的返回值是文件描述符fd，第一个参数是打开文件的路径，flags是你想要打开文件的方式
+因为文件的打开方式比较繁多，不能每一个都设...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/05/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E6%9C%AC%E8%B4%A8/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux进程控制——进程程序替换" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/">Linux进程控制——进程程序替换、bash的模拟实现</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-01T08:49:10.000Z" itemprop="datePublished">2024-08-01</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.5k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            在学习进程的时候，我们想fork一个子进程，然后就可以给他布置任务了
+但是如果我们分成两个人开发，父子进程分别负责不同的任务，等待开发完成之后除了合并项目或者复制粘贴还有更好的办法吗
+其实是有的，当子进程被创建后不想执行父进程代码时，就需要用到程序替换
+主要是exec系列函数的用法
+exec系列函数
+这里一共有六个函数，但是是同一个系列的，也有一定的规律，如果他们替换失败了，返回值都是-1
+execl这是里面最简单的函数，他的函数有两个，第一个是执行的程序路径，之后的是参数包，表示如何执行该程序
+可以理解为前一个是环境变量，后一个是程序指令，只不过按单词分开，具体使用是这样的
+例如
+12345678910111213#include&lt;stdio.h&gt;#include&lt;unistd.h&gt;int main()    &#123;        printf(&quot;程序替换\n&quot;);        int n = execl(&quot;/usr/bin/ls&quot;,&quot;ls&quot;,&quot;-a&quot;,&quot;-...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/01/Linux%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%A8%8B%E5%BA%8F%E6%9B%BF%E6%8D%A2/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程控制——进程等待" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -390,7 +541,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            935 詞 
+            935 词 
           </div>
         </div>
         
@@ -466,7 +617,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k 词 
           </div>
         </div>
         
@@ -540,7 +691,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k 詞 
+            1.7k 词 
           </div>
         </div>
         
@@ -612,7 +763,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            895 詞 
+            895 词 
           </div>
         </div>
         
@@ -697,7 +848,7 @@ main()的第三个参数我们之前说了main的前两个参数，表示命令�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.4k 詞 
+            1.4k 词 
           </div>
         </div>
         
@@ -777,7 +928,7 @@ eip则会保存当前代码运行到了哪一行
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            956 詞 
+            956 词 
           </div>
         </div>
         
@@ -809,159 +960,6 @@ eip则会保存当前代码运行到了哪一行
     <a class="right-panel  non-pic  "
       
       href="/2024/07/15/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-非监督学习之k均值聚类" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/15/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B9%8Bk%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB/">非监督学习之k均值聚类</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-15T08:56:54.000Z" itemprop="datePublished">2024-07-15</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sklearn/" rel="tag">sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">非监督学习</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            聚类分析在模式识别、机器学习以及图像分割领域有着重要作用。k均值聚类由于算法的时间复杂度比较低，从而广泛应用于各类数据信息挖掘业务中
-聚类的概念聚类指的是将物理或者抽象的对象集合分成由相似对象组成的多个类的过程
-这个过程中的关键就是如何度量对象间的相似性
-较为常见的指标由距离、密度等。我们把聚类完成之后的一组数据对象的集合称为簇，同一个簇内的对象相似性高，而不同的则反之，并且非监督学习没有预先定义好的分类
-簇的划分直观上我们会把样本点散落在坐标系中，然后根据相似性放一起，这样自然就能形成一个示意图
-如果在某一固定范围内，样本较为集中，其实就说明这一簇中的对象特征相似，而且有别于其他簇，例如扑克牌中的四种花色
-但是当簇的特征不是那么明显的时候，我们没办法一眼就看出簇的个数，这时候就需要一个算法来划分，也就是k均值聚类算法
-k均值聚类算法的核心首先我们介绍k均值聚类算法的工作流程
-
-选取k个点，作为k个簇的中心，这个k是认为设定的参数
-将数据对象分配到距离自己最近的簇中
-
-假设样本集中由l个样本，每个样本都有n个特征，用$x_i$表示，假设我们要把这些样本分为k个簇$S&#x3D;{...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/15/%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B9%8Bk%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux进程——进程状态" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/14/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81/">Linux进程——进程状态</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-14T11:39:55.000Z" itemprop="datePublished">2024-07-14</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.6k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            这里我们终于开始进程本身的内容了，我们之前讲操作系统管理的是进程的PCB块，那么很显然，进程状态就是PCB中的一个变量，可以使用宏定义来实现
-12345678#define NEW 1#define RUNNING 2#define BLOCK 3struct PCB&#123;    // ...其他配置    int state; // 进程状态&#125;
-
-这里我们主要介绍三种操作系统进程状态，分别是运行状态、阻塞状态、挂起状态，并且讲解Linux中具体的进程状态，分别是R状态（运行状态），S状态（睡眠状态）
-操作系统进程状态运行状态现在我们使用的电脑和手机CPU说是8核心，16核心，也就是相当于CPU可以分别同时处理多个任务，我们为了方便称之为小CPU，每一个小CPU都有其对应的运行队列，他会从自己的运行队列中寻找数据来进行处理，但这里有一个容易混淆的点，就是无论这个进程是否被处理，只要他处于运行队列中，他就是运行状态
-例如
-
-以上的PCB1到PCB5，全都是运行状态
-阻塞状态我们先不去深究阻塞状态究竟是什么，先从感性上感受一下
-当CPU处理一个进程时，或多或少都会访问...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/14/Linux%E8%BF%9B%E7%A8%8B%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
