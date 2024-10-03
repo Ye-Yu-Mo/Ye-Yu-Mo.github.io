@@ -27,17 +27,17 @@
 <meta property="og:site_name" content="jasmine">
 <meta property="og:description" content="std::futurestd::future是C++11标准库中的一个模板类,表示异步操作的结果 当我们在进行多线程中使用异步任务时,std::future是用来帮我们在需要的时候获取任务执行的结果 他的一个重要的特性就是能够阻塞当前的线程,一直到异步操作完成,从而确保在获取结果的时候,异步工作线程的任务是完成的 主要应用场景就是异步任务,比如说网络请求或者计算密集型任务;并发控制,在多线程编程中">
 <meta property="og:locale" content="en_UK">
-<meta property="og:image" content="c:\Users\%E8%AE%B8%E7%A3%8A\AppData\Roaming\Typora\typora-user-images\image-20241002155228574.png">
+<meta property="og:image" content="https://s2.loli.net/2024/10/03/SmDOgsxAQCdBwvc.png">
 <meta property="og:image" content="https://s2.loli.net/2024/10/02/JcV4NBsAKHaCLqn.png">
 <meta property="og:image" content="https://s2.loli.net/2024/10/02/R1MdoqDNFh7CSvy.png">
 <meta property="article:published_time" content="2024-10-02T07:42:15.000Z">
-<meta property="article:modified_time" content="2024-10-02T09:12:14.107Z">
+<meta property="article:modified_time" content="2024-10-03T03:26:11.982Z">
 <meta property="article:author" content="许磊">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="C++11">
 <meta property="article:tag" content="线程池">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:\Users\%E8%AE%B8%E7%A3%8A\AppData\Roaming\Typora\typora-user-images\image-20241002155228574.png">
+<meta name="twitter:image" content="https://s2.loli.net/2024/10/03/SmDOgsxAQCdBwvc.png">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -143,7 +143,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -152,7 +152,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">33</div>
+                <div class="category-count">35</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -223,12 +223,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">5 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -324,8 +324,20 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/10/03/C-%E5%BC%95%E7%94%A8%E6%8C%87%E9%92%88%E5%A4%A7%E5%AF%B9%E6%AF%94/" title="C++引用指针大对比" >
+            <div class="recent-link-text">
+              C++引用指针大对比
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/03/C-%E5%B8%B8%E5%BC%95%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="C++常引用详解" >
+            <div class="recent-link-text">
+              C++常引用详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/10/02/C-%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC%E8%AF%A6%E8%A7%A3reinterpret-cast-static-cast%E4%B8%8Edynamic-cast/" title="C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast" >
             <div class="recent-link-text">
@@ -342,18 +354,6 @@
           <a class="recent-link" href="/2024/10/01/gtest%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/" title="GTest测试框架介绍" >
             <div class="recent-link-text">
               GTest测试框架介绍
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/30/SQLite%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="SQLite数据库介绍" >
-            <div class="recent-link-text">
-              SQLite数据库介绍
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/30/C-C-static%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%A6%E8%A7%A3/" title="C/C++static关键字详解" >
-            <div class="recent-link-text">
-              C/C++static关键字详解
             </div>
           </a>
         
@@ -400,7 +400,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            865 词 
+            1.3k words 
           </div>
         </div>
         
@@ -413,7 +413,7 @@
 <p>当我们在进行多线程中使用异步任务时,std::future是用来帮我们在需要的时候获取任务执行的结果</p>
 <p>他的一个重要的特性就是能够阻塞当前的线程,一直到异步操作完成,从而确保在获取结果的时候,异步工作线程的任务是完成的</p>
 <p>主要应用场景就是异步任务,比如说网络请求或者计算密集型任务;并发控制,在多线程编程中,我们需要等待某些任务完成之后才能继续执行其他操作,实现线程同步;最后就是可以通过std::future::get()来获取任务的结果</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p><img src="C:\Users\许磊\AppData\Roaming\Typora\typora-user-images\image-20241002155228574.png" alt="image-20241002155228574"></p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p><img src="https://s2.loli.net/2024/10/03/SmDOgsxAQCdBwvc.png" alt="image-20241002155228574.png"></p>
 <h4 id="async函数"><a href="#async函数" class="headerlink" title="async函数"></a>async函数</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../logs/Xulog.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Add</span><span class="params">(<span class="type">int</span> num1, <span class="type">int</span> num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">INFO</span>(<span class="string">&quot;正在计算...&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// std::async(func, ...)</span></span><br><span class="line">    <span class="comment">// std::async(policy, func, ...)</span></span><br><span class="line">    <span class="built_in">INFO</span>(<span class="string">&quot;异步任务执行&quot;</span>);</span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; res = std::<span class="built_in">async</span>(std::launch::deferred, Add, <span class="number">114</span>, <span class="number">514</span>);</span><br><span class="line">    <span class="built_in">INFO</span>(<span class="string">&quot;获取结果&quot;</span>);</span><br><span class="line">    <span class="type">int</span> sum = res.<span class="built_in">get</span>();</span><br><span class="line">    <span class="built_in">INFO</span>(<span class="string">&quot;结果是%d&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[24-10-02|16:04:34][139769238738752][root][Async.cc:16][INFO]   异步任务执行</span><br><span class="line">[24-10-02|16:04:34][139769238738752][root][Async.cc:18][INFO]   获取结果</span><br><span class="line">[24-10-02|16:04:34][139769238738752][root][Async.cc:8][INFO]    正在计算...</span><br><span class="line">[24-10-02|16:04:34][139769238738752][root][Async.cc:20][INFO]   结果是628</span><br></pre></td></tr></table></figure>
@@ -438,6 +438,25 @@
 <p>但是也可以曲线救国,让task封装在指针里,传给异步线程</p>
 <p>如果单纯使用指针,存在生命周期的问题,有可能出现风险</p>
 <p>我们就可以在堆上new对象,用智能指针来管理</p>
+<h2 id="线程池实现"><a href="#线程池实现" class="headerlink" title="线程池实现"></a>线程池实现</h2><p>std::packaged_task+std::future</p>
+<p>使用方法:用户传入要执行的函数和参数,由线程池中的工作线程完成任务</p>
+<p>实现:</p>
+<ul>
+<li>管理的成员<ul>
+<li>任务池:用vector维护的一个函数池</li>
+<li>互斥锁&amp;条件变量:同步互斥</li>
+<li>工作线程:从任务池取出任务执行任务</li>
+<li>结束允许标志:控制线程池结束</li>
+</ul>
+</li>
+<li>管理的操作<ul>
+<li>入队任务:入队一个函数和参数</li>
+<li>停止运行:终止线程池</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;condition_variable&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;atomic&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../logs/Xulog.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">threadpool</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> Functor = std::function&lt;<span class="built_in">void</span>(<span class="type">void</span>)&gt;;</span><br><span class="line">    <span class="built_in">threadpool</span>(<span class="type">int</span> thr_count = <span class="number">1</span>) : _stop(<span class="literal">false</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; thr_count; i++)</span><br><span class="line">            _threads.<span class="built_in">emplace_back</span>(&amp;threadpool::entry, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">threadpool</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">stop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">stop</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_stop == <span class="literal">true</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        _stop = <span class="literal">true</span>;</span><br><span class="line">        _cv.<span class="built_in">notify_all</span>(); <span class="comment">// 唤醒线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;thread : _threads)</span><br><span class="line">            thread.<span class="built_in">join</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 自动推导返回值类型</span></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F, <span class="keyword">typename</span>... Args&gt;</span><br><span class="line">    <span class="function"><span class="keyword">auto</span> <span class="title">push</span><span class="params">(F &amp;&amp;func, Args &amp;&amp;...args)</span> -&gt; std::future&lt;<span class="title">decltype</span><span class="params">(func(args...))</span>&gt;</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 将传入函数封装成packaged_task任务包</span></span><br><span class="line">        <span class="keyword">using</span> return_type = <span class="keyword">decltype</span>(<span class="built_in">func</span>(args...));</span><br><span class="line">        <span class="keyword">auto</span> tmp_func = std::<span class="built_in">bind</span>(std::forward&lt;F&gt;(func), std::forward&lt;Args&gt;(args)...);</span><br><span class="line">        <span class="keyword">auto</span> task = std::make_shared&lt;std::packaged_task&lt;<span class="built_in">return_type</span>()&gt;&gt;(tmp_func);</span><br><span class="line">        std::future&lt;return_type&gt; fu = task-&gt;<span class="built_in">get_future</span>();</span><br><span class="line">        <span class="comment">// 构造lambda表达式(捕获任务对象,函数内执行任务对象)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(_mutex)</span></span>;</span><br><span class="line">            <span class="comment">// 将构造出来的匿名对象传入任务池</span></span><br><span class="line">            _taskpool.<span class="built_in">push_back</span>([task]()</span><br><span class="line">                                &#123; (*task)(); &#125;);</span><br><span class="line">            _cv.<span class="built_in">notify_one</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 线程入口函数 从任务池中取出任务执行</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">entry</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!_stop)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 临时任务池</span></span><br><span class="line">            <span class="comment">// 避免频繁加解锁</span></span><br><span class="line">            std::vector&lt;Functor&gt; tmp_taskpool;</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 加锁</span></span><br><span class="line">                <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(_mutex)</span></span>;</span><br><span class="line">                <span class="comment">// 等待任务不为空或_stop被置为1</span></span><br><span class="line">                _cv.<span class="built_in">wait</span>(lock, [<span class="keyword">this</span>]()</span><br><span class="line">                         &#123; <span class="keyword">return</span> _stop || !_taskpool.<span class="built_in">empty</span>(); &#125;);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 取出任务进行执行</span></span><br><span class="line">                tmp_taskpool.<span class="built_in">swap</span>(_taskpool);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;task : tmp_taskpool)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">task</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::atomic&lt;<span class="type">bool</span>&gt; _stop;</span><br><span class="line">    std::vector&lt;Functor&gt; _taskpool;</span><br><span class="line">    std::mutex _mutex;</span><br><span class="line">    std::condition_variable _cv;</span><br><span class="line">    std::vector&lt;std::thread&gt; _threads;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Add</span><span class="params">(<span class="type">int</span> num1, <span class="type">int</span> num2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    threadpool pool;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        std::future&lt;<span class="type">int</span>&gt; fu = pool.<span class="built_in">push</span>(Add, <span class="number">114</span>, <span class="number">514</span> + i);</span><br><span class="line">        <span class="built_in">INFO</span>(<span class="string">&quot;结果是%d&quot;</span>, fu.<span class="built_in">get</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    pool.<span class="built_in">stop</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         
       </div>
@@ -487,7 +506,7 @@
   <div id="comment-card" class="comment-card">
     <div class="main-title-bar">
       <div class="main-title-dot"></div>
-      <div class="main-title">留言 </div>
+      <div class="main-title">Comments </div>
     </div>
     <div id="vcomments"></div>
   </div>

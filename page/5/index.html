@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分类</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">33</div>
+                <div class="category-count">35</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -214,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">归档</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">3 </div>
+          <div class="archive-count">5 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -315,8 +315,20 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/10/03/C-%E5%BC%95%E7%94%A8%E6%8C%87%E9%92%88%E5%A4%A7%E5%AF%B9%E6%AF%94/" title="C++引用指针大对比" >
+            <div class="recent-link-text">
+              C++引用指针大对比
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/03/C-%E5%B8%B8%E5%BC%95%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="C++常引用详解" >
+            <div class="recent-link-text">
+              C++常引用详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/10/02/C-%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC%E8%AF%A6%E8%A7%A3reinterpret-cast-static-cast%E4%B8%8Edynamic-cast/" title="C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast" >
             <div class="recent-link-text">
@@ -336,18 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/09/30/SQLite%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D/" title="SQLite数据库介绍" >
-            <div class="recent-link-text">
-              SQLite数据库介绍
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/2024/09/30/C-C-static%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%A6%E8%A7%A3/" title="C/C++static关键字详解" >
-            <div class="recent-link-text">
-              C/C++static关键字详解
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,163 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux进程信号——信号的概念与产生" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%A7%E7%94%9F/">Linux进程信号——信号的概念与产生</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-25T03:27:49.000Z" itemprop="datePublished">2024-08-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            信号及其产生与发送我们从生活中理解信号，例如各种指示灯，红绿灯之类的，我们能认识红绿灯是因为每一种不同的情况在我们大脑中已经存下了，并且根据每一种不同的情况我们也可以作出不同的反应
+在操作系统中的信号也是如此，系统需要做的两个动作就是识别、处理
+什么是Linux信号信号本身其实就是一种通知的形式，用户或者操作系统可以通过信号给进程发送信息，让进程来进行处理
+例如前台进程可以发送一个ctrl + c指令来中断进程
+我们可以使用kill -l查看进程信号表
+
+这些个信号存在bits/signum.h文件中，大致可以分为两类，从1到31是标准信号，其余的都是POSIX实时信号，都有不同的含义
+ctrl + c其实就对应着2号信号
+回到上面的问题，进程想要处理信号就需要识别信号，那么进程如何识别信号，其实就是程序内置的代码可以识别+处理
+信号的产生是随机的，这种随机性是在时间上随机，产生的信号随机
+因此进程收到信号时可能正在处理其他事情，当收到信号也无法立即响应
+那么就一定存在某种数据结构来保存收到的信号
+因此信号的一生就只有三个过程，产生、保存、处理
+信号的产生信号的产生有四种方式，分...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7%E2%80%94%E2%80%94%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BA%A7%E7%94%9F/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
+<article id="post-Linux进程间通信——硬件实现临界区互斥的基本方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/">Linux进程间通信——硬件实现临界区互斥的基本方法</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-08-25T02:58:46.000Z" itemprop="datePublished">2024-08-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            748 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            硬件实现方法之前的软件方法出现各种问题的根本原因其实是因为检查是否被占用和设置自己想要占用，这两个动作没有办法一气呵成导致的
+而硬件实现的好处就是他的权限足够高，无法随意被中断
+中断屏蔽方法操作系统有一个系统级的指令是中断指令，主要分为两个步骤，一个是关中断指令，另一个是开中断指令
+什么意思呢，就是说是否允许被中断，关中断就之后不允许被中断，开中断就是之后可以被中断
+因此我们想要确保进程访问临界区时不被其他进程打扰，只需要在临界区之前执行关中断指令，在临界区之后执行开中断指令，确保进程互斥的实现
+123// 关中断;// 临界区;// 开中断;
+
+这个方法的缺点是限制了CPU交替并发执行程序的能力，即便是时间片到也无法中断，因此系统的效率就会降低
+其次这个方法其实是权限的下放，就是将系统的权限交给用户的进程，这样进程有可能会一直占用CPU
+这个方法还无法限制其他CPU，只能限制一个CPU不执行相同临界区的代码
+TestAndSet指令这是一条硬件指令，TS指令，这条指令是原子操作，也就是原语，不允许被中断
+他的代码描述如下
+123456bool TestAndSet(bool* ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/08/25/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E7%A1%AC%E4%BB%B6%E5%AE%9E%E7%8E%B0%E4%B8%B4%E7%95%8C%E5%8C%BA%E4%BA%92%E6%96%A5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux进程间通信——实现临界区互斥的基本方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -390,7 +547,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k 词 
+            1.7k words 
           </div>
         </div>
         
@@ -468,7 +625,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.3k 词 
+            1.3k words 
           </div>
         </div>
         
@@ -550,7 +707,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            728 词 
+            728 words 
           </div>
         </div>
         
@@ -632,7 +789,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            279 词 
+            279 words 
           </div>
         </div>
         
@@ -712,7 +869,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            3.5k 词 
+            3.5k words 
           </div>
         </div>
         
@@ -786,7 +943,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 词 
+            1.2k words 
           </div>
         </div>
         
@@ -823,152 +980,6 @@
     <a class="right-panel  non-pic  "
       
       href="/2024/08/14/Linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E2%80%94%E2%80%94%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux基础IO——文件系统与动静态库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/">Linux基础IO——文件系统与动静态库</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-11T06:20:21.000Z" itemprop="datePublished">2024-08-11</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.3k 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            什么是文件系统我们之前所说的文件读写都是通过进程对已经打开的文件进行操作，也就是对操作系统对文件所创建的结构体进行操作
-那么对于磁盘中没有打开的文件是如何进行管理的
-磁盘的物理结构这里我们主要讨论机械磁盘而非固态磁盘，因为机械磁盘的价格较低，而且学习之后也能更好的理解整个系统
-
-这是机械硬盘内部的样子，有点像光盘的样子，不同的是光盘只能读，机械磁盘可以读写，而且机械磁盘是一摞的，利用这个磁头来感应出来0和1
-
-绕着这个转轴，就是圆心，有不同的半径的圆，我们称之为磁道，同一个磁道所组成的称为柱面，而为了同时读取数据，按照不同的圆心角划分成了不同的扇区
-我们可以把某一个磁道的扇区单独取出来，看成一个数组，这样就能把文件系统划分成众多这样的数组，再将其组织起来即可
-这样对磁盘问题就变成了对数组的问题，存储数据到磁盘就变成了存数据到数组，从磁盘取数据就是找到数组中的位置，对磁盘的管理也就成了对数组的管理
-这样一个扇区的大小是512字节，接下来就是对扇区如何进行划分管理了
-扇区中的块组直接管理512字节还是过于麻烦，我们仍然需要对其进行设计才能很好的管理其中的内容
-
-一个扇区会分成若干个这...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/11/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%8A%A8%E9%9D%99%E6%80%81%E5%BA%93/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux基础IO——重定向与文件缓冲区" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/">Linux基础IO——重定向与文件缓冲区</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-08-07T10:53:18.000Z" itemprop="datePublished">2024-08-07</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            863 词 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B/" rel="tag">进程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            重定向我们在学习Linux的基本内容时候，知道&gt;&gt; &gt;都可以用来表示重定向，那么重定向的本质是什么呢，其实就是更改了标号为1的文件描述符
-1表示标准输出，那么我们也就可以手动实现输出重定向，将标准输出更改为我们指定的文件
-1234567891011121314 1 #include&lt;unistd.h&gt; 2 #include&lt;sys/types.h&gt; 3 #include&lt;sys/stat.h&gt; 4 #include&lt;fcntl.h&gt; 5 #include&lt;stdio.h&gt; 6  7 int main() 8 &#123; 9   close(1);10   int fd = open(&quot;log.txt&quot;,O_WRONLY|O_CREAT|O_TRUNC,0666);11   printf(&quot;关闭1之后新建文件标识符为%d\n&quot;,fd);12   fprintf(stdout,&quot;输出到更改后的标准输出\n&quot;);               13 ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/08/07/Linux%E5%9F%BA%E7%A1%80IO%E2%80%94%E2%80%94%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2%E5%8C%BA/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
