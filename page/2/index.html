@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">35</div>
+                <div class="category-count">36</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -219,7 +219,7 @@
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">5 </div>
+          <div class="archive-count">6 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -318,6 +318,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/10/04/C-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AF%B9%E6%AF%94/" title="C++继承与组合详解与对比" >
+            <div class="recent-link-text">
+              C++继承与组合详解与对比
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/10/03/C-%E5%BC%95%E7%94%A8%E6%8C%87%E9%92%88%E5%A4%A7%E5%AF%B9%E6%AF%94/" title="C++引用指针大对比" >
             <div class="recent-link-text">
               C++引用指针大对比
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/01/gtest%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/" title="GTest测试框架介绍" >
-            <div class="recent-link-text">
-              GTest测试框架介绍
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,92 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-MySQL数据库基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/30/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">MySQL数据库基础</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-30T04:00:11.000Z" itemprop="datePublished">2024-09-30</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            813 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            之前我们虽然学习了数据库的基本操作，但是如果想要了解底层的部分，还是需要理解原理的
+为什么要有数据库一开始我们学习时，数据是存储在内存中的，然后慢慢的到了文件
+但是如果想要存储成万上亿的数据，内存和文件其实就不太够用了
+先不说够不够用，且说增删改查，改和查其实是最麻烦的
+不仅仅需要各种循环封装，而且不同语言想要同时使用，就是十分难受的一件事情
+主流的数据库有很多，SQL server、Oracle、MySQL、PostgreSQL、SQLite、H2
+各有特色，根据需求选择即可
+具体安装和设置这里不多赘述
+服务器、数据库、表我们在安装数据库时，其实安装了两个部分，客户端mysql和服务端mysqld
+所有的数据库操作，其实都是服务端完成的，数据内容也存在服务端里
+而客户端只是连接到了服务端，然后发出指令
+因此原理上来说，在一个客户端，指定ip和port，就可以连接到对应服务器的mysql
+
+简单使用shell中使用下面的命令登录
+1mysql -uroot -p
+
+创建数据库
+1create database helloworld;
+
+使用数据库
+1use helloworld;...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/30/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-基于muduo库实现protobuf协议的通信" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -904,89 +990,6 @@ UDP的传输过程是不可靠的,无连接的,面向数据报,在我们之前�
     <a class="right-panel  non-pic  "
       
       href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTPS%E8%AF%A6%E8%A7%A3/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux网络——HTTP协议详解（2）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/">Linux网络——HTTP协议详解（2）</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-22T09:18:53.000Z" itemprop="datePublished">2024-09-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            902 words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            HTTP方法HTTP方法有这些
-
-但是怎么说呢，这些方法只有GET和POST方法是99%情况用到的
-剩下的几乎不太用，如果有兴趣可以找《图解HTTP》，是处于了解的范畴
-大家肯定一看就明白的
-GET方法GET方法就是顾名思义，要从服务器中获取某些资源所用的方法，比如说获取一个网页，图片，视频
-GET方法是分为带参数的GET方法，不带参的GET方法
-如果单纯是拿某一个资源，那肯定就不需要带参数，直接给路径就行
-但是如果是浏览器搜索关键词，登录，就需要把浏览器客户端的内容传递给服务器
-而GET方法显著区别于POST方法的就是，他提供参数是通过URL传递的
-也就是将参数以键值对的方式添加在URL之后传过去，服务器再解析URL拿到数据
-POST方法POST方法要使用主要就是要上传数据给服务器，但是传递的数据并不在URL
-而是在请求正文中，在HTTP的报头里面
-相对来说POST方法比GET方法好一点，至少在你的浏览器地址栏里面看不到账号和密码
-但是这两者都并不安全，没有加密，一旦被劫持还是会泄漏数据的
-状态码与报头状态码状态码就是200 OK，404 NOT FOUND
-
-我们需要记住的其...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/22/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3%EF%BC%882%EF%BC%89/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
