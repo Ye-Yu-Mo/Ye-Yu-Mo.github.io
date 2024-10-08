@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">37</div>
+                <div class="category-count">38</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -219,7 +219,7 @@
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">7 </div>
+          <div class="archive-count">8 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -318,6 +318,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/10/08/C-%E5%A4%9A%E6%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="C++多态常见问题" >
+            <div class="recent-link-text">
+              C++多态常见问题
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/10/08/C-%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E5%AF%B9%E6%AF%94/" title="C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别" >
             <div class="recent-link-text">
               C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/02/C-%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC%E8%AF%A6%E8%A7%A3reinterpret-cast-static-cast%E4%B8%8Edynamic-cast/" title="C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast" >
-            <div class="recent-link-text">
-              C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,82 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-哈希应用之位图及其实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/04/30/%E5%93%88%E5%B8%8C%E5%BA%94%E7%94%A8%E4%B9%8B%E4%BD%8D%E5%9B%BE%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/">哈希应用之位图及其实现</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-04-30T09:42:55.000Z" itemprop="datePublished">2024-04-30</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            970 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BD%8D%E5%9B%BE/" rel="tag">位图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            位图鹅厂有这样一道题，给四十亿个不重复无符号整数，无序，如何判断一个数是否在这四十亿个数中出现过
+直接遍历的话，时间复杂度是N的；排序加二分是NlogN的，哈希的话会好很多，是常数级的
+但是需要考虑一个问题，就是说四十亿个值内存里能不能开出来，大概算一下需要16G左右的内存，因此直接开哈希表也是不现实的
+实际上要解决在不在这个问题，不需要存下来这么多数据，只需要使用整数通过哈希函数计算出对应的位置，用0表示不在，用1表示在，这样就能节省大量空间
+这里四十亿个数据只需要0.5G左右即可
+那其实可以拓展来讲，在不在是两种状态，也可以使用两个bit位表示四种状态，以此类推，在后面我们会尝试实现
+模拟实现在C++标准库里面也有bitset可以直接使用，而且功能也算是比较丰富的，我们主要模拟实现三个函数，一个是set置一，一个属reset置零，一个是test查询
+我们用什么来承载这些个bit呢，考虑使用int，32位机器下，一个int是4个字节，刚好可以承载32个比特
+如果我们想开N个bit的大小，那么至少需要N&#x2F;32+1个int
+这样我们就可以搭一个基本的框架了
+1234567...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/04/30/%E5%93%88%E5%B8%8C%E5%BA%94%E7%94%A8%E4%B9%8B%E4%BD%8D%E5%9B%BE%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-哈希封装unordered系列关联式容器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -916,81 +992,6 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
 
  
 
-   
-
-<article id="post-MyLisp项目日志：变量与环境" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/03/22/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E5%8F%98%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%A2%83/">MyLisp项目日志：变量与环境</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-03-22T02:44:12.000Z" itemprop="datePublished">2024-03-22</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            5.6k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyLisp/" rel="tag">MyLisp</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            变量与环境我们之前已经实现了相当多的功能，例如波兰表达式的处理与计算，S表达式，Q表达式，我们甚至可以吧代码本身放到列表里，现在我们需要为MyLisp添加变量的功能了
-不变性到目前位置，我们所添加的变量是不可变的，只是暂时我们还没有添加这个功能罢了
-当我们在计算一个表达式的时候，他的基本逻辑是删除先前的事物（表达式），返回新的事物（结果）
-所以我们的变量其实只是命名值的一种方式，给值分配一个名称，然后在需要的时候获取该值的副本
-为了允许命名，我们需要创建一个结构体，存储命名中的所有内容的名称和值，我们称之为环境，当我们开始创建一个新的名称-表达式关系时，同时创建一个新的环境匹配他
-在MyLisp中，如果我们给变量重新分配一个名称时，在底层上其实是把原先的对象删除，然后再新建一个，再分配名称，与C语言是有很大不同的
-符号语法我们现在需要更新一下符号语法，以更好的适配变量命名
-我们需要他灵活一点，可能匹配任何可能有效的符号，没有限制，正则表达式如下
-/[a-zA-Z0-9_+\\-*\\/\\\\=&lt;&gt;!&amp;]+/
-此规则允许符号是任何普通的 C 标识符字符 a-z...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/03/22/MyLisp%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%EF%BC%9A%E5%8F%98%E9%87%8F%E4%B8%8E%E7%8E%AF%E5%A2%83/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
 
   <nav id="page-nav">
     <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
@@ -998,7 +999,7 @@ RBTree的模板参数前两个是K和T，K表示key关键字类型，T表示其�
       <i class="fa-solid fa-angle-left"></i>
     </a>
     <div id="num-bar">
-      <a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a>  
+      <a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a>  
     </div>
     <a id="next-btn" class="page-nav-btn " href="/page/11/">
       <i class="fa-solid fa-angle-right"></i>

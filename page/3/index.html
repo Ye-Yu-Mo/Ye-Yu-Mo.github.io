@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">37</div>
+                <div class="category-count">38</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -219,7 +219,7 @@
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">7 </div>
+          <div class="archive-count">8 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -318,6 +318,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/10/08/C-%E5%A4%9A%E6%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="C++多态常见问题" >
+            <div class="recent-link-text">
+              C++多态常见问题
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/10/08/C-%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E5%AF%B9%E6%AF%94/" title="C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别" >
             <div class="recent-link-text">
               C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/02/C-%E7%B1%BB%E5%9E%8B%E5%BC%BA%E8%BD%AC%E8%AF%A6%E8%A7%A3reinterpret-cast-static-cast%E4%B8%8Edynamic-cast/" title="C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast" >
-            <div class="recent-link-text">
-              C++类型强转详解const_cast,reinterpret_cast,static_cast与dynamic_cast
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,84 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux网络之UDP协议详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E4%B9%8BUDP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/">Linux网络之UDP与TCP协议详解</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-23T11:21:26.000Z" itemprop="datePublished">2024-09-23</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.7k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            UDP协议前面我们只是说了UDP协议的用法,但是并没有涉及到UDP协议的原理
+毕竟知道冰箱的用法和知道冰箱的原理是两个层级的事情
+我们首先知道计算机网络世界是搭建在四层架构上的
+而HTTP协议是处于最顶层,是应用层协议,应用层协议的最大特点就是非常多,而且各异
+这样多的协议要在网络中传输,必须得给他统一了,并且还能将底层收上来的数据,正确的交付到各个端口中
+做到这些的就是传输层协议,主要有两个,就是大名鼎鼎的UDP和TCP
+UDP协议数据报所有的协议都规定了两部分,就是报头和数据本身,在传输层我们一般习惯把这整体称之为数据包
+报头
+报头是这样的
+相比于IP协议和TCP协议,UDP协议的报头还是十分友好的
+UDP的报头大小是固定的,8字节,因此当我们获取到一个UDP数据报之后,取前8个字节,找到UDP数据报的总长度,就能完整的取到整个报文数据
+需要注意的是,16位UDP长度指的是UDP数据报的总长度,包含报头和数据部分,因此UDP的最大数据大小就是2^16-1,大小就是64KB
+UDP的传输过程是不可靠的,无连接的,面向数据报,在我们之前介绍的时候有说过,他的主要应用场景其实就是直...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/23/Linux%E7%BD%91%E7%BB%9C%E4%B9%8BUDP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux网络——HTTPS详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -929,89 +1007,6 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
 
  
 
-   
-
-<article id="post-Linux网络——从《计算机网络》到网络编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">Linux网络——从《计算机网络》到网络编程</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-10T12:43:09.000Z" itemprop="datePublished">2024-09-10</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.1k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            从《计算机网络》到网络编程科班的同学大多学过计算机网络，而非科班的同学也多多少少听说过一些
-计算机网络体系十分繁杂且精妙，这三四十年来计算机网络技术不断进步，但是核心是TCP&#x2F;IP、UDP协议
-从计算机到计算机网络我们说一个计算机中的进程可以处理一定的任务
-当他想与另一个进程进行通信时，就需要IPC的各种方式
-但无论是管道、共享内存都是利用内存作为中转
-如果想让另一台计算机的进程也能与这个计算机的进程进行通信呢
-聪明的你肯定想到，把内存连起来呗，让他们都能访问到就行
-诶，恭喜你，发明了计算机网络
-所谓的计算机网络其实就是若干台计算机进程之间进行通信的一个过程
-但是这里就有了很多问题
-
-当时的计算机系统各异，Linux、MacOS、Windows，怎么样让他们也能进行通信，甚至同一个操作系统搭载在不同型号的计算机上都有可能不同
-如果传输过程中出错了怎么办，要重传吗，还是将就着用
-如果计算机之间怎么认得彼此，要知道计算机网络中可不止两台计算机，找到计算机了之后又要怎么找到你想找的进程呢
-怎样让我在合肥的计算机访问到在北京的服务器
-为什么无线网跟有线网都能进行通信呢
-
-怪不得...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/10/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BB%8E%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B%E5%88%B0%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
 
   <nav id="page-nav">
     <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
@@ -1019,7 +1014,7 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
       <i class="fa-solid fa-angle-left"></i>
     </a>
     <div id="num-bar">
-      <a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a>  
+      <a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a>  
     </div>
     <a id="next-btn" class="page-nav-btn " href="/page/4/">
       <i class="fa-solid fa-angle-right"></i>
