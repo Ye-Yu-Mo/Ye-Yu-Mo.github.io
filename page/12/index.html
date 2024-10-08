@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">36</div>
+                <div class="category-count">37</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -219,7 +219,7 @@
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">6 </div>
+          <div class="archive-count">7 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -318,6 +318,12 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/10/08/C-%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E5%AF%B9%E6%AF%94/" title="C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别" >
+            <div class="recent-link-text">
+              C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/10/04/C-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AF%B9%E6%AF%94/" title="C++继承与组合详解与对比" >
             <div class="recent-link-text">
               C++继承与组合详解与对比
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/02/C-11%E7%89%B9%E6%80%A7%E4%B9%8B%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0/" title="C++11特性之异步操作实现线程池" >
-            <div class="recent-link-text">
-              C++11特性之异步操作实现线程池
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,82 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-C-多态详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/03/05/C-%E5%A4%9A%E6%80%81%E8%AF%A6%E8%A7%A3/">C++多态详解</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-03-05T10:19:05.000Z" itemprop="datePublished">2024-03-05</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.1k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E6%80%81/" rel="tag">多态</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%A7%E6%89%BF/" rel="tag">继承</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            多态概念多态是面向对象三大特性中相对复杂的一个，他从直观上理解就是，不同的人（对象）做同一件事情（调用函数），会产生不同的结果（状态）
+多态又分为静态多态和动态多态，静态多态其实就是函数重载，在本篇文章中主要介绍动态多态，在讲到多态的原理时，我们会细讲其中的区别
+定义及实现多态是在不同的为继承关系的类对象，调用同一个函数（同名函数），产生的不同的行为
+例如，Student是Person的子类，同样的买票动作下，Person是全价，而Student是全价
+构成条件构成多态必须有两个条件
+
+必须通过父类的指针或引用调用虚函数
+被调用的函数必须是虚函数，子类必须重写父类的虚函数
+
+例如
+1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;using namespace std;class Person&#123;public:    virtual void Buyticket()    &#123;        cout &lt;&lt; &quot;Person:...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/03/05/C-%E5%A4%9A%E6%80%81%E8%AF%A6%E8%A7%A3/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-C-继承" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -926,81 +1002,6 @@ p1|p2|p3
     <a class="right-panel  non-pic  "
       
       href="/2024/02/02/MySQL%E4%B9%8BDQL%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-MySQL之数据库DQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/02/01/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93DQL/">MySQL之数据库DQL</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-02-01T03:23:45.000Z" itemprop="datePublished">2024-02-01</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/MySQL/">MySQL</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            2.7k words 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            数据查询DQL数据库管理系统一个重要功能就是数据查询，数据查询不应只是简单返回数据库中存储的数据，还应该根据需要对数据进行筛选以及确定数据以什么样的格式显示。
-MySQL提供了功能强大、灵活的语句来实现这些操作。
-MySQL数据库使用select语句来查询数据。
-基本查询语法格式
-12345678910select 	[all|distinct]	&lt;目标列的表达式1&gt; [别名],	&lt;目标列的表达式2&gt; [别名]...from &lt;表名或视图名&gt; [别名],&lt;表名或视图名&gt; [别名]...[where&lt;条件表达式&gt;][group by &lt;列名&gt; [having &lt;条件表达式&gt;]][order by &lt;列名&gt; [asc|desc]][limit &lt;数字或者列表&gt;];
-
-这里的关键字太多了
-where就是第一步的筛选条件，group by是分组条件，having是第二步的筛选条件，order by是排序，limit是限制条数
-我们用到的最多的就是三个关键字
-1select *| 列...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/02/01/MySQL%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93DQL/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

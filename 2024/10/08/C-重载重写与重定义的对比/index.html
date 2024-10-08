@@ -14,25 +14,23 @@
   
 
   
-  <title>每日算法打卡：错误票据 | jasmine</title>
+  <title>C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别 | jasmine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="原题链接1204. 错误票据 题目难度：简单 题目来源：第四届蓝桥杯省赛C++ A&#x2F;B组,第四届蓝桥杯省赛Java A&#x2F;B组 题目描述某涉密单位下发了某种票据，并要在年终全部收回。 每张票据有唯一的ID号。 全年所有票据的ID号是连续的，但ID的开始数码是随机选定的。 因为工作人员疏忽，在录入ID号的时候发生了一处错误，造成了某个ID断号，另外一个ID重号。 你的任务是通过编程">
+  <meta name="description" content="在C++中，重载、重写和重定义是经常被提到的三种不同的概念，它们都涉及函数的行为和定义，但在语义、作用范围以及使用场景上有明显的区别。理解这三者的差异有助于更好地掌握C++语言的多态性和函数操作。  重载（Overloading）重载指的是在同一个作用域（同一个类或函数体内），函数名相同但参数列表不同的多个函数共存的现象。重载主要发生在编译时，编译器根据参数的类型、个数来区分调用哪个版本的函数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每日算法打卡：错误票据">
-<meta property="og:url" content="http://example.com/2024/01/18/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E9%94%99%E8%AF%AF%E7%A5%A8%E6%8D%AE/index.html">
+<meta property="og:title" content="C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别">
+<meta property="og:url" content="http://example.com/2024/10/08/C-%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E5%AF%B9%E6%AF%94/index.html">
 <meta property="og:site_name" content="jasmine">
-<meta property="og:description" content="原题链接1204. 错误票据 题目难度：简单 题目来源：第四届蓝桥杯省赛C++ A&#x2F;B组,第四届蓝桥杯省赛Java A&#x2F;B组 题目描述某涉密单位下发了某种票据，并要在年终全部收回。 每张票据有唯一的ID号。 全年所有票据的ID号是连续的，但ID的开始数码是随机选定的。 因为工作人员疏忽，在录入ID号的时候发生了一处错误，造成了某个ID断号，另外一个ID重号。 你的任务是通过编程">
+<meta property="og:description" content="在C++中，重载、重写和重定义是经常被提到的三种不同的概念，它们都涉及函数的行为和定义，但在语义、作用范围以及使用场景上有明显的区别。理解这三者的差异有助于更好地掌握C++语言的多态性和函数操作。  重载（Overloading）重载指的是在同一个作用域（同一个类或函数体内），函数名相同但参数列表不同的多个函数共存的现象。重载主要发生在编译时，编译器根据参数的类型、个数来区分调用哪个版本的函数。">
 <meta property="og:locale" content="en_UK">
-<meta property="article:published_time" content="2024-01-18T07:40:12.000Z">
-<meta property="article:modified_time" content="2024-01-18T08:07:41.810Z">
+<meta property="article:published_time" content="2024-10-08T02:10:29.000Z">
+<meta property="article:modified_time" content="2024-10-08T02:14:32.272Z">
 <meta property="article:author" content="许磊">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="模拟">
-<meta property="article:tag" content="排序">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
   
   
@@ -364,7 +362,7 @@
     <div id="content-body">
        
 
-<article id="post-每日算法打卡：错误票据" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-C-重载重写与重定义的对比" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -377,7 +375,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        每日算法打卡：错误票据
+        C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别
       </h1>
     
   
@@ -385,53 +383,150 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-18T07:40:12.000Z" itemprop="datePublished">2024-01-18</time>
+  <time class="dt-published" datetime="2024-10-08T02:10:29.000Z" itemprop="datePublished">2024-10-08</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            790 words 
+            1.3k words 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h2 id="原题链接"><a href="#原题链接" class="headerlink" title="原题链接"></a>原题链接</h2><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1206/">1204. 错误票据</a></p>
-<p>题目难度：简单</p>
-<p>题目来源：第四届蓝桥杯省赛C++ A&#x2F;B组,第四届蓝桥杯省赛Java A&#x2F;B组</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>某涉密单位下发了某种票据，并要在年终全部收回。</p>
-<p>每张票据有唯一的ID号。</p>
-<p>全年所有票据的ID号是连续的，但ID的开始数码是随机选定的。</p>
-<p>因为工作人员疏忽，在录入ID号的时候发生了一处错误，造成了某个ID断号，另外一个ID重号。</p>
-<p>你的任务是通过编程，找出断号的ID和重号的ID。</p>
-<p>假设断号不可能发生在最大和最小号。</p>
-<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p>第一行包含整数 N，表示后面共有 N 行数据。</p>
-<p>接下来 N 行，每行包含空格分开的若干个（不大于100个）正整数（不大于100000），每个整数代表一个ID号。</p>
-<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p>要求程序输出1行，含两个整数 m,n，用空格分隔。</p>
-<p>其中，m表示断号ID，n表示重号ID。</p>
-<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>1≤N≤100</p>
-<h4 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">5 6 8 11 9 </span><br><span class="line">10 12 9 </span><br></pre></td></tr></table></figure>
+          <p>在C++中，重载、重写和重定义是经常被提到的三种不同的概念，它们都涉及函数的行为和定义，但在语义、作用范围以及使用场景上有明显的区别。理解这三者的差异有助于更好地掌握C++语言的多态性和函数操作。</p>
+<hr>
+<h4 id="重载（Overloading）"><a href="#重载（Overloading）" class="headerlink" title="重载（Overloading）"></a>重载（Overloading）</h4><p><strong>重载</strong>指的是在同一个作用域（同一个类或函数体内），<strong>函数名相同但参数列表不同</strong>的多个函数共存的现象。重载主要发生在<strong>编译时</strong>，编译器根据参数的类型、个数来区分调用哪个版本的函数。</p>
+<p><strong>特点：</strong></p>
+<ol>
+<li>函数名相同，参数类型或数量不同。</li>
+<li>发生在<strong>同一作用域内</strong>。</li>
+<li>可以是普通函数的重载，也可以是运算符的重载。</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Calculator</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">add</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h4 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7 9 </span><br></pre></td></tr></table></figure>
+<p>在这个例子中，<code>add</code> 函数被重载了两次，一个处理整数加法，另一个处理浮点数加法。根据传入的参数类型，编译器决定调用哪个函数。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>发生在编译时。</li>
+<li>参数列表必须不同。</li>
+<li>不涉及继承或派生类。</li>
+</ul>
+<hr>
+<h4 id="重写（Overriding）"><a href="#重写（Overriding）" class="headerlink" title="重写（Overriding）"></a>重写（Overriding）</h4><p><strong>重写</strong>（有时也叫<strong>覆盖</strong>）是在<strong>继承关系</strong>中，派生类重新定义基类中的<strong>虚函数</strong>，以便实现多态性。重写发生在<strong>运行时</strong>，通过基类指针或引用调用的虚函数在运行时根据对象的实际类型决定调用哪个版本的函数。</p>
+<p><strong>特点：</strong></p>
+<ol>
+<li>函数名、参数列表、返回类型必须与基类中被重写的虚函数完全一致。</li>
+<li>基类中的函数必须是<strong>虚函数</strong>（用 <code>virtual</code> 关键字声明）。</li>
+<li>重写主要用于实现<strong>运行时多态</strong>。</li>
+<li>使用 <code>override</code> 关键字可以显式标记重写的函数（推荐使用）。</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">sound</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Animal sound&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> : <span class="keyword">public</span> Animal &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">sound</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;  <span class="comment">// 重写基类的虚函数</span></span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Dog barks&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题目的意思就是从随机开始的一个id序列，存在一个段号和一个重复，需要找到断号和重复的数字</p>
-<p>这道题的难度是在数据输入的，他只告诉我们输入的行数，但并不告诉每一行的数据量</p>
-<p>对于这个题目的解决是这样的，我们可以开一个布尔数组，从前往后扫描每一个数字，先判断每一个数字是否出现过，如果出现过就说明这个id是重复的</p>
-<p>对于中断的数字，我们可以先找到最小值，再从最小值开始扫描，第一个缺失的位置就是断号的位置</p>
-<p>第二个做法就是用排序的做法，首先把整个数组排序，我们要从第二个位置开始扫描，如果这个数字跟前一个数字的差为0，那么就是重号，如果数字跟前一个数字相差大于1，则为断号</p>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><h3 id="重置输入流，排序做法"><a href="#重置输入流，排序做法" class="headerlink" title="重置输入流，排序做法"></a>重置输入流，排序做法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10010</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> cnt;</span><br><span class="line">    cin &gt;&gt; cnt;</span><br><span class="line">    string line;</span><br><span class="line">    <span class="built_in">getline</span>(cin, line); <span class="comment">// 读取第一行末的回车</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (cnt--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">getline</span>(cin, line);</span><br><span class="line">        <span class="function">stringstream <span class="title">ssin</span><span class="params">(line)</span></span>; <span class="comment">// 初始化输入流</span></span><br><span class="line">        <span class="keyword">while</span> (ssin &gt;&gt; a[n]) n++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">sort</span>(a, a + n);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans1, ans2;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] - a[i - <span class="number">1</span>] &gt; <span class="number">1</span>)</span><br><span class="line">            ans1 = a[i] - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (a[i] - a[i - <span class="number">1</span>] == <span class="number">0</span>)</span><br><span class="line">            ans2 = a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans1 &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; ans2 &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，基类 <code>Animal</code> 的 <code>sound</code> 函数是虚函数，在 <code>Dog</code> 类中被重写。如果使用 <code>Animal*</code> 指向 <code>Dog</code> 对象，并调用 <code>sound</code> 函数，程序将在运行时调用 <code>Dog</code> 的版本。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal* animal = <span class="keyword">new</span> <span class="built_in">Dog</span>();</span><br><span class="line">animal-&gt;<span class="built_in">sound</span>();  <span class="comment">// 输出 &quot;Dog barks&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="EOF读入法，计数做法"><a href="#EOF读入法，计数做法" class="headerlink" title="EOF读入法，计数做法"></a>EOF读入法，计数做法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1000010</span>;</span><br><span class="line"><span class="type">bool</span> st[N]; <span class="comment">// 状态数组</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n,m;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line">    <span class="type">int</span> nn;</span><br><span class="line">    cin&gt;&gt;nn; <span class="comment">// 行数</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;tmp)!=EOF) <span class="comment">// tmp表示数字</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(st[tmp]==<span class="literal">false</span>) <span class="comment">// 标记</span></span><br><span class="line">            st[tmp] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            n = tmp; <span class="comment">// n表示重复的数字</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> start = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(st[start]==<span class="literal">false</span>) <span class="comment">// 找到最小的数字</span></span><br><span class="line">        start++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=start;;i++) <span class="comment">// 找缺失的数字</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(st[i]==<span class="literal">false</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            m = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;m&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;n&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>总结：</strong></p>
+<ul>
+<li>发生在运行时（动态绑定）。</li>
+<li>需要继承关系，且基类中的函数必须是虚函数。</li>
+<li>函数名、参数列表、返回类型必须一致。</li>
+</ul>
+<hr>
+<h4 id="重定义（Hiding）"><a href="#重定义（Hiding）" class="headerlink" title="重定义（Hiding）"></a>重定义（Hiding）</h4><p><strong>重定义</strong>指的是派生类中的函数与基类中的同名函数没有完全相同的签名（例如参数列表不同），但基类中的函数<strong>并不是虚函数</strong>。在这种情况下，派生类中的函数<strong>隐藏</strong>了基类中的同名函数，即使通过基类指针也无法访问被隐藏的基类函数。</p>
+<p><strong>特点：</strong></p>
+<ol>
+<li>函数名相同，但基类的函数不是虚函数。</li>
+<li>可以参数列表不同，但即便相同，仍会隐藏基类的函数。</li>
+<li>基类函数被隐藏后，使用基类指针调用时只会访问派生类的版本。</li>
+<li>重定义可能会导致意外的行为，因此需要注意。</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Parent</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Parent: &quot;</span> &lt;&lt; x &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Child</span> : <span class="keyword">public</span> Parent &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Child&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>在这个例子中，<code>Child</code> 类中的 <code>print()</code> 函数隐藏了 <code>Parent</code> 类中的 <code>print(int)</code>。如果通过 <code>Child</code> 对象调用 <code>print()</code>，那么只能访问 <code>Child</code> 的版本。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Child child;</span><br><span class="line">child.<span class="built_in">print</span>();     <span class="comment">// 输出 &quot;Child&quot;</span></span><br><span class="line">child.<span class="built_in">print</span>(<span class="number">10</span>);   <span class="comment">// 编译报错，Child的print没有参数</span></span><br></pre></td></tr></table></figure>
+
+<p>如果需要调用 <code>Parent</code> 中的 <code>print(int)</code>，必须显式指定作用域：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">child.Parent::<span class="built_in">print</span>(<span class="number">10</span>);  <span class="comment">// 输出 &quot;Parent: 10&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong></p>
+<ul>
+<li>发生在继承关系中。</li>
+<li>基类中的函数不是虚函数。</li>
+<li>派生类中的函数与基类同名，但可以有不同的参数列表。</li>
+<li>派生类函数会隐藏基类函数。</li>
+</ul>
+<hr>
+<h4 id="三者的对比"><a href="#三者的对比" class="headerlink" title="三者的对比"></a>三者的对比</h4><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>重载（Overloading）</th>
+<th>重写（Overriding）</th>
+<th>重定义（Hiding）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>作用域</td>
+<td>同一类内</td>
+<td>派生类和基类之间</td>
+<td>派生类和基类之间</td>
+</tr>
+<tr>
+<td>是否需要继承</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>关键字</td>
+<td>无</td>
+<td><code>virtual</code>、<code>override</code></td>
+<td>无</td>
+</tr>
+<tr>
+<td>参数列表</td>
+<td>必须不同</td>
+<td>必须相同</td>
+<td>可以不同</td>
+</tr>
+<tr>
+<td>返回类型</td>
+<td>可以不同</td>
+<td>必须相同</td>
+<td>可以不同</td>
+</tr>
+<tr>
+<td>调用时间</td>
+<td>编译时决定</td>
+<td>运行时决定</td>
+<td>编译时决定</td>
+</tr>
+<tr>
+<td>用途</td>
+<td>提供同名函数的不同版本</td>
+<td>实现多态性</td>
+<td>派生类中隐藏基类同名函数</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li><strong>重载</strong>主要用来定义同名函数的多个版本，在编译时根据参数的不同选择合适的函数进行调用。  </li>
+<li><strong>重写</strong>是为了实现多态性，派生类可以重新定义基类的虚函数，调用时根据实际对象类型决定调用哪个版本的函数。  </li>
+<li><strong>重定义</strong>则是指派生类中定义了一个与基类同名但不同签名的函数，这会隐藏基类中的版本，导致基类函数不能通过派生类对象直接访问。</li>
+</ul>
 
         
       </div>
@@ -444,27 +539,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/01/18/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E8%BF%9E%E5%8F%B7%E5%8C%BA%E9%97%B4%E6%95%B0/"
-      title="每日算法打卡：连号区间数"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        每日算法打卡：连号区间数
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2024/01/17/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E9%80%92%E5%A2%9E%E4%B8%89%E5%85%83%E7%BB%84/"
-      title="每日算法打卡：递增三元组"
+      href="/2024/10/04/C-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AF%B9%E6%AF%94/"
+      title="C++继承与组合详解与对比"
      >
 
     <p class="title-text">
       
-        每日算法打卡：递增三元组
+        C++继承与组合详解与对比
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
