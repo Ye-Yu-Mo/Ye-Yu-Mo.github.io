@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">39</div>
+                <div class="category-count">40</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -214,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">9 </div>
+          <div class="archive-count">10 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -315,8 +315,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/10/18/C-STL%E5%BA%93%E5%85%A8%E8%AF%A6%E8%A7%A3/" title="C++STL库全详解" >
+            <div class="recent-link-text">
+              C++STL库全详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/10/13/C-%E5%B8%B8%E8%A7%81%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/" title="常见开源组件的详解" >
             <div class="recent-link-text">
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/03/C-%E5%BC%95%E7%94%A8%E6%8C%87%E9%92%88%E5%A4%A7%E5%AF%B9%E6%AF%94/" title="C++引用指针大对比" >
-            <div class="recent-link-text">
-              C++引用指针大对比
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,77 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-C-11特性之异步操作实现线程池" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/10/02/C-11%E7%89%B9%E6%80%A7%E4%B9%8B%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0/">C++11特性之异步操作实现线程池</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-10-02T07:42:15.000Z" itemprop="datePublished">2024-10-02</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-11/" rel="tag">C++11</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="tag">线程池</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            std::futurestd::future是C++11标准库中的一个模板类,表示异步操作的结果
+当我们在进行多线程中使用异步任务时,std::future是用来帮我们在需要的时候获取任务执行的结果
+他的一个重要的特性就是能够阻塞当前的线程,一直到异步操作完成,从而确保在获取结果的时候,异步工作线程的任务是完成的
+主要应用场景就是异步任务,比如说网络请求或者计算密集型任务;并发控制,在多线程编程中,我们需要等待某些任务完成之后才能继续执行其他操作,实现线程同步;最后就是可以通过std::future::get()来获取任务的结果
+用法
+async函数12345678910111213141516171819202122#include &lt;iostream&gt;#include &lt;thread&gt;#include &lt;future&gt;#include &quot;../logs/Xulog.h&quot;int Add(int num1, int num2)&#123;    INFO(&quot;正在计算...&quot;);    return num...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/10/02/C-11%E7%89%B9%E6%80%A7%E4%B9%8B%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-gtest测试框架介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -390,7 +461,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            755 詞 
+            755 words 
           </div>
         </div>
         
@@ -463,7 +534,7 @@ GTest使用简单的宏断言断言分两类
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            944 詞 
+            944 words 
           </div>
         </div>
         
@@ -544,7 +615,7 @@ sqlite有三种安全模式
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            878 詞 
+            878 words 
           </div>
         </div>
         
@@ -628,7 +699,7 @@ C语言中的staticC语言中static一共有三个用法
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            813 詞 
+            813 words 
           </div>
         </div>
         
@@ -714,7 +785,7 @@ C语言中的staticC语言中static一共有三个用法
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 詞 
+            1.2k words 
           </div>
         </div>
         
@@ -798,7 +869,7 @@ proto文件1234567891011121314151617181920syntax = &quot;proto3...
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.9k 詞 
+            1.9k words 
           </div>
         </div>
         
@@ -875,7 +946,7 @@ Server常见接口TcpServer类这个类用来生成服务器对象
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.8k 詞 
+            1.8k words 
           </div>
         </div>
         
@@ -909,92 +980,6 @@ epollepoll是为了处理大量句柄而做了改进的poll，在实际中运用
     <a class="right-panel  non-pic  "
       
       href="/2024/09/27/Linux%E9%AB%98%E7%BA%A7IO%E4%B9%8Bpoll%E4%B8%8Eepoll/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux高阶IO之select多路转接" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/">Linux高阶IO之select多路转接</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-26T07:55:01.000Z" itemprop="datePublished">2024-09-26</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            980 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            select多路转接多路转接有三种方案,分别是select,poll和epoll,我们都会讲解和介绍
-select的函数原型是这样的
-
-他一共有五个参数,但是可以分为三组
-
-nfds:需要监视的最大的文件描述符值+1
-readfds:可读文件描述符集合writefds:可写文件描述符集合exceptfds:异常文件描述符集合
-timeout:设置select等待的时间
-
-就绪事件分为三种,可读事件,可写事件,异常事件
-timeoutselect可以帮我们同时等待多个文件描述符,但是如果一直轮询多个描述符是不合理的,我们应当可以设置他阻塞或者轮询
-因此timeout可以传入三种数据
-
-NULL : 表示没有timeout,select一直阻塞等待,直到有了就绪的文件描述符
-0 : 进检测文件描述符集合的状态,然后立即返回,不会进行任何阻塞等待,继续执行后面的逻辑
-确定的时间 : 阻塞指定的时间段,没有等到则超时返回
-
-前两个都好理解,第三个的数据类型是timeval,要怎么用呢
-他的内部有两个成员,分别对应了秒和微秒
-长这样
-1234struct timeval &#123;   ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

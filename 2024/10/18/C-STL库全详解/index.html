@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>C++STL库全详解 | jasmine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="之前有介绍过STL标准模板库 但是那时候由于个人的水平还不足与完全理解 于是再写一篇 让我们重新认识一下STL标准模板库 这里需要数据结构和了解进程地址空间的基础知识 STL库可以说是C++最核心的库之一了 提供了丰富的模板类 函数 让我们能够方便的处理常见的数据结构和算法 STL主要由以下的几个部分组成  容器 Containers 迭代器 iterators 算法 algorithm 函数对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++STL库全详解">
+<meta property="og:url" content="http://example.com/2024/10/18/C-STL%E5%BA%93%E5%85%A8%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="jasmine">
+<meta property="og:description" content="之前有介绍过STL标准模板库 但是那时候由于个人的水平还不足与完全理解 于是再写一篇 让我们重新认识一下STL标准模板库 这里需要数据结构和了解进程地址空间的基础知识 STL库可以说是C++最核心的库之一了 提供了丰富的模板类 函数 让我们能够方便的处理常见的数据结构和算法 STL主要由以下的几个部分组成  容器 Containers 迭代器 iterators 算法 algorithm 函数对象">
+<meta property="og:locale" content="en_UK">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729146760460-5106c140-b744-4772-abe6-bb6fd77282da.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729147936837-a631a38a-45e1-4897-9782-9cb6c0adc2d8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729148325817-9102f73c-dacc-4490-a8f1-7d03787ca80f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729149663467-d9975949-eb8f-4146-930f-b0b667f3cbb3.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729149822086-04e70589-e2d4-46ab-b055-68615586f346.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729239408587-af084dcf-61d0-49e4-9969-69316f0beeb1.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729244763335-8b4e428b-2fe7-4929-9471-cf92324384b2.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729245377630-6a290868-9a01-4ac8-999d-579627a00b31.png">
+<meta property="article:published_time" content="2024-10-18T10:55:52.000Z">
+<meta property="article:modified_time" content="2024-10-18T10:56:12.676Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="STL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729146760460-5106c140-b744-4772-abe6-bb6fd77282da.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://s2.loli.net/2023/12/13/Bv6hpEor4W1G8nl.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>jasmine </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/headimg.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">许磊 </div>
+      <div class="dot"></div>
+      <div class="subtitle">学习记录 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://s2.loli.net/2024/08/16/z8xO9lbBnqUdt6Q.png" title="QQ"><i class="fa-brands fa-qq"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/ye_yumo" title="CSDN"><i class="fa-regular fa-code"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo" title="github"><i class="fa-solid fa-cloud"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
+                C语言
+                <div class="category-count">5</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/">
+                C++
+                <div class="category-count">40</div>
+            </a>
+        <div class="children"><div class="category-box">
+            <a class="category-link" href="/categories/C/STL/">
+                STL
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/C/%E5%86%85%E5%AD%98/">
+                内存
+                <div class="category-count">1</div>
+            </a>
+        </div></div>
+            <a class="category-link" href="/categories/Linux/">
+                Linux
+                <div class="category-count">46</div>
+            </a>
+        
+            <a class="category-link" href="/categories/python/">
+                python
+                <div class="category-count">15</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">
+                算法
+                <div class="category-count">38</div>
+            </a>
+        
+            <a class="category-link" href="/categories/MySQL/">
+                MySQL
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Web/">
+                Web
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                大模型训练营
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">
+                项目
+                <div class="category-count">8</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                机器学习
+                <div class="category-count">9</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%A1%86%E6%9E%B6/">
+                框架
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                数据库
+                <div class="category-count">2</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/10 ">
+          October 2024 
+          <div class="archive-count">10 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/09 ">
+          September 2024 
+          <div class="archive-count">23 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/08 ">
+          August 2024 
+          <div class="archive-count">16 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/07 ">
+          July 2024 
+          <div class="archive-count">12 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          May 2024 
+          <div class="archive-count">13 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          April 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          March 2024 
+          <div class="archive-count">14 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          February 2024 
+          <div class="archive-count">7 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/01 ">
+          January 2024 
+          <div class="archive-count">42 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/12 ">
+          December 2023 
+          <div class="archive-count">27 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/10 ">
+          October 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/09 ">
+          September 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          August 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/07 ">
+          July 2023 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/06 ">
+          June 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/04 ">
+          April 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/03 ">
+          March 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/02 ">
+          February 2023 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Recent Posts</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/10/18/C-STL%E5%BA%93%E5%85%A8%E8%AF%A6%E8%A7%A3/" title="C++STL库全详解" >
+            <div class="recent-link-text">
+              C++STL库全详解
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/13/C-%E5%B8%B8%E8%A7%81%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/" title="常见开源组件的详解" >
+            <div class="recent-link-text">
+              常见开源组件的详解
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/08/C-%E5%A4%9A%E6%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" title="C++多态常见问题" >
+            <div class="recent-link-text">
+              C++多态常见问题
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/08/C-%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E5%AE%9A%E4%B9%89%E7%9A%84%E5%AF%B9%E6%AF%94/" title="C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别" >
+            <div class="recent-link-text">
+              C++重载（Overloading）、重写（Overriding）、重定义（Hiding）的对比与区别
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/10/04/C-%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AF%B9%E6%AF%94/" title="C++继承与组合详解与对比" >
+            <div class="recent-link-text">
+              C++继承与组合详解与对比
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-C-STL库全详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        C++STL库全详解
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-10-18T10:55:52.000Z" itemprop="datePublished">2024-10-18</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/C/">C++</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            5.2k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STL/" rel="tag">STL</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>之前有介绍过STL标准模板库 但是那时候由于个人的水平还不足与完全理解 于是再写一篇 让我们重新认识一下STL标准模板库</p>
+<p>这里需要数据结构和了解进程地址空间的基础知识</p>
+<p>STL库可以说是C++最核心的库之一了 提供了丰富的模板类 函数 让我们能够方便的处理常见的数据结构和算法</p>
+<p>STL主要由以下的几个部分组成</p>
+<ol>
+<li>容器 Containers</li>
+<li>迭代器 iterators</li>
+<li>算法 algorithm</li>
+<li>函数对象 functors</li>
+<li>适配器 adapters</li>
+<li>空间配置器 allocators</li>
+</ol>
+<p>接下来我们一一对其介绍 尽可能详细的讲解其中的原理</p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>容器可以说是STL中最常用的部分之一了 例如vector list map都属于这个内容 主要是为了存储和管理数据</p>
+<p>基础的容器主要分为三类 序列式容器 关联式容器 无序容器</p>
+<p>还有一种是容器适配器 关于适配器我们后面介绍 这里我们只需要知道他是对上述的三种基础容器进行封装 然后提供特定的功能</p>
+<p>每一类下面有很多具体的容器 我们一一来介绍 对于容器中的迭代器和原理我们在迭代器部分介绍</p>
+<h4 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h4><p>序列式容器的特点就是所有的元素都是按顺序存储的 适合用于按顺序处理顺序的场景</p>
+<p>&#x3D;&#x3D;vector&#x3D;&#x3D;</p>
+<blockquote>
+<p>vector就是简单的动态数组 可以说是相对来说最简单的容器了</p>
+<p>他支持O(1)时间的随机访问 O(n)时间的插入删除 是自动动态扩容和增长的数组 </p>
+<p>底层原理：</p>
+<p>vector的底层原理也很简单 就是一个动态数组 开辟并维护一块内存</p>
+<p>通常维护的成员变量就是两种思路</p>
+<p>一种是起始地址+当前元素个数+容量元素个数</p>
+<p>另一种是起始地址+最后一个元素的地址+1（下一个插入元素的位置）+容量末尾的地址</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729146760460-5106c140-b744-4772-abe6-bb6fd77282da.png"></p>
+</blockquote>
+<p>&#x3D;&#x3D;deque&#x3D;&#x3D;</p>
+<blockquote>
+<p>双端队列</p>
+<p>双端队列的逻辑上是一个队列 支持常数时间的头部和尾部的插入和删除操作 支持常数时间的随机访问 中间位置的插入和删除是O(n)的</p>
+<p>底层原理</p>
+<p>双端队列的底层原理是用指针数组+普通数组组成的 每一个指针数组都指向一个普通数组 也就是一个内存块 每个内存块都包含若干个元素</p>
+<p>deque要找元素的时候就需要两步 第一步是获取数据中哪一个 第二步是定位到块中的具体位置</p>
+<p>deque可以常数时间读取数据很好理解 因为每个内存块的大小都是固定的 因此只要知道序号就能算出具体的位置</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729147936837-a631a38a-45e1-4897-9782-9cb6c0adc2d8.png"></p>
+<p>例如 每个数组可以存10个元素 我们有10个这样的数组（从0到9） 假设这十个中除了头和尾都存满了 头里面存了3个 尾里面存了几个不重要 现在想访问第57个元素 因为头没存满 所以除了头 57-3&#x3D;54 也就是除了头的剩下第54号元素 每个都存满了 所以是在第54&#x2F;10&#x3D;5 在第5号数组里面 具体是第几个呢 54%10&#x3D;4 第4个 这样就能常数时间访问数据了</p>
+<p>这里需要额外说明的是 在头部插入数据时 需要判断头部是否还有剩余空间 如果没有的话就需要申请新的内存块 然后更新指针数组</p>
+</blockquote>
+<p>&#x3D;&#x3D;list&#x3D;&#x3D;</p>
+<blockquote>
+<p>list的内部实现其实是一个双向链表 链表的每一个节点都包含前驱指针 后继指针 数据本身 他说支持常数时间的插入和删除 但是不支持O(1)的随机访问 虽然支持方括号访问数据 但是原理是用迭代器遍历的</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729148325817-9102f73c-dacc-4490-a8f1-7d03787ca80f.png"></p>
+<p>初学者容易把指针变量和指针变量存储的地址混淆 要注意区分</p>
+</blockquote>
+<p>&#x3D;&#x3D;forward_list&#x3D;&#x3D;</p>
+<blockquote>
+<p>这个是另一种更轻量化的链表 只有向后的next指针 也就是单向链表 适合简单的数据流操作 每个节点包含数据和指向下一个节点的指针</p>
+</blockquote>
+<h3 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h3><p>关联式容器是存储的键值对 利用键来进行快速的查找 排序底层原理都是红黑树 是一种自平衡的二叉搜索树 后面我们也会单独出文章介绍</p>
+<p>每一个节点存储的数据也是一个简单的容器pair 非常简单就是一个结构体</p>
+<p>&#x3D;&#x3D;set&#x2F;multiset&#x3D;&#x3D;</p>
+<blockquote>
+<p>翻译过来就是集合 有O(logn)时间的插入 删除 查找 不允许相同的键</p>
+<p>每一次插入的时候会自动排序让二叉树平衡 multi表示可以重复的键 但是不允许完全重复的键和值</p>
+</blockquote>
+<p>&#x3D;&#x3D;map&#x2F;multimap&#x3D;&#x3D;</p>
+<blockquote>
+<p>map也是存储键值对 但是map可以有重复的值 也就是允许不同的键指向相同的值 multimap就允许相同的键和值了</p>
+</blockquote>
+<h3 id="无序容器"><a href="#无序容器" class="headerlink" title="无序容器"></a>无序容器</h3><p>无序容器也是存储的键值对 实现原理都是哈希表 元素通过哈希函数计算得到哈希值 把对应的值存储值对应的桶中 当不同元素的哈希值相同冲突时 会采用一些冲突避免算法 线性探测 指数探测 或者用链表</p>
+<p>所谓的桶也可以理解为是是固定长度的指针数组+普通数组</p>
+<p>基本的时间复杂度都是O(1) 包括插入 删除查找</p>
+<p>有 unordered_map&#x2F;unordered_mutimap&#x2F;unordered_set&#x2F;unordered_mutiset</p>
+<p>和之前的类似</p>
+<h3 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h3><p>这个东西其实就是对其他容器进行封装 然后提供特定的功能 例如栈 队列等</p>
+<p>&#x3D;&#x3D;stack&#x3D;&#x3D;</p>
+<blockquote>
+<p>这个东西就是先进后出 不允许随机访问 只允许值栈顶进行操作 通常是用vector或者deque进行封装</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729149663467-d9975949-eb8f-4146-930f-b0b667f3cbb3.png"></p>
+</blockquote>
+<p>&#x3D;&#x3D;queue&#x3D;&#x3D;</p>
+<blockquote>
+<p>这个就是普通的队列 先进先出 只允许队尾插入 队头取出</p>
+<p>通常是基于deque实现进行封装</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729149822086-04e70589-e2d4-46ab-b055-68615586f346.png"></p>
+</blockquote>
+<p>&#x3D;&#x3D;priority_queue&#x3D;&#x3D;</p>
+<blockquote>
+<p>这个东西直接翻译过来是优先级队列 实际上所对应的数据结构就是堆 分为大根堆和小根堆 都可以指定 默认是大根堆</p>
+<p>所有的元素按照优先级排序 优先级高的优先出队 也就是越大的优先级越高</p>
+<p>底层原理就是一个堆 自动排序还是很香的 常用来解决top k问题 </p>
+</blockquote>
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p>我们使用容器这种数据结构无非就是因为其中的使用非常方便 其中的一个体现就是可以用一套操作来遍历容器 这里就是迭代器发挥了很重要的作用 而就是一种方便我们遍历容器元素的一种工具 </p>
+<p>根据不同类型的容器特定 迭代器也有很多不同的类型</p>
+<ol>
+<li>输入迭代器 单向读取操作 不允许修改或回退 只能用于单向的遍历 一般用的地方就是输入流</li>
+<li>输出迭代器 单向输出操作 不能读取或者修改 用的地方也就是输出流 或者就是某些容器的输出</li>
+<li>前向迭代器 可读可写 只支持单向遍历 也就是++ 但是只能从前往后移动 单向链表forward_list用的就是这种</li>
+<li>双向迭代器 也是可读可写的 支持向前和向后遍历 ++ – 都是可以的 例如list set map 虽然他们都支持方括号访问 但是时间复杂度并非上O(1)的</li>
+<li>随机访问迭代器 支持常数时间的随机访问 都是通过指针运算来确定位置的 比如说vector deque array都是这样的</li>
+</ol>
+<p>常见容器的迭代器类型</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729239408587-af084dcf-61d0-49e4-9969-69316f0beeb1.png"></p>
+<p>上面这种分类方式是根据迭代器提供的功能来分类 然而实际应用中我们也不太关心这里的分类 而是更加在意const迭代器 reverse反向迭代器 const reverse迭代器</p>
+<p>额外的这三种难道说我们对每个容器都要重新设计吗 其实并不用 而是我们构建了一种迭代器适配器 将我们自行实现的一般迭代器自动适配到另外三种</p>
+<h4 id="常见容器的迭代器实现原理"><a href="#常见容器的迭代器实现原理" class="headerlink" title="常见容器的迭代器实现原理"></a>常见容器的迭代器实现原理</h4><p>迭代器的实现一定是跟容器及其特性强相关的 不同容器的迭代器实现起来也不一样</p>
+<p>&#x3D;&#x3D;vector&#x3D;&#x3D;</p>
+<blockquote>
+<p>vector的底层是一片连续的内存 因此我们可以把原生指针当作一个迭代器 因为他本身就指向元素的地址 + - 解引用 都是原生支持的 因此我们不需要额外定义 </p>
+</blockquote>
+<p>&#x3D;&#x3D;list&#x3D;&#x3D;</p>
+<blockquote>
+<p>我们想要遍历整个链表 如果没有迭代器的话 是通过指针来进行移动的 但是list在遍历时的单位结构是一个节点 单纯的使用原生指针式不够用的</p>
+<p>因此我们在实现list的迭代器时 就需要对节点进行封装 每一个迭代器存储的 或者说管理的是一个节点的指针</p>
+<p>需要注意的是 迭代器本身并不知道他本身在链表的什么位置 头尾还是中间 这些东西是由链表来控制的</p>
+<p>这其中+-运算符的重载就是把当前指向节点更改成指向上一个或者指向下一个 解引用的操作就是返回节点中数据的引用或者指针 除此之外还应该实现判断等于或者不等于的功能</p>
+</blockquote>
+<p>&#x3D;&#x3D;deque&#x3D;&#x3D;</p>
+<blockquote>
+<p>这个东西维护的是一个指针数组及每个指针维护的一片内存区域 </p>
+<p>因此他的迭代器需要维护的信息也很多 但是我们要知道这其中的数据单元是什么 其实还是元素本体  需要有 指向当前元素的指针（找到元素的基本单位） 指向整个指针数组的指针（用来找具体在哪一个缓冲区的指针）指向具体缓冲区的指针（表示当前元素所在的缓冲区）</p>
+<p>+-是通过类似vector的检查越界来实现跨缓冲区访问 解引用是和vector一样的</p>
+</blockquote>
+<p>&#x3D;&#x3D;树形容器&#x3D;&#x3D;</p>
+<blockquote>
+<p>这种就包括set map等一系列容器了 维护的内容是指向树节点的指针 类似于list +-操作的顺序是中序遍历的 解引用和list一样</p>
+</blockquote>
+<p>&#x3D;&#x3D;哈希容器&#x3D;&#x3D;</p>
+<blockquote>
+<p>这种容器的底层是一个哈希桶 本身维护的是类似于deque一样的东西 只是缓冲区的大小是不定的 根据哈希桶实现的不同 迭代器也就有所不同了</p>
+<p>例如和deque一样是数组加连续地址空间的那就是类似deque的模式</p>
+<p>如果是和list一样 数组后面加的是链表的内容 就是类似于list的模式来实现迭代器了 </p>
+</blockquote>
+<h3 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a>适配器</h3><p>前面我们已经多少用到适配器的内容 能够大概理解适配器这个东西是用来干嘛的 他主要是用来将已有的 容器 函数 迭代器 进行包装或者转换 让其能够满足我们的需求 让我们少写重复实现的代码</p>
+<p>例如容器适配器 迭代器适配器 函数适配器</p>
+<h4 id="容器适配器-1"><a href="#容器适配器-1" class="headerlink" title="容器适配器"></a>容器适配器</h4><p>这个就是对我们原有的容器进行封装 提供特定的功能和接口 从一个容器到另一个符合我们要求的容器</p>
+<p>例如stack queue priority_queue</p>
+<h4 id="迭代器适配器"><a href="#迭代器适配器" class="headerlink" title="迭代器适配器"></a>迭代器适配器</h4><p>迭代器适配器是将已有的容器的迭代器进行封装 让其能够实现比如说反向迭代器 或者const迭代器的功能 这就是从一个迭代器到另一个符合我们要求的迭代器</p>
+<p>他的模板参数就是原来的普通迭代器</p>
+<p>还有其他的比如说insert适配器 让算法能够直接对容器执行插入操作 例如 back_inserter</p>
+<h4 id="函数适配器"><a href="#函数适配器" class="headerlink" title="函数适配器"></a>函数适配器</h4><p>这里需要结合函数对象来理解</p>
+<h3 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h3><p>这个东西上提供了一种将函数行为转换为类对象的机制，也就是仿函数对象</p>
+<p>STL提供了许多仿函数</p>
+<ol>
+<li>算术运算类（Arithmetic Functors）：<ol>
+<li>plus<T>：加法操作。</li>
+<li>minus<T>：减法操作。</li>
+<li>multiplies<T>：乘法操作。</li>
+<li>divides<T>：除法操作。</li>
+<li>modulus<T>：取模操作。</li>
+<li>negate<T>：取负操作。2.</li>
+</ol>
+</li>
+<li>关系运算类（Relational Functors）：<ol>
+<li>equal_to<T>：等于比较。</li>
+<li>not_equal_to<T>：不等于比较。</li>
+<li>greater<T>：大于比较。</li>
+<li>less<T>：小于比较。</li>
+<li>greater_equal<T>：大于等于比较。</li>
+<li>less_equal<T>：小于等于比较。</li>
+</ol>
+</li>
+<li>逻辑运算类（Logical Functors）：<ol>
+<li>logical_and<T>：逻辑与操作。</li>
+<li>logical_or<T>：逻辑或操作。</li>
+<li>logical_not<T>：逻辑非操作。</li>
+</ol>
+</li>
+<li>位运算类（Bitwise Functors）：<ol>
+<li>bit_and<T>：按位与操作。</li>
+<li>bit_or<T>：按位或操作。</li>
+<li>bit_xor<T>：按位异或操作。</li>
+</ol>
+</li>
+<li>通用适配器类（Function Adaptors）：<ol>
+<li>绑定器：如 bind1st、bind2nd，用于将二元函数对象转化为一元函数对象。</li>
+<li>否定器：如 not1、not2，将函数对象取反，返回相反结果。</li>
+<li>成员函数适配器：如 mem_fun、mem_fun_ref，用于将成员函数绑定为函数对象。</li>
+</ol>
+</li>
+</ol>
+<h4 id="函数适配器-1"><a href="#函数适配器-1" class="headerlink" title="函数适配器"></a>函数适配器</h4><p>既然函数对象可以看作对象来传递 看作函数来使用 对于他来说最难以确定的其实就是参数 还有调用方式</p>
+<p>最常用的函数适配的一个方法就是bind</p>
+<p>在这样一个场景中 在一个类中的成员是一个回调函数 我们想要传递的这个回调函数是另一个类的成员函数 这样的话对于回调函数的设计就很局限了</p>
+<p>如果没有函数适配器 我们不得不在回调函数的第一个参数类型设置为第二个类指针 因为成员函数的第一个隐藏参数就是this指针</p>
+<p>那想要传入其他类的成员函数不久不行了</p>
+<p>bind函数适配器就可以解决这个问题 他可以把原来的函数参数进行绑定 进行预先的传值 例如吧this指针提前传递给这个成员函数 然后生成一个新的函数对象</p>
+<p>接着这个新生成的函数对象 就能够作为回调函数传递了 因为这个函数对象接收的参数就是原来成员函数中没有绑定的参数 </p>
+<p>这个思想就是从一个函数到另一个符合我们要求的函数的思想</p>
+<h3 id="空间配置器"><a href="#空间配置器" class="headerlink" title="空间配置器"></a>空间配置器</h3><p>空间配置器也是一个宏大的话题 他说未来各个容器高效管理内存空间而存在的 我们中正常使用STL的时候很难察觉到</p>
+<p>但是在我们自己模拟实现STL的相关容器时 却从来没有用到 都是用的new</p>
+<p>这就有一些不足之处了</p>
+<ul>
+<li>自行管理空间的申请和释放容易造成内存泄露</li>
+<li>频繁申请小块内存 容易造成内存碎片 也会影响程序运行的效率</li>
+<li>申请失败时没有任何办法</li>
+<li>代码结构比较混乱 复用率也不高</li>
+<li>没有考虑线程安全问题</li>
+</ul>
+<p>我们迫切的需要一个内存管理模块 让我们方便好用的实现内存管理</p>
+<p>解决问题时我们需要区分主要矛盾和次要矛盾 这里的主要矛盾其实是由于频繁申请小块内存引起的内存碎片 低效导致的 而这个问题解决了 剩下的也就好说了</p>
+<p>STL通常把128字节作为小块内存和大块内存的分界线 我们对大块内存和小块内存分别进行处理和利用</p>
+<p>对于大块内存使用一级空间配置器 对于小块内存使用耳机空间配置器</p>
+<h4 id="一级空间配置器"><a href="#一级空间配置器" class="headerlink" title="一级空间配置器"></a>一级空间配置器</h4><p>一级空间配置器很简单 因为他本身就是为大块内存来服务的 new和malloc就已经足够使用</p>
+<p>而对于内存分配失败的情况 也不会单纯的直接抛异常结束程序 而是支持用于传入函数对象来进行内存分配失败时的调用</p>
+<h4 id="二级空间配置器"><a href="#二级空间配置器" class="headerlink" title="二级空间配置器"></a>二级空间配置器</h4><p>二级空间配置器时专门用来负责处理小块内存的申请的 那要怎么才能提升小块内存申请与释放的效率呢</p>
+<p>聪明的你肯定想到了池化技术 之前的文章我们有说过进程池 线程池</p>
+<p>这里就是需要内存池了</p>
+<h5 id="内存池"><a href="#内存池" class="headerlink" title="内存池"></a>内存池</h5><p>内存池就是我们先申请一块比较大的内存作为备用内存 当需要内存的时候 直接到内存中取 当内存池也不够的时候 再去内存本体中去 当用户内存也不够的时候 我们直接把内存池还给用户</p>
+<p>这样就能达到一次申请终身适用的效果了</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729244763335-8b4e428b-2fe7-4929-9471-cf92324384b2.png"></p>
+<p>这里的图示是逻辑上的 实际中的实现比这个要略微复杂一点 主要是因为我们无法确定程序何时会归还申请的内存 怎么样尽量提高内存的利用率</p>
+<h4 id="二级空间配置器的设计"><a href="#二级空间配置器的设计" class="headerlink" title="二级空间配置器的设计"></a>二级空间配置器的设计</h4><p>怎么对每一段还没有利用的内存进行管理成了问题 这又回到了那个熟悉的管理问题 解决方法就是先描述 再组织</p>
+<p>我们描述一个内存区域需要什么 其实就是需要起始地址和结束地址就够了 这样既可以分配个给具体的申请请求 有能够知道内存区域的大小</p>
+<p>那要怎么组织起来呢 考虑到分配效率 频繁的查找 插入 删除 那肯定是效率越高越好 最好还能排个序 直接分配给刚好够用的就行</p>
+<p>答案呼之欲出 那就是 哈希桶 将内存块大小作为索引 将一系列符合要求的小内存块 和大内存块串在一起 用的时候直接取 香啊</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/43731355/1729245377630-6a290868-9a01-4ac8-999d-579627a00b31.png"></p>
+<p>这里以8字节作为增量主要是因为内存对其问题 小了不够用 大了用不完</p>
+<p>正规空间配置器的使用逻辑就是 先判断申请内存是否大于128字节 大于直接由一级配置器神器 小于则直接去哈希桶中找 找得到就直接给了 找不到就向上继续申请更大一点的内存块</p>
+<p>更加详细的实现细节可以看我之后再STL模拟实现的库中的ReadMe和文档</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ye-Yu-Mo/XuSTL">https://github.com/Ye-Yu-Mo/XuSTL</a></p>
+<h4 id="空间配置器的再次封装"><a href="#空间配置器的再次封装" class="headerlink" title="空间配置器的再次封装"></a>空间配置器的再次封装</h4><p>申请的内存可能是任意类型的 连续空间或者 单个对象的空间 每一次都让用户自己计算大小就不是很好 要是能像new就好了</p>
+<p>对于对象的构造和析构在空间的申请和释放是分开的 有些对象的构造不需要构造函数 有些对象析构不需要析构函数 将这两个过程分开就能提高程序的性能了 前提是我们需要通过类型萃取来获取类型是否调用 可以通过迭代器来获取 这部分也是比较复杂的</p>
+<p>接下来这个空间配置器就能正常工作的来 用于我们自行实现的容器</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>具体的算法原理这里不做讲解 这里只是介绍STL的接口</p>
+<p>这里的算法并不限定某一种容器 这得益于迭代器的实现 在算法顶层上看 他们都是一样的</p>
+<ol>
+<li>非修改序列算法 for_each find count find_if adjacent_find</li>
+<li>修改序列算法 copy copy_if replace replace_if remove remove_if unique transform</li>
+<li>排序算法  sort stable_sqrt partial_sort nth_element merge partition stable_partition</li>
+<li>集合操作 set_union set_intersection set_difference set_symmetric_difference</li>
+<li>数值算法</li>
+<li>堆算法 push_heap pop_heap make_heap sort_heap</li>
+<li>二分查找 binary_search lower_bound upper_bound equal_range</li>
+</ol>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/10/13/C-%E5%B8%B8%E8%A7%81%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/"
+      title="常见开源组件的详解"
+     >
+
+    <p class="title-text">
+      
+        常见开源组件的详解
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">Comments </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"nctYZUBSQkAe8nfJkbEY0bN3-gzGzoHsz","appKey":"8Vx9DjxpYLAzQpeAvDBmDFDi","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":null,"el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 许磊<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

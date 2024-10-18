@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">39</div>
+                <div class="category-count">40</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -214,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">9 </div>
+          <div class="archive-count">10 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -315,8 +315,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/10/18/C-STL%E5%BA%93%E5%85%A8%E8%AF%A6%E8%A7%A3/" title="C++STL库全详解" >
+            <div class="recent-link-text">
+              C++STL库全详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/10/13/C-%E5%B8%B8%E8%A7%81%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/" title="常见开源组件的详解" >
             <div class="recent-link-text">
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/03/C-%E5%BC%95%E7%94%A8%E6%8C%87%E9%92%88%E5%A4%A7%E5%AF%B9%E6%AF%94/" title="C++引用指针大对比" >
-            <div class="recent-link-text">
-              C++引用指针大对比
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,86 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-每日算法打卡：最长上升子序列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/01/14/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">每日算法打卡：最长上升子序列</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-01-14T08:26:00.000Z" itemprop="datePublished">2024-01-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            420 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">最长上升子序列</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            原题链接895. 最长上升子序列
+题目难度：简单
+题目描述给定一个长度为 N 的数列，求数值严格单调递增的子序列的长度最长是多少。
+输入格式第一行包含整数 N。
+第二行包含 N 个整数，表示完整序列。
+输出格式输出一个整数，表示最大长度。
+数据范围$1 \le N \le 1000$，$-10^9 \le 数列中的数 \le 10^9$
+输入样例：1273 1 2 1 8 5 6 
+
+输出样例：14 
+
+题目分析这道题目的意思很简单，就是从序列中找到一个最长的严格递增的子序列，例如样例中的结果就是，1,2,5,6
+这是一个经典的DP问题，我们依旧从集合的角度来看，集合的含义就是所有以a[i]结尾的严格单调上升的子序列
+从状态计算的角度来看，我们以倒数第二个位置可以取的不同的数字进行集合划分，一共有i种情况，分别是空，a[1]，a[2]一直到a[i-1]，那么对于其中任意一种情况，都可以继续进行划分，当不符合条件的时候，只需要进行排除即可
+示例代码12345678910111213141516171819202122232425262728#include&lt;iostream&...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/01/14/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-每日算法打卡：背包问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -390,7 +470,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 詞 
+            1.2k words 
           </div>
         </div>
         
@@ -472,7 +552,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            864 詞 
+            864 words 
           </div>
         </div>
         
@@ -560,7 +640,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            382 詞 
+            382 words 
           </div>
         </div>
         
@@ -641,7 +721,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            964 詞 
+            964 words 
           </div>
         </div>
         
@@ -726,7 +806,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            820 詞 
+            820 words 
           </div>
         </div>
         
@@ -808,7 +888,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k words 
           </div>
         </div>
         
@@ -890,7 +970,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k words 
           </div>
         </div>
         
@@ -932,90 +1012,6 @@ $0 \le a \le b \le c \le d$
     <a class="right-panel  non-pic  "
       
       href="/2024/01/09/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%9B%9B%E5%B9%B3%E6%96%B9%E5%92%8C/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-每日算法打卡：分巧克力" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/01/09/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%88%86%E5%B7%A7%E5%85%8B%E5%8A%9B/">每日算法打卡：分巧克力</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-01-09T02:34:31.000Z" itemprop="datePublished">2024-01-09</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            789 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            原题链接1227. 分巧克力
-题目难度：简单
-题目来源：第八届蓝桥杯省赛C++ A&#x2F;B组,第八届蓝桥杯省赛Java A&#x2F;B&#x2F;C组
-题目描述儿童节那天有 K 位小朋友到小明家做客。
-小明拿出了珍藏的巧克力招待小朋友们。
-小明一共有 N 块巧克力，其中第 i 块是 $H_i \times W_i$ 的方格组成的长方形。
-为了公平起见，小明需要从这 N 块巧克力中切出 K 块巧克力分给小朋友们。
-切出的巧克力需要满足：
-
-形状是正方形，边长是整数
-大小相同
-
-例如一块 $6 \times 5$ 的巧克力可以切出 6 块 $2 \times 2$ 的巧克力或者 2 块 $3 \times 3$ 的巧克力。
-当然小朋友们都希望得到的巧克力尽可能大，你能帮小明计算出最大的边长是多少么？
-输入格式第一行包含两个整数 N 和 K。
-以下 NN 行每行包含两个整数 $H_i$ 和 $W_i$。
-输入保证每位小朋友至少能获得一块 $1 \times 1$ 的巧克力。
-输出格式输出切出的正方形巧克力最大可能的边长。
-数据范围$1 \le N,K \le 10^5$,$1 ...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/01/09/%E6%AF%8F%E6%97%A5%E7%AE%97%E6%B3%95%E6%89%93%E5%8D%A1%EF%BC%9A%E5%88%86%E5%B7%A7%E5%85%8B%E5%8A%9B/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">39</div>
+                <div class="category-count">40</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -214,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">9 </div>
+          <div class="archive-count">10 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -315,8 +315,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/10/18/C-STL%E5%BA%93%E5%85%A8%E8%AF%A6%E8%A7%A3/" title="C++STL库全详解" >
+            <div class="recent-link-text">
+              C++STL库全详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/10/13/C-%E5%B8%B8%E8%A7%81%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/" title="常见开源组件的详解" >
             <div class="recent-link-text">
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/03/C-%E5%BC%95%E7%94%A8%E6%8C%87%E9%92%88%E5%A4%A7%E5%AF%B9%E6%AF%94/" title="C++引用指针大对比" >
-            <div class="recent-link-text">
-              C++引用指针大对比
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,85 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux网络——守护进程与TCP服务器和客户机通信" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/">Linux网络——守护进程、会话、进程组</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-15T13:10:07.000Z" itemprop="datePublished">2024-09-15</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            934 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            会话会话是session，代表的是客户端与服务器的一次交互过程，我们可以简单理解为，当我们打开一个终端，在用户登录时，就是创建了一个会话
+一般来说会话都与各自的终端关联，这个会话中的第一个进程称之为首进程，也称为进程组长
+一个会话中可能有很多进程，我们称之为进程组，为了表示也就有了进程组ID：PGID，会话ID：SIG
+
+使用setsid系统调用可以创建新会话
+
+需要注意的是，创建会话的进程不能是组长进程
+进程组的主要特征就是信号可以发给一个进程组中的所有进程，可以进行作业控制
+PGID就是这个进程组的唯一标识，其实也就是进程组组长的id
+也就是要求一个进程只能当一个组的组长，否则id不就重复了嘛
+但是说进程组长挂了，进程组中只要还有一个进程存在，整个进程组还在
+守护进程守护进程也叫做精灵进程，Deamon，是一种运行在后台的进程，所谓前台后台可以简单理解为能否直接收到键盘指令的进程
+守护进程独立于终端，并且周期性的执行某种任务或者等待处理某些发生的事件
+当Linux系统启动时，或者bash启动时，会启动很多进程服务，例如ssh连接，或者一些代理服务，在进程终止或者系统终止时服务...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux网络——socket编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -390,7 +469,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.2k 詞 
+            2.2k words 
           </div>
         </div>
         
@@ -473,7 +552,7 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.1k 詞 
+            2.1k words 
           </div>
         </div>
         
@@ -556,7 +635,7 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            794 詞 
+            794 words 
           </div>
         </div>
         
@@ -638,7 +717,7 @@ TCP面向的是有连接，意思是在正式的传递信息之前，需要建�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            444 詞 
+            444 words 
           </div>
         </div>
         
@@ -721,7 +800,7 @@ POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            961 詞 
+            961 words 
           </div>
         </div>
         
@@ -796,7 +875,7 @@ POSIX的操作初始化12#include&lt;semaphore.h&gt;int sem_init(sem_t *sem, int
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k 詞 
+            1.1k words 
           </div>
         </div>
         
@@ -880,7 +959,7 @@ int pthread_mutex_init(pthread_mutex_t* restrict mutex, const pthread_mutexattr_
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k 詞 
+            1.2k words 
           </div>
         </div>
         
@@ -936,77 +1015,6 @@ C++11多线程、智能指针、右值引用
     <a class="right-panel  non-pic  "
       
       href="/2024/09/04/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97%E2%80%94%E2%80%94%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux多线程——C-对原生线程库封装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/03/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94C-%E5%AF%B9%E5%8E%9F%E7%94%9F%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/">Linux多线程——利用C++模板对pthread线程库封装</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-03T07:16:29.000Z" itemprop="datePublished">2024-09-03</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1k 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            线程封装我们之前介绍过pthread的线程库，这个线程库主要是基于C语言的void*指针来进行传参和返回
-我们使用C++的模板对其封装可以让他的使用更加方便，并且经过测试可以让我们更加直观的了解到线程互斥和同步的重要性
-主要框架要对线程库进行封装，但是首先这个线程库的基本功能肯定要有
-void*使用模板解决，函数指针使用包装器解决
-那么基本框架就能搭建出来了
-1234567891011121314151617181920212223242526272829303132333435363738#pragma once#include&lt;iostream&gt;#include&lt;string&gt;#include&lt;functional&gt;#include&lt;pthread.h&gt;template&lt;class T&gt;using Func_t = std::function&lt;void(T)&gt;; // 参数类型为T 返回值为空的函数template&lt;class T&gt;class Thread&#123;public:    Th...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/03/Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B%E2%80%94%E2%80%94C-%E5%AF%B9%E5%8E%9F%E7%94%9F%E7%BA%BF%E7%A8%8B%E5%BA%93%E5%B0%81%E8%A3%85/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

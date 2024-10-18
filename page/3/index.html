@@ -134,7 +134,7 @@
 
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">分類</h3>
+      <h3 class="widget-title">Categories</h3>
       <div class="category-box">
             <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">
                 C语言
@@ -143,7 +143,7 @@
         
             <a class="category-link" href="/categories/C/">
                 C++
-                <div class="category-count">39</div>
+                <div class="category-count">40</div>
             </a>
         <div class="children"><div class="category-box">
             <a class="category-link" href="/categories/C/STL/">
@@ -214,12 +214,12 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">彙整</h3>
+      <h3 class="widget-title">Archives</h3>
       
       
         <a class="archive-link" href="/archives/2024/10 ">
           October 2024 
-          <div class="archive-count">9 </div>
+          <div class="archive-count">10 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/09 ">
@@ -315,8 +315,14 @@
       
   <div class="widget-wrap">
     <div class="widget">
-      <h3 class="widget-title">最新文章</h3>
+      <h3 class="widget-title">Recent Posts</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/10/18/C-STL%E5%BA%93%E5%85%A8%E8%AF%A6%E8%A7%A3/" title="C++STL库全详解" >
+            <div class="recent-link-text">
+              C++STL库全详解
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/10/13/C-%E5%B8%B8%E8%A7%81%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6/" title="常见开源组件的详解" >
             <div class="recent-link-text">
@@ -342,12 +348,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/10/03/C-%E5%BC%95%E7%94%A8%E6%8C%87%E9%92%88%E5%A4%A7%E5%AF%B9%E6%AF%94/" title="C++引用指针大对比" >
-            <div class="recent-link-text">
-              C++引用指针大对比
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -358,6 +358,92 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-Linux高阶IO之select多路转接" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/">Linux高阶IO之select多路转接</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-09-26T07:55:01.000Z" itemprop="datePublished">2024-09-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            980 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            select多路转接多路转接有三种方案,分别是select,poll和epoll,我们都会讲解和介绍
+select的函数原型是这样的
+
+他一共有五个参数,但是可以分为三组
+
+nfds:需要监视的最大的文件描述符值+1
+readfds:可读文件描述符集合writefds:可写文件描述符集合exceptfds:异常文件描述符集合
+timeout:设置select等待的时间
+
+就绪事件分为三种,可读事件,可写事件,异常事件
+timeoutselect可以帮我们同时等待多个文件描述符,但是如果一直轮询多个描述符是不合理的,我们应当可以设置他阻塞或者轮询
+因此timeout可以传入三种数据
+
+NULL : 表示没有timeout,select一直阻塞等待,直到有了就绪的文件描述符
+0 : 进检测文件描述符集合的状态,然后立即返回,不会进行任何阻塞等待,继续执行后面的逻辑
+确定的时间 : 阻塞指定的时间段,没有等到则超时返回
+
+前两个都好理解,第三个的数据类型是timeval,要怎么用呢
+他的内部有两个成员,分别对应了秒和微秒
+长这样
+1234struct timeval &#123;   ...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/09/26/Linux%E9%AB%98%E9%98%B6IO%E4%B9%8Bselect%E5%A4%9A%E8%B7%AF%E8%BD%AC%E6%8E%A5/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-Linux高级IO之五种IO模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -390,7 +476,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.7k 詞 
+            1.7k words 
           </div>
         </div>
         
@@ -463,7 +549,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.7k 詞 
+            2.7k words 
           </div>
         </div>
         
@@ -541,7 +627,7 @@ UDP的传输过程是不可靠的,无连接的,面向数据报,在我们之前�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.6k 詞 
+            1.6k words 
           </div>
         </div>
         
@@ -623,7 +709,7 @@ UDP的传输过程是不可靠的,无连接的,面向数据报,在我们之前�
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            902 詞 
+            902 words 
           </div>
         </div>
         
@@ -706,7 +792,7 @@ POST方法POST方法要使用主要就是要上传数据给服务器，但是传
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            866 詞 
+            866 words 
           </div>
         </div>
         
@@ -790,7 +876,7 @@ QUICK START这里我们通过一个简单的通讯录实现来快速上手protob
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            671 詞 
+            671 words 
           </div>
         </div>
         
@@ -874,7 +960,7 @@ HTTP报文无论是客户端服务器（CS）还是浏览器服务器（BS）
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            2.3k 詞 
+            2.3k words 
           </div>
         </div>
         
@@ -906,85 +992,6 @@ HTTP报文无论是客户端服务器（CS）还是浏览器服务器（BS）
     <a class="right-panel  non-pic  "
       
       href="/2024/09/16/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94TCP%E8%BF%9E%E6%8E%A5%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E3%80%81%E5%88%B6%E5%AE%9A%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E3%80%81%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%BB%9C%E7%89%88%E6%9C%AC%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
- 
-
-   
-
-<article id="post-Linux网络——守护进程与TCP服务器和客户机通信" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/">Linux网络——守护进程、会话、进程组</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-09-15T13:10:07.000Z" itemprop="datePublished">2024-09-15</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/Linux/">Linux</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            934 詞 
-          </div>
-        </div>
-        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
-
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            会话会话是session，代表的是客户端与服务器的一次交互过程，我们可以简单理解为，当我们打开一个终端，在用户登录时，就是创建了一个会话
-一般来说会话都与各自的终端关联，这个会话中的第一个进程称之为首进程，也称为进程组长
-一个会话中可能有很多进程，我们称之为进程组，为了表示也就有了进程组ID：PGID，会话ID：SIG
-
-使用setsid系统调用可以创建新会话
-
-需要注意的是，创建会话的进程不能是组长进程
-进程组的主要特征就是信号可以发给一个进程组中的所有进程，可以进行作业控制
-PGID就是这个进程组的唯一标识，其实也就是进程组组长的id
-也就是要求一个进程只能当一个组的组长，否则id不就重复了嘛
-但是说进程组长挂了，进程组中只要还有一个进程存在，整个进程组还在
-守护进程守护进程也叫做精灵进程，Deamon，是一种运行在后台的进程，所谓前台后台可以简单理解为能否直接收到键盘指令的进程
-守护进程独立于终端，并且周期性的执行某种任务或者等待处理某些发生的事件
-当Linux系统启动时，或者bash启动时，会启动很多进程服务，例如ssh连接，或者一些代理服务，在进程终止或者系统终止时服务...  
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/09/15/Linux%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8ETCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AE%A2%E6%88%B7%E6%9C%BA%E9%80%9A%E4%BF%A1/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
