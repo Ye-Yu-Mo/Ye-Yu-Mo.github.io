@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Rust 的错误处理：别拿类型系统当护身符 | 许磊的技术博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="@[toc] 大多数 Rust 程序员在处理错误时表现得像被编译器吓坏了的孩子。他们害怕 Result、害怕 ?、害怕 lifetimes，最后写出一堆看起来“类型安全”的垃圾。问题不在语言，而在思维：错误处理是设计问题，不是语法问题。  一、错误的核心：调用者到底需要知道什么？如果调用者需要知道错误的来源，就枚举（enumeration）。如果调用者只需要知道“出错了”，就擦除（erasure）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust 的错误处理：别拿类型系统当护身符">
+<meta property="og:url" content="https://ye-yu-mo.github.io/2026/07/Rust%20%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E6%8B%BF%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%BD%93%E6%8A%A4%E8%BA%AB%E7%AC%A6/index.html">
+<meta property="og:site_name" content="许磊的技术博客">
+<meta property="og:description" content="@[toc] 大多数 Rust 程序员在处理错误时表现得像被编译器吓坏了的孩子。他们害怕 Result、害怕 ?、害怕 lifetimes，最后写出一堆看起来“类型安全”的垃圾。问题不在语言，而在思维：错误处理是设计问题，不是语法问题。  一、错误的核心：调用者到底需要知道什么？如果调用者需要知道错误的来源，就枚举（enumeration）。如果调用者只需要知道“出错了”，就擦除（erasure）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-29T07:52:21.985Z">
+<meta property="article:author" content="许磊">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="许磊的技术博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">许磊的技术博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">量化交易系统 · C++ / Rust · AI 辅助开发</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ye-yu-mo.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Rust 的错误处理：别拿类型系统当护身符" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/Rust%20%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E6%8B%BF%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%BD%93%E6%8A%A4%E8%BA%AB%E7%AC%A6/" class="article-date">
+  <time class="dt-published" datetime="2026-07-28T16:00:00.000Z" itemprop="datePublished">2026-07-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Rust 的错误处理：别拿类型系统当护身符
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>@[toc]</p>
+<p>大多数 Rust 程序员在处理错误时表现得像被编译器吓坏了的孩子。<br>他们害怕 <code>Result</code>、害怕 <code>?</code>、害怕 lifetimes，最后写出一堆看起来“类型安全”的垃圾。<br>问题不在语言，而在思维：<strong>错误处理是设计问题，不是语法问题。</strong></p>
+<hr>
+<h2 id="一、错误的核心：调用者到底需要知道什么？"><a href="#一、错误的核心：调用者到底需要知道什么？" class="headerlink" title="一、错误的核心：调用者到底需要知道什么？"></a>一、错误的核心：调用者到底需要知道什么？</h2><p>如果调用者需要知道错误的来源，就枚举（enumeration）。<br>如果调用者只需要知道“出错了”，就擦除（erasure）。</p>
+<hr>
+<h3 id="错误示例：不区分错误来源"><a href="#错误示例：不区分错误来源" class="headerlink" title="错误示例：不区分错误来源"></a>错误示例：不区分错误来源</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">copy_data</span>(<span class="keyword">mut</span> reader: <span class="keyword">impl</span> <span class="title class_">Read</span>, <span class="keyword">mut</span> writer: <span class="keyword">impl</span> <span class="title class_">Write</span>) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), std::io::Error&gt; &#123;</span><br><span class="line">    std::io::<span class="title function_ invoke__">copy</span>(&amp;<span class="keyword">mut</span> reader, &amp;<span class="keyword">mut</span> writer)?;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看起来很简洁对吧？问题是：<strong>调用者根本不知道是读挂了还是写炸了。</strong></p>
+<p>在网络服务器里，这两个错误是完全不同的：</p>
+<ul>
+<li>输入流失败可能意味着磁盘或 socket 损坏（致命）</li>
+<li>输出流失败可能只是客户端断开（可以忽略）</li>
+</ul>
+<p>但现在它们都被混在一个 <code>std::io::Error</code> 里，你的调用者只能瞎猜。</p>
+<hr>
+<h3 id="正确示例：枚举错误来源"><a href="#正确示例：枚举错误来源" class="headerlink" title="正确示例：枚举错误来源"></a>正确示例：枚举错误来源</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Debug)]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">enum</span> <span class="title class_">CopyError</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">In</span>(std::io::Error),</span><br><span class="line">    <span class="title function_ invoke__">Out</span>(std::io::Error),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">std</span>::error::Error <span class="keyword">for</span> <span class="title class_">CopyError</span> &#123;&#125;</span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">std</span>::fmt::Display <span class="keyword">for</span> <span class="title class_">CopyError</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">fmt</span>(&amp;<span class="keyword">self</span>, f: &amp;<span class="keyword">mut</span> std::fmt::Formatter&lt;<span class="symbol">&#x27;_</span>&gt;) <span class="punctuation">-&gt;</span> std::fmt::<span class="type">Result</span> &#123;</span><br><span class="line">        <span class="keyword">match</span> <span class="keyword">self</span> &#123;</span><br><span class="line">            CopyError::<span class="title function_ invoke__">In</span>(e) =&gt; <span class="built_in">write!</span>(f, <span class="string">&quot;input error: &#123;&#125;&quot;</span>, e),</span><br><span class="line">            CopyError::<span class="title function_ invoke__">Out</span>(e) =&gt; <span class="built_in">write!</span>(f, <span class="string">&quot;output error: &#123;&#125;&quot;</span>, e),</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">copy_data</span>(<span class="keyword">mut</span> reader: <span class="keyword">impl</span> <span class="title class_">Read</span>, <span class="keyword">mut</span> writer: <span class="keyword">impl</span> <span class="title class_">Write</span>) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), CopyError&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">buf</span> = [<span class="number">0</span>; <span class="number">4096</span>];</span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">n</span> = reader.<span class="title function_ invoke__">read</span>(&amp;<span class="keyword">mut</span> buf).<span class="title function_ invoke__">map_err</span>(CopyError::In)?;</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span> &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">        writer.<span class="title function_ invoke__">write_all</span>(&amp;buf[..n]).<span class="title function_ invoke__">map_err</span>(CopyError::Out)?;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在调用者能区分错误来源，可以决定不同的策略。<br>这才叫<strong>语义清晰</strong>。类型系统不是目标，它是防止你撒谎的手段。</p>
+<hr>
+<h2 id="二、错误信息越多不代表更好"><a href="#二、错误信息越多不代表更好" class="headerlink" title="二、错误信息越多不代表更好"></a>二、错误信息越多不代表更好</h2><p>有的人以为“详细 &#x3D; 专业”，于是他们搞出这种 monstrosity：</p>
+<h3 id="过度设计的灾难"><a href="#过度设计的灾难" class="headerlink" title="过度设计的灾难"></a>过度设计的灾难</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Debug)]</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">DecodeError</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">InvalidHeader</span>(<span class="type">u32</span>),</span><br><span class="line">    <span class="title function_ invoke__">UnsupportedCompression</span>(<span class="type">String</span>),</span><br><span class="line">    <span class="title function_ invoke__">MalformedChunk</span>(<span class="type">usize</span>),</span><br><span class="line">    <span class="title function_ invoke__">IoError</span>(std::io::Error),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后每个错误都被上报、打印、打 tag。<br>问题是：上层调用者根本不在意。<br>他们只想知道“图片读不出来”，不在乎是哪个 bit 出问题。</p>
+<hr>
+<h3 id="实用设计：擦除无关信息"><a href="#实用设计：擦除无关信息" class="headerlink" title="实用设计：擦除无关信息"></a>实用设计：擦除无关信息</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Debug)]</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ImageError</span>(<span class="type">String</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">std</span>::fmt::Display <span class="keyword">for</span> <span class="title class_">ImageError</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">fmt</span>(&amp;<span class="keyword">self</span>, f: &amp;<span class="keyword">mut</span> std::fmt::Formatter&lt;<span class="symbol">&#x27;_</span>&gt;) <span class="punctuation">-&gt;</span> std::fmt::<span class="type">Result</span> &#123;</span><br><span class="line">        <span class="built_in">write!</span>(f, <span class="string">&quot;image decoding failed: &#123;&#125;&quot;</span>, <span class="keyword">self</span>.<span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">std</span>::error::Error <span class="keyword">for</span> <span class="title class_">ImageError</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">decode_image</span>(data: &amp;[<span class="type">u8</span>]) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;Image, ImageError&gt; &#123;</span><br><span class="line">    <span class="comment">// 内部可以区分多种错误</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">header</span> = <span class="title function_ invoke__">parse_header</span>(data).<span class="title function_ invoke__">map_err</span>(|_| <span class="title function_ invoke__">ImageError</span>(<span class="string">&quot;invalid header&quot;</span>.<span class="title function_ invoke__">into</span>()))?;</span><br><span class="line">    <span class="title function_ invoke__">decompress</span>(header).<span class="title function_ invoke__">map_err</span>(|_| <span class="title function_ invoke__">ImageError</span>(<span class="string">&quot;decompression failed&quot;</span>.<span class="title function_ invoke__">into</span>()))?;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(Image::<span class="title function_ invoke__">new</span>())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用户得到的是干净的 <code>ImageError</code>，无需知道底层细节。<br><strong>擦除复杂度，不是隐藏错误，而是隔离不必要的信息。</strong></p>
+<hr>
+<h2 id="三、特殊情况是设计的失败"><a href="#三、特殊情况是设计的失败" class="headerlink" title="三、特殊情况是设计的失败"></a>三、特殊情况是设计的失败</h2><p>很多人写函数时遇到“理论上不会失败”的情况，就乱来。</p>
+<h3 id="错误示例：用-Option-偷懒"><a href="#错误示例：用-Option-偷懒" class="headerlink" title="错误示例：用 Option 偷懒"></a>错误示例：用 Option 偷懒</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">parse_number</span>(s: &amp;<span class="type">str</span>) <span class="punctuation">-&gt;</span> <span class="type">Option</span>&lt;<span class="type">i32</span>&gt; &#123;</span><br><span class="line">    s.<span class="title function_ invoke__">parse</span>().<span class="title function_ invoke__">ok</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看起来简洁，但 <code>None</code> 到底是什么意思？<br>是字符串不是数字？是空字符串？是 I&#x2F;O 出错？<br>调用者完全没法判断——你直接剥夺了他们的恢复能力。</p>
+<hr>
+<h3 id="正确示例：用-Result-明确语义"><a href="#正确示例：用-Result-明确语义" class="headerlink" title="正确示例：用 Result 明确语义"></a>正确示例：用 Result 明确语义</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Debug)]</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ParseNumberError</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">std</span>::fmt::Display <span class="keyword">for</span> <span class="title class_">ParseNumberError</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">fmt</span>(&amp;<span class="keyword">self</span>, f: &amp;<span class="keyword">mut</span> std::fmt::Formatter&lt;<span class="symbol">&#x27;_</span>&gt;) <span class="punctuation">-&gt;</span> std::fmt::<span class="type">Result</span> &#123;</span><br><span class="line">        <span class="built_in">write!</span>(f, <span class="string">&quot;invalid number format&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">impl</span> <span class="title class_">std</span>::error::Error <span class="keyword">for</span> <span class="title class_">ParseNumberError</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">parse_number</span>(s: &amp;<span class="type">str</span>) <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">i32</span>, ParseNumberError&gt; &#123;</span><br><span class="line">    s.<span class="title function_ invoke__">parse</span>().<span class="title function_ invoke__">map_err</span>(|_| ParseNumberError)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Result</code> 表示“有错误发生”；<code>Option</code> 表示“没有值返回”。<br>混用这两个类型，是 API 设计的懒惰行为。<br><strong>如果函数可能失败，就让类型系统告诉调用者这件事。</strong></p>
+<hr>
+<h2 id="四、操作符不是魔法，是糖衣"><a href="#四、操作符不是魔法，是糖衣" class="headerlink" title="四、操作符不是魔法，是糖衣"></a>四、操作符不是魔法，是糖衣</h2><p>有人以为 <code>?</code> 很神秘，其实它就是：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">match</span> expr &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(v) =&gt; v,</span><br><span class="line">    <span class="title function_ invoke__">Err</span>(e) =&gt; <span class="keyword">return</span> <span class="title function_ invoke__">Err</span>(e.<span class="title function_ invoke__">into</span>()),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以关键不在 <code>?</code>，而在 <strong><code>From</code> trait</strong>。</p>
+<hr>
+<h3 id="错误示例：只实现了-Into"><a href="#错误示例：只实现了-Into" class="headerlink" title="错误示例：只实现了 Into"></a>错误示例：只实现了 Into</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Into</span>&lt;MyError&gt; <span class="keyword">for</span> <span class="title class_">std</span>::io::Error &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">into</span>(<span class="keyword">self</span>) <span class="punctuation">-&gt;</span> MyError &#123; MyError::<span class="title function_ invoke__">Io</span>(<span class="keyword">self</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后惊讶地发现：<code>?</code> 报错，“trait bound not satisfied”。<br>因为 <code>?</code> 调用的是 <code>From::from</code>，不是 <code>Into::into</code>。</p>
+<hr>
+<h3 id="正确示例：实现-From，一切通顺"><a href="#正确示例：实现-From，一切通顺" class="headerlink" title="正确示例：实现 From，一切通顺"></a>正确示例：实现 From，一切通顺</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">From</span>&lt;std::io::Error&gt; <span class="keyword">for</span> <span class="title class_">MyError</span> &#123;</span><br><span class="line">    <span class="keyword">fn</span> <span class="title function_">from</span>(e: std::io::Error) <span class="punctuation">-&gt;</span> <span class="keyword">Self</span> &#123; MyError::<span class="title function_ invoke__">Io</span>(e) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从此你可以愉快地写：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">read_file</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;<span class="type">String</span>, MyError&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">buf</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line">    std::fs::File::<span class="title function_ invoke__">open</span>(<span class="string">&quot;config.txt&quot;</span>)?.<span class="title function_ invoke__">read_to_string</span>(&amp;<span class="keyword">mut</span> buf)?;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(buf)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="五、try-block：清理不该被跳过的东西"><a href="#五、try-block：清理不该被跳过的东西" class="headerlink" title="五、try block：清理不该被跳过的东西"></a>五、try block：清理不该被跳过的东西</h2><p>很多人喜欢：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">run</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), Error&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">conn</span> = <span class="title function_ invoke__">connect</span>()?;</span><br><span class="line">    <span class="title function_ invoke__">do_stuff</span>(&amp;conn)?;</span><br><span class="line">    conn.<span class="title function_ invoke__">close</span>()?; <span class="comment">// 这一行永远执行不到</span></span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一旦 <code>do_stuff</code> 出错，<code>close()</code> 永远不会跑到。<br>Rust 的 <code>?</code> 让你早退，但不会帮你擦屁股。</p>
+<hr>
+<h3 id="正确做法：try-block"><a href="#正确做法：try-block" class="headerlink" title="正确做法：try block"></a>正确做法：try block</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">run</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), Error&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">conn</span> = <span class="title function_ invoke__">connect</span>()?;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">r</span> = <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="title function_ invoke__">do_stuff</span>(&amp;conn)?;</span><br><span class="line">    &#125;;</span><br><span class="line">    conn.<span class="title function_ invoke__">close</span>()?;</span><br><span class="line">    r</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这才是可靠的错误处理：<strong>不丢资源，不绕逻辑</strong>。<br><code>try {}</code> 块让你能在出错时执行 cleanup，而不破坏 <code>?</code> 的流畅性。</p>
+<hr>
+<h2 id="六、永远别为“优雅”破坏用户空间"><a href="#六、永远别为“优雅”破坏用户空间" class="headerlink" title="六、永远别为“优雅”破坏用户空间"></a>六、永远别为“优雅”破坏用户空间</h2><p>有些库作者干了这种蠢事：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// v1.0</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">foo</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), <span class="type">Box</span>&lt;<span class="keyword">dyn</span> Error&gt;&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// v1.1</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">foo</span>() <span class="punctuation">-&gt;</span> <span class="type">Result</span>&lt;(), <span class="type">Box</span>&lt;MyError&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>然后他们说：“签名没变呀！编译器不会报错！”</p>
+<p>但用户代码里：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">match</span> <span class="title function_ invoke__">foo</span>() &#123;</span><br><span class="line">    <span class="title function_ invoke__">Err</span>(e) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(ioe) = e.downcast_ref::&lt;std::io::Error&gt;() &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在全部崩了。<br><strong>如果用户能 downcast，那类型擦除就是你的 API 一部分。</strong><br>别假装不是。<br>这类破坏兼容性的更改，永远是破坏性更新（breaking change）。</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ye-yu-mo.github.io/2026/07/Rust%20%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E6%8B%BF%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%BD%93%E6%8A%A4%E8%BA%AB%E7%AC%A6/" data-id="cuid5CZFxbN5yc7k0bHqdb-zI" data-title="Rust 的错误处理：别拿类型系统当护身符" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/07/CRTP%EF%BC%9A%E5%A5%87%E5%BC%82%E9%80%92%E5%BD%92%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          CRPT奇异递归模板模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Rust%20%E7%9A%84%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%8F%98%E9%87%8F%E3%80%81%E5%80%BC%E4%B8%8E%E6%8C%87%E9%92%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">深入理解 Rust 的内存模型：变量、值与指针</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%93%E5%87%BA-%E5%8D%9A%E5%AE%A2/" rel="tag">输出&#x2F;博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E8%BE%93%E5%87%BA-%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">输出/博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/07/CRTP%EF%BC%9A%E5%A5%87%E5%BC%82%E9%80%92%E5%BD%92%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/">CRPT奇异递归模板模式</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/Rust%20%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E5%88%AB%E6%8B%BF%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%BD%93%E6%8A%A4%E8%BA%AB%E7%AC%A6/">Rust 的错误处理：别拿类型系统当护身符</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20Rust%20%E7%9A%84%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%8F%98%E9%87%8F%E3%80%81%E5%80%BC%E4%B8%8E%E6%8C%87%E9%92%88/">深入理解 Rust 的内存模型：变量、值与指针</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/%E9%AB%98%E9%A2%91%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F/">高频交易系统</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 许磊<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
